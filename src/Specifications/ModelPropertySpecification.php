@@ -39,7 +39,7 @@ class ModelPropertySpecification extends Specification
 
     public function isUnsigned(): bool
     {
-        return $this->extract(self::KEY_UNSIGNED);
+        return $this->extract(self::KEY_UNSIGNED) ?? false;
     }
 
     public function isUnique(): bool
@@ -57,6 +57,24 @@ class ModelPropertySpecification extends Specification
         return $this->extract(self::KEY_FOREIGN_KEY);
     }
 
+    public function isInt(): bool
+    {
+        return in_array($this->getType(), [
+            ModelPropertyType::TINY_INT(),
+            ModelPropertyType::INT(),
+            ModelPropertyType::BIG_INT(),
+        ]);
+    }
+
+    public function isString(): bool
+    {
+        return in_array($this->getType(), [
+            ModelPropertyType::STRING(),
+            ModelPropertyType::EMAIL(),
+            ModelPropertyType::TEXT(),
+        ]);
+    }
+
     public function isPrimaryKey(): bool
     {
         return $this->extract(self::KEY_PRIMARY_KEY) ?? false;
@@ -72,13 +90,17 @@ class ModelPropertySpecification extends Specification
         return $this->extract(self::KEY_FOREIGN_KEY_FIELD);
     }
 
-    public function getForeignKeyOnDelete(): ?ForeignKeyAction
+    public function getForeignKeyOnDelete(): ForeignKeyAction
     {
-        return $this->extract(self::KEY_FOREIGN_KEY_ON_DELETE);
+        return ForeignKeyAction::fromString(
+            $this->extract(self::KEY_FOREIGN_KEY_ON_DELETE)
+        );
     }
 
-    public function getForeignKeyOnUpdate(): ?ForeignKeyAction
+    public function getForeignKeyOnUpdate(): ForeignKeyAction
     {
-        return $this->extract(self::KEY_FOREIGN_KEY_ON_UPDATE);
+        return ForeignKeyAction::fromString(
+            $this->extract(self::KEY_FOREIGN_KEY_ON_UPDATE)
+        );
     }
 }

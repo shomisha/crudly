@@ -41,6 +41,11 @@ class CrudlySpecification extends Specification
         return $this->extract(self::KEY_PROPERTIES);
     }
 
+    public function getPrimaryKey(): ModelPropertySpecification
+    {
+        return $this->extract(self::KEY_PRIMARY);
+    }
+
     public function hasWeb(): bool
     {
         return $this->extract(self::KEY_HAS_WEB);
@@ -54,9 +59,12 @@ class CrudlySpecification extends Specification
     private function parseProperties(): void
     {
         $properties = collect($this->extract(self::KEY_PROPERTIES))
-            ->keyBy('name')
-            ->map(function (array $propertyData) {
-                return new ModelPropertySpecification($propertyData);
+            ->mapWithKeys(function (array $propertyData) {
+                $propertySpecification = new ModelPropertySpecification($propertyData);
+
+                return [
+                    $propertySpecification->getName() => $propertySpecification,
+                ];
             });
 
         $this->set(self::KEY_PROPERTIES, $properties);

@@ -14,6 +14,11 @@ class ModelPropertyType extends BaseEnum
         return new self('string');
     }
 
+    public static function EMAIL(): self
+    {
+        return new self('email');
+    }
+
     public static function TEXT() : self
     {
         return new self('text');
@@ -59,6 +64,7 @@ class ModelPropertyType extends BaseEnum
         return [
             self::BOOL(),
             self::STRING(),
+            self::EMAIL(),
             self::TEXT(),
             self::INT(),
             self::BIG_INT(),
