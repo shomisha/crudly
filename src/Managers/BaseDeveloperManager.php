@@ -26,4 +26,9 @@ abstract class BaseDeveloperManager
     {
         return $this->container;
     }
+
+    protected function instantiateManager(string $managerClass): BaseDeveloperManager
+    {
+        return $this->container->get($managerClass);
+    }
 }

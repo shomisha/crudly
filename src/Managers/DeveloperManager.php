@@ -5,6 +5,8 @@ namespace Shomisha\Crudly\Managers;
 use Shomisha\Crudly\Contracts\Developer;
 use Shomisha\Crudly\Developers\Migration\MigrationDeveloper;
 use Shomisha\Crudly\Developers\Model\ModelDeveloper;
+use Shomisha\Crudly\Developers\WebCrud\WebCrudControllerDeveloper;
+use Shomisha\Crudly\Developers\WebCrud\WebCrudFormRequestDeveloper;
 
 class DeveloperManager extends BaseDeveloperManager
 {
@@ -30,8 +32,20 @@ class DeveloperManager extends BaseDeveloperManager
         return $this->instantiateManager(MigrationDeveloperManager::class);
     }
 
-    private function instantiateManager(string $managerClass): BaseDeveloperManager
+    public function getWebCrudFormRequestDeveloper(): Developer
     {
-        return new $managerClass($this->getConfig(), $this->getContainer());
+        // TODO: refactor this to support overriding developers
+        return new WebCrudFormRequestDeveloper($this->getWebCrudManager());
+    }
+
+    public function getWebCrudControllerDeveloper(): Developer
+    {
+        // TODO: refactor this to support overriding developers
+        return new WebCrudControllerDeveloper($this->getWebCrudManager());
+    }
+
+    private function getWebCrudManager(): BaseDeveloperManager
+    {
+        return $this->instantiateManager(WebCrudDeveloperManager::class);
     }
 }
