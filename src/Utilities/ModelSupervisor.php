@@ -26,7 +26,7 @@ class ModelSupervisor implements ModelSupervisorContract
 
         $pieces = explode('\\', $rawName);
 
-        $className = array_pop($pieces);
+        $className = ucfirst(array_pop($pieces));
         $classNamespace = null;
         if (!empty($pieces)) {
             $classNamespace = implode('\\', $pieces);

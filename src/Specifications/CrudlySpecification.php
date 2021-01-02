@@ -13,7 +13,6 @@ class CrudlySpecification extends Specification
         KEY_PROPERTIES = 'properties',
         KEY_SOFT_DELETION = 'has_soft_deletion',
         KEY_SOFT_DELETION_COLUMN_NAME = 'soft_delete_column_name',
-        KEY_SOFT_DELETION_COLUMN_DEFINITION = 'soft_delete_column_definition',
         KEY_HAS_TIMESTAMPS = 'has_timestamps',
         KEY_HAS_WEB = 'has_web',
         KEY_HAS_API = 'has_api',
@@ -54,17 +53,6 @@ class CrudlySpecification extends Specification
     public function softDeletionColumnName(): ?string
     {
         return $this->extract(self::KEY_SOFT_DELETION_COLUMN_NAME);
-    }
-
-    public function softDeletionColumnDefinition(): ?ModelPropertySpecification
-    {
-        $definition =  $this->extract(self::KEY_SOFT_DELETION_COLUMN_DEFINITION);
-
-        if ($definition === null) {
-            return null;
-        }
-
-        return new ModelPropertySpecification($definition);
     }
 
     public function hasTimestamps(): bool
