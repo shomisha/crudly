@@ -6,9 +6,9 @@ use Illuminate\Container\Container;
 use Illuminate\Support\ServiceProvider;
 use Shomisha\Crudly\Commands\CrudlyWizard;
 use Shomisha\Crudly\Config\DeveloperConfig;
-use Shomisha\Crudly\Contracts\ModelNameParser as ModelNameParserContract;
+use Shomisha\Crudly\Contracts\ModelSupervisor as ModelSupervisorContract;
 use Shomisha\Crudly\Managers\DeveloperManager;
-use Shomisha\Crudly\Utilities\ModelNameParser;
+use Shomisha\Crudly\Utilities\ModelSupervisor;
 
 class CrudlyServiceProvider extends ServiceProvider
 {
@@ -23,26 +23,26 @@ class CrudlyServiceProvider extends ServiceProvider
 
     private function registerCrudly(): void
     {
-        $this->registerModelNameParser();
+        $this->registerModelSupervisor();
 
         $this->registerDeveloperManager();
 
         $this->app->bind(Crudly::class, function (Container $app) {
-            $modelNameParser = $app->get(ModelNameParserContract::class);
+            $modelNameParser = $app->get(ModelSupervisorContract::class);
 
             return new Crudly(
                 $app['files'],
-                $app->get(ModelNameParserContract::class),
+                $app->get(ModelSupervisorContract::class),
                 $app->get(DeveloperManager::class),
                 $app['path']
             );
         });
     }
 
-    private function registerModelNameParser(): void
+    private function registerModelSupervisor(): void
     {
-        $this->app->bind(ModelNameParserContract::class, function (Container $app) {
-            return new ModelNameParser();
+        $this->app->bind(ModelSupervisorContract::class, function (Container $app) {
+            return new ModelSupervisor($app['files'], $app['path']);
         });
     }
 

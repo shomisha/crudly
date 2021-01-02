@@ -3,7 +3,7 @@
 namespace Shomisha\Crudly;
 
 use Illuminate\Filesystem\Filesystem;
-use Shomisha\Crudly\Contracts\ModelNameParser;
+use Shomisha\Crudly\Contracts\ModelSupervisor;
 use Shomisha\Crudly\Data\CrudlySet;
 use Shomisha\Crudly\Data\ModelName;
 use Shomisha\Crudly\Developers\CrudlyDeveloper;
@@ -12,7 +12,7 @@ use Shomisha\Crudly\Managers\DeveloperManager;
 
 class Crudly
 {
-    private ModelNameParser $modelNameParser;
+    private ModelSupervisor $modelSupervisor;
 
     private DeveloperManager $developerManager;
 
@@ -20,9 +20,9 @@ class Crudly
 
     private string $appPath;
 
-    public function __construct(Filesystem $filesystem, ModelNameParser $modelNameParser, DeveloperManager $developerManager, string $appPath)
+    public function __construct(Filesystem $filesystem, ModelSupervisor $modelSupervisor, DeveloperManager $developerManager, string $appPath)
     {
-        $this->modelNameParser = $modelNameParser;
+        $this->modelSupervisor = $modelSupervisor;
         $this->developerManager = $developerManager;
         $this->filesystem = $filesystem;
         $this->appPath = $appPath;
@@ -30,21 +30,17 @@ class Crudly
 
     public function parseModelName(string $modelName): ModelName
     {
-        return $this->modelNameParser->parseModelName($modelName);
+        return $this->modelSupervisor->parseModelName($modelName);
     }
 
     public function modelNameIsValid(string $name): bool
     {
-        return $this->modelNameParser->modelNameIsValid($name);
+        return $this->modelSupervisor->modelNameIsValid($name);
     }
 
     public function modelExists(string $modelName): bool
     {
-        $modelName = $this->modelNameParser->parseModelName($modelName);
-
-        return $this->filesystem->exists(
-            $this->guessModelPath($modelName)
-        );
+        return $this->modelSupervisor->modelExists($modelName);
     }
 
     public function prepareSpecification(array $data): CrudlySpecification
@@ -62,22 +58,6 @@ class Crudly
         $set = $this->getCrudlyDeveloper()->develop($specification);
 
         return $set;
-    }
-
-    private function guessModelPath(ModelName $name): string
-    {
-        if ($this->shouldUseModelsDirectory()) {
-            $this->appPath .= DIRECTORY_SEPARATOR . "Models";
-        }
-
-        return $this->appPath . DIRECTORY_SEPARATOR .  $name->getName() . '.php';
-    }
-
-    private function shouldUseModelsDirectory(): bool
-    {
-        $modelsDirectoryPath = $this->appPath . DIRECTORY_SEPARATOR . "Models";
-
-        return $this->filesystem->isDirectory($modelsDirectoryPath);
     }
 
     private function getCrudlyDeveloper(): CrudlyDeveloper
