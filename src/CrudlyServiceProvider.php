@@ -7,6 +7,7 @@ use Illuminate\Support\ServiceProvider;
 use Shomisha\Crudly\Commands\CrudlyWizard;
 use Shomisha\Crudly\Config\DeveloperConfig;
 use Shomisha\Crudly\Contracts\ModelSupervisor as ModelSupervisorContract;
+use Shomisha\Crudly\Managers\BaseDeveloperManager;
 use Shomisha\Crudly\Managers\DeveloperManager;
 use Shomisha\Crudly\Utilities\ModelSupervisor;
 
@@ -33,7 +34,7 @@ class CrudlyServiceProvider extends ServiceProvider
             return new Crudly(
                 $app['files'],
                 $app->get(ModelSupervisorContract::class),
-                $app->get(DeveloperManager::class),
+                $app->get(BaseDeveloperManager::class),
                 $app['path']
             );
         });
@@ -48,7 +49,7 @@ class CrudlyServiceProvider extends ServiceProvider
 
     private function registerDeveloperManager(): void
     {
-        $this->app->singleton(DeveloperManager::class, function (Container $app) {
+        $this->app->singleton(BaseDeveloperManager::class, function (Container $app) {
             $developerConfig = new DeveloperConfig([]);
 
             return new DeveloperManager($developerConfig, $app);

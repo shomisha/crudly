@@ -13,7 +13,7 @@ class DeveloperManager extends BaseDeveloperManager
     public function getModelDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers
-        return new ModelDeveloper($this->getModelManager());
+        return $this->instantiateDeveloperWithManager(ModelDeveloper::class, ($this->getModelManager()));
     }
 
     private function getModelManager(): BaseDeveloperManager
@@ -24,7 +24,7 @@ class DeveloperManager extends BaseDeveloperManager
     public function getMigrationDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers
-        return new MigrationDeveloper($this->getMigrationManager());
+        return $this->instantiateDeveloperWithManager(MigrationDeveloper::class, ($this->getMigrationManager()));
     }
 
     private function getMigrationManager(): BaseDeveloperManager
@@ -35,13 +35,13 @@ class DeveloperManager extends BaseDeveloperManager
     public function getWebCrudFormRequestDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers
-        return new WebCrudFormRequestDeveloper($this->getWebCrudManager());
+        return $this->instantiateDeveloperWithManager(WebCrudFormRequestDeveloper::class, ($this->getWebCrudManager()));
     }
 
     public function getWebCrudControllerDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers
-        return new WebCrudControllerDeveloper($this->getWebCrudManager());
+        return $this->instantiateDeveloperWithManager(WebCrudControllerDeveloper::class, ($this->getWebCrudManager()));
     }
 
     private function getWebCrudManager(): BaseDeveloperManager
