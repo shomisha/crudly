@@ -6,6 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Str;
 use Shomisha\Crudly\Abstracts\Developer;
 use Shomisha\Crudly\Contracts\Specification;
+use Shomisha\Crudly\Data\CrudlySet;
 use Shomisha\Crudly\Data\ModelName;
 use Shomisha\Crudly\Specifications\CrudlySpecification;
 use Shomisha\Stubless\Contracts\Code;
@@ -20,8 +21,8 @@ use Shomisha\Stubless\Utilities\Importable;
  */
 class MigrationDeveloper extends Developer
 {
-    /** @param \Shomisha\Crudly\Specifications\CrudlySpecification $specification */
-    public function develop(Specification $specification): Code
+	/** @param \Shomisha\Crudly\Specifications\CrudlySpecification $specification */
+    public function develop(Specification $specification, CrudlySet $developedSet): Code
     {
         $modelName = $specification->getModel();
 
@@ -30,8 +31,10 @@ class MigrationDeveloper extends Developer
         );
 
         $migrationClass
-            ->addMethod($this->upMethod($specification))
-            ->addMethod($this->downMethod($specification));
+            ->addMethod($this->upMethod($specification, $developedSet))
+            ->addMethod($this->downMethod($specification, $developedSet));
+
+        $developedSet->setMigration($migrationClass);
 
         return $migrationClass;
     }
@@ -46,13 +49,13 @@ class MigrationDeveloper extends Developer
         return Str::snake(Str::plural($modelName->getName()));
     }
 
-    private function upMethod(CrudlySpecification $specification): ClassMethod
+    private function upMethod(CrudlySpecification $specification, CrudlySet $developedSet): ClassMethod
     {
-        return $this->getManager()->getMigrationUpMethodDeveloper()->develop($specification);
+        return $this->getManager()->getMigrationUpMethodDeveloper()->develop($specification, $developedSet);
     }
 
-    private function downMethod(CrudlySpecification $specification): ClassMethod
+    private function downMethod(CrudlySpecification $specification, CrudlySet $developedSet): ClassMethod
     {
-        return $this->getManager()->getMigrationDownMethodDeveloper()->develop($specification);
+        return $this->getManager()->getMigrationDownMethodDeveloper()->develop($specification, $developedSet);
     }
 }

@@ -3,11 +3,14 @@
 namespace Shomisha\Crudly\Developers\Migration;
 
 use Shomisha\Crudly\Contracts\Specification;
+use Shomisha\Crudly\Data\CrudlySet;
 use Shomisha\Crudly\Enums\ModelPropertyType;
+use Shomisha\Crudly\Specifications\CrudlySpecification;
 use Shomisha\Crudly\Specifications\ModelPropertySpecification;
 use Shomisha\Stubless\Contracts\Code;
 use Shomisha\Stubless\ImperativeCode\Block;
 use Shomisha\Stubless\ImperativeCode\InvokeBlock;
+use Shomisha\Stubless\ImperativeCode\InvokeMethodBlock;
 use Shomisha\Stubless\References\Variable;
 
 class MigrationFieldsDeveloper extends MigrationDeveloper
@@ -15,7 +18,7 @@ class MigrationFieldsDeveloper extends MigrationDeveloper
     private const DEFAULT_PRIMARY_FIELD_NAME = 'id';
 
     /** @param \Shomisha\Crudly\Specifications\CrudlySpecification $specification */
-    public function develop(Specification $specification): Code
+    public function develop(Specification $specification, CrudlySet $developedSet): Code
     {
         $primaryKey = $specification->getPrimaryKey();
         $otherFields = $specification->getProperties()->except($primaryKey->getName());
@@ -32,9 +35,22 @@ class MigrationFieldsDeveloper extends MigrationDeveloper
             }
         }
 
+        $extraMigrations = [];
+        if (
+            $specification->hasSoftDeletion() &&
+            $columnDefinition = $this->developSoftDeleteMigration($specification)
+        ) {
+            $extraMigrations[] = $columnDefinition;
+        }
+
+        if ($specification->hasTimestamps()) {
+            $extraMigrations[] = $this->developTimestampsMigration();
+        }
+
         return Block::fromArray([
             $primaryKeyMigration,
             Block::fromArray($fieldMigrations),
+            Block::fromArray($extraMigrations),
             Block::fromArray($foreignKeyMigrations),
         ]);
     }
@@ -55,7 +71,7 @@ class MigrationFieldsDeveloper extends MigrationDeveloper
 
     private function developFieldMigration(ModelPropertySpecification $specification): InvokeBlock
     {
-        $migrationMethodName = $this->migrationFieldMap()[(string) $specification->getType()];
+        $migrationMethodName = $this->getMigrationFieldMethod($specification->getType());
 
         $method = Block::invokeMethod(
             $this->getTableVar(),
@@ -80,6 +96,11 @@ class MigrationFieldsDeveloper extends MigrationDeveloper
         return $method;
     }
 
+    private function getMigrationFieldMethod(ModelPropertyType $type): string
+    {
+        return $this->migrationFieldMap()[(string) $type];
+    }
+
     private function developForeignKeyMigration(ModelPropertySpecification $specification): InvokeBlock
     {
         $method = Block::invokeMethod(
@@ -94,6 +115,29 @@ class MigrationFieldsDeveloper extends MigrationDeveloper
                ->chain('onUpdate', [(string) $specification->getForeignKeyOnUpdate()]);
 
         return $method;
+    }
+
+    private function developSoftDeleteMigration(CrudlySpecification $specification): ?InvokeMethodBlock
+    {
+        if ($columnName = $specification->softDeletionColumnName()) {
+            return null;
+        }
+
+        return Block::invokeMethod(
+            $this->getTableVar(),
+            'softDeletes',
+            [
+                $specification->softDeletionColumnDefinition()->getName()
+            ]
+        );
+    }
+
+    private function developTimestampsMigration(): InvokeMethodBlock
+    {
+        return Block::invokeMethod(
+            $this->getTableVar(),
+            'timestamps'
+        );
     }
 
     private function getTableVar(): Variable
