@@ -51,6 +51,13 @@ class ModelSupervisor implements ModelSupervisorContract
         );
     }
 
+    public function shouldUseModelsDirectory(): bool
+    {
+        $modelsDirectoryPath = $this->appPath . DIRECTORY_SEPARATOR . "Models";
+
+        return $this->filesystem->isDirectory($modelsDirectoryPath);
+    }
+
     private function guessModelPath(ModelName $name): string
     {
         if ($this->shouldUseModelsDirectory()) {
@@ -58,12 +65,5 @@ class ModelSupervisor implements ModelSupervisorContract
         }
 
         return $this->appPath . DIRECTORY_SEPARATOR .  $name->getName() . '.php';
-    }
-
-    private function shouldUseModelsDirectory(): bool
-    {
-        $modelsDirectoryPath = $this->appPath . DIRECTORY_SEPARATOR . "Models";
-
-        return $this->filesystem->isDirectory($modelsDirectoryPath);
     }
 }

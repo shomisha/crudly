@@ -43,7 +43,7 @@ class ModelDeveloper extends Developer
     {
         $modelName = $specification->getModel();
 
-        $modelTemplate = ClassTemplate::name($modelName->getName())->setNamespace($modelName->getNamespace());
+        $modelTemplate = ClassTemplate::name($modelName->getName())->setNamespace($this->getModelNamespace($modelName->getNamespace()));
         $modelTemplate->extends(new Importable(Model::class));
 
         if ($specification->hasSoftDeletion()) {
@@ -132,5 +132,21 @@ class ModelDeveloper extends Developer
         );
 
         return $method;
+    }
+
+    private function getModelNamespace(?string $subNamespace): string
+    {
+        // TODO: make this configurable
+        $namespace = 'App';
+
+        if ($this->modelSupervisor->shouldUseModelsDirectory()) {
+            $namespace = 'App\Models';
+        }
+
+        if ($subNamespace) {
+            $namespace .= "\\{$subNamespace}";
+        }
+
+        return $namespace;
     }
 }

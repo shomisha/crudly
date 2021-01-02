@@ -11,4 +11,6 @@ interface ModelSupervisor
     public function modelNameIsValid(string $rawName): bool;
 
     public function modelExists(string $rawName): bool;
+
+    public function shouldUseModelsDirectory(): bool;
 }
