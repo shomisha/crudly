@@ -8,17 +8,17 @@ use Shomisha\Crudly\Data\ModelName;
 
 class CrudlySpecification extends Specification
 {
-    const KEY_MODEL = 'model';
-
-    const KEY_PROPERTIES = 'properties';
-
-    const KEY_HAS_WEB = 'has_web';
-
-    const KEY_HAS_API = 'has_api';
-
-    const KEY_PRIMARY = 'primary';
-
-    const KEY_ACTUAL_PRIMARY = 'actual_primary_key';
+    private const
+        KEY_MODEL = 'model',
+        KEY_PROPERTIES = 'properties',
+        KEY_SOFT_DELETION = 'has_soft_deletion',
+        KEY_SOFT_DELETION_COLUMN_NAME = 'soft_delete_column_name',
+        KEY_SOFT_DELETION_COLUMN_DEFINITION = 'soft_delete_column_definition',
+        KEY_HAS_TIMESTAMPS = 'has_timestamps',
+        KEY_HAS_WEB = 'has_web',
+        KEY_HAS_API = 'has_api',
+        KEY_PRIMARY = 'primary',
+        KEY_ACTUAL_PRIMARY = 'actual_primary_key';
 
     public function __construct(ModelName $model, array $data = [])
     {
@@ -44,6 +44,32 @@ class CrudlySpecification extends Specification
     public function getPrimaryKey(): ModelPropertySpecification
     {
         return $this->extract(self::KEY_PRIMARY);
+    }
+
+    public function hasSoftDeletion(): bool
+    {
+        return $this->extract(self::KEY_SOFT_DELETION);
+    }
+
+    public function softDeletionColumnName(): ?string
+    {
+        return $this->extract(self::KEY_SOFT_DELETION_COLUMN_NAME);
+    }
+
+    public function softDeletionColumnDefinition(): ?ModelPropertySpecification
+    {
+        $definition =  $this->extract(self::KEY_SOFT_DELETION_COLUMN_DEFINITION);
+
+        if ($definition === null) {
+            return null;
+        }
+
+        return new ModelPropertySpecification($definition);
+    }
+
+    public function hasTimestamps(): bool
+    {
+        return $this->extract(self::KEY_HAS_TIMESTAMPS);
     }
 
     public function hasWeb(): bool

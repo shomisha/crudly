@@ -4,16 +4,21 @@ namespace Shomisha\Crudly\Commands;
 
 use Illuminate\Support\Collection;
 use Shomisha\Crudly\Crudly;
+use Shomisha\Crudly\Enums\ModelPropertyType;
 use Shomisha\Crudly\Specifications\CrudlySpecification;
 use Shomisha\Crudly\Subwizards\ModelPropertySubwizard;
 use Shomisha\LaravelConsoleWizard\Command\Wizard;
 use Shomisha\LaravelConsoleWizard\Contracts\Step;
 use Shomisha\LaravelConsoleWizard\Steps\ChoiceStep;
 use Shomisha\LaravelConsoleWizard\Steps\ConfirmStep;
+use Shomisha\LaravelConsoleWizard\Steps\OneTimeWizard;
 use Shomisha\LaravelConsoleWizard\Steps\TextStep;
 
 class CrudlyWizard extends Wizard
 {
+    private const SOFT_DELETE_DEFAULT_COLUMN = 'deleted_at';
+    private const NEW_COLUMN_OPTION = 'Create new column';
+
     protected $description = 'Generates CRUD mechanisms for a specific model.';
 
     protected $signature = 'crudly:model';
@@ -34,6 +39,8 @@ class CrudlyWizard extends Wizard
             'properties' => $this->repeat(
                 $this->subWizard(new ModelPropertySubwizard())
             )->withRepeatPrompt('Do you want to add a model property?'),
+            'has_soft_deletion' => new ConfirmStep("Do you want soft deletion for this model?"),
+            'has_timestamps' => new ConfirmStep("Do you want timestamps for this model?"),
             'has_web' => new ConfirmStep('Should this model have web pages for CRUD actions?'),
             'has_api' => new ConfirmStep('Should this model have API endpoints for CRUD actions?'),
         ];
@@ -73,6 +80,35 @@ class CrudlyWizard extends Wizard
         return $properties;
     }
 
+    public function answeredHasSoftDeletion(Step $step, bool $hasSoftDeletion)
+    {
+        if ($hasSoftDeletion) {
+            if (!$this->hasSoftDeleteColumn()) {
+                $this->askForSoftDeleteColumn();
+            }
+        }
+
+        return $hasSoftDeletion;
+    }
+
+    public function answeredSoftDeleteColumnName(Step $step, string $name)
+    {
+        if ($name == self::NEW_COLUMN_OPTION) {
+            $this->followUp(
+                'soft_delete_column_definition',
+                $this->subWizard(
+                    new OneTimeWizard([
+                        'name' => new TextStep('Enter column name'),
+                    ])
+                )
+            );
+
+            return null;
+        }
+
+        return $name;
+    }
+
     function completed()
     {
         $specification = new CrudlySpecification(
@@ -80,11 +116,44 @@ class CrudlyWizard extends Wizard
             $this->answers->all()
         );
 
-        dd($specification);
+        dd($this->crudly->develop($specification)->getMigration()->print());
     }
 
     private function getPrimaryKeys(array $properties): Collection
     {
         return collect($properties)->where('is_primary', true)->pluck('name');
+    }
+
+    private function hasSoftDeleteColumn(): bool
+    {
+        return collect($this->answers->get('properties'))->where('name', self::SOFT_DELETE_DEFAULT_COLUMN)->isNotEmpty();
+    }
+
+    private function askForSoftDeleteColumn(): void
+    {
+        $defaultSoftDeleteColumn = self::SOFT_DELETE_DEFAULT_COLUMN;
+        $timestampableColumns = $this->getSoftDeletableColumnNames();
+
+        if (empty($timestampableColumns)) {
+            $this->followUp(
+                'soft_delete_column_name',
+                new TextStep("No {$defaultSoftDeleteColumn} column found. Please enter name for timestamp column to be used for soft deletion.")
+            );
+            return;
+        }
+
+        $choiceOptions = array_merge($timestampableColumns, [self::NEW_COLUMN_OPTION]);
+        $this->followUp('soft_delete_column_name', new ChoiceStep(
+            "No '{$defaultSoftDeleteColumn}' column found. Please choose column for soft deletion",
+            $choiceOptions
+        ));
+    }
+
+    private function getSoftDeletableColumnNames(): array
+    {
+        return collect($this->answers->get('properties'))->whereIn('type', [
+            ModelPropertyType::DATETIME()->value(),
+            ModelPropertyType::TIMESTAMP()->value(),
+        ])->pluck('name')->toArray();
     }
 }
