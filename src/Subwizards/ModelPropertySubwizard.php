@@ -4,6 +4,7 @@ namespace Shomisha\Crudly\Subwizards;
 
 use Shomisha\Crudly\Enums\ForeignKeyAction;
 use Shomisha\Crudly\Enums\ModelPropertyType;
+use Shomisha\Crudly\Enums\RelationshipType;
 use Shomisha\LaravelConsoleWizard\Command\Subwizard;
 use Shomisha\LaravelConsoleWizard\Contracts\Step;
 use Shomisha\LaravelConsoleWizard\Steps\ChoiceStep;
@@ -57,12 +58,7 @@ class ModelPropertySubwizard extends Subwizard
     public function answeredIsForeignKey(Step $step, bool $isForeignKey)
     {
         if ($isForeignKey) {
-            $this->followUp('foreign_key_target', $this->subWizard(new OneTimeWizard([
-                'table' => new TextStep('To which table should this foreign key point to?'),
-                'field' => new TextStep('Which field should this foreign key point to?'),
-                'on_delete' => new ChoiceStep('What should happen on row delete?', ForeignKeyAction::all()),
-                'on_update' => new ChoiceStep('What should happen on row update?', ForeignKeyAction::all())
-            ])));
+            $this->followUp('foreign_key_target', $this->subWizard(new RelationshipSubwizard()));
         }
 
         return $isForeignKey;

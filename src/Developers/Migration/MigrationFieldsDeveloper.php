@@ -109,10 +109,12 @@ class MigrationFieldsDeveloper extends MigrationDeveloper
             [$specification->getName()]
         );
 
-        $method->chain('references', [$specification->getForeignKeyField()])
-               ->chain('on', [$specification->getForeignKeyTable()])
-               ->chain('onDelete', [(string) $specification->getForeignKeyOnDelete()])
-               ->chain('onUpdate', [(string) $specification->getForeignKeyOnUpdate()]);
+        $foreignKeySpecification = $specification->getForeignKeySpecification();
+
+        $method->chain('references', [$foreignKeySpecification->getForeignKeyField()])
+               ->chain('on', [$foreignKeySpecification->getForeignKeyTable()])
+               ->chain('onDelete', [(string) $foreignKeySpecification->getForeignKeyOnDelete()])
+               ->chain('onUpdate', [(string) $foreignKeySpecification->getForeignKeyOnUpdate()]);
 
         return $method;
     }

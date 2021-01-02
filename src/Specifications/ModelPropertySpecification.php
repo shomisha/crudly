@@ -5,6 +5,7 @@ namespace Shomisha\Crudly\Specifications;
 use Shomisha\Crudly\Abstracts\Specification;
 use Shomisha\Crudly\Enums\ForeignKeyAction;
 use Shomisha\Crudly\Enums\ModelPropertyType;
+use Shomisha\Crudly\Enums\RelationshipType;
 
 class ModelPropertySpecification extends Specification
 {
@@ -15,12 +16,9 @@ class ModelPropertySpecification extends Specification
         KEY_UNSIGNED = 'is_unsigned',
         KEY_UNIQUE = 'is_unique',
         KEY_NULLABLE = 'is_nullable',
-        KEY_FOREIGN_KEY = 'is_foreign_key',
         KEY_PRIMARY_KEY = 'is_primary',
-        KEY_FOREIGN_KEY_TABLE = 'foreign_key_target.table',
-        KEY_FOREIGN_KEY_FIELD = 'foreign_key_target.field',
-        KEY_FOREIGN_KEY_ON_DELETE = 'foreign_key_target.on_delete',
-        KEY_FOREIGN_KEY_ON_UPDATE = 'foreign_key_target.on_update';
+        KEY_FOREIGN_KEY = 'is_foreign_key',
+        KEY_FOREIGN_KEY_TARGET = 'foreign_key_target';
 
     public function getName(): string
     {
@@ -52,11 +50,6 @@ class ModelPropertySpecification extends Specification
         return $this->extract(self::KEY_NULLABLE);
     }
 
-    public function isForeignKey(): bool
-    {
-        return $this->extract(self::KEY_FOREIGN_KEY);
-    }
-
     public function isInt(): bool
     {
         return in_array($this->getType(), [
@@ -80,27 +73,13 @@ class ModelPropertySpecification extends Specification
         return $this->extract(self::KEY_PRIMARY_KEY) ?? false;
     }
 
-    public function getForeignKeyTable(): ?string
+    public function isForeignKey(): bool
     {
-        return $this->extract(self::KEY_FOREIGN_KEY_TABLE);
+        return $this->extract(self::KEY_FOREIGN_KEY);
     }
 
-    public function getForeignKeyField(): ?string
+    public function getForeignKeySpecification(): ForeignKeySpecification
     {
-        return $this->extract(self::KEY_FOREIGN_KEY_FIELD);
-    }
-
-    public function getForeignKeyOnDelete(): ForeignKeyAction
-    {
-        return ForeignKeyAction::fromString(
-            $this->extract(self::KEY_FOREIGN_KEY_ON_DELETE)
-        );
-    }
-
-    public function getForeignKeyOnUpdate(): ForeignKeyAction
-    {
-        return ForeignKeyAction::fromString(
-            $this->extract(self::KEY_FOREIGN_KEY_ON_UPDATE)
-        );
+        return new ForeignKeySpecification($this->extract(self::KEY_FOREIGN_KEY_TARGET));
     }
 }

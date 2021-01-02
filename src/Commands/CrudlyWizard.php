@@ -38,7 +38,7 @@ class CrudlyWizard extends Wizard
             'model' => new TextStep("Enter the name of your model"),
             'properties' => $this->repeat(
                 $this->subWizard(new ModelPropertySubwizard())
-            )->withRepeatPrompt('Do you want to add a model property?'),
+            )->withRepeatPrompt('Do you want to add a model property?', false, true),
             'has_soft_deletion' => new ConfirmStep("Do you want soft deletion for this model?"),
             'has_timestamps' => new ConfirmStep("Do you want timestamps for this model?"),
             'has_web' => new ConfirmStep('Should this model have web pages for CRUD actions?'),
@@ -95,12 +95,8 @@ class CrudlyWizard extends Wizard
     {
         if ($name == self::NEW_COLUMN_OPTION) {
             $this->followUp(
-                'soft_delete_column_definition',
-                $this->subWizard(
-                    new OneTimeWizard([
-                        'name' => new TextStep('Enter column name'),
-                    ])
-                )
+                'soft_delete_column_name',
+                new TextStep('Enter column name')
             );
 
             return null;
@@ -116,7 +112,7 @@ class CrudlyWizard extends Wizard
             $this->answers->all()
         );
 
-        dd($this->crudly->develop($specification)->getMigration()->print());
+        dd($this->crudly->develop($specification)->getModel()->print());
     }
 
     private function getPrimaryKeys(array $properties): Collection
@@ -137,7 +133,7 @@ class CrudlyWizard extends Wizard
         if (empty($timestampableColumns)) {
             $this->followUp(
                 'soft_delete_column_name',
-                new TextStep("No {$defaultSoftDeleteColumn} column found. Please enter name for timestamp column to be used for soft deletion.")
+                new TextStep("No '{$defaultSoftDeleteColumn}' column found. Please enter name for timestamp column to be used for soft deletion.")
             );
             return;
         }
