@@ -4,12 +4,12 @@ namespace Shomisha\Crudly\Enums;
 
 class ModelPropertyType extends BaseEnum
 {
-    public static function BOOL() : self
+    public static function BOOL(): self
     {
         return new self('boolean');
     }
 
-    public static function STRING() : self
+    public static function STRING(): self
     {
         return new self('string');
     }
@@ -19,42 +19,47 @@ class ModelPropertyType extends BaseEnum
         return new self('email');
     }
 
-    public static function TEXT() : self
+    public static function TEXT(): self
     {
         return new self('text');
     }
 
-    public static function INT() : self
+    public static function INT(): self
     {
         return new self('integer');
     }
 
-    public static function BIG_INT() : self
+    public static function BIG_INT(): self
     {
         return new self('big integer');
     }
 
-    public static function TINY_INT() : self
+    public static function TINY_INT(): self
     {
         return new self('tiny integer');
     }
 
-    public static function FLOAT() : self
+    public static function FLOAT(): self
     {
         return new self('float');
     }
 
-    public static function DATE() : self
+    public static function DATE(): self
     {
         return new self('date');
     }
 
-    public static function DATETIME() : self
+    public static function DATETIME(): self
     {
         return new self('datetime');
     }
 
-    public static function JSON() : self
+    public static function TIMESTAMP(): self
+    {
+        return new self('timestamp');
+    }
+
+    public static function JSON(): self
     {
         return new self('json');
     }
@@ -72,6 +77,7 @@ class ModelPropertyType extends BaseEnum
             self::FLOAT(),
             self::DATE(),
             self::DATETIME(),
+            self::TIMESTAMP(),
             self::JSON(),
         ];
     }
