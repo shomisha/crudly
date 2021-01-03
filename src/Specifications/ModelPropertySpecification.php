@@ -75,7 +75,7 @@ class ModelPropertySpecification extends Specification
 
     public function isForeignKey(): bool
     {
-        return $this->extract(self::KEY_FOREIGN_KEY);
+        return $this->extract(self::KEY_FOREIGN_KEY) ?? false;
     }
 
     public function getForeignKeySpecification(): ForeignKeySpecification
