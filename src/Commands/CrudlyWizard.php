@@ -105,6 +105,30 @@ class CrudlyWizard extends Wizard
         return $name;
     }
 
+    public function answeredHasWeb(Step $step, bool $hasWeb)
+    {
+        if ($hasWeb) {
+            $this->followUp(
+                'has_web_authorization',
+                new ConfirmStep("Should web CRUD actions be authorized?", true)
+            );
+        }
+
+        return $hasWeb;
+    }
+
+    public function answeredHasApi(Step $step, bool $hasApi)
+    {
+        if ($hasApi) {
+            $this->followUp(
+                'has_api_authorization',
+                new ConfirmStep("Should API CRUD endpoints be authorized?", true)
+            );
+        }
+
+        return $hasApi;
+    }
+
     function completed()
     {
         $specification = new CrudlySpecification(
