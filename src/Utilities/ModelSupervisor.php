@@ -12,6 +12,9 @@ class ModelSupervisor implements ModelSupervisorContract
 
     private string $appPath;
 
+    // TODO: pull this from the container
+    private string $rootNamespace = 'App';
+
     public function __construct(Filesystem $filesystem, string $appPath)
     {
         $this->filesystem = $filesystem;
@@ -32,7 +35,7 @@ class ModelSupervisor implements ModelSupervisorContract
             $classNamespace = implode('\\', $pieces);
         }
 
-        return new ModelName($className, $classNamespace);
+        return new ModelName($className, $this->rootNamespace, $classNamespace);
     }
 
     public function modelNameIsValid(string $rawName): bool

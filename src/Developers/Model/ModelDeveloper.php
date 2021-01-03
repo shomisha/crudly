@@ -34,7 +34,7 @@ class ModelDeveloper extends Developer
     {
         $modelName = $specification->getModel();
 
-        $modelTemplate = ClassTemplate::name($modelName->getName())->setNamespace($this->getModelNamespace($modelName->getNamespace()));
+        $modelTemplate = ClassTemplate::name($modelName->getName())->setNamespace($modelName->getFullNamespace());
         $modelTemplate->extends(new Importable(Model::class));
 
         $developedSet->setModel($modelTemplate);
@@ -52,21 +52,5 @@ class ModelDeveloper extends Developer
         $this->getManager()->getRelationshipsDeveloper()->develop($specification, $developedSet);
 
         return $modelTemplate;
-    }
-
-    private function getModelNamespace(?string $subNamespace): string
-    {
-        // TODO: make this configurable, pull it from container
-        $namespace = 'App';
-
-        if ($this->modelSupervisor->shouldUseModelsDirectory()) {
-            $namespace = 'App\Models';
-        }
-
-        if ($subNamespace) {
-            $namespace .= "\\{$subNamespace}";
-        }
-
-        return $namespace;
     }
 }

@@ -6,11 +6,14 @@ class ModelName
 {
     private string $name;
 
+    private string $rootNamespace;
+
     private ?string $namespace;
 
-    public function __construct(string $name, ?string $namespace)
+    public function __construct(string $name, string $rootNamespace, ?string $namespace)
     {
         $this->name = $name;
+        $this->rootNamespace = $rootNamespace;
         $this->namespace = $namespace;
     }
 
@@ -27,5 +30,21 @@ class ModelName
     public function getNamespace(): ?string
     {
         return $this->namespace;
+    }
+
+    public function getFullNamespace(): string
+    {
+        $namespace = $this->rootNamespace;
+
+        if ($this->namespace) {
+            $namespace .= "\\{$this->namespace}}";
+        }
+
+        return $namespace;
+    }
+
+    public function getFullyQualifiedName(): string
+    {
+        return $this->getFullNamespace() . '\\' . $this->name;
     }
 }
