@@ -2,11 +2,14 @@
 
 namespace Shomisha\Crudly\Developers\Model;
 
-use Shomisha\Crudly\Contracts\Developer;
+use Illuminate\Support\Str;
+use Shomisha\Crudly\Abstracts\Developer;
+use Shomisha\Crudly\Contracts\ModelSupervisor;
 use Shomisha\Crudly\Contracts\Specification;
 use Shomisha\Crudly\Data\CrudlySet;
 use Shomisha\Crudly\Data\ModelName;
 use Shomisha\Crudly\Enums\RelationshipType;
+use Shomisha\Crudly\Managers\BaseDeveloperManager as DeveloperManagerAbstract;
 use Shomisha\Crudly\Specifications\CrudlySpecification;
 use Shomisha\Crudly\Specifications\ModelPropertySpecification;
 use Shomisha\Stubless\Contracts\Code;
@@ -14,8 +17,18 @@ use Shomisha\Stubless\DeclarativeCode\ClassMethod;
 use Shomisha\Stubless\ImperativeCode\Block;
 use Shomisha\Stubless\References\Reference;
 
-class RelationshipDeveloper implements Developer
+class RelationshipDeveloper extends Developer
 {
+    private ModelSupervisor $modelSupervisor;
+
+    public function __construct(DeveloperManagerAbstract $manager, ModelSupervisor $modelSupervisor)
+    {
+        parent::__construct($manager);
+
+        $this->modelSupervisor = $modelSupervisor;
+    }
+
+
     /** @param \Shomisha\Crudly\Specifications\CrudlySpecification $specification */
     public function develop(Specification $specification, CrudlySet $developedSet): Code
     {
