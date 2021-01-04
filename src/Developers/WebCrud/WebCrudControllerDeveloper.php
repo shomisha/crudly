@@ -46,7 +46,7 @@ class WebCrudControllerDeveloper extends Developer
     {
         return [
             $this->getManager()->getIndexMethodDeveloper(),
-            // $this->getManager()->getShowMethodDeveloper(),
+            $this->getManager()->getShowMethodDeveloper(),
             // $this->getManager()->getCreateMethodDeveloper(),
             // $this->getManager()->getStoreMethodDeveloper(),
             // $this->getManager()->getEditMethodDeveloper(),

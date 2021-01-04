@@ -7,6 +7,11 @@ use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Index\AuthorizationDevel
 use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Index\IndexDeveloper;
 use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Index\Main\PaginateDeveloper;
 use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Index\ResponseDeveloper;
+use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Show\AuthorizationDeveloper as ShowAuthorizationDeveloper;
+use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Show\ImplicitBindArgumentsDeveloper;
+use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Show\LoadRelationshipsDeveloper;
+use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Show\ResponseDeveloper as ShowResponseDeveloper;
+use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Show\ShowDeveloper;
 
 class WebCrudDeveloperManager extends BaseDeveloperManager
 {
@@ -37,6 +42,36 @@ class WebCrudDeveloperManager extends BaseDeveloperManager
     public function getShowMethodDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers
+        return $this->instantiateDeveloperWithManager(ShowDeveloper::class, $this);
+    }
+
+    public function getShowArgumentsDeveloper(): Developer
+    {
+        // TODO: refactor this to support overriding developers
+        return $this->instantiateDeveloperWithManager(ImplicitBindArgumentsDeveloper::class, $this);
+    }
+
+    public function getShowLoadDeveloper(): Developer
+    {
+        // TODO: refactor this to support overriding developers
+        return $this->nullDeveloper();
+    }
+
+    public function getShowAuthorizationDeveloper(): Developer
+    {
+        return $this->instantiateDeveloperWithManager(ShowAuthorizationDeveloper::class, $this);
+    }
+
+    public function getShowMainDeveloper(): Developer
+    {
+        // TODO: refactor this to support overriding developers
+        return $this->instantiateDeveloperWithManager(LoadRelationshipsDeveloper::class, $this);
+    }
+
+    public function getShowResponseDeveloper(): Developer
+    {
+        // TODO: refactor this to support overriding developers
+        return $this->instantiateDeveloperWithManager(ShowResponseDeveloper::class, $this);
     }
 
     public function getCreateMethodDeveloper(): Developer

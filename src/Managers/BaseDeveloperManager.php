@@ -5,6 +5,7 @@ namespace Shomisha\Crudly\Managers;
 use Illuminate\Contracts\Container\Container;
 use Shomisha\Crudly\Config\DeveloperConfig;
 use Shomisha\Crudly\Contracts\Developer;
+use Shomisha\Crudly\Developers\NullDeveloper;
 
 abstract class BaseDeveloperManager
 {
@@ -31,6 +32,11 @@ abstract class BaseDeveloperManager
     protected function instantiateManager(string $managerClass): BaseDeveloperManager
     {
         return $this->container->get($managerClass);
+    }
+
+    protected function nullDeveloper(): NullDeveloper
+    {
+        return new NullDeveloper();
     }
 
     protected function instantiateDeveloperWithManager(string $developerClass, BaseDeveloperManager $manager): Developer
