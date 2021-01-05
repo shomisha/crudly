@@ -12,18 +12,18 @@ class MigrationDeveloperManager extends BaseDeveloperManager
     public function getMigrationUpMethodDeveloper(): Developer
     {
         // TODO: refactor this to make it overridable via config
-        return new UpMethodDeveloper($this);
+        return $this->instantiateDeveloperWithManager(UpMethodDeveloper::class, $this);
     }
 
     public function getMigrationDownMethodDeveloper(): Developer
     {
         // TODO: refactor this to make it overridable via config
-        return new DownMethodDeveloper($this);
+        return $this->instantiateDeveloperWithManager(DownMethodDeveloper::class, $this);
     }
 
     public function getMigrationFieldsDeveloper(): Developer
     {
         // TODO: refactor this to make it overridable via config
-        return new MigrationFieldsDeveloper($this);
+        return $this->instantiateDeveloperWithManager(MigrationFieldsDeveloper::class, $this);
     }
 }
