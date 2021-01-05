@@ -3,6 +3,7 @@
 namespace Shomisha\Crudly\Utilities;
 
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Str;
 use Shomisha\Crudly\Contracts\ModelSupervisor as ModelSupervisorContract;
 use Shomisha\Crudly\Data\ModelName;
 
@@ -36,6 +37,13 @@ class ModelSupervisor implements ModelSupervisorContract
         }
 
         return new ModelName($className, $this->rootNamespace, $classNamespace);
+    }
+
+    public function parseModelNameFromTable(string $tableName): ModelName
+    {
+        return $this->parseModelName(
+            Str::of($tableName)->studly()->singular()
+        );
     }
 
     public function modelNameIsValid(string $rawName): bool

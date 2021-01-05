@@ -8,6 +8,8 @@ interface ModelSupervisor
 {
     public function parseModelName(string $rawName): ModelName;
 
+    public function parseModelNameFromTable(string $tableName): ModelName;
+
     public function modelNameIsValid(string $rawName): bool;
 
     public function modelExists(string $rawName): bool;

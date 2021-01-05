@@ -61,9 +61,7 @@ class RelationshipDeveloper extends Developer
         $foreignKeySpecification = $specification->getForeignKeySpecification();
 
         $relationshipTargetTable = $foreignKeySpecification->getForeignKeyTable();
-        $modelName = $this->modelSupervisor->parseModelName(
-            Str::of($relationshipTargetTable)->studly()->singular()
-        );
+        $modelName = $this->modelSupervisor->parseModelNameFromTable($relationshipTargetTable);
 
         if (!$this->modelSupervisor->modelExists($modelName->getName())) {
             return null;
