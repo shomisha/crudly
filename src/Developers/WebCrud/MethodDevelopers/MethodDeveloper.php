@@ -54,4 +54,11 @@ abstract class MethodDeveloper extends Developer
             return $propertySpecification->getForeignKeySpecification()->getForeignKeyTable();
         })->filter()->toArray();
     }
+
+    protected function guessFormRequestClass(ModelName $model): string
+    {
+        $modelName = $model->getName();
+
+        return "App\Http\Requests\\{$modelName}Request";
+    }
 }

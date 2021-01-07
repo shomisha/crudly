@@ -30,7 +30,7 @@ class WebCrudControllerDeveloper extends Developer
         $developedSet->setWebCrudController($controllerClass);
 
         foreach ($this->getMethodDevelopers() as $developer) {
-            $controllerClass->addMethod($developer->develop($specification, $developedSet));
+            $developer->develop($specification, $developedSet);
         }
 
         return $controllerClass;
@@ -48,7 +48,7 @@ class WebCrudControllerDeveloper extends Developer
             $this->getManager()->getIndexMethodDeveloper(),
             $this->getManager()->getShowMethodDeveloper(),
             $this->getManager()->getCreateMethodDeveloper(),
-            // $this->getManager()->getStoreMethodDeveloper(),
+            $this->getManager()->getStoreMethodDeveloper(),
             // $this->getManager()->getEditMethodDeveloper(),
             // $this->getManager()->getUpdateMethodDeveloper(),
             // $this->getManager()->getDestroyMethodDeveloper(),
