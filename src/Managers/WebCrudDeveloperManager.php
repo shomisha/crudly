@@ -3,6 +3,7 @@
 namespace Shomisha\Crudly\Managers;
 
 use Shomisha\Crudly\Contracts\Developer;
+use Shomisha\Crudly\Developers\WebCrud\InstantiateDeveloper;
 use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Create\AuthorizationDeveloper as CreateAuthorizationDeveloper;
 use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Create\CreateDeveloper;
 use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Create\InstantiatePlaceholderAndLoadDependencies;
@@ -126,5 +127,10 @@ class WebCrudDeveloperManager extends BaseDeveloperManager
     public function getDestroyMethodDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers
+    }
+
+    public function getInstantiateDeveloper(): Developer
+    {
+        return $this->instantiateDeveloperWithManager(InstantiateDeveloper::class, $this);
     }
 }

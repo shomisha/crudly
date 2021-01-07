@@ -11,6 +11,11 @@ use Shomisha\Stubless\ImperativeCode\AssignBlock;
 use Shomisha\Stubless\ImperativeCode\Block;
 use Shomisha\Stubless\Utilities\Importable;
 
+/**
+ * Class InstantiatePlaceholderAndLoadDependencies
+ *
+ * @method \Shomisha\Crudly\Managers\WebCrudDeveloperManager getManager()
+ */
 class InstantiatePlaceholderAndLoadDependencies extends MethodBodyDeveloper
 {
     protected function getMethodFromSet(CrudlySet $developedSet): CrudMethod
@@ -22,7 +27,7 @@ class InstantiatePlaceholderAndLoadDependencies extends MethodBodyDeveloper
     {
         $method->withMainBlock(Block::fromArray([
             $this->loadDependencies($specification),
-            $this->createPlaceholderModelInstance($specification),
+            $this->getManager()->getInstantiateDeveloper()->develop($specification, $developedSet),
         ]));
     }
 
@@ -49,15 +54,5 @@ class InstantiatePlaceholderAndLoadDependencies extends MethodBodyDeveloper
         return array_map(function (string $tableName) {
             return $this->getModelSupervisor()->parseModelNameFromTable($tableName);
         }, $this->extractRelationshipTablesFromSpecification($specification));
-    }
-
-    private function createPlaceholderModelInstance(CrudlySpecification $specification): AssignBlock
-    {
-        $model = $specification->getModel();
-
-        return Block::assign(
-            $this->guessSingularModelVariableName($model),
-            Block::instantiate(new Importable($model->getFullyQualifiedName()))
-        );
     }
 }
