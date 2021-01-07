@@ -18,7 +18,7 @@ class PaginateDeveloper extends MethodBodyDeveloper
         return $developedSet->getWebCrudController()->getMethods()['index'];
     }
 
-    protected function performDevelopment(Specification $specification, CrudMethod $method)
+    protected function performDevelopment(Specification $specification, CrudlySet $developedSet, CrudMethod $method)
     {
         $variableName = $this->guessPluralModelVariableName($specification->getModel()->getName());
         $fullModelName = $specification->getModel()->getFullyQualifiedName();

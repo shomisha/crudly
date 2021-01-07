@@ -13,12 +13,12 @@ abstract class MethodBodyDeveloper extends MethodDeveloper
     {
         $method = $this->getMethodFromSet($developedSet);
 
-        $this->performDevelopment($specification, $method);
+        $this->performDevelopment($specification, $developedSet, $method);
 
         return $method;
     }
 
     abstract protected function getMethodFromSet(CrudlySet $developedSet): CrudMethod;
 
-    abstract protected function performDevelopment(Specification $specification, CrudMethod $method);
+    abstract protected function performDevelopment(Specification $specification, CrudlySet $developedSet, CrudMethod $method);
 }

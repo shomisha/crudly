@@ -18,7 +18,7 @@ class InstantiatePlaceholderAndLoadDependencies extends MethodBodyDeveloper
         return $developedSet->getWebCrudController()->getMethods()['create'];
     }
 
-    protected function performDevelopment(Specification $specification, CrudMethod $method)
+    protected function performDevelopment(Specification $specification, CrudlySet $developedSet, CrudMethod $method)
     {
         $method->withMainBlock(Block::fromArray([
             $this->loadDependencies($specification),

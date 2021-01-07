@@ -17,8 +17,12 @@ class AuthorizationDeveloper extends MethodBodyDeveloper
         return $developedSet->getWebCrudController()->getMethods()['index'];
     }
 
-    /** @param \Shomisha\Crudly\Specifications\CrudlySpecification $specification */
-    protected function performDevelopment(Specification $specification, CrudMethod $method)
+    /**
+     * @param \Shomisha\Crudly\Contracts\Specification $specification
+     * @param \Shomisha\Crudly\Data\CrudlySet $developedSet
+     * @param \Shomisha\Crudly\Templates\Crud\CrudMethod $method
+     */
+    protected function performDevelopment(Specification $specification, CrudlySet $developedSet, CrudMethod $method)
     {
         $fullModelName = $specification->getModel()->getFullyQualifiedName();
 

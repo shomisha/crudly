@@ -16,10 +16,11 @@ class ResponseDeveloper extends MethodBodyDeveloper
     }
 
     /**
-     * @param \Shomisha\Crudly\Specifications\CrudlySpecification $specification
-     * @param \Shomisha\Crudly\Templates\Crud\Web\WebCrudMethod $method
+     * @param \Shomisha\Crudly\Contracts\Specification $specification
+     * @param \Shomisha\Crudly\Data\CrudlySet $developedSet
+     * @param \Shomisha\Crudly\Templates\Crud\CrudMethod $method
      */
-    protected function performDevelopment(Specification $specification, CrudMethod $method)
+    protected function performDevelopment(Specification $specification, CrudlySet $developedSet, CrudMethod $method)
     {
         $model = $specification->getModel();
         $modelsVariable = $this->guessPluralModelVariableName($model->getName());

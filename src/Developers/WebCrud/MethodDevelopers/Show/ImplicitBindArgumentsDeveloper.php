@@ -16,8 +16,12 @@ class ImplicitBindArgumentsDeveloper extends MethodBodyDeveloper
         return $developedSet->getWebCrudController()->getMethods()['show'];
     }
 
-    /** @param \Shomisha\Crudly\Specifications\CrudlySpecification $specification */
-    protected function performDevelopment(Specification $specification, CrudMethod $method)
+    /**
+     * @param \Shomisha\Crudly\Contracts\Specification $specification
+     * @param \Shomisha\Crudly\Data\CrudlySet $developedSet
+     * @param \Shomisha\Crudly\Templates\Crud\CrudMethod $method
+     */
+    protected function performDevelopment(Specification $specification, CrudlySet $developedSet, CrudMethod $method)
     {
         $model = $specification->getModel();
         $modelArgName = $this->guessSingularModelVariableName($model->getName());
