@@ -29,7 +29,7 @@ class WebCrudControllerDeveloper extends Developer
 
         $developedSet->setWebCrudController($controllerClass);
 
-        foreach ($this->getMethodDevelopers() as $developer) {
+        foreach ($this->getMethodDevelopers($specification) as $developer) {
             $developer->develop($specification, $developedSet);
         }
 
@@ -42,16 +42,22 @@ class WebCrudControllerDeveloper extends Developer
     }
 
     /** @return \Shomisha\Crudly\Abstracts\Developer[] */
-    private function getMethodDevelopers(): array
+    private function getMethodDevelopers(CrudlySpecification $specification): array
     {
-        return [
+        $developers = [
             $this->getManager()->getIndexMethodDeveloper(),
             $this->getManager()->getShowMethodDeveloper(),
             $this->getManager()->getCreateMethodDeveloper(),
             $this->getManager()->getStoreMethodDeveloper(),
             $this->getManager()->getEditMethodDeveloper(),
             $this->getManager()->getUpdateMethodDeveloper(),
-            // $this->getManager()->getDestroyMethodDeveloper(),
+            $this->getManager()->getDestroyMethodDeveloper(),
         ];
+
+        if ($specification->hasSoftDeletion()) {
+            // $developers[] = $this->getManager()->getForceDeleteDeveloper();
+        }
+
+        return $developers;
     }
 }

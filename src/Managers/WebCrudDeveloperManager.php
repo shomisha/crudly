@@ -3,6 +3,10 @@
 namespace Shomisha\Crudly\Managers;
 
 use Shomisha\Crudly\Contracts\Developer;
+use Shomisha\Crudly\Developers\WebCrud\InvokeDeleteMethodDeveloper;
+use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Destroy\AuthorizationDeveloper as DestroyAuthorizationDeveloper;
+use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Destroy\DestroyDeveloper;
+use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Destroy\ResponseDeveloper as DestroyResponseDeveloper;
 use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Edit\AuthorizationDeveloper as UpdateAuthorizationDeveloper;
 use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Edit\EditDeveloper;
 use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Edit\ResponseDeveloper as EditResponseDeveloper;
@@ -256,6 +260,32 @@ class WebCrudDeveloperManager extends BaseDeveloperManager
     }
 
     public function getDestroyMethodDeveloper(): Developer
+    {
+        // TODO: refactor this to support overriding developers
+        return $this->instantiateDeveloperWithManager(DestroyDeveloper::class, $this);
+    }
+
+    public function getDestroyLoadDeveloper(): Developer
+    {
+        return $this->nullDeveloper();
+    }
+
+    public function getDestroyAuthorizationDeveloper(): Developer
+    {
+        return $this->instantiateDeveloperWithManager(DestroyAuthorizationDeveloper::class, $this);
+    }
+
+    public function getDestroyMainDeveloper(): Developer
+    {
+        return $this->instantiateDeveloperWithManager(InvokeDeleteMethodDeveloper::class, $this);
+    }
+
+    public function getDestroyResponseDeveloper(): Developer
+    {
+        return $this->instantiateDeveloperWithManager(DestroyResponseDeveloper::class, $this);
+    }
+
+    public function getForceDeleteDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers
     }
