@@ -55,7 +55,8 @@ class WebCrudControllerDeveloper extends Developer
         ];
 
         if ($specification->hasSoftDeletion()) {
-            // $developers[] = $this->getManager()->getForceDeleteDeveloper();
+            $developers[] = $this->getManager()->getForceDeleteDeveloper();
+            $developers[] = $this->getManager()->getRestoreDeveloper();
         }
 
         return $developers;

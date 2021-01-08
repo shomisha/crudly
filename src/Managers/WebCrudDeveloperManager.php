@@ -4,6 +4,8 @@ namespace Shomisha\Crudly\Managers;
 
 use Shomisha\Crudly\Contracts\Developer;
 use Shomisha\Crudly\Developers\WebCrud\InvokeDeleteMethodDeveloper;
+use Shomisha\Crudly\Developers\WebCrud\InvokeForceDeleteMethodDeveloper;
+use Shomisha\Crudly\Developers\WebCrud\InvokeRestoreMethodDeveloper;
 use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Destroy\AuthorizationDeveloper as DestroyAuthorizationDeveloper;
 use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Destroy\DestroyDeveloper;
 use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Destroy\ResponseDeveloper as DestroyResponseDeveloper;
@@ -16,10 +18,16 @@ use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Create\AuthorizationDeve
 use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Create\CreateDeveloper;
 use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Create\InstantiatePlaceholderAndLoadDependencies;
 use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Create\ResponseDeveloper as CreateResponseDeveloper;
+use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\ForceDelete\AuthorizationDeveloper as ForceDeleteAuthorizationDeveloper;
+use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\ForceDelete\ForceDeleteDeveloper;
+use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\ForceDelete\ResponseDeveloper as ForceDeleteResponseDeveloper;
 use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Index\AuthorizationDeveloper;
 use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Index\IndexDeveloper;
 use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Index\Main\PaginateDeveloper;
 use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Index\ResponseDeveloper;
+use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Restore\AuthorizationDeveloper as RestoreAuthorizationDeveloper;
+use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Restore\ResponseDeveloper as RestoreResponseDeveloper;
+use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Restore\RestoreDeveloper;
 use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Show\AuthorizationDeveloper as ShowAuthorizationDeveloper;
 use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Show\ImplicitBindArgumentsDeveloper;
 use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Show\LoadRelationshipsDeveloper;
@@ -285,9 +293,64 @@ class WebCrudDeveloperManager extends BaseDeveloperManager
         return $this->instantiateDeveloperWithManager(DestroyResponseDeveloper::class, $this);
     }
 
+    public function getRestoreDeveloper(): Developer
+    {
+        // TODO: refactor this to support overriding developers
+        return $this->instantiateDeveloperWithManager(RestoreDeveloper::class, $this);
+    }
+
+    public function getRestoreLoadDeveloper(): Developer
+    {
+        // TODO: refactor this to support overriding developers
+        return $this->nullDeveloper();
+    }
+
+    public function getRestoreAuthorizationDeveloper(): Developer
+    {
+        // TODO: refactor this to support overriding developers
+        return $this->instantiateDeveloperWithManager(RestoreAuthorizationDeveloper::class, $this);
+    }
+
+    public function getRestoreMainDeveloper(): Developer
+    {
+        // TODO: refactor this to support overriding developers
+        return $this->instantiateDeveloperWithManager(InvokeRestoreMethodDeveloper::class, $this);
+    }
+
+    public function getRestoreResponseDeveloper(): Developer
+    {
+        // TODO: refactor this to support overriding developers
+        return $this->instantiateDeveloperWithManager(RestoreResponseDeveloper::class, $this);
+    }
+
     public function getForceDeleteDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers
+        return $this->instantiateDeveloperWithManager(ForceDeleteDeveloper::class, $this);
+    }
+
+    public function getForceDeleteLoadDeveloper(): Developer
+    {
+        // TODO: refactor this to support overriding developers
+        return $this->nullDeveloper();
+    }
+
+    public function getForceDeleteAuthorizationDeveloper(): Developer
+    {
+        // TODO: refactor this to support overriding developers
+        return $this->instantiateDeveloperWithManager(ForceDeleteAuthorizationDeveloper::class, $this);
+    }
+
+    public function getForceDeleteMainDeveloper(): Developer
+    {
+        // TODO: refactor this to support overriding developers
+        return $this->instantiateDeveloperWithManager(InvokeForceDeleteMethodDeveloper::class, $this);
+    }
+
+    public function getForceDeleteResponseDeveloper(): Developer
+    {
+        // TODO: refactor this to support overriding developers
+        return $this->instantiateDeveloperWithManager(ForceDeleteResponseDeveloper::class, $this);
     }
 
     public function getImplicitBindArgumentDeveloper(): ImplicitBindArgumentsDeveloper
