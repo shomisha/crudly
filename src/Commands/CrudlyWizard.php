@@ -5,13 +5,11 @@ namespace Shomisha\Crudly\Commands;
 use Illuminate\Support\Collection;
 use Shomisha\Crudly\Crudly;
 use Shomisha\Crudly\Enums\ModelPropertyType;
-use Shomisha\Crudly\Specifications\CrudlySpecification;
 use Shomisha\Crudly\Subwizards\ModelPropertySubwizard;
 use Shomisha\LaravelConsoleWizard\Command\Wizard;
 use Shomisha\LaravelConsoleWizard\Contracts\Step;
 use Shomisha\LaravelConsoleWizard\Steps\ChoiceStep;
 use Shomisha\LaravelConsoleWizard\Steps\ConfirmStep;
-use Shomisha\LaravelConsoleWizard\Steps\OneTimeWizard;
 use Shomisha\LaravelConsoleWizard\Steps\TextStep;
 
 class CrudlyWizard extends Wizard
@@ -42,7 +40,9 @@ class CrudlyWizard extends Wizard
             'has_soft_deletion' => new ConfirmStep("Do you want soft deletion for this model?"),
             'has_timestamps' => new ConfirmStep("Do you want timestamps for this model?"),
             'has_web' => new ConfirmStep('Should this model have web pages for CRUD actions?'),
+            'has_web_authorization' => new ConfirmStep("Should web CRUD actions be authorized?", true),
             'has_api' => new ConfirmStep('Should this model have API endpoints for CRUD actions?'),
+            'has_api_authorization' => new ConfirmStep("Should API CRUD endpoints be authorized?", true),
         ];
     }
 
@@ -74,7 +74,7 @@ class CrudlyWizard extends Wizard
         $primaryKeys = $this->getPrimaryKeys($properties);
 
         if ($primaryKeys->count() > 1) {
-            $this->followUp('actual_primary_key', new ChoiceStep("You have specified multiple primary keys. Please select one.", $primaryKeys->all()));
+            $this->followUp('actual_primary_key', new ChoiceStep("You have specified multiple primary keys. Please select one", $primaryKeys->all()));
         }
 
         return $properties;
@@ -107,11 +107,8 @@ class CrudlyWizard extends Wizard
 
     public function answeredHasWeb(Step $step, bool $hasWeb)
     {
-        if ($hasWeb) {
-            $this->followUp(
-                'has_web_authorization',
-                new ConfirmStep("Should web CRUD actions be authorized?", true)
-            );
+        if (!$hasWeb) {
+            $this->skip('has_web_authorization');
         }
 
         return $hasWeb;
@@ -119,11 +116,8 @@ class CrudlyWizard extends Wizard
 
     public function answeredHasApi(Step $step, bool $hasApi)
     {
-        if ($hasApi) {
-            $this->followUp(
-                'has_api_authorization',
-                new ConfirmStep("Should API CRUD endpoints be authorized?", true)
-            );
+        if (!$hasApi) {
+            $this->skip('has_api_authorization');
         }
 
         return $hasApi;
