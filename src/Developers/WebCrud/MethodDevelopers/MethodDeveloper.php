@@ -7,6 +7,8 @@ use Shomisha\Crudly\Abstracts\Developer;
 use Shomisha\Crudly\Data\ModelName;
 use Shomisha\Crudly\Specifications\CrudlySpecification;
 use Shomisha\Crudly\Specifications\ModelPropertySpecification;
+use Shomisha\Stubless\ImperativeCode\Block;
+use Shomisha\Stubless\ImperativeCode\ReturnBlock;
 
 abstract class MethodDeveloper extends Developer
 {
@@ -60,5 +62,26 @@ abstract class MethodDeveloper extends Developer
         $modelName = $model->getName();
 
         return "App\Http\Requests\\{$modelName}Request";
+    }
+
+    protected function returnViewBlock(string $viewName, array $data = []): ReturnBlock
+    {
+        $viewResponse = Block::invokeFunction('view', array_filter([
+            $viewName,
+            $data,
+        ]));
+
+        return Block::return($viewResponse);
+    }
+
+    protected function returnRedirectRouteBlock(string $route, array $with = []): ReturnBlock
+    {
+        $redirectResponse = Block::invokeFunction('redirect')->chain('route', [$route]);
+
+        if (!empty($with)) {
+            $redirectResponse->chain('with', $with);
+        }
+
+        return Block::return($redirectResponse);
     }
 }

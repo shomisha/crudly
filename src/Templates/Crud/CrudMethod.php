@@ -111,7 +111,7 @@ class CrudMethod extends ClassMethod
         }
 
         $body[] = $this->getMainBlock();
-        $body[] = Block::return($this->getResponseBlock());
+        $body[] = $this->getResponseBlock();
 
         $this->setBody(Block::fromArray($body));
 

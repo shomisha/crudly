@@ -4,29 +4,17 @@ namespace Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Store;
 
 use Shomisha\Crudly\Contracts\Specification;
 use Shomisha\Crudly\Data\CrudlySet;
-use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\MethodBodyDeveloper;
-use Shomisha\Crudly\Templates\Crud\CrudMethod;
+use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\MethodDeveloper;
+use Shomisha\Stubless\Contracts\Code;
 use Shomisha\Stubless\DeclarativeCode\Argument;
 use Shomisha\Stubless\Utilities\Importable;
 
-class FormRequestArgumentDeveloper extends MethodBodyDeveloper
+class FormRequestArgumentDeveloper extends MethodDeveloper
 {
-    protected function getMethodFromSet(CrudlySet $developedSet): CrudMethod
+    public function develop(Specification $specification, CrudlySet $developedSet): Code
     {
-        return $developedSet->getWebCrudController()->getMethods()['store'];
-    }
-
-    /**
-     * @param \Shomisha\Crudly\Contracts\Specification $specification
-     * @param \Shomisha\Crudly\Data\CrudlySet $developedSet
-     * @param \Shomisha\Crudly\Templates\Crud\CrudMethod $method
-     */
-    protected function performDevelopment(Specification $specification, CrudlySet $developedSet, CrudMethod $method)
-    {
-        $method->withArguments([
-            Argument::name('request')->type(
-                new Importable($this->guessFormRequestClass($specification->getModel()))
-            )
-        ]);
+        return Argument::name('request')->type(
+            new Importable($this->guessFormRequestClass($specification->getModel()))
+        );
     }
 }

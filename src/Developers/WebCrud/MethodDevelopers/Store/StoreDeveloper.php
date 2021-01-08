@@ -2,36 +2,45 @@
 
 namespace Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Store;
 
-use Shomisha\Crudly\Contracts\Specification;
-use Shomisha\Crudly\Data\CrudlySet;
-use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\MethodDeveloper;
-use Shomisha\Crudly\Managers\BaseDeveloperManager as DeveloperManagerAbstract;
-use Shomisha\Crudly\Templates\Crud\Web\WebCrudMethod;
-use Shomisha\Stubless\Contracts\Code;
-use Shomisha\Stubless\DeclarativeCode\ClassMethod;
+use Shomisha\Crudly\Contracts\Developer;
+use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\WebCrudMethodDeveloper;
 
 /**
  * Class StoreDeveloper
  *
  * @method \Shomisha\Crudly\Managers\WebCrudDeveloperManager getManager()
  */
-class StoreDeveloper extends MethodDeveloper
+class StoreDeveloper extends WebCrudMethodDeveloper
 {
-    /** @param \Shomisha\Crudly\Specifications\CrudlySpecification $specification */
-    public function develop(Specification $specification, CrudlySet $developedSet): Code
+    protected function getMethodName(): string
     {
-        $storeMethod = new WebCrudMethod('store');
-        $developedSet->getWebCrudController()->addMethod($storeMethod);
+        return 'store';
+    }
 
-        $this->getManager()->getStoreArgumentsDeveloper()->develop($specification, $developedSet);
+    protected function getArgumentsDevelopers(): array
+    {
+        return [
+            $this->getManager()->getFormRequestArgumentDeveloper()
+        ];
+    }
 
-        if ($specification->hasWebAuthorization()) {
-            $this->getManager()->getStoreAuthorizationDeveloper()->develop($specification, $developedSet);
-        }
+    protected function getLoadDeveloper(): Developer
+    {
+        return $this->getManager()->nullDeveloper();
+    }
 
-        $this->getManager()->getStoreMainDeveloper()->develop($specification, $developedSet);
-        $this->getManager()->getStoreResponseDeveloper()->develop($specification, $developedSet);
+    protected function getAuthorizationDeveloper(): Developer
+    {
+        return $this->getManager()->getStoreAuthorizationDeveloper();
+    }
 
-        return $storeMethod;
+    protected function getMainDeveloper(): Developer
+    {
+        return $this->getManager()->getStoreMainDeveloper();
+    }
+
+    protected function getResponseDeveloper(): Developer
+    {
+        return $this->getManager()->getStoreResponseDeveloper();
     }
 }

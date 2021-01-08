@@ -4,23 +4,14 @@ namespace Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Store;
 
 use Shomisha\Crudly\Contracts\Specification;
 use Shomisha\Crudly\Data\CrudlySet;
-use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\MethodBodyDeveloper;
-use Shomisha\Crudly\Templates\Crud\CrudMethod;
+use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\MethodDeveloper;
+use Shomisha\Stubless\Contracts\Code;
 
-class ResponseDeveloper extends MethodBodyDeveloper
+class ResponseDeveloper extends MethodDeveloper
 {
-    protected function getMethodFromSet(CrudlySet $developedSet): CrudMethod
+    public function develop(Specification $specification, CrudlySet $developedSet): Code
     {
-        return $developedSet->getWebCrudController()->getMethods()['store'];
-    }
-
-    /**
-     * @param \Shomisha\Crudly\Specifications\CrudlySpecification $specification
-     * @param \Shomisha\Crudly\Templates\Crud\Web\WebCrudMethod $method
-     */
-    protected function performDevelopment(Specification $specification, CrudlySet $developedSet, CrudMethod $method)
-    {
-        $method->returnRouteRedirect(
+        return $this->returnRedirectRouteBlock(
             $this->guessPluralModelVariableName($specification->getModel()->getName()) . '.index',
             ['success', "Successfully created new instance."]
         );

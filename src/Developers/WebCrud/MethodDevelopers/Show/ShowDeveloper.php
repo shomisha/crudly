@@ -2,35 +2,45 @@
 
 namespace Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Show;
 
-use Shomisha\Crudly\Contracts\Specification;
-use Shomisha\Crudly\Data\CrudlySet;
-use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\MethodDeveloper;
-use Shomisha\Crudly\Templates\Crud\Web\WebCrudMethod;
-use Shomisha\Stubless\Contracts\Code;
+use Shomisha\Crudly\Contracts\Developer;
+use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\WebCrudMethodDeveloper;
 
 /**
  * Class ShowDeveloper
  *
  * @method \Shomisha\Crudly\Managers\WebCrudDeveloperManager getManager()
  */
-class ShowDeveloper extends MethodDeveloper
+class ShowDeveloper extends WebCrudMethodDeveloper
 {
-    /** @param \Shomisha\Crudly\Specifications\CrudlySpecification $specification */
-    public function develop(Specification $specification, CrudlySet $developedSet): Code
+    protected function getMethodName(): string
     {
-        $showMethod = new WebCrudMethod('show');
-        $developedSet->getWebCrudController()->addMethod($showMethod);
+        return 'show';
+    }
 
-        $this->getManager()->getShowArgumentsDeveloper()->develop($specification, $developedSet);
-        $this->getManager()->getShowLoadDeveloper()->develop($specification, $developedSet);
+    protected function getArgumentsDevelopers(): array
+    {
+        return [
+            $this->getManager()->getShowArgumentsDeveloper()
+        ];
+    }
 
-        if ($specification->hasWebAuthorization()) {
-            $this->getManager()->getShowAuthorizationDeveloper()->develop($specification, $developedSet);
-        }
+    protected function getLoadDeveloper(): Developer
+    {
+        return $this->getManager()->getShowLoadDeveloper();
+    }
 
-        $this->getManager()->getShowMainDeveloper()->develop($specification, $developedSet);
-        $this->getManager()->getShowResponseDeveloper()->develop($specification, $developedSet);
+    protected function getAuthorizationDeveloper(): Developer
+    {
+        return $this->getManager()->getShowAuthorizationDeveloper();
+    }
 
-        return $showMethod;
+    protected function getMainDeveloper(): Developer
+    {
+        return $this->getManager()->getShowMainDeveloper();
+    }
+
+    protected function getResponseDeveloper(): Developer
+    {
+        return $this->getManager()->getShowResponseDeveloper();
     }
 }

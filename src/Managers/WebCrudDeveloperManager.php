@@ -4,6 +4,7 @@ namespace Shomisha\Crudly\Managers;
 
 use Shomisha\Crudly\Contracts\Developer;
 use Shomisha\Crudly\Developers\WebCrud\InstantiateDeveloper;
+use Shomisha\Crudly\Developers\WebCrud\LoadDependenciesDeveloper;
 use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Create\AuthorizationDeveloper as CreateAuthorizationDeveloper;
 use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Create\CreateDeveloper;
 use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Create\InstantiatePlaceholderAndLoadDependencies;
@@ -60,7 +61,7 @@ class WebCrudDeveloperManager extends BaseDeveloperManager
     public function getShowArgumentsDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(ImplicitBindArgumentsDeveloper::class, $this);
+        return $this->getImplicitBindArgumentDeveloper();
     }
 
     public function getShowLoadDeveloper(): Developer
@@ -142,7 +143,8 @@ class WebCrudDeveloperManager extends BaseDeveloperManager
 
     public function getStoreInstantiateDeveloper(): Developer
     {
-        return $this->instantiateDeveloperWithManager(InstantiateDeveloper::class, $this);
+        // TODO: refactor this to support overriding developers
+        return $this->getInstantiateDeveloper();
     }
 
     public function getStoreValidationDeveloper(): Developer
@@ -185,8 +187,23 @@ class WebCrudDeveloperManager extends BaseDeveloperManager
         // TODO: refactor this to support overriding developers
     }
 
-    public function getInstantiateDeveloper(): Developer
+    public function getImplicitBindArgumentDeveloper(): ImplicitBindArgumentsDeveloper
+    {
+        return $this->instantiateDeveloperWithManager(ImplicitBindArgumentsDeveloper::class, $this);
+    }
+
+    public function getFormRequestArgumentDeveloper(): FormRequestArgumentDeveloper
+    {
+        return $this->instantiateDeveloperWithManager(FormRequestArgumentDeveloper::class, $this);
+    }
+
+    public function getInstantiateDeveloper(): InstantiateDeveloper
     {
         return $this->instantiateDeveloperWithManager(InstantiateDeveloper::class, $this);
+    }
+
+    public function getLoadDependenciesDeveloper(): LoadDependenciesDeveloper
+    {
+        return $this->instantiateDeveloperWithManager(LoadDependenciesDeveloper::class, $this);
     }
 }

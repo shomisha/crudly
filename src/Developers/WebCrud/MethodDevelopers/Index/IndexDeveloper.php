@@ -2,34 +2,43 @@
 
 namespace Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Index;
 
-use Shomisha\Crudly\Abstracts\Developer;
-use Shomisha\Crudly\Contracts\Specification;
-use Shomisha\Crudly\Data\CrudlySet;
-use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\MethodDeveloper;
-use Shomisha\Crudly\Templates\Crud\Web\WebCrudMethod;
-use Shomisha\Stubless\Contracts\Code;
+use Shomisha\Crudly\Contracts\Developer;
+use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\WebCrudMethodDeveloper;
 
 /**
  * Class IndexDeveloper
  *
  * @method \Shomisha\Crudly\Managers\WebCrudDeveloperManager getManager()
  */
-class IndexDeveloper extends MethodDeveloper
+class IndexDeveloper extends WebCrudMethodDeveloper
 {
-    /** @param \Shomisha\Crudly\Specifications\CrudlySpecification $specification */
-    public function develop(Specification $specification, CrudlySet $developedSet): Code
+    protected function getMethodName(): string
     {
-        $indexMethod = new WebCrudMethod('index');
-        $developedSet->getWebCrudController()->addMethod($indexMethod);
+        return 'index';
+    }
 
-        if ($specification->hasWebAuthorization()) {
-            $this->getManager()->getIndexAuthorizationDeveloper()->develop($specification, $developedSet);
-        }
+    protected function getArgumentsDevelopers(): array
+    {
+        return [];
+    }
 
-        $this->getManager()->getIndexMainDeveloper()->develop($specification, $developedSet);
+    protected function getLoadDeveloper(): Developer
+    {
+        return $this->getManager()->nullDeveloper();
+    }
 
-        $this->getManager()->getIndexResponseDeveloper()->develop($specification, $developedSet);
+    protected function getAuthorizationDeveloper(): Developer
+    {
+        return $this->getManager()->getIndexAuthorizationDeveloper();
+    }
 
-        return $indexMethod;
+    protected function getMainDeveloper(): Developer
+    {
+        return $this->getManager()->getIndexMainDeveloper();
+    }
+
+    protected function getResponseDeveloper(): Developer
+    {
+        return $this->getManager()->getIndexResponseDeveloper();
     }
 }

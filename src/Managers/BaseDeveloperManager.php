@@ -19,6 +19,11 @@ abstract class BaseDeveloperManager
         $this->container = $container;
     }
 
+    public function nullDeveloper(): NullDeveloper
+    {
+        return new NullDeveloper();
+    }
+
     protected function getConfig(): DeveloperConfig
     {
         return $this->config;
@@ -32,11 +37,6 @@ abstract class BaseDeveloperManager
     protected function instantiateManager(string $managerClass): BaseDeveloperManager
     {
         return $this->container->get($managerClass);
-    }
-
-    protected function nullDeveloper(): NullDeveloper
-    {
-        return new NullDeveloper();
     }
 
     protected function instantiateDeveloperWithManager(string $developerClass, BaseDeveloperManager $manager): Developer

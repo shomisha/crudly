@@ -4,55 +4,22 @@ namespace Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Create;
 
 use Shomisha\Crudly\Contracts\Specification;
 use Shomisha\Crudly\Data\CrudlySet;
-use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\MethodBodyDeveloper;
-use Shomisha\Crudly\Specifications\CrudlySpecification;
-use Shomisha\Crudly\Templates\Crud\CrudMethod;
-use Shomisha\Stubless\ImperativeCode\AssignBlock;
+use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\MethodDeveloper;
+use Shomisha\Stubless\Contracts\Code;
 use Shomisha\Stubless\ImperativeCode\Block;
-use Shomisha\Stubless\Utilities\Importable;
 
 /**
  * Class InstantiatePlaceholderAndLoadDependencies
  *
  * @method \Shomisha\Crudly\Managers\WebCrudDeveloperManager getManager()
  */
-class InstantiatePlaceholderAndLoadDependencies extends MethodBodyDeveloper
+class InstantiatePlaceholderAndLoadDependencies extends MethodDeveloper
 {
-    protected function getMethodFromSet(CrudlySet $developedSet): CrudMethod
+    public function develop(Specification $specification, CrudlySet $developedSet): Code
     {
-        return $developedSet->getWebCrudController()->getMethods()['create'];
-    }
-
-    protected function performDevelopment(Specification $specification, CrudlySet $developedSet, CrudMethod $method)
-    {
-        $method->withMainBlock(Block::fromArray([
-            $this->loadDependencies($specification),
+        return Block::fromArray([
+            $this->getManager()->getLoadDependenciesDeveloper()->develop($specification, $developedSet),
             $this->getManager()->getInstantiateDeveloper()->develop($specification, $developedSet),
-        ]));
-    }
-
-    private function loadDependencies(CrudlySpecification $specification): Block
-    {
-        $blocks = [];
-
-        foreach ($this->extractRelationshipModels($specification) as $modelName) {
-            $blocks[] = Block::assign(
-                $this->guessPluralModelVariableName($modelName),
-                Block::invokeStaticMethod(
-                    new Importable($modelName->getFullyQualifiedName()),
-                    'all'
-                )
-            );
-        }
-
-        return Block::fromArray($blocks);
-    }
-
-    /** @return \Shomisha\Crudly\Data\ModelName[] */
-    private function extractRelationshipModels(CrudlySpecification $specification): array
-    {
-        return array_map(function (string $tableName) {
-            return $this->getModelSupervisor()->parseModelNameFromTable($tableName);
-        }, $this->extractRelationshipTablesFromSpecification($specification));
+        ]);
     }
 }

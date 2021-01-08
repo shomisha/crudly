@@ -2,34 +2,43 @@
 
 namespace Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Create;
 
-use Shomisha\Crudly\Contracts\Specification;
-use Shomisha\Crudly\Data\CrudlySet;
-use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\MethodDeveloper;
-use Shomisha\Crudly\Templates\Crud\Web\WebCrudMethod;
-use Shomisha\Stubless\Contracts\Code;
+use Shomisha\Crudly\Contracts\Developer;
+use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\WebCrudMethodDeveloper;
 
 /**
  * Class CreateDeveloper
  *
  * @method \Shomisha\Crudly\Managers\WebCrudDeveloperManager getManager()
  */
-class CreateDeveloper extends MethodDeveloper
+class CreateDeveloper extends WebCrudMethodDeveloper
 {
-    /** @param \Shomisha\Crudly\Specifications\CrudlySpecification $specification */
-    public function develop(Specification $specification, CrudlySet $developedSet): Code
+    protected function getMethodName(): string
     {
-        $createMethod = new WebCrudMethod('create');
-        $developedSet->getWebCrudController()->addMethod($createMethod);
+        return 'create';
+    }
 
-        $this->getManager()->getCreateLoadDeveloper()->develop($specification, $developedSet);
+    protected function getArgumentsDevelopers(): array
+    {
+        return [];
+    }
 
-        if ($specification->hasWebAuthorization()) {
-            $this->getManager()->getCreateAuthorizationDeveloper()->develop($specification, $developedSet);
-        }
+    protected function getLoadDeveloper(): Developer
+    {
+        return $this->getManager()->getCreateLoadDeveloper();
+    }
 
-        $this->getManager()->getCreateMainDeveloper()->develop($specification, $developedSet);
-        $this->getManager()->getCreateResponseDeveloper()->develop($specification, $developedSet);
+    protected function getAuthorizationDeveloper(): Developer
+    {
+        return $this->getManager()->getCreateAuthorizationDeveloper();
+    }
 
-        return $createMethod;
+    protected function getMainDeveloper(): Developer
+    {
+        return $this->getManager()->getCreateMainDeveloper();
+    }
+
+    protected function getResponseDeveloper(): Developer
+    {
+        return $this->getManager()->getCreateResponseDeveloper();
     }
 }
