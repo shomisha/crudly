@@ -3,6 +3,9 @@
 namespace Shomisha\Crudly\Managers;
 
 use Shomisha\Crudly\Contracts\Developer;
+use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Edit\AuthorizationDeveloper as EditAuthorizationDeveloper;
+use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Edit\EditDeveloper;
+use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Edit\ResponseDeveloper as EditResponseDeveloper;
 use Shomisha\Crudly\Developers\WebCrud\InstantiateDeveloper;
 use Shomisha\Crudly\Developers\WebCrud\LoadDependenciesDeveloper;
 use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Create\AuthorizationDeveloper as CreateAuthorizationDeveloper;
@@ -175,6 +178,30 @@ class WebCrudDeveloperManager extends BaseDeveloperManager
     public function getEditMethodDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers
+        return $this->instantiateDeveloperWithManager(EditDeveloper::class, $this);
+    }
+
+    public function getEditLoadDeveloper(): Developer
+    {
+        // TODO: refactor this to support overriding developers
+        return $this->nullDeveloper();
+    }
+
+    public function getEditAuthorizationDeveloper(): Developer
+    {
+        // TODO: refactor this to support overriding developers
+        return $this->instantiateDeveloperWithManager(EditAuthorizationDeveloper::class, $this);
+    }
+
+    public function getEditMainDeveloper(): Developer
+    {
+        return $this->instantiateDeveloperWithManager(LoadDependenciesDeveloper::class, $this);
+    }
+
+    public function getEditResponseDeveloper(): Developer
+    {
+        // TODO: refactor this to support overriding developers
+        return $this->instantiateDeveloperWithManager(EditResponseDeveloper::class, $this);
     }
 
     public function getUpdateMethodDeveloper(): Developer
