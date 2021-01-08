@@ -3,7 +3,7 @@
 namespace Shomisha\Crudly\Managers;
 
 use Shomisha\Crudly\Contracts\Developer;
-use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Edit\AuthorizationDeveloper as EditAuthorizationDeveloper;
+use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Edit\AuthorizationDeveloper as UpdateAuthorizationDeveloper;
 use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Edit\EditDeveloper;
 use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Edit\ResponseDeveloper as EditResponseDeveloper;
 use Shomisha\Crudly\Developers\WebCrud\InstantiateDeveloper;
@@ -21,13 +21,16 @@ use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Show\ImplicitBindArgumen
 use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Show\LoadRelationshipsDeveloper;
 use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Show\ResponseDeveloper as ShowResponseDeveloper;
 use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Show\ShowDeveloper;
-use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Store\AuthorizationDeveloper as StoreAuthorizationDeveloper;
 use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Store\Fill\FillFieldsSeparatelyDeveloper;
 use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Store\FormRequestArgumentDeveloper;
 use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Store\ResponseDeveloper as StoreResponseDeveloper;
+use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Update\ResponseDeveloper as UpdateResponseDeveloper;
+use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Update\UpdateDeveloper;
+use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Update\ValidateFillAndUpdateDeveloper;
 use Shomisha\Crudly\Developers\WebCrud\SaveDeveloper;
 use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Store\StoreDeveloper;
 use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Store\ValidateFillAndSaveDeveloper;
+use Shomisha\Crudly\Developers\WebCrud\InvokeUpdateMethodDeveloper;
 
 class WebCrudDeveloperManager extends BaseDeveloperManager
 {
@@ -135,7 +138,7 @@ class WebCrudDeveloperManager extends BaseDeveloperManager
     public function getStoreAuthorizationDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(StoreAuthorizationDeveloper::class, $this);
+        return $this->instantiateDeveloperWithManager(CreateAuthorizationDeveloper::class, $this);
     }
 
     public function getStoreMainDeveloper(): Developer
@@ -190,7 +193,7 @@ class WebCrudDeveloperManager extends BaseDeveloperManager
     public function getEditAuthorizationDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(EditAuthorizationDeveloper::class, $this);
+        return $this->instantiateDeveloperWithManager(UpdateAuthorizationDeveloper::class, $this);
     }
 
     public function getEditMainDeveloper(): Developer
@@ -207,6 +210,49 @@ class WebCrudDeveloperManager extends BaseDeveloperManager
     public function getUpdateMethodDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers
+        return $this->instantiateDeveloperWithManager(UpdateDeveloper::class, $this);
+    }
+
+    public function getUpdateLoadDeveloper(): Developer
+    {
+        // TODO: refactor this to support overriding developers
+        return $this->nullDeveloper();
+    }
+
+    public function getUpdateAuthorizationDeveloper(): Developer
+    {
+        // TODO: refactor this to support overriding developers
+        return $this->instantiateDeveloperWithManager(UpdateAuthorizationDeveloper::class, $this);
+    }
+
+    public function getUpdateMainDeveloper(): Developer
+    {
+        // TODO: refactor this to support overriding developers
+        return $this->instantiateDeveloperWithManager(ValidateFillAndUpdateDeveloper::class, $this);
+    }
+
+    public function getUpdateValidateDeveloper(): Developer
+    {
+        // TODO: refactor this to support overriding developers
+        return $this->nullDeveloper();
+    }
+
+    public function getUpdateFillDeveloper(): Developer
+    {
+        // TODO: refactor this to support overriding developers
+        return $this->instantiateDeveloperWithManager(FillFieldsSeparatelyDeveloper::class, $this);
+    }
+
+    public function getUpdateSaveDeveloper(): Developer
+    {
+        // TODO: refactor this to support overriding developers
+        return $this->instantiateDeveloperWithManager(InvokeUpdateMethodDeveloper::class, $this);
+    }
+
+    public function getUpdateResponseDeveloper(): Developer
+    {
+        // TODO: refactor this to support overriding developers
+        return $this->instantiateDeveloperWithManager(UpdateResponseDeveloper::class, $this);
     }
 
     public function getDestroyMethodDeveloper(): Developer
