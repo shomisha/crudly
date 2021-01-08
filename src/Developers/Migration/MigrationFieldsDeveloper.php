@@ -160,6 +160,7 @@ class MigrationFieldsDeveloper extends MigrationDeveloper
             (string) ModelPropertyType::FLOAT() => 'float',
             (string) ModelPropertyType::DATE() => 'date',
             (string) ModelPropertyType::DATETIME() => 'dateTime',
+            (string) ModelPropertyType::TIMESTAMP() => 'timestamp',
             (string) ModelPropertyType::JSON() => 'json',
         ];
     }
