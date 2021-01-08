@@ -3,9 +3,7 @@
 namespace Shomisha\Crudly\Specifications;
 
 use Shomisha\Crudly\Abstracts\Specification;
-use Shomisha\Crudly\Enums\ForeignKeyAction;
 use Shomisha\Crudly\Enums\ModelPropertyType;
-use Shomisha\Crudly\Enums\RelationshipType;
 
 class ModelPropertySpecification extends Specification
 {

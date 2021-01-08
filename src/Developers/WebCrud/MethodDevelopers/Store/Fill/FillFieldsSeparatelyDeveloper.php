@@ -18,12 +18,9 @@ class FillFieldsSeparatelyDeveloper extends MethodDeveloper
         $modelVar = Reference::variable($this->guessSingularModelVariableName($specification->getModel()->getName()));
         $requestVar = Reference::variable('request');
 
-        return Block::fromArray($specification->getProperties()->map(
+        $properties = $specification->getProperties()->except($specification->getPrimaryKey()->getName());
+        return Block::fromArray($properties->map(
             function (ModelPropertySpecification $property) use ($modelVar, $requestVar) {
-                if ($property->isPrimaryKey()) {
-                    return;
-                }
-
                 $propertyName = $property->getName();
 
                 return Block::assign(
@@ -35,6 +32,6 @@ class FillFieldsSeparatelyDeveloper extends MethodDeveloper
                     )
                 );
             }
-        )->filter()->toArray());
+        )->toArray());
     }
 }

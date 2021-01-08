@@ -52,11 +52,8 @@ class FillUsingDedicatedMethodDeveloper extends MethodDeveloper
         $modelVar = Variable::fromArgument($modelArg);
         $requestVar = Variable::fromArgument($requestArg);
 
-        $body = Block::fromArray($specification->getProperties()->map(function (ModelPropertySpecification $property) use ($modelVar, $requestVar) {
-            if ($property->isPrimaryKey()) {
-                return;
-            }
-
+        $properties = $specification->getProperties()->except($specification->getPrimaryKey()->getName());
+        $body = Block::fromArray($properties->map(function (ModelPropertySpecification $property) use ($modelVar, $requestVar) {
             return Block::assign(
                 Reference::objectProperty(
                     $modelVar,
@@ -68,7 +65,7 @@ class FillUsingDedicatedMethodDeveloper extends MethodDeveloper
                     [$property->getName()]
                 )
             );
-        })->filter()->toArray())->addCode(
+        })->toArray())->addCode(
             Block::return($modelVar)
         );
 

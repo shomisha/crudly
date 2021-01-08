@@ -19,7 +19,6 @@ use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Show\ResponseDeveloper a
 use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Show\ShowDeveloper;
 use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Store\AuthorizationDeveloper as StoreAuthorizationDeveloper;
 use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Store\Fill\FillFieldsSeparatelyDeveloper;
-use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Store\Fill\FillValidatedDeveloper;
 use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Store\FormRequestArgumentDeveloper;
 use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Store\ResponseDeveloper as StoreResponseDeveloper;
 use Shomisha\Crudly\Developers\WebCrud\SaveDeveloper;
