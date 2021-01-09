@@ -3,11 +3,11 @@
 namespace Shomisha\Crudly\Managers\Crud\Web;
 
 use Shomisha\Crudly\Contracts\Developer;
-use Shomisha\Crudly\Developers\WebCrud\InvokeUpdateMethodDeveloper;
-use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Edit\AuthorizationDeveloper as UpdateAuthorizationDeveloper;
-use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Store\Fill\FillFieldsSeparatelyDeveloper;
-use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Update\ResponseDeveloper as UpdateResponseDeveloper;
-use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Update\ValidateFillAndUpdateDeveloper;
+use Shomisha\Crudly\Developers\Crud\PartialDevelopers\InvokeUpdateMethodDeveloper;
+use Shomisha\Crudly\Developers\Crud\Web\Edit\AuthorizationDeveloper as UpdateAuthorizationDeveloper;
+use Shomisha\Crudly\Developers\Crud\Web\Store\Fill\FillFieldsSeparatelyDeveloper;
+use Shomisha\Crudly\Developers\Crud\Web\Update\ResponseDeveloper as UpdateResponseDeveloper;
+use Shomisha\Crudly\Developers\Crud\Web\Update\ValidateFillAndUpdateDeveloper;
 use Shomisha\Crudly\Managers\Crud\CrudDeveloperManager;
 
 class UpdateDeveloperManager extends CrudDeveloperManager

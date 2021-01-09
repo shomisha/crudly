@@ -3,9 +3,9 @@
 namespace Shomisha\Crudly\Managers\Crud\Web;
 
 use Shomisha\Crudly\Contracts\Developer;
-use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Show\AuthorizationDeveloper as ShowAuthorizationDeveloper;
-use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Show\LoadRelationshipsDeveloper;
-use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Show\ResponseDeveloper as ShowResponseDeveloper;
+use Shomisha\Crudly\Developers\Crud\Web\Show\AuthorizationDeveloper as ShowAuthorizationDeveloper;
+use Shomisha\Crudly\Developers\Crud\Web\Show\LoadRelationshipsDeveloper;
+use Shomisha\Crudly\Developers\Crud\Web\Show\ResponseDeveloper as ShowResponseDeveloper;
 use Shomisha\Crudly\Managers\Crud\CrudDeveloperManager;
 
 class ShowDeveloperManager extends CrudDeveloperManager

@@ -3,9 +3,9 @@
 namespace Shomisha\Crudly\Managers\Crud\Web;
 
 use Shomisha\Crudly\Contracts\Developer;
-use Shomisha\Crudly\Developers\WebCrud\LoadDependenciesDeveloper;
-use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Edit\AuthorizationDeveloper as UpdateAuthorizationDeveloper;
-use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Edit\ResponseDeveloper as EditResponseDeveloper;
+use Shomisha\Crudly\Developers\Crud\PartialDevelopers\LoadDependenciesDeveloper;
+use Shomisha\Crudly\Developers\Crud\Web\Edit\AuthorizationDeveloper as UpdateAuthorizationDeveloper;
+use Shomisha\Crudly\Developers\Crud\Web\Edit\ResponseDeveloper as EditResponseDeveloper;
 use Shomisha\Crudly\Managers\Crud\CrudDeveloperManager;
 
 class EditDeveloperManager extends CrudDeveloperManager

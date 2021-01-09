@@ -3,15 +3,15 @@
 namespace Shomisha\Crudly\Managers\Crud\Web;
 
 use Shomisha\Crudly\Contracts\Developer;
-use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Destroy\DestroyDeveloper;
-use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Edit\EditDeveloper;
-use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Create\CreateDeveloper;
-use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\ForceDelete\ForceDeleteDeveloper;
-use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Index\IndexDeveloper;
-use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Restore\RestoreDeveloper;
-use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Show\ShowDeveloper;
-use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Update\UpdateDeveloper;
-use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Store\StoreDeveloper;
+use Shomisha\Crudly\Developers\Crud\Web\Destroy\DestroyDeveloper;
+use Shomisha\Crudly\Developers\Crud\Web\Edit\EditDeveloper;
+use Shomisha\Crudly\Developers\Crud\Web\Create\CreateDeveloper;
+use Shomisha\Crudly\Developers\Crud\Web\ForceDelete\ForceDeleteDeveloper;
+use Shomisha\Crudly\Developers\Crud\Web\Index\IndexDeveloper;
+use Shomisha\Crudly\Developers\Crud\Web\Restore\RestoreDeveloper;
+use Shomisha\Crudly\Developers\Crud\Web\Show\ShowDeveloper;
+use Shomisha\Crudly\Developers\Crud\Web\Update\UpdateDeveloper;
+use Shomisha\Crudly\Developers\Crud\Web\Store\StoreDeveloper;
 use Shomisha\Crudly\Managers\BaseDeveloperManager;
 
 class WebCrudDeveloperManager extends BaseDeveloperManager

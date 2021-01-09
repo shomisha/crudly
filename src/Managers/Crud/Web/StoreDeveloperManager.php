@@ -3,12 +3,12 @@
 namespace Shomisha\Crudly\Managers\Crud\Web;
 
 use Shomisha\Crudly\Contracts\Developer;
-use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Create\AuthorizationDeveloper as CreateAuthorizationDeveloper;
-use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Store\Fill\FillFieldsSeparatelyDeveloper;
-use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Store\FormRequestArgumentDeveloper;
-use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Store\ResponseDeveloper as StoreResponseDeveloper;
-use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Store\ValidateFillAndSaveDeveloper;
-use Shomisha\Crudly\Developers\WebCrud\SaveDeveloper;
+use Shomisha\Crudly\Developers\Crud\Web\Create\AuthorizationDeveloper as CreateAuthorizationDeveloper;
+use Shomisha\Crudly\Developers\Crud\Web\Store\Fill\FillFieldsSeparatelyDeveloper;
+use Shomisha\Crudly\Developers\Crud\Web\Store\FormRequestArgumentDeveloper;
+use Shomisha\Crudly\Developers\Crud\Web\Store\ResponseDeveloper as StoreResponseDeveloper;
+use Shomisha\Crudly\Developers\Crud\Web\Store\ValidateFillAndSaveDeveloper;
+use Shomisha\Crudly\Developers\Crud\PartialDevelopers\SaveDeveloper;
 use Shomisha\Crudly\Managers\Crud\CrudDeveloperManager;
 
 class StoreDeveloperManager extends CrudDeveloperManager

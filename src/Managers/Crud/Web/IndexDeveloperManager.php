@@ -3,9 +3,9 @@
 namespace Shomisha\Crudly\Managers\Crud\Web;
 
 use Shomisha\Crudly\Contracts\Developer;
-use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Index\AuthorizationDeveloper;
-use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Index\Main\PaginateDeveloper;
-use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Index\ResponseDeveloper;
+use Shomisha\Crudly\Developers\Crud\Web\Index\AuthorizationDeveloper;
+use Shomisha\Crudly\Developers\Crud\Web\Index\Main\PaginateDeveloper;
+use Shomisha\Crudly\Developers\Crud\Web\Index\ResponseDeveloper;
 use Shomisha\Crudly\Managers\Crud\CrudDeveloperManager;
 
 class IndexDeveloperManager extends CrudDeveloperManager

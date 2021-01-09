@@ -3,9 +3,9 @@
 namespace Shomisha\Crudly\Managers\Crud\Web;
 
 use Shomisha\Crudly\Contracts\Developer;
-use Shomisha\Crudly\Developers\WebCrud\InvokeDeleteMethodDeveloper;
-use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Destroy\AuthorizationDeveloper as DestroyAuthorizationDeveloper;
-use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Destroy\ResponseDeveloper as DestroyResponseDeveloper;
+use Shomisha\Crudly\Developers\Crud\PartialDevelopers\InvokeDeleteMethodDeveloper;
+use Shomisha\Crudly\Developers\Crud\Web\Destroy\AuthorizationDeveloper as DestroyAuthorizationDeveloper;
+use Shomisha\Crudly\Developers\Crud\Web\Destroy\ResponseDeveloper as DestroyResponseDeveloper;
 use Shomisha\Crudly\Managers\Crud\CrudDeveloperManager;
 
 class DestroyDeveloperManager extends CrudDeveloperManager

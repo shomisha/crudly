@@ -3,9 +3,9 @@
 namespace Shomisha\Crudly\Managers\Crud\Web;
 
 use Shomisha\Crudly\Contracts\Developer;
-use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Create\AuthorizationDeveloper as CreateAuthorizationDeveloper;
-use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Create\InstantiatePlaceholderAndLoadDependencies;
-use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\Create\ResponseDeveloper as CreateResponseDeveloper;
+use Shomisha\Crudly\Developers\Crud\Web\Create\AuthorizationDeveloper as CreateAuthorizationDeveloper;
+use Shomisha\Crudly\Developers\Crud\Web\Create\InstantiatePlaceholderAndLoadDependencies;
+use Shomisha\Crudly\Developers\Crud\Web\Create\ResponseDeveloper as CreateResponseDeveloper;
 use Shomisha\Crudly\Managers\Crud\CrudDeveloperManager;
 
 class CreateDeveloperManager extends CrudDeveloperManager
