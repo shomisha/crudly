@@ -8,7 +8,7 @@ use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\WebCrudMethodDeveloper;
 /**
  * Class ForceDeleteDeveloper
  *
- * @method \Shomisha\Crudly\Managers\WebCrudDeveloperManager getManager()
+ * @method \Shomisha\Crudly\Managers\Crud\Web\ForceDeleteDeveloperManager getManager()
  */
 class ForceDeleteDeveloper extends WebCrudMethodDeveloper
 {

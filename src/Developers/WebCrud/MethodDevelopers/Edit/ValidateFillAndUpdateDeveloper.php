@@ -11,7 +11,7 @@ use Shomisha\Stubless\ImperativeCode\Block;
 /**
  * Class ValidateFillAndUpdateDeveloper
  *
- * @method \Shomisha\Crudly\Managers\WebCrudDeveloperManager getManager()
+ * @method \Shomisha\Crudly\Managers\Crud\Web\EditDeveloperManager getManager()
  */
 class ValidateFillAndUpdateDeveloper extends MethodDeveloper
 {

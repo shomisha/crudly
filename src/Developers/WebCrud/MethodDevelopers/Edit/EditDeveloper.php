@@ -8,7 +8,7 @@ use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\WebCrudMethodDeveloper;
 /**
  * Class EditDeveloper
  *
- * @method \Shomisha\Crudly\Managers\WebCrudDeveloperManager getManager()
+ * @method \Shomisha\Crudly\Managers\Crud\Web\EditDeveloperManager getManager()
  */
 class EditDeveloper extends WebCrudMethodDeveloper
 {

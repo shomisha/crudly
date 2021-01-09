@@ -15,7 +15,7 @@ use Shomisha\Stubless\Utilities\Importable;
 /**
  * Class WebCrudControllerDeveloper
  *
- * @method \Shomisha\Crudly\Managers\WebCrudDeveloperManager getManager()
+ * @method \Shomisha\Crudly\Managers\Crud\Web\WebCrudDeveloperManager getManager()
  */
 class WebCrudControllerDeveloper extends Developer
 {

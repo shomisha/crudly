@@ -8,7 +8,7 @@ use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\WebCrudMethodDeveloper;
 /**
  * Class ShowDeveloper
  *
- * @method \Shomisha\Crudly\Managers\WebCrudDeveloperManager getManager()
+ * @method \Shomisha\Crudly\Managers\Crud\Web\ShowDeveloperManager getManager()
  */
 class ShowDeveloper extends WebCrudMethodDeveloper
 {

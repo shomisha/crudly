@@ -8,7 +8,7 @@ use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\WebCrudMethodDeveloper;
 /**
  * Class IndexDeveloper
  *
- * @method \Shomisha\Crudly\Managers\WebCrudDeveloperManager getManager()
+ * @method \Shomisha\Crudly\Managers\Crud\Web\IndexDeveloperManager getManager()
  */
 class IndexDeveloper extends WebCrudMethodDeveloper
 {

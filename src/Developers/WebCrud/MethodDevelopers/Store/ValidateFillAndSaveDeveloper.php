@@ -8,7 +8,7 @@ use Shomisha\Crudly\Developers\WebCrud\MethodDevelopers\MethodDeveloper;
 use Shomisha\Stubless\Contracts\Code;
 use Shomisha\Stubless\ImperativeCode\Block;
 
-/** @method \Shomisha\Crudly\Managers\WebCrudDeveloperManager getManager() */
+/** @method \Shomisha\Crudly\Managers\Crud\Web\StoreDeveloperManager getManager() */
 class ValidateFillAndSaveDeveloper extends MethodDeveloper
 {
     public function develop(Specification $specification, CrudlySet $developedSet): Code

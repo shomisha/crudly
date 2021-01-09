@@ -7,6 +7,7 @@ use Shomisha\Crudly\Developers\Migration\MigrationDeveloper;
 use Shomisha\Crudly\Developers\Model\ModelDeveloper;
 use Shomisha\Crudly\Developers\WebCrud\WebCrudControllerDeveloper;
 use Shomisha\Crudly\Developers\WebCrud\WebCrudFormRequestDeveloper;
+use Shomisha\Crudly\Managers\Crud\Web\WebCrudDeveloperManager;
 
 class DeveloperManager extends BaseDeveloperManager
 {
