@@ -30,7 +30,7 @@ class CrudControllerDeveloper extends Developer
         $developedSet->setWebCrudController($controllerClass);
 
         foreach ($this->getMethodDevelopers($specification) as $developer) {
-            $developer->develop($specification, $developedSet);
+            $controllerClass->addMethod($developer->develop($specification, $developedSet));
         }
 
         return $controllerClass;

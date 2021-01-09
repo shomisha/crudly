@@ -93,17 +93,6 @@ class WebCrudDeveloperManager extends BaseDeveloperManager
         return $this->instantiateManager(DestroyDeveloperManager::class);
     }
 
-    public function getRestoreDeveloper(): Developer
-    {
-        // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(RestoreDeveloper::class, $this->getRestoreManager());
-    }
-
-    public function getRestoreManager(): RestoreDeveloperManager
-    {
-        return $this->instantiateManager(RestoreDeveloperManager::class);
-    }
-
     public function getForceDeleteDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers
@@ -113,5 +102,16 @@ class WebCrudDeveloperManager extends BaseDeveloperManager
     public function getForceDeleteManager(): ForceDeleteDeveloperManager
     {
         return $this->instantiateManager(ForceDeleteDeveloperManager::class);
+    }
+
+    public function getRestoreDeveloper(): Developer
+    {
+        // TODO: refactor this to support overriding developers
+        return $this->instantiateDeveloperWithManager(RestoreDeveloper::class, $this->getRestoreManager());
+    }
+
+    public function getRestoreManager(): RestoreDeveloperManager
+    {
+        return $this->instantiateManager(RestoreDeveloperManager::class);
     }
 }

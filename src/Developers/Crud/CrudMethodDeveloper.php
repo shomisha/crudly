@@ -16,7 +16,6 @@ abstract class CrudMethodDeveloper extends MethodDeveloper
     final public function develop(Specification $specification, CrudlySet $developedSet): Code
     {
         $method = new CrudMethod($this->getMethodName());
-        $developedSet->getWebCrudController()->addMethod($method);
 
         foreach ($this->getArgumentsDevelopers() as $argumentsDeveloper) {
             $method->addArgument(
