@@ -1,6 +1,6 @@
 <?php
 
-namespace Shomisha\Crudly\Developers\Crud\Web\Show;
+namespace Shomisha\Crudly\Developers\Crud\PartialDevelopers\Authorization;
 
 use Shomisha\Crudly\Contracts\Specification;
 use Shomisha\Crudly\Data\CrudlySet;
@@ -8,19 +8,20 @@ use Shomisha\Crudly\Developers\Crud\MethodDeveloper;
 use Shomisha\Stubless\Contracts\Code;
 use Shomisha\Stubless\ImperativeCode\Block;
 use Shomisha\Stubless\References\Reference;
+use Shomisha\Stubless\Utilities\Importable;
 
-class AuthorizationDeveloper extends MethodDeveloper
+class ViewAllAuthorizationDeveloper extends MethodDeveloper
 {
     public function develop(Specification $specification, CrudlySet $developedSet): Code
     {
-        $modelVarName = $this->guessSingularModelVariableName($specification->getModel()->getName());
+        $fullModelName = $specification->getModel()->getFullyQualifiedName();
 
         return Block::invokeMethod(
             Reference::this(),
             'authorize',
             [
-                'view',
-                Reference::variable($modelVarName)
+                'viewAll',
+                Reference::classReference(new Importable($fullModelName))
             ]
         );
     }

@@ -3,7 +3,7 @@
 namespace Shomisha\Crudly\Managers\Crud\Web;
 
 use Shomisha\Crudly\Contracts\Developer;
-use Shomisha\Crudly\Developers\Crud\Web\Create\AuthorizationDeveloper as CreateAuthorizationDeveloper;
+use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Authorization\CreateAuthorizationDeveloper;
 use Shomisha\Crudly\Developers\Crud\Web\Store\Fill\FillFieldsSeparatelyDeveloper;
 use Shomisha\Crudly\Developers\Crud\Web\Store\FormRequestArgumentDeveloper;
 use Shomisha\Crudly\Developers\Crud\Web\Store\ResponseDeveloper as StoreResponseDeveloper;

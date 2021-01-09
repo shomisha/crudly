@@ -3,7 +3,7 @@
 namespace Shomisha\Crudly\Managers\Crud\Web;
 
 use Shomisha\Crudly\Contracts\Developer;
-use Shomisha\Crudly\Developers\Crud\Web\Index\AuthorizationDeveloper;
+use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Authorization\ViewAllAuthorizationDeveloper;
 use Shomisha\Crudly\Developers\Crud\Web\Index\Main\PaginateDeveloper;
 use Shomisha\Crudly\Developers\Crud\Web\Index\ResponseDeveloper;
 use Shomisha\Crudly\Managers\Crud\CrudDeveloperManager;
@@ -13,7 +13,7 @@ class IndexDeveloperManager extends CrudDeveloperManager
     public function getIndexAuthorizationDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(AuthorizationDeveloper::class, $this);
+        return $this->instantiateDeveloperWithManager(ViewAllAuthorizationDeveloper::class, $this);
     }
 
     public function getIndexMainDeveloper(): Developer

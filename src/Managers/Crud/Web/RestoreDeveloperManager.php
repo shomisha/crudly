@@ -4,7 +4,7 @@ namespace Shomisha\Crudly\Managers\Crud\Web;
 
 use Shomisha\Crudly\Contracts\Developer;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\InvokeRestoreMethodDeveloper;
-use Shomisha\Crudly\Developers\Crud\Web\Restore\AuthorizationDeveloper as RestoreAuthorizationDeveloper;
+use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Authorization\RestoreAuthorizationDeveloper;
 use Shomisha\Crudly\Developers\Crud\Web\Restore\ResponseDeveloper as RestoreResponseDeveloper;
 use Shomisha\Crudly\Managers\Crud\CrudDeveloperManager;
 

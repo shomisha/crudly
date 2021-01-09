@@ -4,7 +4,7 @@ namespace Shomisha\Crudly\Managers\Crud\Web;
 
 use Shomisha\Crudly\Contracts\Developer;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\InvokeForceDeleteMethodDeveloper;
-use Shomisha\Crudly\Developers\Crud\Web\ForceDelete\AuthorizationDeveloper as ForceDeleteAuthorizationDeveloper;
+use Shomisha\Crudly\Developers\Crud\PartialDevelopers\ForceDeleteAuthorizationDeveloper;
 use Shomisha\Crudly\Developers\Crud\Web\ForceDelete\ResponseDeveloper as ForceDeleteResponseDeveloper;
 use Shomisha\Crudly\Managers\Crud\CrudDeveloperManager;
 

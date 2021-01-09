@@ -1,6 +1,6 @@
 <?php
 
-namespace Shomisha\Crudly\Developers\Crud\Web\Destroy;
+namespace Shomisha\Crudly\Developers\Crud\PartialDevelopers\Authorization;
 
 use Shomisha\Crudly\Contracts\Specification;
 use Shomisha\Crudly\Data\CrudlySet;
@@ -9,7 +9,7 @@ use Shomisha\Stubless\Contracts\Code;
 use Shomisha\Stubless\ImperativeCode\Block;
 use Shomisha\Stubless\References\Reference;
 
-class AuthorizationDeveloper extends MethodDeveloper
+class UpdateAuthorizationDeveloper extends MethodDeveloper
 {
     public function develop(Specification $specification, CrudlySet $developedSet): Code
     {
@@ -19,7 +19,7 @@ class AuthorizationDeveloper extends MethodDeveloper
             Reference::this(),
             'authorize',
             [
-                'delete',
+                'update',
                 Reference::variable($this->guessSingularModelVariableName($modelName))
             ]
         );

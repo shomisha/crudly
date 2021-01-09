@@ -1,6 +1,6 @@
 <?php
 
-namespace Shomisha\Crudly\Developers\Crud\Web\Index;
+namespace Shomisha\Crudly\Developers\Crud\PartialDevelopers\Authorization;
 
 use Shomisha\Crudly\Contracts\Specification;
 use Shomisha\Crudly\Data\CrudlySet;
@@ -10,7 +10,7 @@ use Shomisha\Stubless\ImperativeCode\Block;
 use Shomisha\Stubless\References\Reference;
 use Shomisha\Stubless\Utilities\Importable;
 
-class AuthorizationDeveloper extends MethodDeveloper
+class CreateAuthorizationDeveloper extends MethodDeveloper
 {
     public function develop(Specification $specification, CrudlySet $developedSet): Code
     {
@@ -20,7 +20,7 @@ class AuthorizationDeveloper extends MethodDeveloper
             Reference::this(),
             'authorize',
             [
-                'viewAll',
+                'create',
                 Reference::classReference(new Importable($fullModelName))
             ]
         );
