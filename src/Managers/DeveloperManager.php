@@ -3,10 +3,12 @@
 namespace Shomisha\Crudly\Managers;
 
 use Shomisha\Crudly\Contracts\Developer;
+use Shomisha\Crudly\Developers\Crud\Api\CrudControllerDeveloper as ApiCrudControllerDeveloper;
 use Shomisha\Crudly\Developers\Migration\MigrationDeveloper;
 use Shomisha\Crudly\Developers\Model\ModelDeveloper;
-use Shomisha\Crudly\Developers\Crud\Web\CrudControllerDeveloper;
+use Shomisha\Crudly\Developers\Crud\Web\CrudControllerDeveloper as WebCrudControllerDeveloper;
 use Shomisha\Crudly\Developers\Crud\Web\CrudFormRequestDeveloper;
+use Shomisha\Crudly\Managers\Crud\Api\ApiCrudDeveloperManager;
 use Shomisha\Crudly\Managers\Crud\Web\WebCrudDeveloperManager;
 
 class DeveloperManager extends BaseDeveloperManager
@@ -36,17 +38,33 @@ class DeveloperManager extends BaseDeveloperManager
     public function getWebCrudFormRequestDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(CrudFormRequestDeveloper::class, ($this->getWebCrudManager()));
+        return $this->instantiateDeveloperWithManager(CrudFormRequestDeveloper::class, $this->getWebCrudManager());
     }
 
     public function getWebCrudControllerDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(CrudControllerDeveloper::class, ($this->getWebCrudManager()));
+        return $this->instantiateDeveloperWithManager(WebCrudControllerDeveloper::class, $this->getWebCrudManager());
     }
 
-    private function getWebCrudManager(): BaseDeveloperManager
+    public function getApiCrudFormRequestDeveloper(): Developer
+    {
+
+    }
+
+    public function getApiCrudControllerDeveloper(): Developer
+    {
+        // TODO: refactor this to support overriding developers
+        return $this->instantiateDeveloperWithManager(ApiCrudControllerDeveloper::class, $this->getApiCrudManager());
+    }
+
+    private function getWebCrudManager(): WebCrudDeveloperManager
     {
         return $this->instantiateManager(WebCrudDeveloperManager::class);
+    }
+
+    private function getApiCrudManager(): ApiCrudDeveloperManager
+    {
+        return $this->instantiateManager(ApiCrudDeveloperManager::class);
     }
 }

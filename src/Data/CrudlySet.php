@@ -14,6 +14,10 @@ class CrudlySet
 
     private ?Code $webCrudFormRequest = null;
 
+    private Code $apiCrudController;
+
+    private ?Code $apiCrudFormRequest = null;
+
     public function getMigration(): Code
     {
         return $this->migration;
@@ -58,6 +62,30 @@ class CrudlySet
     public function setWebCrudFormRequest(?Code $webCrudFormRequest): self
     {
         $this->webCrudFormRequest = $webCrudFormRequest;
+
+        return $this;
+    }
+
+    public function getApiCrudController(): Code
+    {
+        return $this->apiCrudController;
+    }
+
+    public function setApiCrudController(Code $apiCrudController): self
+    {
+        $this->apiCrudController = $apiCrudController;
+
+        return $this;
+    }
+
+    public function getApiCrudFormRequest(): ?Code
+    {
+        return $this->apiCrudFormRequest;
+    }
+
+    public function setApiCrudFormRequest(?Code $apiCrudFormRequest): self
+    {
+        $this->apiCrudFormRequest = $apiCrudFormRequest;
 
         return $this;
     }
