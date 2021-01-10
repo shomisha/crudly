@@ -44,7 +44,7 @@ class CrudControllerDeveloper extends Developer
             $this->getManager()->getIndexMethodDeveloper(),
             $this->getManager()->getShowMethodDeveloper(),
             $this->getManager()->getStoreMethodDeveloper(),
-            // $this->getManager()->getUpdateMethodDeveloper(),
+            $this->getManager()->getUpdateMethodDeveloper(),
             // $this->getManager()->getDestroyMethodDeveloper(),
         ];
 

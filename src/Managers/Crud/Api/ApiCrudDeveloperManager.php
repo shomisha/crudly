@@ -6,6 +6,7 @@ use Shomisha\Crudly\Contracts\Developer;
 use Shomisha\Crudly\Developers\Crud\Api\Index\IndexDeveloper;
 use Shomisha\Crudly\Developers\Crud\Api\Show\ShowDeveloper;
 use Shomisha\Crudly\Developers\Crud\Api\Store\StoreDeveloper;
+use Shomisha\Crudly\Developers\Crud\Api\Update\UpdateDeveloper;
 use Shomisha\Crudly\Managers\BaseDeveloperManager;
 
 class ApiCrudDeveloperManager extends BaseDeveloperManager
@@ -46,6 +47,12 @@ class ApiCrudDeveloperManager extends BaseDeveloperManager
     public function getUpdateMethodDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers
+        return $this->instantiateDeveloperWithManager(UpdateDeveloper::class, $this->getUpdateManager());
+    }
+
+    public function getUpdateManager(): UpdateDeveloperManager
+    {
+        return $this->instantiateManager(UpdateDeveloperManager::class);
     }
 
     public function getDestroyMethodDeveloper(): Developer
