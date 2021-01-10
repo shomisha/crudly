@@ -14,7 +14,7 @@ use Shomisha\Stubless\Contracts\Code;
  *
  * @method \Shomisha\Crudly\Managers\Crud\CrudMethodDeveloperManager getManager()
  */
-abstract class CrudMethodDeveloper extends MethodDeveloper
+abstract class CrudMethodDeveloper extends CrudDeveloper
 {
     abstract protected function getMethodName(): string;
 

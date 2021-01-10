@@ -4,7 +4,7 @@ namespace Shomisha\Crudly\Developers\Crud\Web\Store\Fill;
 
 use Shomisha\Crudly\Contracts\Specification;
 use Shomisha\Crudly\Data\CrudlySet;
-use Shomisha\Crudly\Developers\Crud\MethodDeveloper;
+use Shomisha\Crudly\Developers\Crud\CrudDeveloper;
 use Shomisha\Crudly\Specifications\CrudlySpecification;
 use Shomisha\Crudly\Specifications\ModelPropertySpecification;
 use Shomisha\Stubless\Contracts\Code;
@@ -15,7 +15,7 @@ use Shomisha\Stubless\References\Reference;
 use Shomisha\Stubless\References\Variable;
 use Shomisha\Stubless\Utilities\Importable;
 
-class FillUsingDedicatedMethodDeveloper extends MethodDeveloper
+class FillUsingDedicatedMethodDeveloper extends CrudDeveloper
 {
     /** @param \Shomisha\Crudly\Specifications\CrudlySpecification $specification */
     public function develop(Specification $specification, CrudlySet $developedSet): Code

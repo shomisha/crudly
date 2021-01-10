@@ -4,10 +4,10 @@ namespace Shomisha\Crudly\Developers\Crud\Web\Destroy;
 
 use Shomisha\Crudly\Contracts\Specification;
 use Shomisha\Crudly\Data\CrudlySet;
-use Shomisha\Crudly\Developers\Crud\MethodDeveloper;
+use Shomisha\Crudly\Developers\Crud\CrudDeveloper;
 use Shomisha\Stubless\Contracts\Code;
 
-class ResponseDeveloper extends MethodDeveloper
+class ResponseDeveloper extends CrudDeveloper
 {
     /** @param \Shomisha\Crudly\Specifications\CrudlySpecification $specification */
     public function develop(Specification $specification, CrudlySet $developedSet): Code

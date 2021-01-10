@@ -4,12 +4,12 @@ namespace Shomisha\Crudly\Developers\Crud\PartialDevelopers;
 
 use Shomisha\Crudly\Contracts\Specification;
 use Shomisha\Crudly\Data\CrudlySet;
-use Shomisha\Crudly\Developers\Crud\MethodDeveloper;
+use Shomisha\Crudly\Developers\Crud\CrudDeveloper;
 use Shomisha\Stubless\Contracts\Code;
 use Shomisha\Stubless\DeclarativeCode\Argument;
 use Shomisha\Stubless\Utilities\Importable;
 
-class ImplicitBindArgumentsDeveloper extends MethodDeveloper
+class ImplicitBindArgumentsDeveloper extends CrudDeveloper
 {
     public function develop(Specification $specification, CrudlySet $developedSet): Code
     {

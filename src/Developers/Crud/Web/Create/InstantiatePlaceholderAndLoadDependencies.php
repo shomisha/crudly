@@ -4,7 +4,7 @@ namespace Shomisha\Crudly\Developers\Crud\Web\Create;
 
 use Shomisha\Crudly\Contracts\Specification;
 use Shomisha\Crudly\Data\CrudlySet;
-use Shomisha\Crudly\Developers\Crud\MethodDeveloper;
+use Shomisha\Crudly\Developers\Crud\CrudDeveloper;
 use Shomisha\Stubless\Contracts\Code;
 use Shomisha\Stubless\ImperativeCode\Block;
 
@@ -13,7 +13,7 @@ use Shomisha\Stubless\ImperativeCode\Block;
  *
  * @method \Shomisha\Crudly\Managers\Crud\Web\CreateMethodDeveloperManager getManager()
  */
-class InstantiatePlaceholderAndLoadDependencies extends MethodDeveloper
+class InstantiatePlaceholderAndLoadDependencies extends CrudDeveloper
 {
     public function develop(Specification $specification, CrudlySet $developedSet): Code
     {

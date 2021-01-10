@@ -10,7 +10,7 @@ use Shomisha\Crudly\Specifications\ModelPropertySpecification;
 use Shomisha\Stubless\ImperativeCode\Block;
 use Shomisha\Stubless\ImperativeCode\ReturnBlock;
 
-abstract class MethodDeveloper extends Developer
+abstract class CrudDeveloper extends Developer
 {
     protected function guessSingularModelVariableName(string $modelName): string
     {
