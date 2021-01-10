@@ -3,9 +3,9 @@
 namespace Shomisha\Crudly\Managers\Crud\Api;
 
 use Shomisha\Crudly\Contracts\Developer;
-use Shomisha\Crudly\Developers\Crud\Api\Show\ResponseDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Authorization\ViewAuthorizationDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\LoadRelationshipsDeveloper;
+use Shomisha\Crudly\Developers\Crud\PartialDevelopers\ReturnSingleResourceDeveloper;
 use Shomisha\Crudly\Managers\Crud\CrudDeveloperManager;
 
 class ShowDeveloperManager extends CrudDeveloperManager
@@ -31,6 +31,6 @@ class ShowDeveloperManager extends CrudDeveloperManager
     public function getShowResponseDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(ResponseDeveloper::class, $this);
+        return $this->instantiateDeveloperWithManager(ReturnSingleResourceDeveloper::class, $this);
     }
 }

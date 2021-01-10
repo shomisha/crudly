@@ -1,6 +1,6 @@
 <?php
 
-namespace Shomisha\Crudly\Developers\Crud\Api\Show;
+namespace Shomisha\Crudly\Developers\Crud\PartialDevelopers;
 
 use Shomisha\Crudly\Contracts\Specification;
 use Shomisha\Crudly\Data\CrudlySet;
@@ -10,9 +10,8 @@ use Shomisha\Stubless\ImperativeCode\Block;
 use Shomisha\Stubless\References\Reference;
 use Shomisha\Stubless\Utilities\Importable;
 
-class ResponseDeveloper extends MethodDeveloper
+class ReturnSingleResourceDeveloper extends MethodDeveloper
 {
-    /** @param \Shomisha\Crudly\Specifications\CrudlySpecification $specification */
     public function develop(Specification $specification, CrudlySet $developedSet): Code
     {
         $model = $specification->getModel();
