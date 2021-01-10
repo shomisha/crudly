@@ -3,6 +3,7 @@
 namespace Shomisha\Crudly\Managers\Crud\Api;
 
 use Shomisha\Crudly\Contracts\Developer;
+use Shomisha\Crudly\Developers\Crud\Api\Destroy\DestroyDeveloper;
 use Shomisha\Crudly\Developers\Crud\Api\Index\IndexDeveloper;
 use Shomisha\Crudly\Developers\Crud\Api\Show\ShowDeveloper;
 use Shomisha\Crudly\Developers\Crud\Api\Store\StoreDeveloper;
@@ -58,6 +59,12 @@ class ApiCrudDeveloperManager extends BaseDeveloperManager
     public function getDestroyMethodDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers
+        return $this->instantiateDeveloperWithManager(DestroyDeveloper::class, $this->getDestroyManager());
+    }
+
+    public function getDestroyManager(): DestroyMethodDeveloperManager
+    {
+        return $this->instantiateManager(DestroyMethodDeveloperManager::class);
     }
 
     public function getForceDeleteMethodDeveloper(): Developer

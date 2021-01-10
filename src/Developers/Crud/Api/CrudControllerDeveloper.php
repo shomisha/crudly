@@ -45,7 +45,7 @@ class CrudControllerDeveloper extends Developer
             $this->getManager()->getShowMethodDeveloper(),
             $this->getManager()->getStoreMethodDeveloper(),
             $this->getManager()->getUpdateMethodDeveloper(),
-            // $this->getManager()->getDestroyMethodDeveloper(),
+            $this->getManager()->getDestroyMethodDeveloper(),
         ];
 
         if ($specification->hasSoftDeletion()) {
