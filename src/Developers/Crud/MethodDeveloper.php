@@ -64,6 +64,13 @@ abstract class MethodDeveloper extends Developer
         return "App\Http\Requests\\{$modelName}Request";
     }
 
+    protected function guessApiResourceClass(ModelName $modelName): string
+    {
+        $modelName = $modelName->getName();
+
+        return "App\Http\Requests\\{$modelName}Resource";
+    }
+
     protected function returnViewBlock(string $viewName, array $data = []): ReturnBlock
     {
         $viewResponse = Block::invokeFunction('view', array_filter([

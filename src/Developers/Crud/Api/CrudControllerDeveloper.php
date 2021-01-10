@@ -42,15 +42,15 @@ class CrudControllerDeveloper extends Developer
     {
         $developers = [
             $this->getManager()->getIndexMethodDeveloper(),
-            $this->getManager()->getShowMethodDeveloper(),
-            $this->getManager()->getStoreMethodDeveloper(),
-            $this->getManager()->getUpdateMethodDeveloper(),
-            $this->getManager()->getDestroyMethodDeveloper(),
+            // $this->getManager()->getShowMethodDeveloper(),
+            // $this->getManager()->getStoreMethodDeveloper(),
+            // $this->getManager()->getUpdateMethodDeveloper(),
+            // $this->getManager()->getDestroyMethodDeveloper(),
         ];
 
         if ($specification->hasSoftDeletion()) {
-            $developers[] = $this->getManager()->getForceDeleteMethodDeveloper();
-            $developers[] = $this->getManager()->getRestoreMethodDeveloper();
+            // $developers[] = $this->getManager()->getForceDeleteMethodDeveloper();
+            // $developers[] = $this->getManager()->getRestoreMethodDeveloper();
         }
 
         return $developers;
