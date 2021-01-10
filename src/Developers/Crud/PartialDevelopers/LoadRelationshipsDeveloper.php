@@ -15,12 +15,16 @@ class LoadRelationshipsDeveloper extends MethodDeveloper
     {
         $modelVarName = $this->guessSingularModelVariableName($specification->getModel()->getName());
 
+        $relationships = $this->extractRelationshipsFromSpecification($specification);
+
+        if (empty($relationships)) {
+            return Block::fromArray([]);
+        }
+
         return Block::invokeMethod(
             Reference::variable($modelVarName),
             'load',
-            [
-                $this->extractRelationshipsFromSpecification($specification)
-            ]
+            [$relationships]
         );
     }
 }

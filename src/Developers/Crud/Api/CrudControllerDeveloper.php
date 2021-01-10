@@ -42,7 +42,7 @@ class CrudControllerDeveloper extends Developer
     {
         $developers = [
             $this->getManager()->getIndexMethodDeveloper(),
-            // $this->getManager()->getShowMethodDeveloper(),
+            $this->getManager()->getShowMethodDeveloper(),
             // $this->getManager()->getStoreMethodDeveloper(),
             // $this->getManager()->getUpdateMethodDeveloper(),
             // $this->getManager()->getDestroyMethodDeveloper(),

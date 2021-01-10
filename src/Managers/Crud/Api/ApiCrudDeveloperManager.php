@@ -4,6 +4,7 @@ namespace Shomisha\Crudly\Managers\Crud\Api;
 
 use Shomisha\Crudly\Contracts\Developer;
 use Shomisha\Crudly\Developers\Crud\Api\Index\IndexDeveloper;
+use Shomisha\Crudly\Developers\Crud\Api\Show\ShowDeveloper;
 use Shomisha\Crudly\Managers\BaseDeveloperManager;
 
 class ApiCrudDeveloperManager extends BaseDeveloperManager
@@ -22,6 +23,12 @@ class ApiCrudDeveloperManager extends BaseDeveloperManager
     public function getShowMethodDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers
+        return $this->instantiateDeveloperWithManager(ShowDeveloper::class, $this->getShowManager());
+    }
+
+    public function getShowManager(): ShowDeveloperManager
+    {
+        return $this->instantiateManager(ShowDeveloperManager::class);
     }
 
     public function getStoreMethodDeveloper(): Developer
