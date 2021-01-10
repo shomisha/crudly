@@ -4,7 +4,9 @@ namespace Shomisha\Crudly\Managers\Crud\Api;
 
 use Shomisha\Crudly\Contracts\Developer;
 use Shomisha\Crudly\Developers\Crud\Api\Destroy\DestroyDeveloper;
+use Shomisha\Crudly\Developers\Crud\Api\ForceDelete\ForceDeleteDeveloper;
 use Shomisha\Crudly\Developers\Crud\Api\Index\IndexDeveloper;
+use Shomisha\Crudly\Developers\Crud\Api\Restore\RestoreDeveloper;
 use Shomisha\Crudly\Developers\Crud\Api\Show\ShowDeveloper;
 use Shomisha\Crudly\Developers\Crud\Api\Store\StoreDeveloper;
 use Shomisha\Crudly\Developers\Crud\Api\Update\UpdateDeveloper;
@@ -70,10 +72,22 @@ class ApiCrudDeveloperManager extends BaseDeveloperManager
     public function getForceDeleteMethodDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers
+        return $this->instantiateDeveloperWithManager(ForceDeleteDeveloper::class, $this->getForceDeleteManager());
+    }
+
+    public function getForceDeleteManager(): ForceDeleteMethodDeveloperManager
+    {
+        return $this->instantiateManager(ForceDeleteMethodDeveloperManager::class);
     }
 
     public function getRestoreMethodDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers
+        return $this->instantiateDeveloperWithManager(RestoreDeveloper::class, $this->getRestoreManager());
+    }
+
+    public function getRestoreManager(): RestoreMethodDeveloperManager
+    {
+        return $this->instantiateManager(RestoreMethodDeveloperManager::class);
     }
 }

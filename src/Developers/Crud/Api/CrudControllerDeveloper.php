@@ -49,8 +49,8 @@ class CrudControllerDeveloper extends Developer
         ];
 
         if ($specification->hasSoftDeletion()) {
-            // $developers[] = $this->getManager()->getForceDeleteMethodDeveloper();
-            // $developers[] = $this->getManager()->getRestoreMethodDeveloper();
+            $developers[] = $this->getManager()->getForceDeleteMethodDeveloper();
+            $developers[] = $this->getManager()->getRestoreMethodDeveloper();
         }
 
         return $developers;
