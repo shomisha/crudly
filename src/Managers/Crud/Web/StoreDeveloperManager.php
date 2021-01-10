@@ -8,7 +8,7 @@ use Shomisha\Crudly\Developers\Crud\Web\Store\Fill\FillFieldsSeparatelyDeveloper
 use Shomisha\Crudly\Developers\Crud\Web\Store\FormRequestArgumentDeveloper;
 use Shomisha\Crudly\Developers\Crud\Web\Store\ResponseDeveloper as StoreResponseDeveloper;
 use Shomisha\Crudly\Developers\Crud\Web\Store\ValidateFillAndSaveDeveloper;
-use Shomisha\Crudly\Developers\Crud\PartialDevelopers\SaveDeveloper;
+use Shomisha\Crudly\Developers\Crud\PartialDevelopers\MethodInvocation\InvokeSaveMethodDeveloper;
 use Shomisha\Crudly\Managers\Crud\CrudDeveloperManager;
 
 class StoreDeveloperManager extends CrudDeveloperManager
@@ -53,7 +53,7 @@ class StoreDeveloperManager extends CrudDeveloperManager
     public function getStoreSaveDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(SaveDeveloper::class, $this);
+        return $this->instantiateDeveloperWithManager(InvokeSaveMethodDeveloper::class, $this);
     }
 
     public function getStoreResponseDeveloper(): Developer

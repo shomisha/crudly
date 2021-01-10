@@ -9,13 +9,18 @@ use Shomisha\Stubless\Contracts\Code;
 use Shomisha\Stubless\ImperativeCode\Block;
 use Shomisha\Stubless\References\Reference;
 
-class InvokeForceDeleteMethodDeveloper extends MethodDeveloper
+class LoadRelationshipsDeveloper extends MethodDeveloper
 {
     public function develop(Specification $specification, CrudlySet $developedSet): Code
     {
+        $modelVarName = $this->guessSingularModelVariableName($specification->getModel()->getName());
+
         return Block::invokeMethod(
-            Reference::variable($this->guessSingularModelVariableName($specification->getModel()->getName())),
-            'forceDelete'
+            Reference::variable($modelVarName),
+            'load',
+            [
+                $this->extractRelationshipsFromSpecification($specification)
+            ]
         );
     }
 }

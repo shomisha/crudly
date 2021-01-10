@@ -1,6 +1,6 @@
 <?php
 
-namespace Shomisha\Crudly\Developers\Crud\PartialDevelopers;
+namespace Shomisha\Crudly\Developers\Crud\PartialDevelopers\MethodInvocation;
 
 use Shomisha\Crudly\Contracts\Specification;
 use Shomisha\Crudly\Data\CrudlySet;

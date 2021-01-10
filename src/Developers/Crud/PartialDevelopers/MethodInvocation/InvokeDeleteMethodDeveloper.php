@@ -1,6 +1,6 @@
 <?php
 
-namespace Shomisha\Crudly\Developers\Crud\Web\Show;
+namespace Shomisha\Crudly\Developers\Crud\PartialDevelopers\MethodInvocation;
 
 use Shomisha\Crudly\Contracts\Specification;
 use Shomisha\Crudly\Data\CrudlySet;
@@ -9,18 +9,13 @@ use Shomisha\Stubless\Contracts\Code;
 use Shomisha\Stubless\ImperativeCode\Block;
 use Shomisha\Stubless\References\Reference;
 
-class LoadRelationshipsDeveloper extends MethodDeveloper
+class InvokeDeleteMethodDeveloper extends MethodDeveloper
 {
     public function develop(Specification $specification, CrudlySet $developedSet): Code
     {
-        $modelVarName = $this->guessSingularModelVariableName($specification->getModel()->getName());
-
         return Block::invokeMethod(
-            Reference::variable($modelVarName),
-            'load',
-            [
-                $this->extractRelationshipsFromSpecification($specification)
-            ]
+            Reference::variable($this->guessSingularModelVariableName($specification->getModel()->getName())),
+            'delete'
         );
     }
 }

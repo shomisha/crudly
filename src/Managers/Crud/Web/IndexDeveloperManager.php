@@ -4,7 +4,7 @@ namespace Shomisha\Crudly\Managers\Crud\Web;
 
 use Shomisha\Crudly\Contracts\Developer;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Authorization\ViewAllAuthorizationDeveloper;
-use Shomisha\Crudly\Developers\Crud\Web\Index\Main\PaginateDeveloper;
+use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Load\PaginateDeveloper;
 use Shomisha\Crudly\Developers\Crud\Web\Index\ResponseDeveloper;
 use Shomisha\Crudly\Managers\Crud\CrudDeveloperManager;
 

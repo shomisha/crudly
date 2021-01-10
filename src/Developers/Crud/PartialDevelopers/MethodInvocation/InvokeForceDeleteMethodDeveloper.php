@@ -1,6 +1,6 @@
 <?php
 
-namespace Shomisha\Crudly\Developers\Crud\PartialDevelopers;
+namespace Shomisha\Crudly\Developers\Crud\PartialDevelopers\MethodInvocation;
 
 use Shomisha\Crudly\Contracts\Specification;
 use Shomisha\Crudly\Data\CrudlySet;
@@ -9,19 +9,13 @@ use Shomisha\Stubless\Contracts\Code;
 use Shomisha\Stubless\ImperativeCode\Block;
 use Shomisha\Stubless\References\Reference;
 
-class ForceDeleteAuthorizationDeveloper extends MethodDeveloper
+class InvokeForceDeleteMethodDeveloper extends MethodDeveloper
 {
     public function develop(Specification $specification, CrudlySet $developedSet): Code
     {
-        $modelName = $specification->getModel()->getName();
-
         return Block::invokeMethod(
-            Reference::this(),
-            'authorize',
-            [
-                'forceDelete',
-                Reference::variable($this->guessSingularModelVariableName($modelName))
-            ]
+            Reference::variable($this->guessSingularModelVariableName($specification->getModel()->getName())),
+            'forceDelete'
         );
     }
 }

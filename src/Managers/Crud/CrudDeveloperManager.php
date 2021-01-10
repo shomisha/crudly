@@ -4,7 +4,7 @@ namespace Shomisha\Crudly\Managers\Crud;
 
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\InstantiateDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\LoadDependenciesDeveloper;
-use Shomisha\Crudly\Developers\Crud\Web\Show\ImplicitBindArgumentsDeveloper;
+use Shomisha\Crudly\Developers\Crud\PartialDevelopers\ImplicitBindArgumentsDeveloper;
 use Shomisha\Crudly\Developers\Crud\Web\Store\FormRequestArgumentDeveloper;
 use Shomisha\Crudly\Managers\BaseDeveloperManager;
 

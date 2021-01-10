@@ -1,6 +1,6 @@
 <?php
 
-namespace Shomisha\Crudly\Developers\Crud\Web\Index\Main;
+namespace Shomisha\Crudly\Developers\Crud\PartialDevelopers\Load;
 
 use Shomisha\Crudly\Contracts\Specification;
 use Shomisha\Crudly\Data\CrudlySet;
@@ -11,18 +11,19 @@ use Shomisha\Stubless\References\Reference;
 use Shomisha\Stubless\References\Variable;
 use Shomisha\Stubless\Utilities\Importable;
 
-class PaginateDeveloper extends MethodDeveloper
+class LoadAllDeveloper extends MethodDeveloper
 {
     public function develop(Specification $specification, CrudlySet $developedSet): Code
     {
+        // TODO: add note to docs that main and response developers assume some naming conventions which can be accessed by inheriting the MethodBodyDeveloper
         $variableName = $this->guessPluralModelVariableName($specification->getModel()->getName());
         $fullModelName = $specification->getModel()->getFullyQualifiedName();
 
         return Block::assign(
             Variable::name($variableName),
             Block::invokeStaticMethod(
-                Reference::classReference(new Importable($fullModelName)),
-                'paginate'
+                'all',
+                Reference::classReference(new Importable($fullModelName))
             )
         );
     }
