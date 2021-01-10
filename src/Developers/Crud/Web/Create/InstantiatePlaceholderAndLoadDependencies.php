@@ -11,7 +11,7 @@ use Shomisha\Stubless\ImperativeCode\Block;
 /**
  * Class InstantiatePlaceholderAndLoadDependencies
  *
- * @method \Shomisha\Crudly\Managers\Crud\Web\WebCrudDeveloperManager getManager()
+ * @method \Shomisha\Crudly\Managers\Crud\Web\CreateMethodDeveloperManager getManager()
  */
 class InstantiatePlaceholderAndLoadDependencies extends MethodDeveloper
 {

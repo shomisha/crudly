@@ -5,13 +5,19 @@ namespace Shomisha\Crudly\Developers\Crud;
 use Shomisha\Crudly\Contracts\Developer;
 use Shomisha\Crudly\Contracts\Specification;
 use Shomisha\Crudly\Data\CrudlySet;
-use Shomisha\Crudly\Developers\Crud\MethodDeveloper;
 use Shomisha\Crudly\Specifications\CrudlySpecification;
 use Shomisha\Crudly\Templates\Crud\CrudMethod;
 use Shomisha\Stubless\Contracts\Code;
 
+/**
+ * Class CrudMethodDeveloper
+ *
+ * @method \Shomisha\Crudly\Managers\Crud\CrudMethodDeveloperManager getManager()
+ */
 abstract class CrudMethodDeveloper extends MethodDeveloper
 {
+    abstract protected function getMethodName(): string;
+
     /** @param \Shomisha\Crudly\Specifications\CrudlySpecification $specification */
     final public function develop(Specification $specification, CrudlySet $developedSet): Code
     {
@@ -43,18 +49,31 @@ abstract class CrudMethodDeveloper extends MethodDeveloper
         return $method;
     }
 
-    abstract protected function getMethodName(): string;
-
     /** @return \Shomisha\Crudly\Contracts\Developer[] */
-    abstract protected function getArgumentsDevelopers(): array;
+    protected function getArgumentsDevelopers(): array
+    {
+        return $this->getManager()->getArgumentsDeveloper();
+    }
 
-    abstract protected function getLoadDeveloper(): Developer;
+    protected function getLoadDeveloper(): Developer
+    {
+        return $this->getManager()->getLoadDeveloper();
+    }
 
-    abstract protected function getAuthorizationDeveloper(): Developer;
+    protected function getAuthorizationDeveloper(): Developer
+    {
+        return $this->getManager()->getAuthorizationDeveloper();
+    }
 
-    abstract protected function getMainDeveloper(): Developer;
+    protected function getMainDeveloper(): Developer
+    {
+        return $this->getManager()->getMainDeveloper();
+    }
 
-    abstract protected function getResponseDeveloper(): Developer;
+    protected function getResponseDeveloper(): Developer
+    {
+        return $this->getManager()->getResponseDeveloper();
+    }
 
     abstract protected function hasAuthorization(CrudlySpecification $specification): bool;
 }

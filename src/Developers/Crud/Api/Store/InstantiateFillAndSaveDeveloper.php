@@ -11,16 +11,17 @@ use Shomisha\Stubless\ImperativeCode\Block;
 /**
  * Class InstantiateFillAndSaveDeveloper
  *
- * @method \Shomisha\Crudly\Managers\Crud\Api\StoreDeveloperManager getManager()
+ * @method \Shomisha\Crudly\Managers\Crud\Api\StoreMethodDeveloperManager getManager()
  */
 class InstantiateFillAndSaveDeveloper extends MethodDeveloper
 {
     public function develop(Specification $specification, CrudlySet $developedSet): Code
     {
         return Block::fromArray([
+            $this->getManager()->getValidationDeveloper()->develop($specification, $developedSet),
             $this->getManager()->getStoreInstantiateDeveloper()->develop($specification, $developedSet),
-            $this->getManager()->getStoreFillDeveloper()->develop($specification, $developedSet),
-            $this->getManager()->getStoreSaveDeveloper()->develop($specification, $developedSet),
+            $this->getManager()->getFillDeveloper()->develop($specification, $developedSet),
+            $this->getManager()->getSaveDeveloper()->develop($specification, $developedSet),
         ]);
     }
 }

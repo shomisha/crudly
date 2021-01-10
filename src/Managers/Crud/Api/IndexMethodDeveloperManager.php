@@ -6,29 +6,34 @@ use Shomisha\Crudly\Contracts\Developer;
 use Shomisha\Crudly\Developers\Crud\Api\Index\ResponseDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Authorization\ViewAllAuthorizationDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Load\PaginateDeveloper;
-use Shomisha\Crudly\Managers\Crud\CrudDeveloperManager;
+use Shomisha\Crudly\Managers\Crud\CrudMethodDeveloperManager;
 
-class IndexDeveloperManager extends CrudDeveloperManager
+class IndexMethodDeveloperManager extends CrudMethodDeveloperManager
 {
-    public function getIndexLoadDeveloper(): Developer
+    public function getArgumentsDeveloper(): array
+    {
+        return [];
+    }
+
+    public function getLoadDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers
         return $this->nullDeveloper();
     }
 
-    public function getIndexAuthorizationDeveloper(): Developer
+    public function getAuthorizationDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers
         return $this->instantiateDeveloperWithManager(ViewAllAuthorizationDeveloper::class, $this);
     }
 
-    public function getIndexMainDeveloper(): Developer
+    public function getMainDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers
         return $this->instantiateDeveloperWithManager(PaginateDeveloper::class, $this);
     }
 
-    public function getIndexResponseDeveloper(): Developer
+    public function getResponseDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers
         return $this->instantiateDeveloperWithManager(ResponseDeveloper::class, $this);

@@ -6,28 +6,35 @@ use Shomisha\Crudly\Contracts\Developer;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\LoadDependenciesDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Authorization\UpdateAuthorizationDeveloper;
 use Shomisha\Crudly\Developers\Crud\Web\Edit\ResponseDeveloper as EditResponseDeveloper;
-use Shomisha\Crudly\Managers\Crud\CrudDeveloperManager;
+use Shomisha\Crudly\Managers\Crud\CrudMethodDeveloperManager;
 
-class EditDeveloperManager extends CrudDeveloperManager
+class EditMethodDeveloperManager extends CrudMethodDeveloperManager
 {
-    public function getEditLoadDeveloper(): Developer
+    public function getArgumentsDeveloper(): array
+    {
+        return [
+            $this->getImplicitBindArgumentDeveloper(),
+        ];
+    }
+
+    public function getLoadDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers
         return $this->nullDeveloper();
     }
 
-    public function getEditAuthorizationDeveloper(): Developer
+    public function getAuthorizationDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers
         return $this->instantiateDeveloperWithManager(UpdateAuthorizationDeveloper::class, $this);
     }
 
-    public function getEditMainDeveloper(): Developer
+    public function getMainDeveloper(): Developer
     {
         return $this->instantiateDeveloperWithManager(LoadDependenciesDeveloper::class, $this);
     }
 
-    public function getEditResponseDeveloper(): Developer
+    public function getResponseDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers
         return $this->instantiateDeveloperWithManager(EditResponseDeveloper::class, $this);

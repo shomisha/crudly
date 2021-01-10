@@ -5,27 +5,34 @@ namespace Shomisha\Crudly\Managers\Crud\Web;
 use Shomisha\Crudly\Contracts\Developer;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Authorization\CreateAuthorizationDeveloper;
 use Shomisha\Crudly\Developers\Crud\Web\Store\Fill\FillFieldsSeparatelyDeveloper;
-use Shomisha\Crudly\Developers\Crud\Web\Store\FormRequestArgumentDeveloper;
 use Shomisha\Crudly\Developers\Crud\Web\Store\ResponseDeveloper as StoreResponseDeveloper;
 use Shomisha\Crudly\Developers\Crud\Web\Store\ValidateFillAndSaveDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\MethodInvocation\InvokeSaveMethodDeveloper;
-use Shomisha\Crudly\Managers\Crud\CrudDeveloperManager;
+use Shomisha\Crudly\Managers\Crud\CrudMethodDeveloperManager;
 
-class StoreDeveloperManager extends CrudDeveloperManager
+class StoreMethodDeveloperManager extends CrudMethodDeveloperManager
 {
-    public function getStoreArgumentsDeveloper(): Developer
+    public function getArgumentsDeveloper(): array
     {
         // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(FormRequestArgumentDeveloper::class, $this);
+        return [
+            $this->getFormRequestArgumentDeveloper(),
+        ];
     }
 
-    public function getStoreAuthorizationDeveloper(): Developer
+    public function getLoadDeveloper(): Developer
+    {
+        // TODO: refactor this to support overriding developers
+        return $this->nullDeveloper();
+    }
+
+    public function getAuthorizationDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers
         return $this->instantiateDeveloperWithManager(CreateAuthorizationDeveloper::class, $this);
     }
 
-    public function getStoreMainDeveloper(): Developer
+    public function getMainDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers
         return $this->instantiateDeveloperWithManager(ValidateFillAndSaveDeveloper::class, $this);
@@ -37,26 +44,26 @@ class StoreDeveloperManager extends CrudDeveloperManager
         return $this->getInstantiateDeveloper();
     }
 
-    public function getStoreValidationDeveloper(): Developer
+    public function getValidationDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers
         // TODO: implement a $this->validate validation developer
         return $this->nullDeveloper();
     }
 
-    public function getStoreFillDeveloper(): Developer
+    public function getFillDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers
         return $this->instantiateDeveloperWithManager(FillFieldsSeparatelyDeveloper::class, $this);
     }
 
-    public function getStoreSaveDeveloper(): Developer
+    public function getSaveDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers
         return $this->instantiateDeveloperWithManager(InvokeSaveMethodDeveloper::class, $this);
     }
 
-    public function getStoreResponseDeveloper(): Developer
+    public function getResponseDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers
         return $this->instantiateDeveloperWithManager(StoreResponseDeveloper::class, $this);

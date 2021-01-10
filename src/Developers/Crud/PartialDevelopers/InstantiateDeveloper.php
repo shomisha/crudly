@@ -16,7 +16,7 @@ class InstantiateDeveloper extends MethodDeveloper
     {
         return Block::assign(
             $this->guessSingularModelVariableName($specification->getModel()->getName()),
-            Block::instantiate(new Importable($specification->getModel()->getName()))
+            Block::instantiate(new Importable($specification->getModel()->getFullyQualifiedName()))
         );
     }
 }

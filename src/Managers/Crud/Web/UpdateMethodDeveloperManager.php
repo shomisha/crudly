@@ -8,47 +8,55 @@ use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Authorization\UpdateAuthor
 use Shomisha\Crudly\Developers\Crud\Web\Store\Fill\FillFieldsSeparatelyDeveloper;
 use Shomisha\Crudly\Developers\Crud\Web\Update\ResponseDeveloper as UpdateResponseDeveloper;
 use Shomisha\Crudly\Developers\Crud\Web\Update\ValidateFillAndUpdateDeveloper;
-use Shomisha\Crudly\Managers\Crud\CrudDeveloperManager;
+use Shomisha\Crudly\Managers\Crud\CrudMethodDeveloperManager;
 
-class UpdateDeveloperManager extends CrudDeveloperManager
+class UpdateMethodDeveloperManager extends CrudMethodDeveloperManager
 {
-    public function getUpdateLoadDeveloper(): Developer
+    public function getArgumentsDeveloper(): array
+    {
+        return [
+            $this->getFormRequestArgumentDeveloper(),
+            $this->getImplicitBindArgumentDeveloper(),
+        ];
+    }
+
+    public function getLoadDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers
         return $this->nullDeveloper();
     }
 
-    public function getUpdateAuthorizationDeveloper(): Developer
+    public function getAuthorizationDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers
         return $this->instantiateDeveloperWithManager(UpdateAuthorizationDeveloper::class, $this);
     }
 
-    public function getUpdateMainDeveloper(): Developer
+    public function getMainDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers
         return $this->instantiateDeveloperWithManager(ValidateFillAndUpdateDeveloper::class, $this);
     }
 
-    public function getUpdateValidateDeveloper(): Developer
+    public function getValidateDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers
         return $this->nullDeveloper();
     }
 
-    public function getUpdateFillDeveloper(): Developer
+    public function getFillDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers
         return $this->instantiateDeveloperWithManager(FillFieldsSeparatelyDeveloper::class, $this);
     }
 
-    public function getUpdateSaveDeveloper(): Developer
+    public function getSaveDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers
         return $this->instantiateDeveloperWithManager(InvokeUpdateMethodDeveloper::class, $this);
     }
 
-    public function getUpdateResponseDeveloper(): Developer
+    public function getResponseDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers
         return $this->instantiateDeveloperWithManager(UpdateResponseDeveloper::class, $this);

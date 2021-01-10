@@ -6,26 +6,33 @@ use Shomisha\Crudly\Contracts\Developer;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\MethodInvocation\InvokeDeleteMethodDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Authorization\DeleteAuthorizationDeveloper;
 use Shomisha\Crudly\Developers\Crud\Web\Destroy\ResponseDeveloper as DestroyResponseDeveloper;
-use Shomisha\Crudly\Managers\Crud\CrudDeveloperManager;
+use Shomisha\Crudly\Managers\Crud\CrudMethodDeveloperManager;
 
-class DestroyDeveloperManager extends CrudDeveloperManager
+class DestroyMethodDeveloperManager extends CrudMethodDeveloperManager
 {
-    public function getDestroyLoadDeveloper(): Developer
+    public function getArgumentsDeveloper(): array
+    {
+        return [
+            $this->getImplicitBindArgumentDeveloper(),
+        ];
+    }
+
+    public function getLoadDeveloper(): Developer
     {
         return $this->nullDeveloper();
     }
 
-    public function getDestroyAuthorizationDeveloper(): Developer
+    public function getAuthorizationDeveloper(): Developer
     {
         return $this->instantiateDeveloperWithManager(DeleteAuthorizationDeveloper::class, $this);
     }
 
-    public function getDestroyMainDeveloper(): Developer
+    public function getMainDeveloper(): Developer
     {
         return $this->instantiateDeveloperWithManager(InvokeDeleteMethodDeveloper::class, $this);
     }
 
-    public function getDestroyResponseDeveloper(): Developer
+    public function getResponseDeveloper(): Developer
     {
         return $this->instantiateDeveloperWithManager(DestroyResponseDeveloper::class, $this);
     }

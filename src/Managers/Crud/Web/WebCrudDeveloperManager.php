@@ -22,9 +22,9 @@ class WebCrudDeveloperManager extends BaseDeveloperManager
         return $this->instantiateDeveloperWithManager(IndexDeveloper::class, $this->getIndexManager());
     }
 
-    public function getIndexManager(): IndexDeveloperManager
+    public function getIndexManager(): IndexMethodDeveloperManager
     {
-        return $this->instantiateManager(IndexDeveloperManager::class);
+        return $this->instantiateManager(IndexMethodDeveloperManager::class);
     }
 
     public function getShowMethodDeveloper(): Developer
@@ -33,9 +33,9 @@ class WebCrudDeveloperManager extends BaseDeveloperManager
         return $this->instantiateDeveloperWithManager(ShowDeveloper::class, $this->getShowManager());
     }
 
-    public function getShowManager(): ShowDeveloperManager
+    public function getShowManager(): ShowMethodDeveloperManager
     {
-        return $this->instantiateManager(ShowDeveloperManager::class);
+        return $this->instantiateManager(ShowMethodDeveloperManager::class);
     }
 
     public function getCreateMethodDeveloper(): Developer
@@ -44,9 +44,9 @@ class WebCrudDeveloperManager extends BaseDeveloperManager
         return $this->instantiateDeveloperWithManager(CreateDeveloper::class, $this->getCreateManager());
     }
 
-    public function getCreateManager(): CreateDeveloperManager
+    public function getCreateManager(): CreateMethodDeveloperManager
     {
-        return $this->instantiateManager(CreateDeveloperManager::class);
+        return $this->instantiateManager(CreateMethodDeveloperManager::class);
     }
 
     public function getStoreMethodDeveloper(): Developer
@@ -55,9 +55,9 @@ class WebCrudDeveloperManager extends BaseDeveloperManager
         return $this->instantiateDeveloperWithManager(StoreDeveloper::class, $this->getStoreManager());
     }
 
-    public function getStoreManager(): StoreDeveloperManager
+    public function getStoreManager(): StoreMethodDeveloperManager
     {
-        return $this->instantiateManager(StoreDeveloperManager::class);
+        return $this->instantiateManager(StoreMethodDeveloperManager::class);
     }
 
     public function getEditMethodDeveloper(): Developer
@@ -66,9 +66,9 @@ class WebCrudDeveloperManager extends BaseDeveloperManager
         return $this->instantiateDeveloperWithManager(EditDeveloper::class, $this->getEditManager());
     }
 
-    public function getEditManager(): EditDeveloperManager
+    public function getEditManager(): EditMethodDeveloperManager
     {
-        return $this->instantiateManager(EditDeveloperManager::class);
+        return $this->instantiateManager(EditMethodDeveloperManager::class);
     }
 
     public function getUpdateMethodDeveloper(): Developer
@@ -77,9 +77,9 @@ class WebCrudDeveloperManager extends BaseDeveloperManager
         return $this->instantiateDeveloperWithManager(UpdateDeveloper::class, $this->getUpdateManager());
     }
 
-    public function getUpdateManager(): UpdateDeveloperManager
+    public function getUpdateManager(): UpdateMethodDeveloperManager
     {
-        return $this->instantiateManager(UpdateDeveloperManager::class);
+        return $this->instantiateManager(UpdateMethodDeveloperManager::class);
     }
 
     public function getDestroyMethodDeveloper(): Developer
@@ -88,9 +88,9 @@ class WebCrudDeveloperManager extends BaseDeveloperManager
         return $this->instantiateDeveloperWithManager(DestroyDeveloper::class, $this->getDestroyManager());
     }
 
-    public function getDestroyManager(): DestroyDeveloperManager
+    public function getDestroyManager(): DestroyMethodDeveloperManager
     {
-        return $this->instantiateManager(DestroyDeveloperManager::class);
+        return $this->instantiateManager(DestroyMethodDeveloperManager::class);
     }
 
     public function getForceDeleteDeveloper(): Developer
@@ -99,9 +99,9 @@ class WebCrudDeveloperManager extends BaseDeveloperManager
         return $this->instantiateDeveloperWithManager(ForceDeleteDeveloper::class, $this->getForceDeleteManager());
     }
 
-    public function getForceDeleteManager(): ForceDeleteDeveloperManager
+    public function getForceDeleteManager(): ForceDeleteMethodDeveloperManager
     {
-        return $this->instantiateManager(ForceDeleteDeveloperManager::class);
+        return $this->instantiateManager(ForceDeleteMethodDeveloperManager::class);
     }
 
     public function getRestoreDeveloper(): Developer
@@ -110,8 +110,8 @@ class WebCrudDeveloperManager extends BaseDeveloperManager
         return $this->instantiateDeveloperWithManager(RestoreDeveloper::class, $this->getRestoreManager());
     }
 
-    public function getRestoreManager(): RestoreDeveloperManager
+    public function getRestoreManager(): RestoreMethodDeveloperManager
     {
-        return $this->instantiateManager(RestoreDeveloperManager::class);
+        return $this->instantiateManager(RestoreMethodDeveloperManager::class);
     }
 }

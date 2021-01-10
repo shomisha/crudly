@@ -6,34 +6,36 @@ use Shomisha\Crudly\Contracts\Developer;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Authorization\ViewAuthorizationDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\LoadRelationshipsDeveloper;
 use Shomisha\Crudly\Developers\Crud\Web\Show\ResponseDeveloper as ShowResponseDeveloper;
-use Shomisha\Crudly\Managers\Crud\CrudDeveloperManager;
+use Shomisha\Crudly\Managers\Crud\CrudMethodDeveloperManager;
 
-class ShowDeveloperManager extends CrudDeveloperManager
+class ShowMethodDeveloperManager extends CrudMethodDeveloperManager
 {
-    public function getShowArgumentsDeveloper(): Developer
+    public function getArgumentsDeveloper(): array
     {
         // TODO: refactor this to support overriding developers
-        return $this->getImplicitBindArgumentDeveloper();
+        return [
+            $this->getImplicitBindArgumentDeveloper()
+        ];
     }
 
-    public function getShowLoadDeveloper(): Developer
+    public function getLoadDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers
         return $this->nullDeveloper();
     }
 
-    public function getShowAuthorizationDeveloper(): Developer
+    public function getAuthorizationDeveloper(): Developer
     {
         return $this->instantiateDeveloperWithManager(ViewAuthorizationDeveloper::class, $this);
     }
 
-    public function getShowMainDeveloper(): Developer
+    public function getMainDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers
         return $this->instantiateDeveloperWithManager(LoadRelationshipsDeveloper::class, $this);
     }
 
-    public function getShowResponseDeveloper(): Developer
+    public function getResponseDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers
         return $this->instantiateDeveloperWithManager(ShowResponseDeveloper::class, $this);

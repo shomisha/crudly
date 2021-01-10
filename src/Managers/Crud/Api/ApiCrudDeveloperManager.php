@@ -17,9 +17,9 @@ class ApiCrudDeveloperManager extends BaseDeveloperManager
         return $this->instantiateDeveloperWithManager(IndexDeveloper::class, $this->getIndexManager());
     }
 
-    public function getIndexManager(): IndexDeveloperManager
+    public function getIndexManager(): IndexMethodDeveloperManager
     {
-        return $this->instantiateManager(IndexDeveloperManager::class);
+        return $this->instantiateManager(IndexMethodDeveloperManager::class);
     }
 
     public function getShowMethodDeveloper(): Developer
@@ -28,9 +28,9 @@ class ApiCrudDeveloperManager extends BaseDeveloperManager
         return $this->instantiateDeveloperWithManager(ShowDeveloper::class, $this->getShowManager());
     }
 
-    public function getShowManager(): ShowDeveloperManager
+    public function getShowManager(): ShowMethodDeveloperManager
     {
-        return $this->instantiateManager(ShowDeveloperManager::class);
+        return $this->instantiateManager(ShowMethodDeveloperManager::class);
     }
 
     public function getStoreMethodDeveloper(): Developer
@@ -39,9 +39,9 @@ class ApiCrudDeveloperManager extends BaseDeveloperManager
         return $this->instantiateDeveloperWithManager(StoreDeveloper::class, $this->getStoreManager());
     }
 
-    public function getStoreManager(): StoreDeveloperManager
+    public function getStoreManager(): StoreMethodDeveloperManager
     {
-        return $this->instantiateManager(StoreDeveloperManager::class);
+        return $this->instantiateManager(StoreMethodDeveloperManager::class);
     }
 
     public function getUpdateMethodDeveloper(): Developer
@@ -50,9 +50,9 @@ class ApiCrudDeveloperManager extends BaseDeveloperManager
         return $this->instantiateDeveloperWithManager(UpdateDeveloper::class, $this->getUpdateManager());
     }
 
-    public function getUpdateManager(): UpdateDeveloperManager
+    public function getUpdateManager(): UpdateMethodDeveloperManager
     {
-        return $this->instantiateManager(UpdateDeveloperManager::class);
+        return $this->instantiateManager(UpdateMethodDeveloperManager::class);
     }
 
     public function getDestroyMethodDeveloper(): Developer

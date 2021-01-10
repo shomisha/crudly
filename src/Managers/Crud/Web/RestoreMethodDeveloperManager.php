@@ -6,29 +6,37 @@ use Shomisha\Crudly\Contracts\Developer;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\MethodInvocation\InvokeRestoreMethodDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Authorization\RestoreAuthorizationDeveloper;
 use Shomisha\Crudly\Developers\Crud\Web\Restore\ResponseDeveloper as RestoreResponseDeveloper;
-use Shomisha\Crudly\Managers\Crud\CrudDeveloperManager;
+use Shomisha\Crudly\Managers\Crud\CrudMethodDeveloperManager;
 
-class RestoreDeveloperManager extends CrudDeveloperManager
+class RestoreMethodDeveloperManager extends CrudMethodDeveloperManager
 {
-    public function getRestoreLoadDeveloper(): Developer
+    public function getArgumentsDeveloper(): array
+    {
+        // TODO: refactor this to support overriding developers
+        return [
+            $this->getImplicitBindArgumentDeveloper(),
+        ];
+    }
+
+    public function getLoadDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers
         return $this->nullDeveloper();
     }
 
-    public function getRestoreAuthorizationDeveloper(): Developer
+    public function getAuthorizationDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers
         return $this->instantiateDeveloperWithManager(RestoreAuthorizationDeveloper::class, $this);
     }
 
-    public function getRestoreMainDeveloper(): Developer
+    public function getMainDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers
         return $this->instantiateDeveloperWithManager(InvokeRestoreMethodDeveloper::class, $this);
     }
 
-    public function getRestoreResponseDeveloper(): Developer
+    public function getResponseDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers
         return $this->instantiateDeveloperWithManager(RestoreResponseDeveloper::class, $this);
