@@ -37,19 +37,24 @@ abstract class CrudDeveloper extends Developer
 
     protected function extractRelationshipsFromSpecification(CrudlySpecification $specification): array
     {
-        return $specification->getProperties()->map(function (ModelPropertySpecification $modelSpecification) {
-            if (!$modelSpecification->isForeignKey()) {
+        return $specification->getProperties()->map(function (ModelPropertySpecification $propertySpecification) {
+            if (!$this->propertyIsRelationship($propertySpecification)) {
                 return null;
             }
 
-            return $modelSpecification->getForeignKeySpecification()->getRelationshipName();
+            return $propertySpecification->getForeignKeySpecification()->getRelationshipName();
         })->filter()->values()->toArray();
+    }
+
+    protected function propertyIsRelationship(ModelPropertySpecification $property): bool
+    {
+        return $property->isForeignKey() && $property->getForeignKeySpecification()->hasRelationship();
     }
 
     protected function extractRelationshipTablesFromSpecification(CrudlySpecification $specification): array
     {
         return $specification->getProperties()->map(function (ModelPropertySpecification $propertySpecification) {
-            if (!$propertySpecification->isForeignKey() || !$propertySpecification->getForeignKeySpecification()->hasRelationship()) {
+            if (!$this->propertyIsRelationship($propertySpecification)) {
                 return;
             }
 
@@ -68,7 +73,7 @@ abstract class CrudDeveloper extends Developer
     {
         $modelName = $modelName->getName();
 
-        return "App\Http\Requests\\{$modelName}Resource";
+        return "App\Http\Resources\\{$modelName}Resource";
     }
 
     protected function returnViewBlock(string $viewName, array $data = []): ReturnBlock
