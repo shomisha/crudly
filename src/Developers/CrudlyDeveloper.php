@@ -52,7 +52,7 @@ class CrudlyDeveloper
 
     private function developApiCrud(CrudlySpecification $specification, CrudlySet $developedSet): CrudlySet
     {
-        // $this->manager->getApiCrudFormRequestDeveloper()->develop($specification, $developedSet);
+        $this->manager->getApiCrudFormRequestDeveloper()->develop($specification, $developedSet);
 
         $this->manager->getApiCrudApiResourceDeveloper()->develop($specification, $developedSet);
 

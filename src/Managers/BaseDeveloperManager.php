@@ -6,6 +6,7 @@ use Illuminate\Contracts\Container\Container;
 use Shomisha\Crudly\Config\DeveloperConfig;
 use Shomisha\Crudly\Contracts\Developer;
 use Shomisha\Crudly\Developers\NullDeveloper;
+use Shomisha\Crudly\Developers\NullMethodDeveloper;
 
 abstract class BaseDeveloperManager
 {
@@ -22,6 +23,11 @@ abstract class BaseDeveloperManager
     public function nullDeveloper(): NullDeveloper
     {
         return new NullDeveloper();
+    }
+
+    public function nullMethodDeveloper(): NullMethodDeveloper
+    {
+        return $this->instantiateDeveloperWithManager(NullMethodDeveloper::class, $this);
     }
 
     protected function getConfig(): DeveloperConfig

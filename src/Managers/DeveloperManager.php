@@ -3,6 +3,7 @@
 namespace Shomisha\Crudly\Managers;
 
 use Shomisha\Crudly\Contracts\Developer;
+use Shomisha\Crudly\Developers\Crud\Api\FormRequest\ApiFormRequestDeveloper;
 use Shomisha\Crudly\Developers\Crud\Api\Resource\ApiResourceDeveloper;
 use Shomisha\Crudly\Developers\Crud\Api\CrudControllerDeveloper as ApiCrudControllerDeveloper;
 use Shomisha\Crudly\Developers\Migration\MigrationDeveloper;
@@ -10,6 +11,7 @@ use Shomisha\Crudly\Developers\Model\ModelDeveloper;
 use Shomisha\Crudly\Developers\Crud\Web\CrudControllerDeveloper as WebCrudControllerDeveloper;
 use Shomisha\Crudly\Developers\Crud\Web\CrudFormRequestDeveloper;
 use Shomisha\Crudly\Managers\Crud\Api\ApiCrudDeveloperManager;
+use Shomisha\Crudly\Managers\Crud\Api\ApiFormRequestDeveloperManager;
 use Shomisha\Crudly\Managers\Crud\Api\ApiResourceDeveloperManager;
 use Shomisha\Crudly\Managers\Crud\Web\WebCrudDeveloperManager;
 
@@ -51,7 +53,7 @@ class DeveloperManager extends BaseDeveloperManager
 
     public function getApiCrudFormRequestDeveloper(): Developer
     {
-
+        return $this->instantiateDeveloperWithManager(ApiFormRequestDeveloper::class, $this->getApiFormRequestDeveloperManager());
     }
 
     public function getApiCrudApiResourceDeveloper(): Developer
@@ -70,13 +72,18 @@ class DeveloperManager extends BaseDeveloperManager
         return $this->instantiateManager(WebCrudDeveloperManager::class);
     }
 
-    private function getApiCrudManager(): ApiCrudDeveloperManager
+    private function getApiFormRequestDeveloperManager(): ApiFormRequestDeveloperManager
     {
-        return $this->instantiateManager(ApiCrudDeveloperManager::class);
+        return $this->instantiateManager(ApiFormRequestDeveloperManager::class);
     }
 
     private function getApiResourceDeveloperManager(): ApiResourceDeveloperManager
     {
         return $this->instantiateManager(ApiResourceDeveloperManager::class);
+    }
+
+    private function getApiCrudManager(): ApiCrudDeveloperManager
+    {
+        return $this->instantiateManager(ApiCrudDeveloperManager::class);
     }
 }

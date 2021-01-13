@@ -64,9 +64,16 @@ abstract class CrudDeveloper extends Developer
 
     protected function guessFormRequestClass(ModelName $model): string
     {
+        $classShortName = $this->guessFormRequestClassShortName($model);
+
+        return "App\Http\Requests\\{$classShortName}Request";
+    }
+
+    protected function guessFormRequestClassShortName(ModelName $model): string
+    {
         $modelName = $model->getName();
 
-        return "App\Http\Requests\\{$modelName}Request";
+        return "{$modelName}Request";
     }
 
     protected function guessApiResourceClass(ModelName $modelName): string

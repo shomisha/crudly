@@ -5,6 +5,7 @@ namespace Shomisha\Crudly\Managers\Crud;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\ImplicitBindArgumentsDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\InstantiateDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\LoadDependenciesDeveloper;
+use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Validation\PropertyValidationRulesDeveloper;
 use Shomisha\Crudly\Developers\Crud\Web\Store\FormRequestArgumentDeveloper;
 use Shomisha\Crudly\Managers\BaseDeveloperManager;
 
@@ -28,5 +29,10 @@ class CrudDeveloperManager extends BaseDeveloperManager
     public function getLoadDependenciesDeveloper(): LoadDependenciesDeveloper
     {
         return $this->instantiateDeveloperWithManager(LoadDependenciesDeveloper::class, $this);
+    }
+
+    public function getValidationRulesDeveloper(): PropertyValidationRulesDeveloper
+    {
+        return $this->instantiateDeveloperWithManager(PropertyValidationRulesDeveloper::class, $this);
     }
 }
