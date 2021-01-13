@@ -47,6 +47,7 @@ class ModelPropertySubwizard extends Subwizard
 
         if (!$this->canBeForeignKey($this->answers->get('type'))) {
             $this->skip('is_foreign_key');
+            $this->skip('foreign_key_target');
         }
 
         return $isNullable;
