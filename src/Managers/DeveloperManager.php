@@ -11,7 +11,7 @@ use Shomisha\Crudly\Developers\Model\ModelDeveloper;
 use Shomisha\Crudly\Developers\Crud\Web\CrudControllerDeveloper as WebCrudControllerDeveloper;
 use Shomisha\Crudly\Developers\Crud\Web\CrudFormRequestDeveloper;
 use Shomisha\Crudly\Managers\Crud\Api\ApiCrudDeveloperManager;
-use Shomisha\Crudly\Managers\Crud\Api\ApiFormRequestDeveloperManager;
+use Shomisha\Crudly\Managers\Crud\FormRequestDeveloperManager;
 use Shomisha\Crudly\Managers\Crud\Api\ApiResourceDeveloperManager;
 use Shomisha\Crudly\Managers\Crud\Web\WebCrudDeveloperManager;
 
@@ -72,9 +72,9 @@ class DeveloperManager extends BaseDeveloperManager
         return $this->instantiateManager(WebCrudDeveloperManager::class);
     }
 
-    private function getApiFormRequestDeveloperManager(): ApiFormRequestDeveloperManager
+    private function getApiFormRequestDeveloperManager(): FormRequestDeveloperManager
     {
-        return $this->instantiateManager(ApiFormRequestDeveloperManager::class);
+        return $this->instantiateManager(FormRequestDeveloperManager::class);
     }
 
     private function getApiResourceDeveloperManager(): ApiResourceDeveloperManager

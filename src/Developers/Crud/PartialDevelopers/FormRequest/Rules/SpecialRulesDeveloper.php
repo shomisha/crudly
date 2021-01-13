@@ -1,6 +1,6 @@
 <?php
 
-namespace Shomisha\Crudly\Developers\Crud\Api\FormRequest\Rules;
+namespace Shomisha\Crudly\Developers\Crud\PartialDevelopers\FormRequest\Rules;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
@@ -31,7 +31,6 @@ class SpecialRulesDeveloper extends ValidationDeveloper
             [$declarations, $dependent] = $this->getSpecialRules($specification, $property);
 
             $ruleDeclarations[] = $declarations;
-
             if (!empty($dependent)) {
                 $dependentRules[] = $dependent;
             }

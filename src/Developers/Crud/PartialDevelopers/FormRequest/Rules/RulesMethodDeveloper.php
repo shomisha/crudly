@@ -1,6 +1,6 @@
 <?php
 
-namespace Shomisha\Crudly\Developers\Crud\Api\FormRequest\Rules;
+namespace Shomisha\Crudly\Developers\Crud\PartialDevelopers\FormRequest\Rules;
 
 use Shomisha\Crudly\Contracts\Specification;
 use Shomisha\Crudly\Data\CrudlySet;
@@ -13,7 +13,7 @@ use Shomisha\Stubless\ImperativeCode\Block;
 /**
  * Class RulesMethodDeveloper
  *
- * @method \Shomisha\Crudly\Managers\Crud\Api\ApiFormRequestDeveloperManager getManager()
+ * @method \Shomisha\Crudly\Managers\Crud\FormRequestDeveloperManager getManager()
  */
 class RulesMethodDeveloper extends ValidationDeveloper
 {

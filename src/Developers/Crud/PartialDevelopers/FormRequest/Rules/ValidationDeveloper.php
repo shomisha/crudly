@@ -1,6 +1,6 @@
 <?php
 
-namespace Shomisha\Crudly\Developers\Crud\Api\FormRequest\Rules;
+namespace Shomisha\Crudly\Developers\Crud\PartialDevelopers\FormRequest\Rules;
 
 use Illuminate\Support\Str;
 use Shomisha\Crudly\Developers\Crud\CrudDeveloper;

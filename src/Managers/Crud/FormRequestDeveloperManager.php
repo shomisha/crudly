@@ -1,13 +1,12 @@
 <?php
 
-namespace Shomisha\Crudly\Managers\Crud\Api;
+namespace Shomisha\Crudly\Managers\Crud;
 
 use Shomisha\Crudly\Abstracts\Developer;
-use Shomisha\Crudly\Developers\Crud\Api\FormRequest\Rules\RulesMethodDeveloper;
-use Shomisha\Crudly\Developers\Crud\Api\FormRequest\Rules\SpecialRulesDeveloper;
-use Shomisha\Crudly\Managers\Crud\CrudDeveloperManager;
+use Shomisha\Crudly\Developers\Crud\PartialDevelopers\FormRequest\Rules\RulesMethodDeveloper;
+use Shomisha\Crudly\Developers\Crud\PartialDevelopers\FormRequest\Rules\SpecialRulesDeveloper;
 
-class ApiFormRequestDeveloperManager extends CrudDeveloperManager
+class FormRequestDeveloperManager extends CrudDeveloperManager
 {
     public function getAuthorizeMethodDeveloper(): Developer
     {
