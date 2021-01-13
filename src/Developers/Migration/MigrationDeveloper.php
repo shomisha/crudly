@@ -46,7 +46,7 @@ class MigrationDeveloper extends Developer
 
     protected function guessTableName(ModelName $modelName): string
     {
-        return Str::snake(Str::plural($modelName->getName()));
+        return Str::of($modelName->getName())->plural()->snake();
     }
 
     private function upMethod(CrudlySpecification $specification, CrudlySet $developedSet): ClassMethod
