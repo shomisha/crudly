@@ -3,16 +3,16 @@
 namespace Shomisha\Crudly\Managers;
 
 use Shomisha\Crudly\Contracts\Developer;
+use Shomisha\Crudly\Developers\Crud\Api\CrudControllerDeveloper as ApiCrudControllerDeveloper;
 use Shomisha\Crudly\Developers\Crud\Api\FormRequest\ApiFormRequestDeveloper;
 use Shomisha\Crudly\Developers\Crud\Api\Resource\ApiResourceDeveloper;
-use Shomisha\Crudly\Developers\Crud\Api\CrudControllerDeveloper as ApiCrudControllerDeveloper;
+use Shomisha\Crudly\Developers\Crud\Web\CrudControllerDeveloper as WebCrudControllerDeveloper;
+use Shomisha\Crudly\Developers\Crud\Web\FormRequest\WebFormRequestDeveloper;
 use Shomisha\Crudly\Developers\Migration\MigrationDeveloper;
 use Shomisha\Crudly\Developers\Model\ModelDeveloper;
-use Shomisha\Crudly\Developers\Crud\Web\CrudControllerDeveloper as WebCrudControllerDeveloper;
-use Shomisha\Crudly\Developers\Crud\Web\CrudFormRequestDeveloper;
 use Shomisha\Crudly\Managers\Crud\Api\ApiCrudDeveloperManager;
-use Shomisha\Crudly\Managers\Crud\FormRequestDeveloperManager;
 use Shomisha\Crudly\Managers\Crud\Api\ApiResourceDeveloperManager;
+use Shomisha\Crudly\Managers\Crud\FormRequestDeveloperManager;
 use Shomisha\Crudly\Managers\Crud\Web\WebCrudDeveloperManager;
 
 class DeveloperManager extends BaseDeveloperManager
@@ -42,7 +42,7 @@ class DeveloperManager extends BaseDeveloperManager
     public function getWebCrudFormRequestDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(CrudFormRequestDeveloper::class, $this->getWebCrudManager());
+        return $this->instantiateDeveloperWithManager(WebFormRequestDeveloper::class, $this->getFormRequestDeveloperManager());
     }
 
     public function getWebCrudControllerDeveloper(): Developer
@@ -53,7 +53,7 @@ class DeveloperManager extends BaseDeveloperManager
 
     public function getApiCrudFormRequestDeveloper(): Developer
     {
-        return $this->instantiateDeveloperWithManager(ApiFormRequestDeveloper::class, $this->getApiFormRequestDeveloperManager());
+        return $this->instantiateDeveloperWithManager(ApiFormRequestDeveloper::class, $this->getFormRequestDeveloperManager());
     }
 
     public function getApiCrudApiResourceDeveloper(): Developer
@@ -72,7 +72,7 @@ class DeveloperManager extends BaseDeveloperManager
         return $this->instantiateManager(WebCrudDeveloperManager::class);
     }
 
-    private function getApiFormRequestDeveloperManager(): FormRequestDeveloperManager
+    private function getFormRequestDeveloperManager(): FormRequestDeveloperManager
     {
         return $this->instantiateManager(FormRequestDeveloperManager::class);
     }
