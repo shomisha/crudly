@@ -18,7 +18,7 @@ use Shomisha\Stubless\Utilities\Importable;
 abstract class FormRequestDeveloper extends CrudDeveloper
 {
     /** @param \Shomisha\Crudly\Specifications\CrudlySpecification $specification */
-    public function develop(Specification $specification, CrudlySet $developedSet): Code
+    public function develop(Specification $specification, CrudlySet $developedSet): ClassTemplate
     {
         $formRequestClass = ClassTemplate::name(
             $this->guessFormRequestClassShortName($specification->getModel())

@@ -6,7 +6,6 @@ use Shomisha\Crudly\Contracts\Specification;
 use Shomisha\Crudly\Data\CrudlySet;
 use Shomisha\Crudly\Specifications\CrudlySpecification;
 use Shomisha\Crudly\Specifications\ModelPropertySpecification;
-use Shomisha\Stubless\Contracts\Code;
 use Shomisha\Stubless\DeclarativeCode\ClassMethod;
 use Shomisha\Stubless\ImperativeCode\Block;
 
@@ -18,7 +17,7 @@ use Shomisha\Stubless\ImperativeCode\Block;
 class RulesMethodDeveloper extends ValidationDeveloper
 {
     /** @param \Shomisha\Crudly\Specifications\CrudlySpecification $specification */
-    public function develop(Specification $specification, CrudlySet $developedSet): Code
+    public function develop(Specification $specification, CrudlySet $developedSet): ClassMethod
     {
         $rulesMethod = $this->getRulesMethod();
 

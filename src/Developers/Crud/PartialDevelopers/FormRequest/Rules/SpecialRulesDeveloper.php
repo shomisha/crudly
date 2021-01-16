@@ -18,7 +18,7 @@ use Shomisha\Stubless\Utilities\Importable;
 class SpecialRulesDeveloper extends ValidationDeveloper
 {
     /** @param \Shomisha\Crudly\Specifications\CrudlySpecification $specification */
-    public function develop(Specification $specification, CrudlySet $developedSet): Code
+    public function develop(Specification $specification, CrudlySet $developedSet): Block
     {
         $specialProperties = $this->getSpecialProperties($specification);
         if ($specialProperties->isEmpty()) {

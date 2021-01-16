@@ -2,6 +2,7 @@
 
 namespace Shomisha\Crudly\Abstracts;
 
+use Illuminate\Support\Str;
 use Shomisha\Crudly\Contracts\Developer as DeveloperContract;
 use Shomisha\Crudly\Contracts\ModelSupervisor;
 use Shomisha\Crudly\Data\ModelName;
@@ -33,5 +34,10 @@ abstract class Developer implements DeveloperContract
     protected function propertyIsRelationship(ModelPropertySpecification $property): bool
     {
         return $property->isForeignKey() && $property->getForeignKeySpecification()->hasRelationship();
+    }
+
+    protected function guessTableName(ModelName $modelName): string
+    {
+        return Str::of($modelName->getName())->plural()->snake();
     }
 }

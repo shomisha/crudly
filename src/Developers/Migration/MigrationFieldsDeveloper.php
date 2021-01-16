@@ -2,23 +2,23 @@
 
 namespace Shomisha\Crudly\Developers\Migration;
 
+use Shomisha\Crudly\Abstracts\Developer;
 use Shomisha\Crudly\Contracts\Specification;
 use Shomisha\Crudly\Data\CrudlySet;
 use Shomisha\Crudly\Enums\ModelPropertyType;
 use Shomisha\Crudly\Specifications\CrudlySpecification;
 use Shomisha\Crudly\Specifications\ModelPropertySpecification;
-use Shomisha\Stubless\Contracts\Code;
 use Shomisha\Stubless\ImperativeCode\Block;
 use Shomisha\Stubless\ImperativeCode\InvokeBlock;
 use Shomisha\Stubless\ImperativeCode\InvokeMethodBlock;
 use Shomisha\Stubless\References\Variable;
 
-class MigrationFieldsDeveloper extends MigrationDeveloper
+class MigrationFieldsDeveloper extends Developer
 {
     private const DEFAULT_PRIMARY_FIELD_NAME = 'id';
 
     /** @param \Shomisha\Crudly\Specifications\CrudlySpecification $specification */
-    public function develop(Specification $specification, CrudlySet $developedSet): Code
+    public function develop(Specification $specification, CrudlySet $developedSet): Block
     {
         $primaryKey = $specification->getPrimaryKey();
         $otherFields = $specification->getProperties()->except($primaryKey->getName());

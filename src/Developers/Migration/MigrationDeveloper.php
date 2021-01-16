@@ -9,7 +9,6 @@ use Shomisha\Crudly\Contracts\Specification;
 use Shomisha\Crudly\Data\CrudlySet;
 use Shomisha\Crudly\Data\ModelName;
 use Shomisha\Crudly\Specifications\CrudlySpecification;
-use Shomisha\Stubless\Contracts\Code;
 use Shomisha\Stubless\DeclarativeCode\ClassMethod;
 use Shomisha\Stubless\DeclarativeCode\ClassTemplate;
 use Shomisha\Stubless\Utilities\Importable;
@@ -22,7 +21,7 @@ use Shomisha\Stubless\Utilities\Importable;
 class MigrationDeveloper extends Developer
 {
 	/** @param \Shomisha\Crudly\Specifications\CrudlySpecification $specification */
-    public function develop(Specification $specification, CrudlySet $developedSet): Code
+    public function develop(Specification $specification, CrudlySet $developedSet): ClassTemplate
     {
         $modelName = $specification->getModel();
 
@@ -42,11 +41,6 @@ class MigrationDeveloper extends Developer
     private function guessName(ModelName $modelName): string
     {
         return "Create" . Str::studly((string) $modelName) . "Table";
-    }
-
-    protected function guessTableName(ModelName $modelName): string
-    {
-        return Str::of($modelName->getName())->plural()->snake();
     }
 
     private function upMethod(CrudlySpecification $specification, CrudlySet $developedSet): ClassMethod

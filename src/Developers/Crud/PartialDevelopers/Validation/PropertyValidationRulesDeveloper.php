@@ -8,13 +8,13 @@ use Shomisha\Crudly\Data\ValidationRules;
 use Shomisha\Crudly\Developers\Crud\CrudDeveloper;
 use Shomisha\Crudly\Enums\ModelPropertyType;
 use Shomisha\Crudly\Specifications\ModelPropertySpecification;
-use Shomisha\Stubless\Contracts\Code;
+use Shomisha\Stubless\Values\ArrayValue;
 use Shomisha\Stubless\Values\Value;
 
 class PropertyValidationRulesDeveloper extends CrudDeveloper
 {
     /** @param \Shomisha\Crudly\Specifications\ModelPropertySpecification $propertySpecification */
-    public function develop(Specification $propertySpecification, CrudlySet $developedSet): Code
+    public function develop(Specification $propertySpecification, CrudlySet $developedSet): ArrayValue
     {
         $rules = $this->guessFieldValidationRules($propertySpecification);
 

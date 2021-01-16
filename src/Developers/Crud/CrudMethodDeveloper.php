@@ -7,7 +7,7 @@ use Shomisha\Crudly\Contracts\Specification;
 use Shomisha\Crudly\Data\CrudlySet;
 use Shomisha\Crudly\Specifications\CrudlySpecification;
 use Shomisha\Crudly\Templates\Crud\CrudMethod;
-use Shomisha\Stubless\Contracts\Code;
+use Shomisha\Stubless\DeclarativeCode\ClassMethod;
 
 /**
  * Class CrudMethodDeveloper
@@ -19,7 +19,7 @@ abstract class CrudMethodDeveloper extends CrudDeveloper
     abstract protected function getMethodName(): string;
 
     /** @param \Shomisha\Crudly\Specifications\CrudlySpecification $specification */
-    final public function develop(Specification $specification, CrudlySet $developedSet): Code
+    final public function develop(Specification $specification, CrudlySet $developedSet): ClassMethod
     {
         $method = new CrudMethod($this->getMethodName());
 

@@ -11,12 +11,13 @@ use Shomisha\Stubless\Contracts\Code;
 use Shomisha\Stubless\ImperativeCode\Block;
 use Shomisha\Stubless\References\Reference;
 use Shomisha\Stubless\Utilities\Importable;
+use Shomisha\Stubless\Values\ArrayValue;
 use Shomisha\Stubless\Values\Value;
 
 class PropertyResourceMappingDeveloper extends CrudDeveloper
 {
     /** @param \Shomisha\Crudly\Specifications\CrudlySpecification $specification */
-    public function develop(Specification $specification, CrudlySet $developedSet): Code
+    public function develop(Specification $specification, CrudlySet $developedSet): ArrayValue
     {
         $primary = $specification->getPrimaryKey();
         $remainingFields = $specification->getProperties()->except($primary->getName());

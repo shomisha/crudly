@@ -4,6 +4,7 @@ namespace Shomisha\Crudly\Developers\Migration;
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Shomisha\Crudly\Abstracts\Developer;
 use Shomisha\Crudly\Contracts\Specification;
 use Shomisha\Crudly\Data\CrudlySet;
 use Shomisha\Crudly\Specifications\CrudlySpecification;
@@ -15,10 +16,10 @@ use Shomisha\Stubless\Utilities\Importable;
 use Shomisha\Stubless\Values\Closure;
 use Shomisha\Stubless\Values\Value;
 
-class UpMethodDeveloper extends MigrationDeveloper
+class UpMethodDeveloper extends Developer
 {
     /** @param \Shomisha\Crudly\Specifications\CrudlySpecification $specification */
-    public function develop(Specification $specification, CrudlySet $developedSet): Code
+    public function develop(Specification $specification, CrudlySet $developedSet): ClassMethod
     {
         $upMethod = ClassMethod::name('up');
 

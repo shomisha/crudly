@@ -9,15 +9,15 @@ use Shomisha\Crudly\Data\ModelName;
 use Shomisha\Crudly\Enums\RelationshipType;
 use Shomisha\Crudly\Specifications\CrudlySpecification;
 use Shomisha\Crudly\Specifications\ModelPropertySpecification;
-use Shomisha\Stubless\Contracts\Code;
 use Shomisha\Stubless\DeclarativeCode\ClassMethod;
+use Shomisha\Stubless\DeclarativeCode\ClassTemplate;
 use Shomisha\Stubless\ImperativeCode\Block;
 use Shomisha\Stubless\References\Reference;
 
 class RelationshipDeveloper extends Developer
 {
     /** @param \Shomisha\Crudly\Specifications\CrudlySpecification $specification */
-    public function develop(Specification $specification, CrudlySet $developedSet): Code
+    public function develop(Specification $specification, CrudlySet $developedSet): ClassTemplate
     {
         /** @var \Shomisha\Stubless\DeclarativeCode\ClassTemplate $model */
         $model = $developedSet->getModel();

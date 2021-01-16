@@ -6,14 +6,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Shomisha\Crudly\Contracts\Developer;
 use Shomisha\Crudly\Contracts\Specification;
 use Shomisha\Crudly\Data\CrudlySet;
-use Shomisha\Stubless\Contracts\Code;
 use Shomisha\Stubless\DeclarativeCode\ClassMethod;
+use Shomisha\Stubless\DeclarativeCode\ClassTemplate;
 use Shomisha\Stubless\ImperativeCode\Block;
 use Shomisha\Stubless\Utilities\Importable;
 
 class SoftDeletionDeveloper implements Developer
 {
-    public function develop(Specification $specification, CrudlySet $developedSet): Code
+    public function develop(Specification $specification, CrudlySet $developedSet): ClassTemplate
     {
         /** @var \Shomisha\Stubless\DeclarativeCode\ClassTemplate $model */
         $model = $developedSet->getModel();
