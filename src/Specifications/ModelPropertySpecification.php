@@ -30,7 +30,7 @@ class ModelPropertySpecification extends Specification
 
     public function isAutoincrement(): bool
     {
-        return $this->extract(self::KEY_AUTOINCREMENT);
+        return $this->extract(self::KEY_AUTOINCREMENT) ?? false;
     }
 
     public function isUnsigned(): bool

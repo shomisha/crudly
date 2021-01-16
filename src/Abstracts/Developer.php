@@ -4,7 +4,9 @@ namespace Shomisha\Crudly\Abstracts;
 
 use Shomisha\Crudly\Contracts\Developer as DeveloperContract;
 use Shomisha\Crudly\Contracts\ModelSupervisor;
+use Shomisha\Crudly\Data\ModelName;
 use Shomisha\Crudly\Managers\BaseDeveloperManager as DeveloperManagerAbstract;
+use Shomisha\Crudly\Specifications\ModelPropertySpecification;
 
 abstract class Developer implements DeveloperContract
 {
@@ -26,5 +28,10 @@ abstract class Developer implements DeveloperContract
     protected function getModelSupervisor(): ModelSupervisor
     {
         return $this->modelSupervisor;
+    }
+
+    protected function propertyIsRelationship(ModelPropertySpecification $property): bool
+    {
+        return $property->isForeignKey() && $property->getForeignKeySpecification()->hasRelationship();
     }
 }

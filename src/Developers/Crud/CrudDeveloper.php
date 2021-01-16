@@ -46,11 +46,6 @@ abstract class CrudDeveloper extends Developer
         })->filter()->values()->toArray();
     }
 
-    protected function propertyIsRelationship(ModelPropertySpecification $property): bool
-    {
-        return $property->isForeignKey() && $property->getForeignKeySpecification()->hasRelationship();
-    }
-
     protected function extractRelationshipTablesFromSpecification(CrudlySpecification $specification): array
     {
         return $specification->getProperties()->map(function (ModelPropertySpecification $propertySpecification) {
