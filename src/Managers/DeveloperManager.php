@@ -8,6 +8,7 @@ use Shomisha\Crudly\Developers\Crud\Api\FormRequest\ApiFormRequestDeveloper;
 use Shomisha\Crudly\Developers\Crud\Api\Resource\ApiResourceDeveloper;
 use Shomisha\Crudly\Developers\Crud\Web\CrudControllerDeveloper as WebCrudControllerDeveloper;
 use Shomisha\Crudly\Developers\Crud\Web\FormRequest\WebFormRequestDeveloper;
+use Shomisha\Crudly\Developers\Factory\FactoryClassDeveloper;
 use Shomisha\Crudly\Developers\Migration\MigrationDeveloper;
 use Shomisha\Crudly\Developers\Model\ModelDeveloper;
 use Shomisha\Crudly\Managers\Crud\Api\ApiCrudDeveloperManager;
@@ -37,6 +38,17 @@ class DeveloperManager extends BaseDeveloperManager
     private function getMigrationManager(): BaseDeveloperManager
     {
         return $this->instantiateManager(MigrationDeveloperManager::class);
+    }
+
+    public function getFactoryDeveloper(): Developer
+    {
+        // TODO: refactor this to support overriding developers
+        return $this->instantiateDeveloperWithManager(FactoryClassDeveloper::class, $this->getFactoryManager());
+    }
+
+    private function getFactoryManager(): BaseDeveloperManager
+    {
+        return $this->instantiateManager(FactoryDeveloperManager::class);
     }
 
     public function getWebCrudFormRequestDeveloper(): Developer

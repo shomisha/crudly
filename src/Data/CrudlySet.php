@@ -10,6 +10,8 @@ class CrudlySet
 
     private Code $model;
 
+    private Code $factory;
+
     private Code $webCrudController;
 
     private ?Code $webCrudFormRequest = null;
@@ -40,6 +42,18 @@ class CrudlySet
     public function setModel(Code $model): self
     {
         $this->model = $model;
+
+        return $this;
+    }
+
+    public function getFactory(): Code
+    {
+        return $this->factory;
+    }
+
+    public function setFactory(Code $factory): self
+    {
+        $this->factory = $factory;
 
         return $this;
     }

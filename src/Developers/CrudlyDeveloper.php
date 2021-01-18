@@ -32,13 +32,13 @@ class CrudlyDeveloper
         return $set;
     }
 
-    private function developModel(CrudlySpecification $specification, CrudlySet $developedSet): CrudlySet
+    private function developModel(CrudlySpecification $specification, CrudlySet $developedSet): void
     {
         $this->manager->getMigrationDeveloper()->develop($specification, $developedSet);
 
         $this->manager->getModelDeveloper()->develop($specification, $developedSet);
 
-        return $developedSet;
+        $this->manager->getFactoryDeveloper()->develop($specification, $developedSet);
     }
 
     private function developWebCrud(CrudlySpecification $specification, CrudlySet $developedSet): CrudlySet
