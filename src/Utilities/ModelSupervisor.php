@@ -14,12 +14,13 @@ class ModelSupervisor implements ModelSupervisorContract
     private string $appPath;
 
     // TODO: pull this from the container
-    private string $rootNamespace = 'App';
+    private string $rootNamespace;
 
-    public function __construct(Filesystem $filesystem, string $appPath)
+    public function __construct(Filesystem $filesystem, string $appPath, string $rootNamespace)
     {
         $this->filesystem = $filesystem;
         $this->appPath = $appPath;
+        $this->rootNamespace = rtrim($rootNamespace, '\\');
     }
 
     public function parseModelName(string $rawName): ModelName
@@ -36,7 +37,7 @@ class ModelSupervisor implements ModelSupervisorContract
             $classNamespace = implode('\\', $pieces);
         }
 
-        return new ModelName($className, $this->rootNamespace, $classNamespace);
+        return new ModelName($className, $this->modelNamespace(), $classNamespace);
     }
 
     public function parseModelNameFromTable(string $tableName): ModelName
@@ -57,9 +58,7 @@ class ModelSupervisor implements ModelSupervisorContract
     {
         $modelName = $this->parseModelName($rawName);
 
-        return $this->filesystem->exists(
-            $this->guessModelPath($modelName)
-        );
+        return class_exists($modelName->getFullyQualifiedName(), true);
     }
 
     public function shouldUseModelsDirectory(): bool
@@ -76,5 +75,16 @@ class ModelSupervisor implements ModelSupervisorContract
         }
 
         return $this->appPath . DIRECTORY_SEPARATOR .  $name->getName() . '.php';
+    }
+
+    private function modelNamespace(): string
+    {
+        $namespace = $this->rootNamespace;
+
+        if ($this->shouldUseModelsDirectory()) {
+            $namespace .= "\\Models";
+        }
+
+        return $namespace;
     }
 }

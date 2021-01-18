@@ -43,7 +43,7 @@ class CrudlyServiceProvider extends ServiceProvider
     private function registerModelSupervisor(): void
     {
         $this->app->bind(ModelSupervisorContract::class, function (Container $app) {
-            return new ModelSupervisor($app['files'], $app['path']);
+            return new ModelSupervisor($app['files'], $app['path'], $this->app->getNamespace());
         });
     }
 
