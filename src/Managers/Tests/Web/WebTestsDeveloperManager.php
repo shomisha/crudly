@@ -5,6 +5,9 @@ namespace Shomisha\Crudly\Managers\Tests\Web;
 use Shomisha\Crudly\Contracts\Developer;
 use Shomisha\Crudly\Developers\Tests\HelperMethodDevelopers\AuthorizeUserMethodDeveloper;
 use Shomisha\Crudly\Developers\Tests\HelperMethodDevelopers\DeauthorizeUserMethodDeveloper;
+use Shomisha\Crudly\Developers\Tests\HelperMethodDevelopers\GetModelDataPrimeDefaultsDeveloper;
+use Shomisha\Crudly\Developers\Tests\HelperMethodDevelopers\GetModelDataMethodDeveloper;
+use Shomisha\Crudly\Developers\Tests\HelperMethodDevelopers\GetModelDataSpecialDefaultsDeveloper;
 use Shomisha\Crudly\Developers\Tests\HelperMethodDevelopers\RouteGetters;
 use Shomisha\Crudly\Developers\Tests\Web\Methods\Index\IndexTestDeveloper;
 use Shomisha\Crudly\Developers\Tests\Web\Methods\Index\UnauthorizedIndexTestDeveloper;
@@ -24,7 +27,17 @@ class WebTestsDeveloperManager extends BaseDeveloperManager
 
     public function getDataMethodDeveloper(): Developer
     {
-        return $this->nullMethodDeveloper();
+        return $this->instantiateDeveloperWithManager(GetModelDataMethodDeveloper::class, $this);
+    }
+
+    public function getModelDataSpecialDefaultsDeveloper(): Developer
+    {
+        return $this->instantiateDeveloperWithManager(GetModelDataSpecialDefaultsDeveloper::class, $this);
+    }
+
+    public function getModelDataPrimeDefaultsDeveloper(): Developer
+    {
+        return $this->instantiateDeveloperWithManager(GetModelDataPrimeDefaultsDeveloper::class, $this);
     }
 
     /** @return \Shomisha\Crudly\Abstracts\Developer[] */

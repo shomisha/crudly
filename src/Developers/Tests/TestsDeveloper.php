@@ -9,9 +9,19 @@ use Shomisha\Crudly\Exceptions\IncompleteWebTest;
 
 abstract class TestsDeveloper extends Developer
 {
-    protected function guessTestClassName(ModelName $model): string
+    protected function guessTestClassFullName(ModelName $model): string
     {
-        return Str::of($model->getName())->plural();
+        return $this->guessTestNamespace() . $this->guessTestClassShortName($model);
+    }
+
+    protected function guessTestClassShortName(ModelName $model): string
+    {
+        return Str::of($model->getName())->singular() . "Test";
+    }
+
+    protected function guessTestNamespace(): string
+    {
+        return "Tests\Feature\Web";
     }
 
     protected function incompleteWebTestExceptionName(): string

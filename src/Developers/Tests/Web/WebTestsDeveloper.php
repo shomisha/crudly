@@ -21,12 +21,10 @@ class WebTestsDeveloper extends TestsDeveloper
     public function develop(Specification $specification, CrudlySet $developedSet): Code
     {
         $webTestsClass = ClassTemplate::name(
-            $this->guessTestClassName($specification->getModel())
-        )->extends(new Importable('Tests\TestCase'));
+            $this->guessTestClassShortName($specification->getModel())
+        )->extends(new Importable('Tests\TestCase'))->setNamespace($this->guessTestNamespace());
 
         $developedSet->setWebTests($webTestsClass);
-
-        $webTestsClass->setName('Tests\Feature\Web');
 
         foreach ($this->getHelperMethodDevelopers() as $developer) {
             $webTestsClass->addMethod($developer->develop($specification, $developedSet));

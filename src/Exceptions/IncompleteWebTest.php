@@ -58,4 +58,9 @@ class IncompleteWebTest extends \Exception
     {
 
     }
+
+    public static function provideMissingForeignKey(string $keyName): self
+    {
+
+    }
 }
