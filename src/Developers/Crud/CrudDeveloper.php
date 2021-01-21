@@ -12,16 +12,6 @@ use Shomisha\Stubless\ImperativeCode\ReturnBlock;
 
 abstract class CrudDeveloper extends Developer
 {
-    protected function guessSingularModelVariableName(string $modelName): string
-    {
-        return Str::of($modelName)->camel();
-    }
-
-    protected function guessPluralModelVariableName(string $modelName): string
-    {
-        return Str::of($modelName)->camel()->plural();
-    }
-
     protected function guessModelViewNamespace(ModelName $modelName): string
     {
         $name = '';

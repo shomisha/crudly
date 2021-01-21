@@ -3,11 +3,46 @@
 namespace Shomisha\Crudly\Managers\Tests\Web;
 
 use Shomisha\Crudly\Contracts\Developer;
+use Shomisha\Crudly\Developers\Tests\HelperMethodDevelopers\AuthorizeUserMethodDeveloper;
+use Shomisha\Crudly\Developers\Tests\HelperMethodDevelopers\DeauthorizeUserMethodDeveloper;
+use Shomisha\Crudly\Developers\Tests\HelperMethodDevelopers\RouteGetters;
+use Shomisha\Crudly\Developers\Tests\Web\Methods\Index\IndexTestDeveloper;
 use Shomisha\Crudly\Developers\Tests\Web\Methods\Index\UnauthorizedIndexTestDeveloper;
 use Shomisha\Crudly\Managers\BaseDeveloperManager;
 
 class WebTestsDeveloperManager extends BaseDeveloperManager
 {
+    public function getAuthorizeMethodDeveloper(): Developer
+    {
+        return $this->instantiateDeveloperWithManager(AuthorizeUserMethodDeveloper::class, $this);
+    }
+
+    public function getDeauthorizeMethodDeveloper(): Developer
+    {
+        return $this->instantiateDeveloperWithManager(DeauthorizeUserMethodDeveloper::class, $this);
+    }
+
+    public function getDataMethodDeveloper(): Developer
+    {
+        return $this->nullMethodDeveloper();
+    }
+
+    /** @return \Shomisha\Crudly\Abstracts\Developer[] */
+    public function getRouteMethodDevelopers(): array
+    {
+        return [
+            $this->instantiateDeveloperWithManager(RouteGetters\GetIndexRouteMethodDeveloper::class, $this),
+            $this->instantiateDeveloperWithManager(RouteGetters\GetShowRouteMethodDeveloper::class, $this),
+            $this->instantiateDeveloperWithManager(RouteGetters\GetCreateRouteMethodDeveloper::class, $this),
+            $this->instantiateDeveloperWithManager(RouteGetters\GetStoreRouteMethodDeveloper::class, $this),
+            $this->instantiateDeveloperWithManager(RouteGetters\GetEditRouteMethodDeveloper::class, $this),
+            $this->instantiateDeveloperWithManager(RouteGetters\GetUpdateRouteMethodDeveloper::class, $this),
+            $this->instantiateDeveloperWithManager(RouteGetters\GetDestroyRouteMethodDeveloper::class, $this),
+            $this->instantiateDeveloperWithManager(RouteGetters\GetForceDeleteRouteMethodDeveloper::class, $this),
+            $this->instantiateDeveloperWithManager(RouteGetters\GetRestoreRouteMethodDeveloper::class, $this),
+        ];
+    }
+
     public function getIndexTestDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers

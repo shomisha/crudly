@@ -24,13 +24,30 @@ class WebTestsDeveloper extends TestsDeveloper
             $this->guessTestClassName($specification->getModel())
         )->extends(new Importable('Tests\TestCase'));
 
+        $developedSet->setWebTests($webTestsClass);
+
         $webTestsClass->setName('Tests\Feature\Web');
+
+        foreach ($this->getHelperMethodDevelopers() as $developer) {
+            $webTestsClass->addMethod($developer->develop($specification, $developedSet));
+        }
 
         foreach ($this->getTestDevelopers($specification) as $developer) {
             $webTestsClass->addMethod($developer->develop($specification, $developedSet));
         }
 
         return $webTestsClass;
+    }
+
+    /** @return \Shomisha\Crudly\Abstracts\Developer[] */
+    protected function getHelperMethodDevelopers(): array
+    {
+        return [
+            $this->getManager()->getAuthorizeMethodDeveloper(),
+            $this->getManager()->getDeauthorizeMethodDeveloper(),
+            ...$this->getManager()->getRouteMethodDevelopers(),
+            $this->getManager()->getDataMethodDeveloper(),
+        ];
     }
 
     /** @return \Shomisha\Crudly\Developers\Tests\TestsDeveloper[] */

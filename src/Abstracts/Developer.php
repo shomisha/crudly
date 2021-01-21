@@ -40,4 +40,14 @@ abstract class Developer implements DeveloperContract
     {
         return Str::of($modelName->getName())->plural()->snake();
     }
+
+    protected function guessSingularModelVariableName(string $modelName): string
+    {
+        return Str::of($modelName)->camel();
+    }
+
+    protected function guessPluralModelVariableName(string $modelName): string
+    {
+        return Str::of($modelName)->camel()->plural();
+    }
 }
