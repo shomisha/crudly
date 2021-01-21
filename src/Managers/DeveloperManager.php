@@ -11,10 +11,12 @@ use Shomisha\Crudly\Developers\Crud\Web\FormRequest\WebFormRequestDeveloper;
 use Shomisha\Crudly\Developers\Factory\FactoryClassDeveloper;
 use Shomisha\Crudly\Developers\Migration\MigrationDeveloper;
 use Shomisha\Crudly\Developers\Model\ModelDeveloper;
+use Shomisha\Crudly\Developers\Tests\Web\WebTestsDeveloper;
 use Shomisha\Crudly\Managers\Crud\Api\ApiCrudDeveloperManager;
 use Shomisha\Crudly\Managers\Crud\Api\ApiResourceDeveloperManager;
 use Shomisha\Crudly\Managers\Crud\FormRequestDeveloperManager;
 use Shomisha\Crudly\Managers\Crud\Web\WebCrudDeveloperManager;
+use Shomisha\Crudly\Managers\Tests\Web\WebTestsDeveloperManager;
 
 class DeveloperManager extends BaseDeveloperManager
 {
@@ -66,6 +68,7 @@ class DeveloperManager extends BaseDeveloperManager
     public function getWebTestsDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers
+        return $this->instantiateDeveloperWithManager(WebTestsDeveloper::class, $this->getWebTestsManager());
     }
 
     public function getApiCrudFormRequestDeveloper(): Developer
@@ -94,9 +97,9 @@ class DeveloperManager extends BaseDeveloperManager
         return $this->instantiateManager(WebCrudDeveloperManager::class);
     }
 
-    private function getWebTestsManager()
+    private function getWebTestsManager(): WebTestsDeveloperManager
     {
-
+        return $this->instantiateManager(WebTestsDeveloperManager::class);
     }
 
     private function getFormRequestDeveloperManager(): FormRequestDeveloperManager
