@@ -63,6 +63,11 @@ class DeveloperManager extends BaseDeveloperManager
         return $this->instantiateDeveloperWithManager(WebCrudControllerDeveloper::class, $this->getWebCrudManager());
     }
 
+    public function getWebTestsDeveloper(): Developer
+    {
+        // TODO: refactor this to support overriding developers
+    }
+
     public function getApiCrudFormRequestDeveloper(): Developer
     {
         return $this->instantiateDeveloperWithManager(ApiFormRequestDeveloper::class, $this->getFormRequestDeveloperManager());
@@ -79,9 +84,19 @@ class DeveloperManager extends BaseDeveloperManager
         return $this->instantiateDeveloperWithManager(ApiCrudControllerDeveloper::class, $this->getApiCrudManager());
     }
 
+    public function getApiTestsDeveloper(): Developer
+    {
+        // TODO: refactor this to support overriding developers
+    }
+
     private function getWebCrudManager(): WebCrudDeveloperManager
     {
         return $this->instantiateManager(WebCrudDeveloperManager::class);
+    }
+
+    private function getWebTestsManager()
+    {
+
     }
 
     private function getFormRequestDeveloperManager(): FormRequestDeveloperManager
@@ -97,5 +112,10 @@ class DeveloperManager extends BaseDeveloperManager
     private function getApiCrudManager(): ApiCrudDeveloperManager
     {
         return $this->instantiateManager(ApiCrudDeveloperManager::class);
+    }
+
+    private function getApiTestsManager()
+    {
+
     }
 }

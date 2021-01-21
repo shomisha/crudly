@@ -16,11 +16,15 @@ class CrudlySet
 
     private ?Code $webCrudFormRequest = null;
 
+    private Code $webTests;
+
     private ?Code $apiCrudFormRequest = null;
 
     private Code $apiCrudApiResource;
 
     private Code $apiCrudController;
+
+    private Code $apiTests;
 
     public function getMigration(): Code
     {
@@ -82,6 +86,18 @@ class CrudlySet
         return $this;
     }
 
+    public function getWebTests(): Code
+    {
+        return $this->webTests;
+    }
+
+    public function setWebTests(Code $webTests): self
+    {
+        $this->webTests = $webTests;
+
+        return $this;
+    }
+
     public function getApiCrudFormRequest(): ?Code
     {
         return $this->apiCrudFormRequest;
@@ -114,6 +130,18 @@ class CrudlySet
     public function setApiCrudController(Code $apiCrudController): self
     {
         $this->apiCrudController = $apiCrudController;
+
+        return $this;
+    }
+
+    public function getApiTests(): Code
+    {
+        return $this->apiTests;
+    }
+
+    public function setApiTests(Code $apiTests): self
+    {
+        $this->apiTests = $apiTests;
 
         return $this;
     }

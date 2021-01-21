@@ -36,13 +36,15 @@ class CrudlyWizard extends Wizard
             'model' => new TextStep("Enter the name of your model"),
             'properties' => $this->repeat(
                 $this->subWizard(new ModelPropertySubwizard())
-            )->withRepeatPrompt('Do you want to add a model property?', false, true),
+            )->withRepeatPrompt("Do you want to add a model property?", false, true),
             'has_soft_deletion' => new ConfirmStep("Do you want soft deletion for this model?"),
             'has_timestamps' => new ConfirmStep("Do you want timestamps for this model?"),
-            'has_web' => new ConfirmStep('Should this model have web pages for CRUD actions?', true),
+            'has_web' => new ConfirmStep("Should this model have web pages for CRUD actions?", true),
             'has_web_authorization' => new ConfirmStep("Should web CRUD actions be authorized?", true),
-            'has_api' => new ConfirmStep('Should this model have API endpoints for CRUD actions?', true),
+            'has_web_tests' => new ConfirmStep("Do you want web CRUD tests?", true),
+            'has_api' => new ConfirmStep("Should this model have API endpoints for CRUD actions?", true),
             'has_api_authorization' => new ConfirmStep("Should API CRUD endpoints be authorized?", true),
+            'has_api_tests' => new ConfirmStep("Do you want API CRUD tests?", true),
         ];
     }
 
@@ -109,6 +111,7 @@ class CrudlyWizard extends Wizard
     {
         if (!$hasWeb) {
             $this->skip('has_web_authorization');
+            $this->skip('has_web_tests');
         }
 
         return $hasWeb;
@@ -118,6 +121,7 @@ class CrudlyWizard extends Wizard
     {
         if (!$hasApi) {
             $this->skip('has_api_authorization');
+            $this->skip('has_api_tests');
         }
 
         return $hasApi;
@@ -125,12 +129,17 @@ class CrudlyWizard extends Wizard
 
     function completed()
     {
-        $specification = new CrudlySpecification(
-            $this->crudly->parseModelName($this->answers->get('model')),
-            $this->answers->all()
-        );
+        $specification = $this->crudly->prepareSpecification($this->answers->all());
 
-        dd($this->crudly->develop($specification)->getModel()->print());
+        $developedSet = $this->crudly->develop($specification);
+
+        dd([
+            'web' => $developedSet->getWebCrudController()->print(),
+            'api' => $developedSet->getApiCrudController()->print(),
+            'resource' => $developedSet->getApiCrudApiResource()->print(),
+            'form-request' => $developedSet->getWebCrudFormRequest()->print(),
+            'factory' => $developedSet->getFactory()->print(),
+        ]);
     }
 
     private function getPrimaryKeys(array $properties): Collection

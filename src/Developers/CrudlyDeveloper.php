@@ -23,10 +23,18 @@ class CrudlyDeveloper
 
         if ($specification->hasWeb()) {
             $this->developWebCrud($specification, $set);
+
+            if ($specification->hasWebTests()) {
+                $this->developWebTests($specification, $set);
+            }
         }
 
         if ($specification->hasApi()) {
             $this->developApiCrud($specification, $set);
+
+            if ($specification->hasApiTests()) {
+                $this->developApiTests($specification, $set);
+            }
         }
 
         return $set;
@@ -41,23 +49,29 @@ class CrudlyDeveloper
         $this->manager->getFactoryDeveloper()->develop($specification, $developedSet);
     }
 
-    private function developWebCrud(CrudlySpecification $specification, CrudlySet $developedSet): CrudlySet
+    private function developWebCrud(CrudlySpecification $specification, CrudlySet $developedSet): void
     {
         $this->manager->getWebCrudFormRequestDeveloper()->develop($specification, $developedSet);
 
         $this->manager->getWebCrudControllerDeveloper()->develop($specification, $developedSet);
-
-        return $developedSet;
     }
 
-    private function developApiCrud(CrudlySpecification $specification, CrudlySet $developedSet): CrudlySet
+    private function developWebTests(CrudlySpecification $specification, CrudlySet $developedSet): void
+    {
+        $this->manager->getWebTestsDeveloper()->develop($specification, $developedSet);
+    }
+
+    private function developApiCrud(CrudlySpecification $specification, CrudlySet $developedSet): void
     {
         $this->manager->getApiCrudFormRequestDeveloper()->develop($specification, $developedSet);
 
         $this->manager->getApiCrudApiResourceDeveloper()->develop($specification, $developedSet);
 
         $this->manager->getApiCrudControllerDeveloper()->develop($specification, $developedSet);
+    }
 
-        return $developedSet;
+    private function developApiTests(CrudlySpecification $specification, CrudlySet $developedSet): void
+    {
+        $this->manager->getApiTestsDeveloper()->develop($specification, $developedSet);
     }
 }
