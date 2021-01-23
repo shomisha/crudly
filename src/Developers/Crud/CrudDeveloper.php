@@ -12,19 +12,6 @@ use Shomisha\Stubless\ImperativeCode\ReturnBlock;
 
 abstract class CrudDeveloper extends Developer
 {
-    protected function guessModelViewNamespace(ModelName $modelName): string
-    {
-        $name = '';
-
-        if ($namespace = $modelName->getNamespace()) {
-            $name .= Str::of($namespace)->replace('\\', '.')->snake()->singular() . ".";
-        }
-
-        $name .= Str::of($modelName->getName())->snake()->singular();
-
-        return $name;
-    }
-
     protected function extractRelationshipsFromSpecification(CrudlySpecification $specification): array
     {
         return $specification->getProperties()->map(function (ModelPropertySpecification $propertySpecification) {

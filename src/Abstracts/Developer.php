@@ -50,4 +50,17 @@ abstract class Developer implements DeveloperContract
     {
         return Str::of($modelName)->camel()->plural();
     }
+
+    protected function guessModelViewNamespace(ModelName $modelName): string
+    {
+        $name = '';
+
+        if ($namespace = $modelName->getNamespace()) {
+            $name .= Str::of($namespace)->replace('\\', '.')->snake()->singular() . ".";
+        }
+
+        $name .= Str::of($modelName->getName())->snake()->singular();
+
+        return $name;
+    }
 }

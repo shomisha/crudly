@@ -41,6 +41,7 @@ class WebTestsDeveloper extends TestsDeveloper
     protected function getHelperMethodDevelopers(): array
     {
         return [
+            $this->getManager()->getAuthenticateUserMethodDeveloper(),
             $this->getManager()->getAuthorizeMethodDeveloper(),
             $this->getManager()->getDeauthorizeMethodDeveloper(),
             ...$this->getManager()->getRouteMethodDevelopers(),
@@ -61,53 +62,53 @@ class WebTestsDeveloper extends TestsDeveloper
             $developers[] = $manager->getUnauthorizedIndexTestDeveloper();
         }
 
-        $developers[] = $manager->getShowTestDeveloper();
-        if ($hasAuthorization) {
-            $developers[] = $manager->getUnauthorizedShowTestDeveloper();
-        }
-
-        $developers[] = $manager->getCreateTestDeveloper();
-        if ($hasAuthorization) {
-            $developers[] = $manager->getUnauthorizedCreateTestDeveloper();
-        }
-
-        $developers[] = $manager->getStoreTestDeveloper();
-        $developers[] = $manager->getStoreInvalidDataProviderDeveloper();
-        $developers[] = $manager->getInvalidDataStoreTestDeveloper();
-        if ($hasAuthorization) {
-            $developers[] = $manager->getUnauthorizedStoreTestDeveloper();
-        }
-
-        $developers[] = $manager->getEditTestDeveloper();
-        if ($hasAuthorization) {
-            $developers[] = $manager->getUnauthorizedEditTestDeveloper();
-        }
-
-
-        $developers[] = $manager->getUpdateTestDeveloper();
-        $developers[] = $manager->getUpdateInvalidDataProviderDeveloper();
-        $developers[] = $manager->getInvalidDataUpdateTestDeveloper();
-        if ($hasAuthorization) {
-            $developers[] = $manager->getUnauthorizedUpdateTestDeveloper();
-        }
-
-        $developers[] = $manager->getDestroyTestDeveloper();
-        if ($hasAuthorization) {
-            $developers[] = $manager->getUnauthorizedDestroyTestDeveloper();
-        }
-
-        if ($specification->hasSoftDeletion()) {
-            $developers[] = $manager->getForceDeleteTestDeveloper();
-            if ($hasAuthorization) {
-                $developers[] = $manager->getUnauthorizedForceDeleteTestDeveloper();
-            }
-
-            $developers[] = $manager->getRestoreTestDeveloper();
-            if ($hasAuthorization) {
-                $developers[] = $manager->getUnauthorizedRestoreTestDeveloper();
-            }
-        }
-
+        // $developers[] = $manager->getShowTestDeveloper();
+        // if ($hasAuthorization) {
+        //     $developers[] = $manager->getUnauthorizedShowTestDeveloper();
+        // }
+        //
+        // $developers[] = $manager->getCreateTestDeveloper();
+        // if ($hasAuthorization) {
+        //     $developers[] = $manager->getUnauthorizedCreateTestDeveloper();
+        // }
+        //
+        // $developers[] = $manager->getStoreTestDeveloper();
+        // $developers[] = $manager->getStoreInvalidDataProviderDeveloper();
+        // $developers[] = $manager->getInvalidDataStoreTestDeveloper();
+        // if ($hasAuthorization) {
+        //     $developers[] = $manager->getUnauthorizedStoreTestDeveloper();
+        // }
+        //
+        // $developers[] = $manager->getEditTestDeveloper();
+        // if ($hasAuthorization) {
+        //     $developers[] = $manager->getUnauthorizedEditTestDeveloper();
+        // }
+        //
+        //
+        // $developers[] = $manager->getUpdateTestDeveloper();
+        // $developers[] = $manager->getUpdateInvalidDataProviderDeveloper();
+        // $developers[] = $manager->getInvalidDataUpdateTestDeveloper();
+        // if ($hasAuthorization) {
+        //     $developers[] = $manager->getUnauthorizedUpdateTestDeveloper();
+        // }
+        //
+        // $developers[] = $manager->getDestroyTestDeveloper();
+        // if ($hasAuthorization) {
+        //     $developers[] = $manager->getUnauthorizedDestroyTestDeveloper();
+        // }
+        //
+        // if ($specification->hasSoftDeletion()) {
+        //     $developers[] = $manager->getForceDeleteTestDeveloper();
+        //     if ($hasAuthorization) {
+        //         $developers[] = $manager->getUnauthorizedForceDeleteTestDeveloper();
+        //     }
+        //
+        //     $developers[] = $manager->getRestoreTestDeveloper();
+        //     if ($hasAuthorization) {
+        //         $developers[] = $manager->getUnauthorizedRestoreTestDeveloper();
+        //     }
+        // }
+        //
         return $developers;
     }
 }

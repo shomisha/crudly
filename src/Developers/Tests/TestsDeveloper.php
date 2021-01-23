@@ -24,6 +24,16 @@ abstract class TestsDeveloper extends Developer
         return "Tests\Feature\Web";
     }
 
+    protected function guessTestNameSingularModelComponent(ModelName $model): string
+    {
+        return Str::of($model->getName())->singular()->snake('_');
+    }
+
+    protected function guessTestNamePluralModelComponent(ModelName $model): string
+    {
+        return Str::of($model->getName())->plural()->snake('_');
+    }
+
     protected function incompleteWebTestExceptionName(): string
     {
         return IncompleteWebTest::class;

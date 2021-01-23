@@ -2,19 +2,17 @@
 
 namespace Shomisha\Crudly\Developers\Tests;
 
-use Illuminate\Support\Str;
-use Shomisha\Crudly\Abstracts\Developer;
+use Shomisha\Crudly\Contracts\Developer;
 use Shomisha\Crudly\Contracts\Developer as DeveloperContract;
 use Shomisha\Crudly\Contracts\Specification;
 use Shomisha\Crudly\Data\CrudlySet;
-use Shomisha\Crudly\Data\ModelName;
 use Shomisha\Crudly\Specifications\CrudlySpecification;
 use Shomisha\Crudly\Stubless\TestMethod;
 use Shomisha\Stubless\Contracts\Code;
 use Shomisha\Stubless\ImperativeCode\Block;
 
 /** @method \Shomisha\Crudly\Managers\Tests\TestMethodDeveloperManager getManager() */
-abstract class TestMethodDeveloper extends Developer
+abstract class TestMethodDeveloper extends TestsDeveloper
 {
     /** @param \Shomisha\Crudly\Specifications\CrudlySpecification $specification */
     final public function develop(Specification $specification, CrudlySet $developedSet): Code
@@ -24,9 +22,9 @@ abstract class TestMethodDeveloper extends Developer
         );
 
         $testMethod->setBody(Block::fromArray([
-            $this->getArrangeDeveloper()->develop($specification, $developedSet),
-            $this->getActDeveloper()->develop($specification, $developedSet),
-            $this->getAssertDeveloper()->develop($specification, $developedSet),
+            ...$this->getCodeFromDevelopers($this->getManager()->getArrangeDevelopers(), $specification, $developedSet),
+            ...$this->getCodeFromDevelopers($this->getManager()->getActDevelopers(), $specification, $developedSet),
+            ...$this->getCodeFromDevelopers($this->getManager()->getAssertDevelopers(), $specification, $developedSet),
         ]));
 
         return $testMethod;
@@ -41,26 +39,27 @@ abstract class TestMethodDeveloper extends Developer
 
     protected function getArrangeDeveloper(): DeveloperContract
     {
-        return $this->getManager()->getArrangeDeveloper();
+        return $this->getManager()->getArrangeDevelopers();
     }
 
     protected function getActDeveloper(): DeveloperContract
     {
-        return $this->getManager()->getActDeveloper();
+        return $this->getManager()->getActDevelopers();
     }
 
     protected function getAssertDeveloper(): DeveloperContract
     {
-        return $this->getManager()->getAssertDeveloper();
+        return $this->getManager()->getAssertDevelopers();
     }
 
-    protected function getPluralModelNameComponent(ModelName $model): string
+    /**
+     * @param \Shomisha\Crudly\Contracts\Developer[] $developers
+     * @return \Shomisha\Stubless\Contracts\Code[]
+     */
+    final protected function getCodeFromDevelopers(array $developers, CrudlySpecification $specification, CrudlySet $developedSet): array
     {
-        return Str::of($model->getName())->plural()->snake();
-    }
-
-    protected function getSingularModelNameComponent(ModelName $modelName): string
-    {
-        return Str::of($modelName->getName())->singular()->snake();
+        return array_values(array_map(function (Developer $developer) use ($specification, $developedSet) {
+            return $developer->develop($specification, $developedSet);
+        }, $developers));
     }
 }
