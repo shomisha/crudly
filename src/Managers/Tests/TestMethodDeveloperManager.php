@@ -8,6 +8,7 @@ use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertRes
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Authentication\InvokeAuthorizeUserDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Authentication\InvokeCreateAndAuthenticateUserDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Authentication\InvokeDeauthorizeUserDeveloper;
+use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Routes\Getters\GetCreateRoute;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Routes\Getters\GetIndexRoute;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Routes\Getters\GetShowRoute;
 use Shomisha\Crudly\Managers\DeveloperManager;
@@ -55,5 +56,11 @@ abstract class TestMethodDeveloperManager extends DeveloperManager
     {
         // TODO: refactor this to support overriding developers
         return $this->instantiateDeveloperWithManager(GetShowRoute::class, $this);
+    }
+
+    public function getCreateRouteDeveloper(): Developer
+    {
+        // TODO: refactor this to support overriding developers
+        return $this->instantiateDeveloperWithManager(GetCreateRoute::class, $this);
     }
 }
