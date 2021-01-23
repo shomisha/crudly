@@ -62,10 +62,10 @@ class WebTestsDeveloper extends TestsDeveloper
             $developers[] = $manager->getUnauthorizedIndexTestDeveloper();
         }
 
-        // $developers[] = $manager->getShowTestDeveloper();
-        // if ($hasAuthorization) {
-        //     $developers[] = $manager->getUnauthorizedShowTestDeveloper();
-        // }
+        $developers[] = $manager->getShowTestDeveloper();
+        if ($hasAuthorization) {
+            $developers[] = $manager->getUnauthorizedShowTestDeveloper();
+        }
         //
         // $developers[] = $manager->getCreateTestDeveloper();
         // if ($hasAuthorization) {

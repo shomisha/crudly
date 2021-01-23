@@ -12,9 +12,13 @@ use Shomisha\Crudly\Developers\Tests\HelperMethodDevelopers\GetModelDataSpecialD
 use Shomisha\Crudly\Developers\Tests\HelperMethodDevelopers\RouteGetters;
 use Shomisha\Crudly\Developers\Tests\Web\Methods\Index\IndexTestDeveloper;
 use Shomisha\Crudly\Developers\Tests\Web\Methods\Index\UnauthorizedIndexTestDeveloper;
+use Shomisha\Crudly\Developers\Tests\Web\Methods\Show\ShowTestDeveloper;
+use Shomisha\Crudly\Developers\Tests\Web\Methods\Show\UnauthorizedShowTestDeveloper;
 use Shomisha\Crudly\Managers\BaseDeveloperManager;
-use Shomisha\Crudly\Managers\Tests\Web\TestMethodDeveloperManagers\IndexTestDeveloperManager;
-use Shomisha\Crudly\Managers\Tests\Web\TestMethodDeveloperManagers\UnauthorizedIndexTestDeveloperManager;
+use Shomisha\Crudly\Managers\Tests\Web\TestMethodDeveloperManagers\Index\IndexTestDeveloperManager;
+use Shomisha\Crudly\Managers\Tests\Web\TestMethodDeveloperManagers\Index\UnauthorizedIndexTestDeveloperManager;
+use Shomisha\Crudly\Managers\Tests\Web\TestMethodDeveloperManagers\Show\ShowTestDeveloperManager;
+use Shomisha\Crudly\Managers\Tests\Web\TestMethodDeveloperManagers\Show\UnauthorizedShowTestDeveloperManager;
 
 class WebTestsDeveloperManager extends BaseDeveloperManager
 {
@@ -96,11 +100,24 @@ class WebTestsDeveloperManager extends BaseDeveloperManager
     public function getShowTestDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers
+        return $this->instantiateDeveloperWithManager(ShowTestDeveloper::class, $this->getShowTestDeveloperManager());
+    }
+
+    private function getShowTestDeveloperManager(): ShowTestDeveloperManager
+    {
+        return $this->instantiateManager(ShowTestDeveloperManager::class);
     }
 
     public function getUnauthorizedShowTestDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers
+        return $this->instantiateDeveloperWithManager(UnauthorizedShowTestDeveloper::class, $this->getUnauthorizedShowDeveloperManager());
+
+    }
+
+    private function getUnauthorizedShowDeveloperManager(): UnauthorizedShowTestDeveloperManager
+    {
+        return $this->instantiateManager(UnauthorizedShowTestDeveloperManager::class);
     }
 
     public function getCreateTestDeveloper(): Developer

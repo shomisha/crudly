@@ -11,12 +11,7 @@ use Shomisha\Stubless\ImperativeCode\AssignBlock;
 use Shomisha\Stubless\ImperativeCode\Block;
 use Shomisha\Stubless\References\Reference;
 
-/**
- * Class LoadIndexPageDeveloper
- *
- * @method \Shomisha\Crudly\Managers\Tests\Web\TestMethodDeveloperManagers\Index\IndexTestDeveloperManager getManager()
- */
-class LoadIndexPageDeveloper extends TestsDeveloper
+class LoadShowPageDeveloper extends TestsDeveloper
 {
     /** @param \Shomisha\Crudly\Specifications\CrudlySpecification $specification */
     public function develop(Specification $specification, CrudlySet $developedSet): AssignBlock
@@ -35,6 +30,6 @@ class LoadIndexPageDeveloper extends TestsDeveloper
 
     protected function getRoute(CrudlySpecification $specification, CrudlySet $developedSet): Code
     {
-        return $this->getManager()->getIndexRouteDeveloper()->develop($specification, $developedSet);
+        return $this->getManager()->getShowRouteDeveloper()->develop($specification, $developedSet);
     }
 }
