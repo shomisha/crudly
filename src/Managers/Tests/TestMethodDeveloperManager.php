@@ -11,9 +11,11 @@ use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Authentication\Invok
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Authentication\InvokeCreateAndAuthenticateUserDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Authentication\InvokeDeauthorizeUserDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Factory\CreateSingleModelInstance;
+use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\RefreshModelDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Routes\Getters\GetCreateRoute;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Routes\Getters\GetDestroyRoute;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Routes\Getters\GetEditRoute;
+use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Routes\Getters\GetForceDeleteRoute;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Routes\Getters\GetIndexRoute;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Routes\Getters\GetShowRoute;
 use Shomisha\Crudly\Managers\DeveloperManager;
@@ -39,6 +41,11 @@ abstract class TestMethodDeveloperManager extends DeveloperManager
     public function getDeauthorizeUserDeveloper(): InvokeDeauthorizeUserDeveloper
     {
         return $this->instantiateDeveloperWithManager(InvokeDeauthorizeUserDeveloper::class, $this);
+    }
+
+    public function getRefreshModelDeveloper(): RefreshModelDeveloper
+    {
+        return $this->instantiateDeveloperWithManager(RefreshModelDeveloper::class, $this);
     }
 
     public function getAssertResponseSuccessfulDeveloper(): AssertResponseSuccessfulDeveloper
@@ -94,5 +101,10 @@ abstract class TestMethodDeveloperManager extends DeveloperManager
     {
         // TODO: refactor this to support overriding developers
         return $this->instantiateDeveloperWithManager(GetDestroyRoute::class, $this);
+    }
+
+    public function getForceDeleteRouteDeveloper(): Developer
+    {
+        return $this->instantiateDeveloperWithManager(GetForceDeleteRoute::class, $this);
     }
 }

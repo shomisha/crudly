@@ -97,18 +97,18 @@ class WebTestsDeveloper extends TestsDeveloper
             $developers[] = $manager->getUnauthorizedDestroyTestDeveloper();
         }
 
-        // if ($specification->hasSoftDeletion()) {
-        //     $developers[] = $manager->getForceDeleteTestDeveloper();
-        //     if ($hasAuthorization) {
-        //         $developers[] = $manager->getUnauthorizedForceDeleteTestDeveloper();
-        //     }
-        //
-        //     $developers[] = $manager->getRestoreTestDeveloper();
-        //     if ($hasAuthorization) {
-        //         $developers[] = $manager->getUnauthorizedRestoreTestDeveloper();
-        //     }
-        // }
-        //
+        if ($specification->hasSoftDeletion()) {
+            $developers[] = $manager->getForceDeleteTestDeveloper();
+            if ($hasAuthorization) {
+                $developers[] = $manager->getUnauthorizedForceDeleteTestDeveloper();
+            }
+
+            // $developers[] = $manager->getRestoreTestDeveloper();
+            if ($hasAuthorization) {
+                // $developers[] = $manager->getUnauthorizedRestoreTestDeveloper();
+            }
+        }
+
         return $developers;
     }
 }
