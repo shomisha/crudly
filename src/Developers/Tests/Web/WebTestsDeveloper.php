@@ -54,10 +54,14 @@ class WebTestsDeveloper extends TestsDeveloper
     {
         $manager = $this->getManager();
         $hasAuthorization = $specification->hasWebAuthorization();
+        $hasSoftDeletion = $specification->hasSoftDeletion();
 
         $developers = [];
 
         $developers[] = $manager->getIndexTestDeveloper();
+        if ($hasSoftDeletion) {
+            // $developers[] = $manager->getIndexWillNotContainSoftDeletedModelsTestDeveloper();
+        }
         if ($hasAuthorization) {
             $developers[] = $manager->getUnauthorizedIndexTestDeveloper();
         }
@@ -97,15 +101,15 @@ class WebTestsDeveloper extends TestsDeveloper
             $developers[] = $manager->getUnauthorizedDestroyTestDeveloper();
         }
 
-        if ($specification->hasSoftDeletion()) {
+        if ($hasSoftDeletion) {
             $developers[] = $manager->getForceDeleteTestDeveloper();
             if ($hasAuthorization) {
                 $developers[] = $manager->getUnauthorizedForceDeleteTestDeveloper();
             }
 
-            // $developers[] = $manager->getRestoreTestDeveloper();
+            $developers[] = $manager->getRestoreTestDeveloper();
             if ($hasAuthorization) {
-                // $developers[] = $manager->getUnauthorizedRestoreTestDeveloper();
+                $developers[] = $manager->getUnauthorizedRestoreTestDeveloper();
             }
         }
 

@@ -20,6 +20,9 @@ use Shomisha\Crudly\Developers\Tests\Web\Methods\ForceDelete\ForceDeleteTestDeve
 use Shomisha\Crudly\Developers\Tests\Web\Methods\ForceDelete\UnauthorizedForceDeleteTestDeveloper;
 use Shomisha\Crudly\Developers\Tests\Web\Methods\Index\IndexTestDeveloper;
 use Shomisha\Crudly\Developers\Tests\Web\Methods\Index\UnauthorizedIndexTestDeveloper;
+use Shomisha\Crudly\Developers\Tests\Web\Methods\Restore\RestoreTestDeveloper;
+use Shomisha\Crudly\Developers\Tests\Web\Methods\Restore\UnauthorizedRestoreTestDeveloper;
+use Shomisha\Crudly\Managers\Tests\Web\TestMethodDeveloperManagers\Restore\UnauthorizedRestoreTestDeveloperManager;
 use Shomisha\Crudly\Developers\Tests\Web\Methods\Show\ShowTestDeveloper;
 use Shomisha\Crudly\Developers\Tests\Web\Methods\Show\UnauthorizedShowTestDeveloper;
 use Shomisha\Crudly\Managers\BaseDeveloperManager;
@@ -33,6 +36,7 @@ use Shomisha\Crudly\Managers\Tests\Web\TestMethodDeveloperManagers\ForceDelete\F
 use Shomisha\Crudly\Managers\Tests\Web\TestMethodDeveloperManagers\ForceDelete\UnauthorizedForceDeleteTestDeveloperManager;
 use Shomisha\Crudly\Managers\Tests\Web\TestMethodDeveloperManagers\Index\IndexTestDeveloperManager;
 use Shomisha\Crudly\Managers\Tests\Web\TestMethodDeveloperManagers\Index\UnauthorizedIndexTestDeveloperManager;
+use Shomisha\Crudly\Managers\Tests\Web\TestMethodDeveloperManagers\Restore\RestoreTestDeveloperManager;
 use Shomisha\Crudly\Managers\Tests\Web\TestMethodDeveloperManagers\Show\ShowTestDeveloperManager;
 use Shomisha\Crudly\Managers\Tests\Web\TestMethodDeveloperManagers\Show\UnauthorizedShowTestDeveloperManager;
 
@@ -95,6 +99,11 @@ class WebTestsDeveloperManager extends BaseDeveloperManager
     {
         // TODO: refactor this to support overriding developers
         return $this->instantiateDeveloperWithManager(IndexTestDeveloper::class, $this->getIndexTestDeveloperManager());
+    }
+
+    public function getIndexWillNotContainSoftDeletedModelsTestDeveloper(): Developer
+    {
+        // TODO: refactor this to support overriding developers
     }
 
     private function getIndexTestDeveloperManager(): IndexTestDeveloperManager
@@ -267,10 +276,22 @@ class WebTestsDeveloperManager extends BaseDeveloperManager
     public function getRestoreTestDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers
+        return $this->instantiateDeveloperWithManager(RestoreTestDeveloper::class, $this->getRestoreTestDeveloperManager());
+    }
+
+    private function getRestoreTestDeveloperManager(): RestoreTestDeveloperManager
+    {
+        return $this->instantiateManager(RestoreTestDeveloperManager::class);
     }
 
     public function getUnauthorizedRestoreTestDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers
+        return $this->instantiateDeveloperWithManager(UnauthorizedRestoreTestDeveloper::class, $this->getUnauthorizedRestoreTestDeveloperManager());
+    }
+
+    private function getUnauthorizedRestoreTestDeveloperManager(): UnauthorizedRestoreTestDeveloperManager
+    {
+        return $this->instantiateManager(UnauthorizedRestoreTestDeveloperManager::class);
     }
 }

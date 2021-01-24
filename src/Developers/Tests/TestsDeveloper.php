@@ -7,6 +7,11 @@ use Shomisha\Crudly\Abstracts\Developer;
 use Shomisha\Crudly\Data\ModelName;
 use Shomisha\Crudly\Exceptions\IncompleteWebTest;
 
+/**
+ * Class TestsDeveloper
+ *
+ * @method \Shomisha\Crudly\Managers\Tests\TestMethodDeveloperManager getManager()
+ */
 abstract class TestsDeveloper extends Developer
 {
     protected function guessTestClassFullName(ModelName $model): string

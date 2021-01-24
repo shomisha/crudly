@@ -7,6 +7,7 @@ use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertDat
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertRedirectToIndexDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertResponseForbiddenDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertResponseSuccessfulDeveloper;
+use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertSoftDeletedColumnIsNotNull;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Authentication\InvokeAuthorizeUserDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Authentication\InvokeCreateAndAuthenticateUserDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Authentication\InvokeDeauthorizeUserDeveloper;
@@ -17,6 +18,7 @@ use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Routes\Getters\GetDe
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Routes\Getters\GetEditRoute;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Routes\Getters\GetForceDeleteRoute;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Routes\Getters\GetIndexRoute;
+use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Routes\Getters\GetRestoreRoute;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Routes\Getters\GetShowRoute;
 use Shomisha\Crudly\Managers\DeveloperManager;
 
@@ -63,6 +65,11 @@ abstract class TestMethodDeveloperManager extends DeveloperManager
         return $this->instantiateDeveloperWithManager(AssertRedirectToIndexDeveloper::class, $this);
     }
 
+    public function assertSoftDeletedColumnIsNotNull(): AssertSoftDeletedColumnIsNotNull
+    {
+        return $this->instantiateDeveloperWithManager(AssertSoftDeletedColumnIsNotNull::class, $this);
+    }
+
     public function getAssertDatabaseMissingModelDeveloper(): AssertDatabaseMissingModelDeveloper
     {
         return $this->instantiateDeveloperWithManager(AssertDatabaseMissingModelDeveloper::class, $this);
@@ -106,5 +113,10 @@ abstract class TestMethodDeveloperManager extends DeveloperManager
     public function getForceDeleteRouteDeveloper(): Developer
     {
         return $this->instantiateDeveloperWithManager(GetForceDeleteRoute::class, $this);
+    }
+
+    public function getRestoreRouteDeveloper(): Developer
+    {
+        return $this->instantiateDeveloperWithManager(GetRestoreRoute::class, $this);
     }
 }
