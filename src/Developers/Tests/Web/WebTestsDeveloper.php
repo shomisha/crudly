@@ -79,12 +79,12 @@ class WebTestsDeveloper extends TestsDeveloper
         //     $developers[] = $manager->getUnauthorizedStoreTestDeveloper();
         // }
         //
-        // $developers[] = $manager->getEditTestDeveloper();
-        // if ($hasAuthorization) {
-        //     $developers[] = $manager->getUnauthorizedEditTestDeveloper();
-        // }
-        //
-        //
+        $developers[] = $manager->getEditTestDeveloper();
+        if ($hasAuthorization) {
+            $developers[] = $manager->getUnauthorizedEditTestDeveloper();
+        }
+
+
         // $developers[] = $manager->getUpdateTestDeveloper();
         // $developers[] = $manager->getUpdateInvalidDataProviderDeveloper();
         // $developers[] = $manager->getInvalidDataUpdateTestDeveloper();

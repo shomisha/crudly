@@ -12,6 +12,8 @@ use Shomisha\Crudly\Developers\Tests\HelperMethodDevelopers\GetModelDataSpecialD
 use Shomisha\Crudly\Developers\Tests\HelperMethodDevelopers\RouteGetters;
 use Shomisha\Crudly\Developers\Tests\Web\Methods\Create\CreateTestDeveloper;
 use Shomisha\Crudly\Developers\Tests\Web\Methods\Create\UnauthorizedCreateTestDeveloper;
+use Shomisha\Crudly\Developers\Tests\Web\Methods\Edit\EditTestDeveloper;
+use Shomisha\Crudly\Developers\Tests\Web\Methods\Edit\UnauthorizedEditTestDeveloper;
 use Shomisha\Crudly\Developers\Tests\Web\Methods\Index\IndexTestDeveloper;
 use Shomisha\Crudly\Developers\Tests\Web\Methods\Index\UnauthorizedIndexTestDeveloper;
 use Shomisha\Crudly\Developers\Tests\Web\Methods\Show\ShowTestDeveloper;
@@ -19,6 +21,8 @@ use Shomisha\Crudly\Developers\Tests\Web\Methods\Show\UnauthorizedShowTestDevelo
 use Shomisha\Crudly\Managers\BaseDeveloperManager;
 use Shomisha\Crudly\Managers\Tests\Web\TestMethodDeveloperManagers\Create\CreateTestDeveloperManager;
 use Shomisha\Crudly\Managers\Tests\Web\TestMethodDeveloperManagers\Create\UnauthorizedCreateTestDeveloperManager;
+use Shomisha\Crudly\Managers\Tests\Web\TestMethodDeveloperManagers\Edit\EditTestDeveloperManager;
+use Shomisha\Crudly\Managers\Tests\Web\TestMethodDeveloperManagers\Edit\UnauthorizedEditTestDeveloperManager;
 use Shomisha\Crudly\Managers\Tests\Web\TestMethodDeveloperManagers\Index\IndexTestDeveloperManager;
 use Shomisha\Crudly\Managers\Tests\Web\TestMethodDeveloperManagers\Index\UnauthorizedIndexTestDeveloperManager;
 use Shomisha\Crudly\Managers\Tests\Web\TestMethodDeveloperManagers\Show\ShowTestDeveloperManager;
@@ -169,11 +173,23 @@ class WebTestsDeveloperManager extends BaseDeveloperManager
     public function getEditTestDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers
+        return $this->instantiateDeveloperWithManager(EditTestDeveloper::class, $this->getEditTestDeveloperManager());
+    }
+
+    private function getEditTestDeveloperManager(): EditTestDeveloperManager
+    {
+        return $this->instantiateManager(EditTestDeveloperManager::class);
     }
 
     public function getUnauthorizedEditTestDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers
+        return $this->instantiateDeveloperWithManager(UnauthorizedEditTestDeveloper::class, $this->getUnauthorizedEditTestDeveloperManager());
+    }
+
+    protected function getUnauthorizedEditTestDeveloperManager(): UnauthorizedEditTestDeveloperManager
+    {
+        return $this->instantiateManager(UnauthorizedEditTestDeveloperManager::class);
     }
 
     public function getUpdateTestDeveloper(): Developer
