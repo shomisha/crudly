@@ -12,6 +12,8 @@ use Shomisha\Crudly\Developers\Tests\HelperMethodDevelopers\GetModelDataSpecialD
 use Shomisha\Crudly\Developers\Tests\HelperMethodDevelopers\RouteGetters;
 use Shomisha\Crudly\Developers\Tests\Web\Methods\Create\CreateTestDeveloper;
 use Shomisha\Crudly\Developers\Tests\Web\Methods\Create\UnauthorizedCreateTestDeveloper;
+use Shomisha\Crudly\Developers\Tests\Web\Methods\Destroy\DestroyTestDeveloper;
+use Shomisha\Crudly\Developers\Tests\Web\Methods\Destroy\UnauthorizedDestroyTestDeveloper;
 use Shomisha\Crudly\Developers\Tests\Web\Methods\Edit\EditTestDeveloper;
 use Shomisha\Crudly\Developers\Tests\Web\Methods\Edit\UnauthorizedEditTestDeveloper;
 use Shomisha\Crudly\Developers\Tests\Web\Methods\Index\IndexTestDeveloper;
@@ -21,6 +23,8 @@ use Shomisha\Crudly\Developers\Tests\Web\Methods\Show\UnauthorizedShowTestDevelo
 use Shomisha\Crudly\Managers\BaseDeveloperManager;
 use Shomisha\Crudly\Managers\Tests\Web\TestMethodDeveloperManagers\Create\CreateTestDeveloperManager;
 use Shomisha\Crudly\Managers\Tests\Web\TestMethodDeveloperManagers\Create\UnauthorizedCreateTestDeveloperManager;
+use Shomisha\Crudly\Managers\Tests\Web\TestMethodDeveloperManagers\Destroy\DestroyTestDeveloperManager;
+use Shomisha\Crudly\Managers\Tests\Web\TestMethodDeveloperManagers\Destroy\UnauthorizedDestroyTestDeveloperManager;
 use Shomisha\Crudly\Managers\Tests\Web\TestMethodDeveloperManagers\Edit\EditTestDeveloperManager;
 use Shomisha\Crudly\Managers\Tests\Web\TestMethodDeveloperManagers\Edit\UnauthorizedEditTestDeveloperManager;
 use Shomisha\Crudly\Managers\Tests\Web\TestMethodDeveloperManagers\Index\IndexTestDeveloperManager;
@@ -215,11 +219,23 @@ class WebTestsDeveloperManager extends BaseDeveloperManager
     public function getDestroyTestDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers
+        return $this->instantiateDeveloperWithManager(DestroyTestDeveloper::class, $this->getDestroyTestDeveloperManager());
+    }
+
+    private function getDestroyTestDeveloperManager(): DestroyTestDeveloperManager
+    {
+        return $this->instantiateManager(DestroyTestDeveloperManager::class);
     }
 
     public function getUnauthorizedDestroyTestDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers
+        return $this->instantiateDeveloperWithManager(UnauthorizedDestroyTestDeveloper::class, $this->getUnauthorizedDestroyTestDeveloperManager());
+    }
+
+    private function getUnauthorizedDestroyTestDeveloperManager(): UnauthorizedDestroyTestDeveloperManager
+    {
+        return $this->instantiateManager(UnauthorizedDestroyTestDeveloperManager::class);
     }
 
     public function getForceDeleteTestDeveloper(): Developer

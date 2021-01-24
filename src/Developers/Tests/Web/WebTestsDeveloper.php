@@ -92,11 +92,11 @@ class WebTestsDeveloper extends TestsDeveloper
         //     $developers[] = $manager->getUnauthorizedUpdateTestDeveloper();
         // }
         //
-        // $developers[] = $manager->getDestroyTestDeveloper();
-        // if ($hasAuthorization) {
-        //     $developers[] = $manager->getUnauthorizedDestroyTestDeveloper();
-        // }
-        //
+        $developers[] = $manager->getDestroyTestDeveloper();
+        if ($hasAuthorization) {
+            $developers[] = $manager->getUnauthorizedDestroyTestDeveloper();
+        }
+
         // if ($specification->hasSoftDeletion()) {
         //     $developers[] = $manager->getForceDeleteTestDeveloper();
         //     if ($hasAuthorization) {

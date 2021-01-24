@@ -24,5 +24,5 @@ abstract class AssertViewIsDeveloper extends Developer
         );
     }
 
-    abstract protected function getExpectedView(ModelName $modelName): string;
+    abstract protected function getExpectedView(ModelName $model): string;
 }
