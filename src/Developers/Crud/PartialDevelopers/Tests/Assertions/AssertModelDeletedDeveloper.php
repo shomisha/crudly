@@ -6,9 +6,7 @@ use Shomisha\Crudly\Contracts\Specification;
 use Shomisha\Crudly\Data\CrudlySet;
 use Shomisha\Crudly\Developers\Tests\TestsDeveloper;
 use Shomisha\Crudly\Specifications\CrudlySpecification;
-use Shomisha\Stubless\ImperativeCode\Block;
 use Shomisha\Stubless\ImperativeCode\InvokeBlock;
-use Shomisha\Stubless\References\Reference;
 
 class AssertModelDeletedDeveloper extends TestsDeveloper
 {
@@ -24,25 +22,7 @@ class AssertModelDeletedDeveloper extends TestsDeveloper
 
     protected function assertSoftDeleted(CrudlySpecification $specification, CrudlySet $developedSet): InvokeBlock
     {
-        $modelVar = Reference::variable(
-            $this->guessSingularModelVariableName($specification->getModel()->getName())
-        );
-
-        $getDeletedAt = Reference::objectProperty(
-            Block::invokeMethod(
-                $modelVar,
-                'refresh'
-            ),
-            $specification->softDeletionColumnName()
-        );
-
-        return Block::invokeMethod(
-            Reference::this(),
-            'assertNotNull',
-            [
-                $getDeletedAt
-            ]
-        );
+        return $this->getManager()->assertSoftDeletedColumnIsNotNull()->develop($specification, $developedSet);
     }
 
     protected function assertHardDeleted(CrudlySpecification $specification, CrudlySet $developedSet): InvokeBlock
