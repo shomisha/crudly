@@ -16,7 +16,6 @@ class AssertAllModelIdsPresentDeveloper extends TestsDeveloper
     /** @param \Shomisha\Crudly\Specifications\CrudlySpecification $specification */
     public function develop(Specification $specification, CrudlySet $developedSet): Block
     {
-        $responseVar = Reference::variable('response');
         $model = $specification->getModel();
 
         $modelsCollectionVar = Reference::variable($this->guessPluralModelVariableName($model));
@@ -24,7 +23,7 @@ class AssertAllModelIdsPresentDeveloper extends TestsDeveloper
         $responseModelIds = Reference::variable('response' . ucfirst($this->guessSingularModelVariableName($model)) . 'Ids');
 
         return Block::fromArray([
-            $this->getResponseModelIdsVariable($specification, $responseVar, $responseModelIds),
+            $this->getManager()->getModelIdsFromResponseDeveloper()->develop($specification, $developedSet),
             Block::foreach($modelsCollectionVar, $singleModelVar)->do(
                 Block::invokeMethod(
                     Reference::this(),

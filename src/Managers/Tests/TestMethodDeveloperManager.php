@@ -12,6 +12,7 @@ use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Authentication\Invok
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Authentication\InvokeCreateAndAuthenticateUserDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Authentication\InvokeDeauthorizeUserDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Factory\CreateSingleModelInstance;
+use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\GetModelIdsFromResponseDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\RefreshModelDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Routes\Getters\GetCreateRoute;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Routes\Getters\GetDestroyRoute;
@@ -78,6 +79,11 @@ abstract class TestMethodDeveloperManager extends DeveloperManager
     public function getCreateSingleInstanceDeveloper(): CreateSingleModelInstance
     {
         return $this->instantiateDeveloperWithManager(CreateSingleModelInstance::class, $this);
+    }
+
+    public function getModelIdsFromResponseDeveloper(): GetModelIdsFromResponseDeveloper
+    {
+        return $this->instantiateDeveloperWithManager(GetModelIdsFromResponseDeveloper::class, $this);
     }
 
     public function getIndexRouteDeveloper(): Developer

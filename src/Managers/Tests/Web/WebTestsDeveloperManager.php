@@ -76,6 +76,10 @@ class WebTestsDeveloperManager extends BaseDeveloperManager
     public function getIndexWillNotContainSoftDeletedModelsTestDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers
+        return $this->instantiateDeveloperWithManager(
+            TestMethods\Index\IndexWillNotContainSoftDeletedModelsTestDeveloper::class,
+            $this->instantiateManager(TestManagers\Index\IndexWillNotContainSoftDeletedModelsTestDeveloperManager::class)
+        );
     }
 
     public function getUnauthorizedIndexTestDeveloper(): Developer

@@ -60,7 +60,7 @@ class WebTestsDeveloper extends TestsDeveloper
 
         $developers[] = $manager->getIndexTestDeveloper();
         if ($hasSoftDeletion) {
-            // $developers[] = $manager->getIndexWillNotContainSoftDeletedModelsTestDeveloper();
+            $developers[] = $manager->getIndexWillNotContainSoftDeletedModelsTestDeveloper();
         }
         if ($hasAuthorization) {
             $developers[] = $manager->getUnauthorizedIndexTestDeveloper();
