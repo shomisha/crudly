@@ -66,7 +66,7 @@ abstract class TestMethodDeveloperManager extends DeveloperManager
         return $this->instantiateDeveloperWithManager(AssertRedirectToIndexDeveloper::class, $this);
     }
 
-    public function assertSoftDeletedColumnIsNotNull(): AssertSoftDeletedColumnIsNotNull
+    public function getAssertSoftDeletedColumnIsNotNullDeveloper(): AssertSoftDeletedColumnIsNotNull
     {
         return $this->instantiateDeveloperWithManager(AssertSoftDeletedColumnIsNotNull::class, $this);
     }

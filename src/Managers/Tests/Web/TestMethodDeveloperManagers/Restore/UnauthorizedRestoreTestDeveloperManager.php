@@ -29,7 +29,7 @@ class UnauthorizedRestoreTestDeveloperManager extends TestMethodDeveloperManager
         return [
             $this->getAssertResponseForbiddenDeveloper(),
             $this->getRefreshModelDeveloper(),
-            $this->assertSoftDeletedColumnIsNotNull(),
+            $this->getAssertSoftDeletedColumnIsNotNullDeveloper(),
         ];
     }
 }

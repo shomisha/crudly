@@ -22,7 +22,7 @@ class AssertModelDeletedDeveloper extends TestsDeveloper
 
     protected function assertSoftDeleted(CrudlySpecification $specification, CrudlySet $developedSet): InvokeBlock
     {
-        return $this->getManager()->assertSoftDeletedColumnIsNotNull()->develop($specification, $developedSet);
+        return $this->getManager()->getAssertSoftDeletedColumnIsNotNullDeveloper()->develop($specification, $developedSet);
     }
 
     protected function assertHardDeleted(CrudlySpecification $specification, CrudlySet $developedSet): InvokeBlock
