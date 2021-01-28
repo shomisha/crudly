@@ -7,7 +7,7 @@ use Shomisha\Crudly\Contracts\Specification;
 use Shomisha\Crudly\Data\CrudlySet;
 use Shomisha\Crudly\Developers\Tests\TestsDeveloper;
 use Shomisha\Crudly\Managers\BaseDeveloperManager as DeveloperManagerAbstract;
-use Shomisha\Crudly\ModelPropertyGuessers\DataProvidersGuesser;
+use Shomisha\Crudly\ModelPropertyGuessers\InvalidValidationDataProvidersGuesser;
 use Shomisha\Crudly\Specifications\CrudlySpecification;
 use Shomisha\Crudly\Specifications\ModelPropertySpecification;
 use Shomisha\Stubless\DeclarativeCode\ClassMethod;
@@ -16,9 +16,9 @@ use Shomisha\Stubless\ImperativeCode\ReturnBlock;
 
 class InvalidStoreDataProviderDeveloper extends TestsDeveloper
 {
-    private DataProvidersGuesser $dataProviderGuesser;
+    private InvalidValidationDataProvidersGuesser $dataProviderGuesser;
 
-    public function __construct(DeveloperManagerAbstract $manager, ModelSupervisor $modelSupervisor, DataProvidersGuesser $dataProviderGuesser)
+    public function __construct(DeveloperManagerAbstract $manager, ModelSupervisor $modelSupervisor, InvalidValidationDataProvidersGuesser $dataProviderGuesser)
     {
         parent::__construct($manager, $modelSupervisor);
 
