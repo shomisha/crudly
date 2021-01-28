@@ -7,6 +7,7 @@ use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertDat
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertRedirectToIndexDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertResponseForbiddenDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertResponseSuccessfulDeveloper;
+use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertSessionHasSuccessDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertSoftDeletedColumnIsNotNull;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Authentication\InvokeAuthorizeUserDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Authentication\InvokeCreateAndAuthenticateUserDeveloper;
@@ -21,6 +22,7 @@ use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Routes\Getters\GetFo
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Routes\Getters\GetIndexRoute;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Routes\Getters\GetRestoreRoute;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Routes\Getters\GetShowRoute;
+use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Routes\Getters\GetStoreRoute;
 use Shomisha\Crudly\Managers\DeveloperManager;
 
 abstract class TestMethodDeveloperManager extends DeveloperManager
@@ -66,6 +68,11 @@ abstract class TestMethodDeveloperManager extends DeveloperManager
         return $this->instantiateDeveloperWithManager(AssertRedirectToIndexDeveloper::class, $this);
     }
 
+    public function getAssertSessionHasSuccessDeveloper(): AssertSessionHasSuccessDeveloper
+    {
+        return $this->instantiateDeveloperWithManager(AssertSessionHasSuccessDeveloper::class, $this);
+    }
+
     public function getAssertSoftDeletedColumnIsNotNullDeveloper(): AssertSoftDeletedColumnIsNotNull
     {
         return $this->instantiateDeveloperWithManager(AssertSoftDeletedColumnIsNotNull::class, $this);
@@ -102,6 +109,12 @@ abstract class TestMethodDeveloperManager extends DeveloperManager
     {
         // TODO: refactor this to support overriding developers
         return $this->instantiateDeveloperWithManager(GetCreateRoute::class, $this);
+    }
+
+    public function getStoreRouteDeveloper(): Developer
+    {
+        // TODO: refactor this to support overriding developers
+        return $this->instantiateDeveloperWithManager(GetStoreRoute::class, $this);
     }
 
     public function getEditRouteDeveloper(): Developer

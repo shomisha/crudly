@@ -3,9 +3,9 @@
 namespace Shomisha\Crudly\Developers\Tests;
 
 use Shomisha\Crudly\Contracts\Developer;
-use Shomisha\Crudly\Contracts\Developer as DeveloperContract;
 use Shomisha\Crudly\Contracts\Specification;
 use Shomisha\Crudly\Data\CrudlySet;
+use Shomisha\Crudly\Data\ModelName;
 use Shomisha\Crudly\Specifications\CrudlySpecification;
 use Shomisha\Crudly\Stubless\TestMethod;
 use Shomisha\Stubless\Contracts\Code;
@@ -19,7 +19,7 @@ abstract class TestMethodDeveloper extends TestsDeveloper
     {
         $testMethod = TestMethod::name($this->getName($specification))->withDataProvider(
             $this->getDataProvider($specification, $developedSet)
-        );
+        )->withArguments($this->getArguments());
 
         $testMethod->setBody(Block::fromArray([
             ...$this->getCodeFromDevelopers($this->getManager()->getArrangeDevelopers(), $specification, $developedSet),
@@ -32,24 +32,15 @@ abstract class TestMethodDeveloper extends TestsDeveloper
 
     abstract protected function getName(CrudlySpecification $specification): string;
 
+    /** @return \Shomisha\Stubless\DeclarativeCode\Argument[] */
+    protected function getArguments(): array
+    {
+        return [];
+    }
+
     protected function getDataProvider(CrudlySpecification $specification, CrudlySet $developedSet): ?string
     {
         return null;
-    }
-
-    protected function getArrangeDeveloper(): DeveloperContract
-    {
-        return $this->getManager()->getArrangeDevelopers();
-    }
-
-    protected function getActDeveloper(): DeveloperContract
-    {
-        return $this->getManager()->getActDevelopers();
-    }
-
-    protected function getAssertDeveloper(): DeveloperContract
-    {
-        return $this->getManager()->getAssertDevelopers();
     }
 
     /**

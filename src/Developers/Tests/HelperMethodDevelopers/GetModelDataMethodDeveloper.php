@@ -20,9 +20,7 @@ class GetModelDataMethodDeveloper extends TestsDeveloper
     /** @param \Shomisha\Crudly\Specifications\CrudlySpecification $specification */
     public function develop(Specification $specification, CrudlySet $developedSet): Code
     {
-        $model = ucfirst($this->guessSingularModelVariableName($specification->getModel()));
-
-        $method = ClassMethod::name("get{$model}Data")->withArguments([
+        $method = ClassMethod::name($this->getModelDataMethodName($specification->getModel()))->withArguments([
             Argument::name('override')->type('array')->value([])
         ])->return('array');
 

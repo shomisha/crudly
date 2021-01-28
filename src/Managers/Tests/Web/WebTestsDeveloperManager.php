@@ -129,21 +129,37 @@ class WebTestsDeveloperManager extends BaseDeveloperManager
     public function getStoreTestDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers
+        return $this->instantiateDeveloperWithManager(
+            TestMethods\Store\StoreTestDeveloper::class,
+            $this->instantiateManager(TestManagers\Store\StoreTestDeveloperManager::class)
+        );
     }
 
     public function getStoreInvalidDataProviderDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers
+        return $this->instantiateDeveloperWithManager(
+            TestMethods\Store\InvalidStoreDataProviderDeveloper::class,
+            $this
+        );
     }
 
     public function getInvalidDataStoreTestDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers
+        return $this->instantiateDeveloperWithManager(
+            TestMethods\Store\InvalidStoreTestDeveloper::class,
+            $this->instantiateManager(TestManagers\Store\InvalidDataStoreTestDeveloperManager::class),
+        );
     }
 
     public function getUnauthorizedStoreTestDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers
+        return $this->instantiateDeveloperWithManager(
+            TestMethods\Store\UnauthorizedStoreTestDeveloper::class,
+            $this->instantiateManager(TestManagers\Store\UnauthorizedStoreTestDeveloperManager::class)
+        );
     }
 
     public function getEditTestDeveloper(): Developer
