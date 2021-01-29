@@ -7,6 +7,7 @@ use Shomisha\Crudly\Contracts\Specification;
 use Shomisha\Crudly\Data\CrudlySet;
 use Shomisha\Crudly\Data\ModelName;
 use Shomisha\Crudly\Enums\ModelPropertyType;
+use Shomisha\Crudly\ModelPropertyGuessers\FakerMethodGuesser;
 use Shomisha\Crudly\Specifications\ForeignKeySpecification;
 use Shomisha\Crudly\Specifications\ModelPropertySpecification;
 use Shomisha\Stubless\Contracts\Code;
@@ -103,112 +104,6 @@ class FactoryDefinitionFieldDeveloper extends FactoryDeveloper
             $faker = Block::invokeMethod($faker, 'unique');
         }
 
-        switch ($property->getType()) {
-            case ModelPropertyType::BOOL():
-                return $this->invokeBooleanFakerMethod($faker);
-            case ModelPropertyType::STRING():
-                return $this->invokeStringFakerMethod($faker);
-            case ModelPropertyType::EMAIL():
-                return $this->invokeEmailFakerMethod($faker);
-            case ModelPropertyType::TEXT():
-                return $this->invokeTextFakerMethod($faker);
-            case ModelPropertyType::INT():
-                return $this->invokeIntegerFakerMethod($faker);
-            case ModelPropertyType::BIG_INT():
-                return $this->invokeBigIntegerFakerMethod($faker);
-            case ModelPropertyType::TINY_INT():
-                return $this->invokeTinyIntegerFakerMethod($faker);
-            case ModelPropertyType::FLOAT():
-                return $this->invokeFloatFakerMethod($faker);
-            case ModelPropertyType::DATE():
-                return $this->invokeDateFakerMethod($faker);
-            case ModelPropertyType::TIMESTAMP():
-                return $this->invokeTimestampFakerMethod($faker);
-            case ModelPropertyType::DATETIME():
-                return $this->invokeDatetimeFakerMethod($faker);
-            case ModelPropertyType::JSON():
-                return $this->invokeJsonFakerMethod($faker);
-        }
-    }
-
-    protected function invokeBooleanFakerMethod(Code $faker): Code
-    {
-        return $this->appendInvocationToFaker($faker, 'boolean');
-    }
-
-    protected function invokeStringFakerMethod(Code $faker): Code
-    {
-        // MySQL default string duration provided as argument
-        return $this->appendInvocationToFaker($faker, 'text', [255]);
-    }
-
-    protected function invokeEmailFakerMethod(Code $faker): Code
-    {
-        return $this->appendPropertyToFaker($faker, 'email');
-    }
-
-    protected function invokeTextFakerMethod(Code $faker): Code
-    {
-        // Near max text length provided as argument
-        return $this->appendInvocationToFaker($faker, 'text', [65000]);
-    }
-
-    protected function invokeIntegerFakerMethod(Code $faker): Code
-    {
-        // TODO: account for unsigned fields
-        // MySQL max int provided as second argument
-        return $this->appendInvocationToFaker($faker, 'numberBetween', [0, 32767]);
-    }
-
-    protected function invokeBigIntegerFakerMethod(Code $faker): Code
-    {
-        // TODO: account for unsigned fields
-        // Default value provided as second argument
-        return $this->appendInvocationToFaker($faker, 'numberBetween', [0, 2147483647]);
-    }
-
-    protected function invokeTinyIntegerFakerMethod(Code $faker): Code
-    {
-        // TODO: account for unsigned fields
-        return $this->appendInvocationToFaker($faker, 'numberBetween', [0, 127]);
-    }
-
-    protected function invokeFloatFakerMethod(Code $faker): Code
-    {
-        return $this->appendInvocationToFaker($faker, 'randomFloat');
-    }
-
-    protected function invokeDateFakerMethod(Code $faker): Code
-    {
-        return $this->appendInvocationToFaker($faker, 'date');
-    }
-
-    protected function invokeTimestampFakerMethod(Code $faker): Code
-    {
-        return $this->appendInvocationToFaker($faker, 'dateTime');
-    }
-
-    protected function invokeDatetimeFakerMethod(Code $faker): Code
-    {
-        return $this->appendInvocationToFaker($faker, 'dateTime');
-    }
-
-    protected function invokeJsonFakerMethod(Code $faker): Code
-    {
-        return Value::array([1, 2, 3]);
-    }
-
-    protected function appendPropertyToFaker(Code $faker, string $property): Code
-    {
-        return Reference::objectProperty($faker, $property);
-    }
-
-    protected function appendInvocationToFaker(Code $faker, string $method, array $arguments = []): Code
-    {
-        if ($faker instanceof InvokeMethodBlock) {
-            return $faker->chain($method, $arguments);
-        }
-
-        return Block::invokeMethod($faker, $method, $arguments);
+        return with(new FakerMethodGuesser($faker))->guess($property);
     }
 }
