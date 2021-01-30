@@ -1,6 +1,6 @@
 <?php
 
-namespace Shomisha\Crudly\Developers\Tests\Web\Methods\Store;
+namespace Shomisha\Crudly\Developers\Tests\Web\Methods;
 
 use Shomisha\Crudly\Contracts\ModelSupervisor;
 use Shomisha\Crudly\Contracts\Specification;
@@ -14,7 +14,7 @@ use Shomisha\Stubless\DeclarativeCode\ClassMethod;
 use Shomisha\Stubless\ImperativeCode\Block;
 use Shomisha\Stubless\ImperativeCode\ReturnBlock;
 
-class InvalidStoreDataProviderDeveloper extends TestsDeveloper
+class InvalidDataProviderDeveloper extends TestsDeveloper
 {
     private InvalidValidationDataProvidersGuesser $dataProviderGuesser;
 
@@ -29,7 +29,7 @@ class InvalidStoreDataProviderDeveloper extends TestsDeveloper
     public function develop(Specification $specification, CrudlySet $developedSet): ClassMethod
     {
         $method = ClassMethod::name(
-            $this->guessStoreDataProviderName($specification->getModel())
+            $this->guessInvalidDataProviderName($specification->getModel())
         );
 
         return $method->body(

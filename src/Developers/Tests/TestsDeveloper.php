@@ -56,17 +56,10 @@ abstract class TestsDeveloper extends Developer
         return "get{$modelComponent}Data";
     }
 
-    protected function guessStoreDataProviderName(ModelName $model): string
+    protected function guessInvalidDataProviderName(ModelName $model): string
     {
         $modelComponent = ucfirst($this->guessSingularModelVariableName($model));
 
-        return "invalidStore{$modelComponent}DataProvider";
-    }
-
-    protected function guessUpdateDataProviderName(ModelName $model): string
-    {
-        $modelComponent = ucfirst($this->guessSingularModelVariableName($model));
-
-        return "invalidUpdate{$modelComponent}DataProvider";
+        return "invalid{$modelComponent}DataProvider";
     }
 }

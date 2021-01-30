@@ -135,11 +135,11 @@ class WebTestsDeveloperManager extends BaseDeveloperManager
         );
     }
 
-    public function getStoreInvalidDataProviderDeveloper(): Developer
+    public function getInvalidDataProviderDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers
         return $this->instantiateDeveloperWithManager(
-            TestMethods\Store\InvalidStoreDataProviderDeveloper::class,
+            TestMethods\InvalidDataProviderDeveloper::class,
             $this
         );
     }

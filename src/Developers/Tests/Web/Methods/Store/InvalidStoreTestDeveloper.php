@@ -26,6 +26,6 @@ class InvalidStoreTestDeveloper extends TestMethodDeveloper
 
     protected function getDataProvider(CrudlySpecification $specification, CrudlySet $developedSet): ?string
     {
-        return $this->guessStoreDataProviderName($specification->getModel());
+        return $this->guessInvalidDataProviderName($specification->getModel());
     }
 }
