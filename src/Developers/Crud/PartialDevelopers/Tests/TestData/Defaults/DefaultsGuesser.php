@@ -14,7 +14,7 @@ abstract class DefaultsGuesser
 
     public function canGuessDefaultFor(ModelPropertySpecification $property): bool
     {
-        if ($property->getType() === ModelPropertyType::EMAIL()) {
+        if ($this->propertyIsEmail($property)) {
             return true;
         }
 
@@ -32,7 +32,7 @@ abstract class DefaultsGuesser
 
     protected function propertyIsEmail(ModelPropertySpecification $property): bool
     {
-        return $property->getType() === ModelPropertyType::EMAIL();
+        return $property->getType() == ModelPropertyType::EMAIL();
     }
 
     abstract protected function getDefaults(): array;

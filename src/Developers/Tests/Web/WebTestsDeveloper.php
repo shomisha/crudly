@@ -58,6 +58,7 @@ class WebTestsDeveloper extends TestsDeveloper
 
         $developers = [];
 
+
         $developers[] = $manager->getIndexTestDeveloper();
         if ($hasSoftDeletion) {
             $developers[] = $manager->getIndexWillNotContainSoftDeletedModelsTestDeveloper();
@@ -66,22 +67,26 @@ class WebTestsDeveloper extends TestsDeveloper
             $developers[] = $manager->getUnauthorizedIndexTestDeveloper();
         }
 
+
         $developers[] = $manager->getShowTestDeveloper();
         if ($hasAuthorization) {
             $developers[] = $manager->getUnauthorizedShowTestDeveloper();
         }
+
 
         $developers[] = $manager->getCreateTestDeveloper();
         if ($hasAuthorization) {
             $developers[] = $manager->getUnauthorizedCreateTestDeveloper();
         }
 
+
         $developers[] = $manager->getStoreTestDeveloper();
-        $developers[] = $manager->getStoreInvalidDataProviderDeveloper();
+        $developers[] = $manager->getInvalidDataProviderDeveloper();
         $developers[] = $manager->getInvalidDataStoreTestDeveloper();
         if ($hasAuthorization) {
             $developers[] = $manager->getUnauthorizedStoreTestDeveloper();
         }
+
 
         $developers[] = $manager->getEditTestDeveloper();
         if ($hasAuthorization) {
@@ -89,23 +94,25 @@ class WebTestsDeveloper extends TestsDeveloper
         }
 
 
-        // $developers[] = $manager->getUpdateTestDeveloper();
-        // $developers[] = $manager->getUpdateInvalidDataProviderDeveloper();
-        // $developers[] = $manager->getInvalidDataUpdateTestDeveloper();
-        // if ($hasAuthorization) {
-        //     $developers[] = $manager->getUnauthorizedUpdateTestDeveloper();
-        // }
-        //
+        $developers[] = $manager->getUpdateTestDeveloper();
+        $developers[] = $manager->getInvalidDataUpdateTestDeveloper();
+        if ($hasAuthorization) {
+            $developers[] = $manager->getUnauthorizedUpdateTestDeveloper();
+        }
+
+
         $developers[] = $manager->getDestroyTestDeveloper();
         if ($hasAuthorization) {
             $developers[] = $manager->getUnauthorizedDestroyTestDeveloper();
         }
+
 
         if ($hasSoftDeletion) {
             $developers[] = $manager->getForceDeleteTestDeveloper();
             if ($hasAuthorization) {
                 $developers[] = $manager->getUnauthorizedForceDeleteTestDeveloper();
             }
+
 
             $developers[] = $manager->getRestoreTestDeveloper();
             if ($hasAuthorization) {
