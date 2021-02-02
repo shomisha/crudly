@@ -7,7 +7,7 @@ use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertRes
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\Views\AssertViewIsIndex;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Factory\CreateMultipleModelInstances;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\GetModelIdsFromResponseDeveloper;
-use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Requests\LoadIndexPageDeveloper;
+use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Requests\GetIndexRouteDeveloper;
 use Shomisha\Crudly\Managers\Tests\TestMethodDeveloperManager;
 
 class IndexTestDeveloperManager extends TestMethodDeveloperManager
@@ -25,7 +25,7 @@ class IndexTestDeveloperManager extends TestMethodDeveloperManager
     {
         // TODO: refactor this to support overriding developers
         return [
-            $this->instantiateDeveloperWithManager(LoadIndexPageDeveloper::class, $this),
+            $this->instantiateDeveloperWithManager(GetIndexRouteDeveloper::class, $this),
         ];
     }
 

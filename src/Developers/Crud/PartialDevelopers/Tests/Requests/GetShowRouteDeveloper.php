@@ -11,12 +11,7 @@ use Shomisha\Stubless\ImperativeCode\AssignBlock;
 use Shomisha\Stubless\ImperativeCode\Block;
 use Shomisha\Stubless\References\Reference;
 
-/**
- * Class SendStoreDataRequest
- *
- * @method \Shomisha\Crudly\Managers\Tests\TestMethodDeveloperManager getManager()
- */
-class SendStoreDataRequest extends TestsDeveloper
+class GetShowRouteDeveloper extends TestsDeveloper
 {
     /** @param \Shomisha\Crudly\Specifications\CrudlySpecification $specification */
     public function develop(Specification $specification, CrudlySet $developedSet): AssignBlock
@@ -25,10 +20,9 @@ class SendStoreDataRequest extends TestsDeveloper
             Reference::variable('response'),
             Block::invokeMethod(
                 Reference::this(),
-                'post',
+                'get',
                 [
-                    $this->getRoute($specification, $developedSet),
-                    Reference::variable('data'),
+                    $this->getRoute($specification, $developedSet)
                 ]
             )
         );
@@ -36,6 +30,6 @@ class SendStoreDataRequest extends TestsDeveloper
 
     protected function getRoute(CrudlySpecification $specification, CrudlySet $developedSet): Code
     {
-        return $this->getManager()->getStoreRouteDeveloper()->develop($specification, $developedSet);
+        return $this->getManager()->getShowRouteDeveloper()->develop($specification, $developedSet);
     }
 }

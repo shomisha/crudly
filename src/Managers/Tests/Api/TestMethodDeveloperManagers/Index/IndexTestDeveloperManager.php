@@ -7,7 +7,7 @@ use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertJso
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertResponseStatusOkDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Factory\CreateMultipleModelInstances;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\GetModelIdsFromJsonDeveloper;
-use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Requests\LoadIndexPageDeveloper;
+use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Requests\GetIndexRouteDeveloper;
 use Shomisha\Crudly\Managers\Tests\TestMethodDeveloperManager;
 
 class IndexTestDeveloperManager extends TestMethodDeveloperManager
@@ -23,7 +23,7 @@ class IndexTestDeveloperManager extends TestMethodDeveloperManager
     public function getActDevelopers(): array
     {
         return [
-            $this->instantiateDeveloperWithManager(LoadIndexPageDeveloper::class, $this),
+            $this->instantiateDeveloperWithManager(GetIndexRouteDeveloper::class, $this),
         ];
     }
 

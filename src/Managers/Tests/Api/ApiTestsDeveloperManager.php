@@ -54,4 +54,64 @@ class ApiTestsDeveloperManager extends TestClassDeveloperManager
             $this->instantiateManager(MethodDeveloperManagers\Show\UnauthorizedShowTestDeveloperManager::class)
         );
     }
+
+    public function getStoreDeveloper(): Developer
+    {
+
+    }
+
+    public function getInvalidStoreDeveloper(): Developer
+    {
+
+    }
+
+    public function getUnauthorizedStoreDeveloper(): Developer
+    {
+
+    }
+
+    public function getUpdateDeveloper(): Developer
+    {
+
+    }
+
+    public function getInvalidUpdateDeveloper(): Developer
+    {
+
+    }
+
+    public function getUnauthorizedUpdateDeveloper(): Developer
+    {
+
+    }
+
+    public function getDestroyDeveloper(): Developer
+    {
+
+    }
+
+    public function getUnauthorizedDestroyDeveloper(): Developer
+    {
+
+    }
+
+    public function getForceDeleteDeveloper(): Developer
+    {
+
+    }
+
+    public function getUnauthorizedForceDeleteDeveloper(): Developer
+    {
+
+    }
+
+    public function getRestoreDeveloper(): Developer
+    {
+
+    }
+
+    public function getUnauthorizedRestoreDeveloper(): Developer
+    {
+
+    }
 }

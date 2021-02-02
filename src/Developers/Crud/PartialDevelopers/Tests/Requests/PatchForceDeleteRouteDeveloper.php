@@ -11,7 +11,12 @@ use Shomisha\Stubless\ImperativeCode\AssignBlock;
 use Shomisha\Stubless\ImperativeCode\Block;
 use Shomisha\Stubless\References\Reference;
 
-class SendDestroyRequest extends TestsDeveloper
+/**
+ * Class SendForceDeleteRequest
+ *
+ * @method \Shomisha\Crudly\Managers\Tests\TestMethodDeveloperManager getManager()
+ */
+class PatchForceDeleteRouteDeveloper extends TestsDeveloper
 {
     /** @param \Shomisha\Crudly\Specifications\CrudlySpecification $specification */
     public function develop(Specification $specification, CrudlySet $developedSet): AssignBlock
@@ -30,6 +35,6 @@ class SendDestroyRequest extends TestsDeveloper
 
     protected function getRoute(CrudlySpecification $specification, CrudlySet $developedSet): Code
     {
-        return $this->getManager()->getDestroyRouteDeveloper()->develop($specification, $developedSet);
+        return $this->getManager()->getForceDeleteRouteDeveloper()->develop($specification, $developedSet);
     }
 }

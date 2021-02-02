@@ -3,7 +3,7 @@
 namespace Shomisha\Crudly\Managers\Tests\Web\TestMethodDeveloperManagers\Store;
 
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertDatabaseContainsNewModel;
-use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Requests\SendStoreDataRequest;
+use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Requests\PostDataToStoreRouteDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\TestData\GetDataWithNewDefaultsDeveloper;
 use Shomisha\Crudly\Managers\Tests\TestMethodDeveloperManager;
 
@@ -20,7 +20,7 @@ class StoreTestDeveloperManager extends TestMethodDeveloperManager
     public function getActDevelopers(): array
     {
         return [
-            $this->instantiateDeveloperWithManager(SendStoreDataRequest::class, $this),
+            $this->instantiateDeveloperWithManager(PostDataToStoreRouteDeveloper::class, $this),
         ];
     }
 

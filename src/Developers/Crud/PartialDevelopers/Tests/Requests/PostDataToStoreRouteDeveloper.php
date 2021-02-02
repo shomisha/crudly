@@ -12,11 +12,11 @@ use Shomisha\Stubless\ImperativeCode\Block;
 use Shomisha\Stubless\References\Reference;
 
 /**
- * Class LoadIndexPageDeveloper
+ * Class SendStoreDataRequest
  *
- * @method \Shomisha\Crudly\Managers\Tests\Web\TestMethodDeveloperManagers\Index\IndexTestDeveloperManager getManager()
+ * @method \Shomisha\Crudly\Managers\Tests\TestMethodDeveloperManager getManager()
  */
-class LoadIndexPageDeveloper extends TestsDeveloper
+class PostDataToStoreRouteDeveloper extends TestsDeveloper
 {
     /** @param \Shomisha\Crudly\Specifications\CrudlySpecification $specification */
     public function develop(Specification $specification, CrudlySet $developedSet): AssignBlock
@@ -25,9 +25,10 @@ class LoadIndexPageDeveloper extends TestsDeveloper
             Reference::variable('response'),
             Block::invokeMethod(
                 Reference::this(),
-                'get',
+                'post',
                 [
-                    $this->getRoute($specification, $developedSet)
+                    $this->getRoute($specification, $developedSet),
+                    Reference::variable('data'),
                 ]
             )
         );
@@ -35,6 +36,6 @@ class LoadIndexPageDeveloper extends TestsDeveloper
 
     protected function getRoute(CrudlySpecification $specification, CrudlySet $developedSet): Code
     {
-        return $this->getManager()->getIndexRouteDeveloper()->develop($specification, $developedSet);
+        return $this->getManager()->getStoreRouteDeveloper()->develop($specification, $developedSet);
     }
 }

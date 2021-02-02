@@ -3,7 +3,7 @@
 namespace Shomisha\Crudly\Managers\Tests\Web\TestMethodDeveloperManagers\ForceDelete;
 
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertDatabaseMissingModelDeveloper;
-use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Requests\SendForceDeleteRequest;
+use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Requests\PatchForceDeleteRouteDeveloper;
 use Shomisha\Crudly\Managers\Tests\TestMethodDeveloperManager;
 
 class ForceDeleteTestDeveloperManager extends TestMethodDeveloperManager
@@ -19,7 +19,7 @@ class ForceDeleteTestDeveloperManager extends TestMethodDeveloperManager
     public function getActDevelopers(): array
     {
         return [
-            $this->instantiateDeveloperWithManager(SendForceDeleteRequest::class, $this),
+            $this->instantiateDeveloperWithManager(PatchForceDeleteRouteDeveloper::class, $this),
         ];
     }
 

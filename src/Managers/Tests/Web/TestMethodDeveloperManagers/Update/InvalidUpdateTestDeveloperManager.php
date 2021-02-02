@@ -5,7 +5,7 @@ namespace Shomisha\Crudly\Managers\Tests\Web\TestMethodDeveloperManagers\Update;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertModelHasOldValuesDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertSessionHasFieldErrorDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Factory\CreateModelWithOldDefaultsDeveloper;
-use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Requests\SendUpdateDataRequest;
+use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Requests\PutDataToUpdateRouteDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\TestData\GetDataWithInvalidOverrideDeveloper;
 use Shomisha\Crudly\Managers\Tests\TestMethodDeveloperManager;
 
@@ -23,7 +23,7 @@ class InvalidUpdateTestDeveloperManager extends TestMethodDeveloperManager
     public function getActDevelopers(): array
     {
         return [
-            $this->instantiateDeveloperWithManager(SendUpdateDataRequest::class, $this),
+            $this->instantiateDeveloperWithManager(PutDataToUpdateRouteDeveloper::class, $this),
         ];
     }
 

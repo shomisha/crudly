@@ -7,7 +7,7 @@ use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\Views\Ass
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Factory\CreateMultipleModelInstances;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Factory\CreateSoftDeletedInstance;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\GetModelIdsFromResponseDeveloper;
-use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Requests\LoadIndexPageDeveloper;
+use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Requests\GetIndexRouteDeveloper;
 use Shomisha\Crudly\Managers\Tests\TestMethodDeveloperManager;
 
 class IndexWillNotContainSoftDeletedModelsTestDeveloperManager extends TestMethodDeveloperManager
@@ -24,7 +24,7 @@ class IndexWillNotContainSoftDeletedModelsTestDeveloperManager extends TestMetho
     public function getActDevelopers(): array
     {
         return [
-            $this->instantiateDeveloperWithManager(LoadIndexPageDeveloper::class, $this),
+            $this->instantiateDeveloperWithManager(GetIndexRouteDeveloper::class, $this),
         ];
     }
 

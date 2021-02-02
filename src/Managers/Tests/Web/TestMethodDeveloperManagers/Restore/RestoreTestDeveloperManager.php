@@ -4,7 +4,7 @@ namespace Shomisha\Crudly\Managers\Tests\Web\TestMethodDeveloperManagers\Restore
 
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertSoftDeletedColumnIsNull;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Factory\CreateSoftDeletedInstance;
-use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Requests\SendRestoreRequest;
+use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Requests\PatchRestoreRouteDeveloper;
 use Shomisha\Crudly\Managers\Tests\TestMethodDeveloperManager;
 
 class RestoreTestDeveloperManager extends TestMethodDeveloperManager
@@ -20,7 +20,7 @@ class RestoreTestDeveloperManager extends TestMethodDeveloperManager
     public function getActDevelopers(): array
     {
         return [
-            $this->instantiateDeveloperWithManager(SendRestoreRequest::class, $this),
+            $this->instantiateDeveloperWithManager(PatchRestoreRouteDeveloper::class, $this),
         ];
     }
 

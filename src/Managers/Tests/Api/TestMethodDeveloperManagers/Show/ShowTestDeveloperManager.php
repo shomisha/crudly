@@ -4,7 +4,7 @@ namespace Shomisha\Crudly\Managers\Tests\Api\TestMethodDeveloperManagers\Show;
 
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertModelIsJsonModel;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertResponseStatusOkDeveloper;
-use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Requests\LoadShowPageDeveloper;
+use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Requests\GetShowRouteDeveloper;
 use Shomisha\Crudly\Managers\Tests\TestMethodDeveloperManager;
 
 class ShowTestDeveloperManager extends TestMethodDeveloperManager
@@ -20,7 +20,7 @@ class ShowTestDeveloperManager extends TestMethodDeveloperManager
     public function getActDevelopers(): array
     {
         return [
-            $this->instantiateDeveloperWithManager(LoadShowPageDeveloper::class, $this),
+            $this->instantiateDeveloperWithManager(GetShowRouteDeveloper::class, $this),
         ];
     }
 
