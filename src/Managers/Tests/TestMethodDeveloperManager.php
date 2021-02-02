@@ -106,11 +106,6 @@ abstract class TestMethodDeveloperManager extends DeveloperManager
         return $this->instantiateDeveloperWithManager(CreateSingleModelInstance::class, $this);
     }
 
-    public function getModelIdsFromResponseDeveloper(): GetModelIdsFromResponseDeveloper
-    {
-        return $this->instantiateDeveloperWithManager(GetModelIdsFromResponseDeveloper::class, $this);
-    }
-
     public function getIndexRouteDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers

@@ -22,7 +22,6 @@ class AssertResponseModelsMissingSingularModel extends TestsDeveloper
         );
 
         return Block::fromArray([
-            $this->getManager()->getModelIdsFromResponseDeveloper()->develop($specification, $developedSet),
             Block::invokeMethod(
                 Reference::this(),
                 'assertNotContains',

@@ -23,7 +23,6 @@ class AssertAllModelIdsPresentDeveloper extends TestsDeveloper
         $responseModelIds = Reference::variable('response' . ucfirst($this->guessSingularModelVariableName($model)) . 'Ids');
 
         return Block::fromArray([
-            $this->getManager()->getModelIdsFromResponseDeveloper()->develop($specification, $developedSet),
             Block::foreach($modelsCollectionVar, $singleModelVar)->do(
                 Block::invokeMethod(
                     Reference::this(),
