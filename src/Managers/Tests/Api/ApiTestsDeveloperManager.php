@@ -5,6 +5,7 @@ namespace Shomisha\Crudly\Managers\Tests\Api;
 use Shomisha\Crudly\Contracts\Developer;
 use Shomisha\Crudly\Developers\Tests\Api\Methods as MethodDevelopers;
 use Shomisha\Crudly\Developers\Tests\HelperMethodDevelopers\RouteGetters;
+use Shomisha\Crudly\Developers\Tests\Web\Methods\InvalidDataProviderDeveloper;
 use Shomisha\Crudly\Managers\Tests\Api\TestMethodDeveloperManagers as MethodDeveloperManagers;
 use Shomisha\Crudly\Managers\Tests\TestClassDeveloperManager;
 
@@ -57,17 +58,34 @@ class ApiTestsDeveloperManager extends TestClassDeveloperManager
 
     public function getStoreDeveloper(): Developer
     {
+        return $this->instantiateDeveloperWithManager(
+            MethodDevelopers\Store\StoreTestDeveloper::class,
+            $this->instantiateManager(MethodDeveloperManagers\Store\StoreTestDeveloperManager::class)
+        );
+    }
 
+    public function getInvalidDataProviderDeveloper(): Developer
+    {
+        return $this->instantiateDeveloperWithManager(
+            InvalidDataProviderDeveloper::class,
+            $this,
+        );
     }
 
     public function getInvalidStoreDeveloper(): Developer
     {
-
+        return $this->instantiateDeveloperWithManager(
+            MethodDevelopers\Store\InvalidStoreTestDeveloper::class,
+            $this->instantiateManager(MethodDeveloperManagers\Store\InvalidStoreTestDeveloperManager::class)
+        );
     }
 
     public function getUnauthorizedStoreDeveloper(): Developer
     {
-
+        return $this->instantiateDeveloperWithManager(
+            MethodDevelopers\Store\UnauthorizedStoreTestDeveloper::class,
+            $this->instantiateManager(MethodDeveloperManagers\Store\UnauthorizedStoreTestDeveloperManager::class)
+        );
     }
 
     public function getUpdateDeveloper(): Developer

@@ -1,6 +1,6 @@
 <?php
 
-namespace Shomisha\Crudly\Managers\Tests\Web\TestMethodDeveloperManagers\Store;
+namespace Shomisha\Crudly\Managers\Tests\Api\TestMethodDeveloperManagers\Store;
 
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertDatabaseHasNoModels;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertResponseStatusValidationErrorDeveloper;
@@ -9,7 +9,7 @@ use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Requests\PostDataToS
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\TestData\GetDataWithInvalidOverrideDeveloper;
 use Shomisha\Crudly\Managers\Tests\TestMethodDeveloperManager;
 
-class InvalidDataStoreTestDeveloperManager extends TestMethodDeveloperManager
+class InvalidStoreTestDeveloperManager extends TestMethodDeveloperManager
 {
     public function getArrangeDevelopers(): array
     {

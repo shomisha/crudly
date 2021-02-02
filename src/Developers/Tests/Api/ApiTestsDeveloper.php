@@ -48,14 +48,24 @@ class ApiTestsDeveloper extends TestsDeveloper
         $developers = [];
         $hasAuthorization = $specification->hasApiAuthorization();
 
+
         $developers[] = $this->getManager()->getIndexTestDeveloper();
         if ($hasAuthorization) {
             $developers[] = $this->getManager()->getUnauthorizedIndexTestDeveloper();
         }
 
+
         $developers[] = $this->getManager()->getShowDeveloper();
         if ($hasAuthorization) {
             $developers[] = $this->getManager()->getUnauthorizedShowDeveloper();
+        }
+
+
+        $developers[] = $this->getManager()->getStoreDeveloper();
+        $developers[] = $this->getManager()->getInvalidDataProviderDeveloper();
+        $developers[] = $this->getManager()->getInvalidStoreDeveloper();
+        if ($hasAuthorization) {
+            $developers[] = $this->getManager()->getUnauthorizedStoreDeveloper();
         }
 
         return $developers;
