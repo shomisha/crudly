@@ -26,7 +26,7 @@ class ApiTestsDeveloper extends TestsDeveloper
         }
 
         foreach ($this->getTestDevelopers($specification) as $developer) {
-            $apiTestsClass->addMethod($developer->develop($specification, $developer));
+            $apiTestsClass->addMethod($developer->develop($specification, $developedSet));
         }
 
         return $apiTestsClass;
@@ -46,6 +46,9 @@ class ApiTestsDeveloper extends TestsDeveloper
     protected function getTestDevelopers(CrudlySpecification $specification): array
     {
         $developers = [];
+        $hasAuthorization = $specification->hasApiAuthorization();
+
+        $developers[] = $this->getManager()->getIndexTestDeveloper();
 
         return $developers;
     }
