@@ -6,7 +6,6 @@ use Shomisha\Crudly\Contracts\Specification;
 use Shomisha\Crudly\Data\CrudlySet;
 use Shomisha\Crudly\Developers\Tests\TestsDeveloper;
 use Shomisha\Crudly\Specifications\CrudlySpecification;
-use Shomisha\Stubless\Contracts\Code;
 use Shomisha\Stubless\DeclarativeCode\ClassTemplate;
 use Shomisha\Stubless\Utilities\Importable;
 
@@ -18,7 +17,7 @@ use Shomisha\Stubless\Utilities\Importable;
 class WebTestsDeveloper extends TestsDeveloper
 {
     /** @param \Shomisha\Crudly\Specifications\CrudlySpecification $specification */
-    public function develop(Specification $specification, CrudlySet $developedSet): Code
+    public function develop(Specification $specification, CrudlySet $developedSet): ClassTemplate
     {
         $webTestsClass = ClassTemplate::name(
             $this->guessTestClassShortName($specification->getModel())
