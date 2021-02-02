@@ -19,7 +19,7 @@ class CrudlySpecification extends Specification
         KEY_HAS_WEB_TESTS = 'has_web_tests',
         KEY_HAS_API = 'has_api',
         KEY_API_HAS_AUTHORIZATION = 'has_api_authorization',
-        KEY_HAS_API_TESTS = 'has_api_test',
+        KEY_HAS_API_TESTS = 'has_api_tests',
         KEY_PRIMARY = 'primary',
         KEY_ACTUAL_PRIMARY = 'actual_primary_key';
 
