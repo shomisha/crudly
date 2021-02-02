@@ -37,4 +37,21 @@ class ApiTestsDeveloperManager extends TestClassDeveloperManager
             MethodDevelopers\Index\UnauthorizedIndexTestDeveloper::class,
             $this->instantiateManager(MethodDeveloperManagers\Index\UnauthorizedIndexTestDeveloperManager::class)
         );
+    }
+
+    public function getShowDeveloper(): Developer
+    {
+        return $this->instantiateDeveloperWithManager(
+            MethodDevelopers\Show\ShowTestDeveloper::class,
+            $this->instantiateManager(MethodDeveloperManagers\Show\ShowTestDeveloperManager::class)
+        );
+    }
+
+    public function getUnauthorizedShowDeveloper(): Developer
+    {
+        return $this->instantiateDeveloperWithManager(
+            MethodDevelopers\Show\UnauthorizedShowTestDeveloper::class,
+            $this->instantiateManager(MethodDeveloperManagers\Show\UnauthorizedShowTestDeveloperManager::class)
+        );
+    }
 }
