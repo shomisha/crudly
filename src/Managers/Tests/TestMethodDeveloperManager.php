@@ -9,6 +9,8 @@ use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertRes
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertResponseSuccessfulDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertSessionHasSuccessDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertSoftDeletedColumnIsNotNull;
+use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Authentication\AuthenticateAndAuthorizeUserDeveloper;
+use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Authentication\AuthenticateAndDeauthorizeUserDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Authentication\InvokeAuthorizeUserDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Authentication\InvokeCreateAndAuthenticateUserDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Authentication\InvokeDeauthorizeUserDeveloper;
@@ -32,6 +34,22 @@ abstract class TestMethodDeveloperManager extends DeveloperManager
     abstract public function getActDevelopers(): array;
 
     abstract public function getAssertDevelopers(): array;
+
+    public function getAuthenticateAndAuthorizeUserDeveloper(): Developer
+    {
+        return $this->instantiateDeveloperWithManager(
+            AuthenticateAndAuthorizeUserDeveloper::class,
+            $this
+        );
+    }
+
+    public function getAuthenticateAndDeauthorizeUserDeveloper(): Developer
+    {
+        return $this->instantiateDeveloperWithManager(
+            AuthenticateAndDeauthorizeUserDeveloper::class,
+            $this
+        );
+    }
 
     public function getCreateAndAuthenticateUserDeveloper(): InvokeCreateAndAuthenticateUserDeveloper
     {

@@ -14,8 +14,7 @@ class IndexTestDeveloperManager extends TestMethodDeveloperManager
     {
         // TODO: refactor this to support overriding developers
         return [
-            $this->getCreateAndAuthenticateUserDeveloper(),
-            $this->getAuthorizeUserDeveloper(),
+            $this->getAuthenticateAndAuthorizeUserDeveloper(),
             $this->instantiateDeveloperWithManager(CreateMultipleModelInstances::class, $this),
         ];
     }

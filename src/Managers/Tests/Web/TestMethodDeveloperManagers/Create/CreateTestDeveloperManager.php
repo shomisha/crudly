@@ -11,8 +11,7 @@ class CreateTestDeveloperManager extends TestMethodDeveloperManager
     public function getArrangeDevelopers(): array
     {
         return [
-            $this->getCreateAndAuthenticateUserDeveloper(),
-            $this->getAuthorizeUserDeveloper(),
+            $this->getAuthenticateAndAuthorizeUserDeveloper(),
         ];
     }
 

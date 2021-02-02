@@ -13,8 +13,7 @@ class UnauthorizedUpdateTestDeveloperManager extends TestMethodDeveloperManager
     public function getArrangeDevelopers(): array
     {
         return [
-            $this->getCreateAndAuthenticateUserDeveloper(),
-            $this->getDeauthorizeUserDeveloper(),
+            $this->getAuthenticateAndDeauthorizeUserDeveloper(),
             $this->instantiateDeveloperWithManager(CreateModelWithOldDefaultsDeveloper::class, $this),
             $this->instantiateDeveloperWithManager(GetDataWithNewDefaultsDeveloper::class, $this),
         ];

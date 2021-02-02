@@ -12,8 +12,7 @@ class UnauthorizedStoreTestDeveloperManager extends TestMethodDeveloperManager
     public function getArrangeDevelopers(): array
     {
         return [
-            $this->getCreateAndAuthenticateUserDeveloper(),
-            $this->getDeauthorizeUserDeveloper(),
+            $this->getAuthenticateAndDeauthorizeUserDeveloper(),
             $this->instantiateDeveloperWithManager(GetDataWithoutOverrideDeveloper::class, $this),
         ];
     }

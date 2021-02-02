@@ -11,8 +11,7 @@ class UnauthorizedForceDeleteTestDeveloperManager extends TestMethodDeveloperMan
     public function getArrangeDevelopers(): array
     {
         return [
-            $this->getCreateAndAuthenticateUserDeveloper(),
-            $this->getDeauthorizeUserDeveloper(),
+            $this->getAuthenticateAndDeauthorizeUserDeveloper(),
             $this->getCreateSingleInstanceDeveloper(),
         ];
     }

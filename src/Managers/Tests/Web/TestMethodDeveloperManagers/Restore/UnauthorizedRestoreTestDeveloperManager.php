@@ -11,8 +11,7 @@ class UnauthorizedRestoreTestDeveloperManager extends TestMethodDeveloperManager
     public function getArrangeDevelopers(): array
     {
         return [
-            $this->getCreateAndAuthenticateUserDeveloper(),
-            $this->getDeauthorizeUserDeveloper(),
+            $this->getAuthenticateAndDeauthorizeUserDeveloper(),
             $this->instantiateDeveloperWithManager(CreateSoftDeletedInstance::class, $this),
         ];
     }

@@ -14,8 +14,7 @@ class InvalidUpdateTestDeveloperManager extends TestMethodDeveloperManager
     public function getArrangeDevelopers(): array
     {
         return [
-            $this->getCreateAndAuthenticateUserDeveloper(),
-            $this->getAuthorizeUserDeveloper(),
+            $this->getAuthenticateAndAuthorizeUserDeveloper(),
             $this->instantiateDeveloperWithManager(CreateModelWithOldDefaultsDeveloper::class, $this),
             $this->instantiateDeveloperWithManager(GetDataWithInvalidOverrideDeveloper::class, $this),
         ];
