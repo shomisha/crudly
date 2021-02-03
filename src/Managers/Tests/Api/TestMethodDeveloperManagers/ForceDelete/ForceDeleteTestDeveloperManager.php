@@ -4,7 +4,7 @@ namespace Shomisha\Crudly\Managers\Tests\Api\TestMethodDeveloperManagers\ForceDe
 
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertResponseStatusUpdatedDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertSoftDeletedColumnIsNotNull;
-use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Requests\PatchForceDeleteRouteDeveloper;
+use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Requests\DeleteForceDeleteRouteDeveloper;
 use Shomisha\Crudly\Managers\Tests\TestMethodDeveloperManager;
 
 class ForceDeleteTestDeveloperManager extends TestMethodDeveloperManager
@@ -20,7 +20,7 @@ class ForceDeleteTestDeveloperManager extends TestMethodDeveloperManager
     public function getActDevelopers(): array
     {
         return [
-            $this->instantiateDeveloperWithManager(PatchForceDeleteRouteDeveloper::class, $this),
+            $this->instantiateDeveloperWithManager(DeleteForceDeleteRouteDeveloper::class, $this),
         ];
     }
 

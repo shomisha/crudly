@@ -3,7 +3,7 @@
 namespace Shomisha\Crudly\Managers\Tests\Api\TestMethodDeveloperManagers\ForceDelete;
 
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertSoftDeletedColumnIsNull;
-use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Requests\PatchForceDeleteRouteDeveloper;
+use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Requests\DeleteForceDeleteRouteDeveloper;
 use Shomisha\Crudly\Managers\Tests\TestMethodDeveloperManager;
 
 class UnauthorizedForceDeleteTestDeveloperManager extends TestMethodDeveloperManager
@@ -19,7 +19,7 @@ class UnauthorizedForceDeleteTestDeveloperManager extends TestMethodDeveloperMan
     public function getActDevelopers(): array
     {
         return [
-            $this->instantiateDeveloperWithManager(PatchForceDeleteRouteDeveloper::class, $this),
+            $this->instantiateDeveloperWithManager(DeleteForceDeleteRouteDeveloper::class, $this),
         ];
     }
 

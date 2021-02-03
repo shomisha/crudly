@@ -16,7 +16,7 @@ use Shomisha\Stubless\References\Reference;
  *
  * @method \Shomisha\Crudly\Managers\Tests\TestMethodDeveloperManager getManager()
  */
-class PatchForceDeleteRouteDeveloper extends TestsDeveloper
+class DeleteForceDeleteRouteDeveloper extends TestsDeveloper
 {
     /** @param \Shomisha\Crudly\Specifications\CrudlySpecification $specification */
     public function develop(Specification $specification, CrudlySet $developedSet): AssignBlock
