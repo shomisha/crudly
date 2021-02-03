@@ -90,17 +90,26 @@ class ApiTestsDeveloperManager extends TestClassDeveloperManager
 
     public function getUpdateDeveloper(): Developer
     {
-
+        return $this->instantiateDeveloperWithManager(
+            MethodDevelopers\Update\UpdateTestDeveloper::class,
+            $this->instantiateManager(MethodDeveloperManagers\Update\UpdateTestDeveloperManager::class)
+        );
     }
 
     public function getInvalidUpdateDeveloper(): Developer
     {
-
+        return $this->instantiateDeveloperWithManager(
+            MethodDevelopers\Update\InvalidUpdateTestDeveloper::class,
+            $this->instantiateManager(MethodDeveloperManagers\Update\InvalidUpdateTestDeveloperManager::class)
+        );
     }
 
     public function getUnauthorizedUpdateDeveloper(): Developer
     {
-
+        return $this->instantiateDeveloperWithManager(
+            MethodDevelopers\Update\UnauthorizedUpdateTestDeveloper::class,
+            $this->instantiateManager(MethodDeveloperManagers\Update\UnauthorizedUpdateTestDeveloperManager::class)
+        );
     }
 
     public function getDestroyDeveloper(): Developer
