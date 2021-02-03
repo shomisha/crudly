@@ -74,6 +74,11 @@ class ApiTestsDeveloper extends TestsDeveloper
             $developers[] = $this->getManager()->getUnauthorizedUpdateDeveloper();
         }
 
+        $developers[] = $this->getManager()->getDestroyDeveloper();
+        if ($hasAuthorization) {
+            $developers[] = $this->getManager()->getUnauthorizedDestroyDeveloper();
+        }
+
         return $developers;
     }
 }

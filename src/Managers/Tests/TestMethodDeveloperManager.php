@@ -3,12 +3,14 @@
 namespace Shomisha\Crudly\Managers\Tests;
 
 use Shomisha\Crudly\Contracts\Developer;
+use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertDatabaseHasModelDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertDatabaseMissingModelDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertRedirectToIndexDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertResponseForbiddenDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertResponseSuccessfulDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertSessionHasSuccessDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertSoftDeletedColumnIsNotNull;
+use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertSoftDeletedColumnIsNull;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Authentication\AuthenticateAndAuthorizeUserDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Authentication\AuthenticateAndDeauthorizeUserDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Authentication\InvokeAuthorizeUserDeveloper;
@@ -97,9 +99,19 @@ abstract class TestMethodDeveloperManager extends DeveloperManager
         return $this->instantiateDeveloperWithManager(AssertSoftDeletedColumnIsNotNull::class, $this);
     }
 
+    public function getAssertSoftDeletedColumnIsNullDeveloper(): AssertSoftDeletedColumnIsNull
+    {
+        return $this->instantiateDeveloperWithManager(AssertSoftDeletedColumnIsNull::class, $this);
+    }
+
     public function getAssertDatabaseMissingModelDeveloper(): AssertDatabaseMissingModelDeveloper
     {
         return $this->instantiateDeveloperWithManager(AssertDatabaseMissingModelDeveloper::class, $this);
+    }
+
+    public function getAssertDatabaseHasModelDeveloper(): AssertDatabaseHasModelDeveloper
+    {
+        return $this->instantiateDeveloperWithManager(AssertDatabaseHasModelDeveloper::class, $this);
     }
 
     public function getCreateSingleInstanceDeveloper(): CreateSingleModelInstance

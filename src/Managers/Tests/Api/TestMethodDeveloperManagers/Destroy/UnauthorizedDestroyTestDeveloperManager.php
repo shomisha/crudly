@@ -1,6 +1,6 @@
 <?php
 
-namespace Shomisha\Crudly\Managers\Tests\Web\TestMethodDeveloperManagers\Destroy;
+namespace Shomisha\Crudly\Managers\Tests\Api\TestMethodDeveloperManagers\Destroy;
 
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertModelNotDeletedDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Requests\DeleteDestroyRouteDeveloper;

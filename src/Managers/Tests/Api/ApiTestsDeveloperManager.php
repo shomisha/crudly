@@ -114,12 +114,18 @@ class ApiTestsDeveloperManager extends TestClassDeveloperManager
 
     public function getDestroyDeveloper(): Developer
     {
-
+        return $this->instantiateDeveloperWithManager(
+            MethodDevelopers\Destroy\DestroyTestDeveloper::class,
+            $this->instantiateManager(MethodDeveloperManagers\Destroy\DestroyTestDeveloperManager::class)
+        );
     }
 
     public function getUnauthorizedDestroyDeveloper(): Developer
     {
-
+        return $this->instantiateDeveloperWithManager(
+            MethodDevelopers\Destroy\UnauthorizedDestroyTestDeveloper::class,
+            $this->instantiateManager(MethodDeveloperManagers\Destroy\UnauthorizedDestroyTestDeveloperManager::class)
+        );
     }
 
     public function getForceDeleteDeveloper(): Developer
