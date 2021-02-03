@@ -25,6 +25,7 @@ use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Routes\Getters\GetIn
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Routes\Getters\GetRestoreRoute;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Routes\Getters\GetShowRoute;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Routes\Getters\GetStoreRoute;
+use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Routes\Getters\GetUpdateRoute;
 use Shomisha\Crudly\Managers\DeveloperManager;
 
 abstract class TestMethodDeveloperManager extends DeveloperManager
@@ -134,6 +135,11 @@ abstract class TestMethodDeveloperManager extends DeveloperManager
     {
         // TODO: refactor this to support overriding developers
         return $this->instantiateDeveloperWithManager(GetEditRoute::class, $this);
+    }
+
+    public function getUpdateRouteDeveloper(): Developer
+    {
+        return $this->instantiateDeveloperWithManager(GetUpdateRoute::class, $this);
     }
 
     public function getDestroyRouteDeveloper(): Developer
