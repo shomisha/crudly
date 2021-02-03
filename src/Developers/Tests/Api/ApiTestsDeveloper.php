@@ -34,49 +34,64 @@ class ApiTestsDeveloper extends TestsDeveloper
 
     protected function getHelperMethodDevelopers(): array
     {
+        $manager = $this->getManager();
+
         return [
-            $this->getManager()->getAuthenticateUserMethodDeveloper(),
-            $this->getManager()->getAuthorizeMethodDeveloper(),
-            $this->getManager()->getDeauthorizeMethodDeveloper(),
-            ...$this->getManager()->getRouteMethodDevelopers(),
-            $this->getManager()->getDataMethodDeveloper(),
+            $manager->getAuthenticateUserMethodDeveloper(),
+            $manager->getAuthorizeMethodDeveloper(),
+            $manager->getDeauthorizeMethodDeveloper(),
+            ...$manager->getRouteMethodDevelopers(),
+            $manager->getDataMethodDeveloper(),
         ];
     }
 
     protected function getTestDevelopers(CrudlySpecification $specification): array
     {
+        $manager = $this->getManager();
         $developers = [];
         $hasAuthorization = $specification->hasApiAuthorization();
 
 
-        $developers[] = $this->getManager()->getIndexTestDeveloper();
+        $developers[] = $manager->getIndexTestDeveloper();
         if ($hasAuthorization) {
-            $developers[] = $this->getManager()->getUnauthorizedIndexTestDeveloper();
+            $developers[] = $manager->getUnauthorizedIndexTestDeveloper();
         }
 
 
-        $developers[] = $this->getManager()->getShowDeveloper();
+        $developers[] = $manager->getShowDeveloper();
         if ($hasAuthorization) {
-            $developers[] = $this->getManager()->getUnauthorizedShowDeveloper();
+            $developers[] = $manager->getUnauthorizedShowDeveloper();
         }
 
 
-        $developers[] = $this->getManager()->getStoreDeveloper();
-        $developers[] = $this->getManager()->getInvalidDataProviderDeveloper();
-        $developers[] = $this->getManager()->getInvalidStoreDeveloper();
+        $developers[] = $manager->getStoreDeveloper();
+        $developers[] = $manager->getInvalidDataProviderDeveloper();
+        $developers[] = $manager->getInvalidStoreDeveloper();
         if ($hasAuthorization) {
-            $developers[] = $this->getManager()->getUnauthorizedStoreDeveloper();
+            $developers[] = $manager->getUnauthorizedStoreDeveloper();
         }
 
-        $developers[] = $this->getManager()->getUpdateDeveloper();
-        $developers[] = $this->getManager()->getInvalidUpdateDeveloper();
+        $developers[] = $manager->getUpdateDeveloper();
+        $developers[] = $manager->getInvalidUpdateDeveloper();
         if ($hasAuthorization) {
-            $developers[] = $this->getManager()->getUnauthorizedUpdateDeveloper();
+            $developers[] = $manager->getUnauthorizedUpdateDeveloper();
         }
 
-        $developers[] = $this->getManager()->getDestroyDeveloper();
+        $developers[] = $manager->getDestroyDeveloper();
         if ($hasAuthorization) {
-            $developers[] = $this->getManager()->getUnauthorizedDestroyDeveloper();
+            $developers[] = $manager->getUnauthorizedDestroyDeveloper();
+        }
+
+        if ($specification->hasSoftDeletion()) {
+            $developers[] = $manager->getForceDeleteDeveloper();
+            if ($hasAuthorization) {
+                $developers[] = $manager->getUnauthorizedForceDeleteDeveloper();
+            }
+
+            $developers[] = $manager->getRestoreDeveloper();
+            if ($hasAuthorization) {
+                $developers[] = $manager->getUnauthorizedRestoreDeveloper();
+            }
         }
 
         return $developers;

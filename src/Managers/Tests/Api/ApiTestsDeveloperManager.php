@@ -130,21 +130,33 @@ class ApiTestsDeveloperManager extends TestClassDeveloperManager
 
     public function getForceDeleteDeveloper(): Developer
     {
-
+        return $this->instantiateDeveloperWithManager(
+            MethodDevelopers\ForceDelete\ForceDeleteTestDeveloper::class,
+            $this->instantiateManager(MethodDeveloperManagers\ForceDelete\ForceDeleteTestDeveloperManager::class)
+        );
     }
 
     public function getUnauthorizedForceDeleteDeveloper(): Developer
     {
-
+        return $this->instantiateDeveloperWithManager(
+            MethodDevelopers\ForceDelete\UnauthorizedForceDeleteTestDeveloper::class,
+            $this->instantiateManager(MethodDeveloperManagers\ForceDelete\UnauthorizedForceDeleteTestDeveloperManager::class)
+        );
     }
 
     public function getRestoreDeveloper(): Developer
     {
-
+        return $this->instantiateDeveloperWithManager(
+            MethodDevelopers\Restore\RestoreTestDeveloper::class,
+            $this->instantiateManager(MethodDeveloperManagers\Restore\RestoreTestDeveloperManager::class)
+        );
     }
 
     public function getUnauthorizedRestoreDeveloper(): Developer
     {
-
+        return $this->instantiateDeveloperWithManager(
+            MethodDevelopers\Restore\UnauthorizedRestoreTestDeveloper::class,
+            $this->instantiateManager(MethodDeveloperManagers\Restore\UnauthorizedRestoreTestDeveloperManager::class)
+        );
     }
 }
