@@ -2,6 +2,7 @@
 
 namespace Shomisha\Crudly\Developers\Model;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Shomisha\Crudly\Abstracts\Developer;
 use Shomisha\Crudly\Contracts\Specification;
@@ -31,11 +32,17 @@ class ModelDeveloper extends Developer
             $this->getManager()->getSoftDeletionDeveloper()->develop($specification, $developedSet);
         }
 
+        $modelTemplate->addTrait(new Importable(HasFactory::class));
+
         if (!$specification->hasTimestamps()) {
             $modelTemplate->addProperty(
                 ClassProperty::name('timestamps')->value(false)
             );
         }
+
+        $modelTemplate->addProperty(
+            $this->getManager()->getCastsDeveloper()->develop($specification, $developedSet)
+        );
 
         $this->getManager()->getRelationshipsDeveloper()->develop($specification, $developedSet);
 
