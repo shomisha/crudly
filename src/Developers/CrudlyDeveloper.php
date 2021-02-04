@@ -37,6 +37,10 @@ class CrudlyDeveloper
             }
         }
 
+        if ($specification->hasWebAuthorization() || $specification->hasApiAuthorization()) {
+            $this->developPolicy($specification, $set);
+        }
+
         return $set;
     }
 
@@ -73,5 +77,10 @@ class CrudlyDeveloper
     private function developApiTests(CrudlySpecification $specification, CrudlySet $developedSet): void
     {
         $this->manager->getApiTestsDeveloper()->develop($specification, $developedSet);
+    }
+
+    private function developPolicy(CrudlySpecification $specification, CrudlySet $developedSet): void
+    {
+        $this->manager->getPolicyTestsDeveloper()->develop($specification, $developedSet);
     }
 }

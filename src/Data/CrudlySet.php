@@ -26,6 +26,8 @@ class CrudlySet
 
     private Code $apiTests;
 
+    private Code $policy;
+
     public function getMigration(): Code
     {
         return $this->migration;
@@ -142,6 +144,18 @@ class CrudlySet
     public function setApiTests(Code $apiTests): self
     {
         $this->apiTests = $apiTests;
+
+        return $this;
+    }
+
+    public function getPolicy(): Code
+    {
+        return $this->policy;
+    }
+
+    public function setPolicy(Code $policy): self
+    {
+        $this->policy = $policy;
 
         return $this;
     }

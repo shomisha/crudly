@@ -6,6 +6,7 @@ use Shomisha\Crudly\Contracts\Developer;
 use Shomisha\Crudly\Developers\Crud\Api\CrudControllerDeveloper as ApiCrudControllerDeveloper;
 use Shomisha\Crudly\Developers\Crud\Api\FormRequest\ApiFormRequestDeveloper;
 use Shomisha\Crudly\Developers\Crud\Api\Resource\ApiResourceDeveloper;
+use Shomisha\Crudly\Developers\Crud\PolicyDeveloper;
 use Shomisha\Crudly\Developers\Crud\Web\CrudControllerDeveloper as WebCrudControllerDeveloper;
 use Shomisha\Crudly\Developers\Crud\Web\FormRequest\WebFormRequestDeveloper;
 use Shomisha\Crudly\Developers\Factory\FactoryClassDeveloper;
@@ -93,6 +94,11 @@ class DeveloperManager extends BaseDeveloperManager
     {
         // TODO: refactor this to support overriding developers
         return $this->instantiateDeveloperWithManager(ApiTestsDeveloper::class, $this->getApiTestsDeveloperManager());
+    }
+
+    public function getPolicyTestsDeveloper(): Developer
+    {
+        return $this->instantiateDeveloperWithManager(PolicyDeveloper::class, $this);
     }
 
     private function getWebCrudManager(): WebCrudDeveloperManager
