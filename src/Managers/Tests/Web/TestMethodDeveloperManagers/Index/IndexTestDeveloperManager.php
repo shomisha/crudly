@@ -4,7 +4,7 @@ namespace Shomisha\Crudly\Managers\Tests\Web\TestMethodDeveloperManagers\Index;
 
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertAllModelIdsPresentDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertResponseModelIdsCountSameAsModels;
-use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\Views\AssertViewIsIndex;
+use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertViewIsDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Factory\CreateMultipleModelInstances;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\GetModelIdsFromResponseDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Requests\GetIndexRouteDeveloper;
@@ -34,7 +34,7 @@ class IndexTestDeveloperManager extends TestMethodDeveloperManager
         // TODO: refactor this to support overriding developers
         return [
             $this->getAssertResponseSuccessfulDeveloper(),
-            $this->instantiateDeveloperWithManager(AssertViewIsIndex::class, $this),
+            $this->instantiateDeveloperWithManager(AssertViewIsDeveloper::class, $this)->using(['view' => 'index']),
             $this->instantiateDeveloperWithManager(GetModelIdsFromResponseDeveloper::class, $this),
             $this->instantiateDeveloperWithManager(AssertResponseModelIdsCountSameAsModels::class, $this),
             $this->instantiateDeveloperWithManager(AssertAllModelIdsPresentDeveloper::class, $this),

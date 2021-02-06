@@ -3,7 +3,7 @@
 namespace Shomisha\Crudly\Managers\Tests\Web\TestMethodDeveloperManagers\Index;
 
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertResponseModelsMissingSingularModel;
-use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\Views\AssertViewIsIndex;
+use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertViewIsDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Factory\CreateMultipleModelInstances;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Factory\CreateSoftDeletedInstance;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\GetModelIdsFromResponseDeveloper;
@@ -32,7 +32,7 @@ class IndexWillNotContainSoftDeletedModelsTestDeveloperManager extends TestMetho
     {
         return [
             $this->getAssertResponseSuccessfulDeveloper(),
-            $this->instantiateDeveloperWithManager(AssertViewIsIndex::class, $this),
+            $this->instantiateDeveloperWithManager(AssertViewIsDeveloper::class, $this)->using(['view' => 'index']),
             $this->instantiateDeveloperWithManager(GetModelIdsFromResponseDeveloper::class, $this),
             $this->instantiateDeveloperWithManager(AssertResponseModelsMissingSingularModel::class, $this),
         ];

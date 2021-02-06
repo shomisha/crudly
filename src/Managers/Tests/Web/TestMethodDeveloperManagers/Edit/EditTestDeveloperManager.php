@@ -3,7 +3,7 @@
 namespace Shomisha\Crudly\Managers\Tests\Web\TestMethodDeveloperManagers\Edit;
 
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertResponseModelIsTestModel;
-use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\Views\AssertViewIsEdit;
+use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertViewIsDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Factory\CreateSingleModelInstance;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Requests\LoadEditPageDeveloper;
 use Shomisha\Crudly\Managers\Tests\TestMethodDeveloperManager;
@@ -29,7 +29,7 @@ class EditTestDeveloperManager extends TestMethodDeveloperManager
     {
         return [
             $this->getAssertResponseSuccessfulDeveloper(),
-            $this->instantiateDeveloperWithManager(AssertViewIsEdit::class, $this),
+            $this->instantiateDeveloperWithManager(AssertViewIsDeveloper::class, $this)->using(['view' => 'edit']),
             $this->instantiateDeveloperWithManager(AssertResponseModelIsTestModel::class, $this),
         ];
     }

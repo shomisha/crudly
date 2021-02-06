@@ -3,7 +3,7 @@
 namespace Shomisha\Crudly\Managers\Tests\Web\TestMethodDeveloperManagers\Show;
 
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertResponseModelIsTestModel;
-use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\Views\AssertViewIsShow;
+use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertViewIsDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Factory\CreateSingleModelInstance;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Requests\GetShowRouteDeveloper;
 use Shomisha\Crudly\Managers\Tests\TestMethodDeveloperManager;
@@ -29,7 +29,7 @@ class ShowTestDeveloperManager extends TestMethodDeveloperManager
     {
         return [
             $this->getAssertResponseSuccessfulDeveloper(),
-            $this->instantiateDeveloperWithManager(AssertViewIsShow::class, $this),
+            $this->instantiateDeveloperWithManager(AssertViewIsDeveloper::class, $this)->using(['view' => 'show']),
             $this->instantiateDeveloperWithManager(AssertResponseModelIsTestModel::class, $this),
         ];
     }
