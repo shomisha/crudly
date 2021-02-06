@@ -3,7 +3,7 @@
 namespace Shomisha\Crudly\Managers\Crud\Web;
 
 use Shomisha\Crudly\Contracts\Developer;
-use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Authorization\ViewAuthorizationDeveloper;
+use Shomisha\Crudly\Developers\Crud\PartialDevelopers\InvokeAuthorizationDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\LoadRelationshipsDeveloper;
 use Shomisha\Crudly\Developers\Crud\Web\Show\ResponseDeveloper as ShowResponseDeveloper;
 use Shomisha\Crudly\Managers\Crud\CrudMethodDeveloperManager;
@@ -26,7 +26,7 @@ class ShowMethodDeveloperManager extends CrudMethodDeveloperManager
 
     public function getAuthorizationDeveloper(): Developer
     {
-        return $this->instantiateDeveloperWithManager(ViewAuthorizationDeveloper::class, $this);
+        return $this->instantiateDeveloperWithManager(InvokeAuthorizationDeveloper::class, $this)->using(['action' => 'view', 'withModel' => true]);
     }
 
     public function getMainDeveloper(): Developer

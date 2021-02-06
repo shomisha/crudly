@@ -4,7 +4,7 @@ namespace Shomisha\Crudly\Managers\Crud\Api;
 
 use Shomisha\Crudly\Contracts\Developer;
 use Shomisha\Crudly\Developers\Crud\Api\Store\InstantiateFillAndSaveDeveloper;
-use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Authorization\CreateAuthorizationDeveloper;
+use Shomisha\Crudly\Developers\Crud\PartialDevelopers\InvokeAuthorizationDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\InstantiateDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\InvokeModelMethodDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\ReturnSingleResourceDeveloper;
@@ -27,7 +27,7 @@ class StoreMethodDeveloperManager extends CrudMethodDeveloperManager
 
     public function getAuthorizationDeveloper(): Developer
     {
-        return $this->instantiateDeveloperWithManager(CreateAuthorizationDeveloper::class, $this);
+        return $this->instantiateDeveloperWithManager(InvokeAuthorizationDeveloper::class, $this)->using(['action' => 'create', 'withClass' => true]);
     }
 
     public function getMainDeveloper(): Developer
