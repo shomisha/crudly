@@ -3,7 +3,7 @@
 namespace Shomisha\Crudly\Managers\Tests\Api\TestMethodDeveloperManagers\Update;
 
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertModelUpdatedWithNewValuesDeveloper;
-use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertResponseStatusOkDeveloper;
+use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertResponseStatusDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Factory\CreateModelWithOldDefaultsDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Requests\PutDataToUpdateRouteDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\TestData\GetDataWithNewDefaultsDeveloper;
@@ -30,7 +30,7 @@ class UpdateTestDeveloperManager extends TestMethodDeveloperManager
     public function getAssertDevelopers(): array
     {
         return [
-            $this->instantiateDeveloperWithManager(AssertResponseStatusOkDeveloper::class, $this),
+            $this->instantiateDeveloperWithManager(AssertResponseStatusDeveloper::class, $this)->using(['status' => 200]),
             $this->getRefreshModelDeveloper(),
             $this->instantiateDeveloperWithManager(AssertModelUpdatedWithNewValuesDeveloper::class, $this),
         ];
