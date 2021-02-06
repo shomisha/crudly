@@ -2,17 +2,36 @@
 
 namespace Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\TestData\Defaults;
 
+use Illuminate\Support\Collection;
 use Shomisha\Crudly\Enums\ModelPropertyType;
 use Shomisha\Crudly\Specifications\ModelPropertySpecification;
 
 abstract class DefaultsGuesser
 {
-    public static function new(): self
+    private Collection $properties;
+
+    public function __construct(Collection $properties)
     {
-        return new static();
+        $this->properties = $properties;
     }
 
-    public function canGuessDefaultFor(ModelPropertySpecification $property): bool
+    public static function forProperties(Collection $properties): self
+    {
+        return new static($properties);
+    }
+
+    public function guess(): array
+    {
+        return $this->properties->mapWithKeys(function (ModelPropertySpecification $property) {
+            if ($this->canGuessDefaultFor($property)) {
+                return [$property->getName() => $this->guessDefaultFor($property)];
+            }
+
+            return [null => null];
+        })->filter()->toArray();
+    }
+
+    protected function canGuessDefaultFor(ModelPropertySpecification $property): bool
     {
         if ($this->propertyIsEmail($property)) {
             return true;
@@ -21,7 +40,7 @@ abstract class DefaultsGuesser
         return array_key_exists($property->getName(), $this->getDefaults());
     }
 
-    public function guessDefaultFor(ModelPropertySpecification $property)
+    protected function guessDefaultFor(ModelPropertySpecification $property)
     {
         if ($this->propertyIsEmail($property)) {
             return $this->getEmailDefault();

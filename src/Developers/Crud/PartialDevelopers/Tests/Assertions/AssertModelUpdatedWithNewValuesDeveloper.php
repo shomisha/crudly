@@ -39,14 +39,6 @@ class AssertModelUpdatedWithNewValuesDeveloper extends TestsDeveloper
 
     protected function getUpdatedFields(CrudlySpecification $specification): array
     {
-        $newDefaults = new NewDefaults();
-
-        return $specification->getProperties()->mapWithKeys(function (ModelPropertySpecification $property) use ($newDefaults) {
-            if (!$newDefaults->canGuessDefaultFor($property)) {
-                return [null => null];
-            }
-
-            return [$property->getName() => $newDefaults->guessDefaultFor($property)];
-        })->filter()->toArray();
+        return NewDefaults::forProperties($specification->getProperties())->guess();
     }
 }

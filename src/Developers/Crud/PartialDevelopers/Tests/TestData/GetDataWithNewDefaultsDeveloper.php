@@ -26,22 +26,12 @@ class GetDataWithNewDefaultsDeveloper extends TestsDeveloper
 
     protected function getDataWithDefaults(CrudlySpecification $specification): InvokeMethodBlock
     {
-        $defaults = NewDefaults::new();
-
-        $arguments = $specification->getProperties()->mapWithKeys(function (ModelPropertySpecification $property) use ($defaults) {
-            if (!$defaults->canGuessDefaultFor($property)) {
-                return [null => null];
-            }
-
-            return [
-                $property->getName() => $defaults->guessDefaultFor($property),
-            ];
-        })->filter()->toArray();
-
         return Block::invokeMethod(
             Reference::this(),
             $this->getModelDataMethodName($specification->getModel()),
-            [$arguments]
+            [
+                NewDefaults::forProperties($specification->getProperties())->guess()
+            ]
         );
     }
 }

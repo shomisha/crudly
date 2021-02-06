@@ -29,16 +29,6 @@ class AssertDatabaseContainsNewModel extends TestsDeveloper
 
     protected function guessDefaults(CrudlySpecification $specification): array
     {
-        $defaults = NewDefaults::new();
-
-        return $specification->getProperties()->mapWithKeys(function (ModelPropertySpecification $property) use ($defaults) {
-            if (!$defaults->canGuessDefaultFor($property)) {
-                return [null => null];
-            }
-
-            return [
-                $property->getName() => $defaults->guessDefaultFor($property),
-            ];
-        })->filter()->toArray();
+        return NewDefaults::forProperties($specification->getProperties())->guess();
     }
 }

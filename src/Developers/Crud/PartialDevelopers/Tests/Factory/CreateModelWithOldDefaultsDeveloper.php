@@ -41,18 +41,8 @@ class CreateModelWithOldDefaultsDeveloper extends TestsDeveloper
 
     protected function getOldOverride(CrudlySpecification $specification, CrudlySet $developedSet): ArrayValue
     {
-        $oldDefaults = OldDefaults::new();
-
-        $propertyDefaults = $specification->getProperties()->mapWithKeys(function (ModelPropertySpecification $property) use ($oldDefaults) {
-            if (!$oldDefaults->canGuessDefaultFor($property)) {
-                return [null => null];
-            }
-
-            return [
-                $property->getName() => $oldDefaults->guessDefaultFor($property),
-            ];
-        })->filter()->toArray();
-
-        return Value::array($propertyDefaults);
+        return Value::array(
+            OldDefaults::forProperties($specification->getProperties())->guess()
+        );
     }
 }

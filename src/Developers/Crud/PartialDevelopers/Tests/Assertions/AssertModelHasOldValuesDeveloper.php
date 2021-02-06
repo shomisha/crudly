@@ -39,14 +39,6 @@ class AssertModelHasOldValuesDeveloper extends TestsDeveloper
 
     protected function getOldFields(CrudlySpecification $specification): array
     {
-        $oldDefaults = new OldDefaults();
-
-        return $specification->getProperties()->mapWithKeys(function (ModelPropertySpecification $property) use ($oldDefaults) {
-            if (!$oldDefaults->canGuessDefaultFor($property)) {
-                return [null => null];
-            }
-
-            return [$property->getName() => $oldDefaults->guessDefaultFor($property)];
-        })->filter()->toArray();
+        return OldDefaults::forProperties($specification->getProperties())->guess();
     }
 }
