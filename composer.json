@@ -7,7 +7,9 @@
         "php": "^7.4",
         "laravel/framework": "^8.0",
         "shomisha/laravel-console-wizard": "^1.7",
-        "shomisha/stubless": "^1.4"
+        "shomisha/stubless": "^1.4",
+        "orchestra/testbench": "^6.11",
+        "mockery/mockery": "^1.4"
     },
     "license": "MIT",
     "authors": [

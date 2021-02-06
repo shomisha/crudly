@@ -60,6 +60,13 @@ class Crudly
         return $set;
     }
 
+    protected function setModelSupervisor(ModelSupervisor $modelSupervisor): self
+    {
+        $this->modelSupervisor = $modelSupervisor;
+
+        return $this;
+    }
+
     private function getCrudlyDeveloper(): CrudlyDeveloper
     {
         return new CrudlyDeveloper($this->developerManager);
