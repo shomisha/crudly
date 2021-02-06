@@ -4,7 +4,7 @@ namespace Shomisha\Crudly\Managers\Crud\Api;
 
 use Shomisha\Crudly\Contracts\Developer;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Authorization\ForceDeleteAuthorizationDeveloper;
-use Shomisha\Crudly\Developers\Crud\PartialDevelopers\MethodInvocation\InvokeForceDeleteMethodDeveloper;
+use Shomisha\Crudly\Developers\Crud\PartialDevelopers\InvokeModelMethodDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\ReturnNoContentDeveloper;
 use Shomisha\Crudly\Managers\Crud\CrudMethodDeveloperManager;
 
@@ -29,7 +29,7 @@ class ForceDeleteMethodDeveloperManager extends CrudMethodDeveloperManager
 
     public function getMainDeveloper(): Developer
     {
-        return $this->instantiateDeveloperWithManager(InvokeForceDeleteMethodDeveloper::class, $this);
+        return $this->instantiateDeveloperWithManager(InvokeModelMethodDeveloper::class, $this)->using(['method' => 'forceDelete']);
     }
 
     public function getResponseDeveloper(): Developer

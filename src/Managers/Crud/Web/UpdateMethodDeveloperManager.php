@@ -3,8 +3,8 @@
 namespace Shomisha\Crudly\Managers\Crud\Web;
 
 use Shomisha\Crudly\Contracts\Developer;
-use Shomisha\Crudly\Developers\Crud\PartialDevelopers\MethodInvocation\InvokeUpdateMethodDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Authorization\UpdateAuthorizationDeveloper;
+use Shomisha\Crudly\Developers\Crud\PartialDevelopers\InvokeModelMethodDeveloper;
 use Shomisha\Crudly\Developers\Crud\Web\Store\Fill\FillFieldsSeparatelyDeveloper;
 use Shomisha\Crudly\Developers\Crud\Web\Update\ResponseDeveloper as UpdateResponseDeveloper;
 use Shomisha\Crudly\Developers\Crud\Web\Update\ValidateFillAndUpdateDeveloper;
@@ -53,7 +53,7 @@ class UpdateMethodDeveloperManager extends CrudMethodDeveloperManager
     public function getSaveDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(InvokeUpdateMethodDeveloper::class, $this);
+        return $this->instantiateDeveloperWithManager(InvokeModelMethodDeveloper::class, $this)->using(['method' => 'update']);
     }
 
     public function getResponseDeveloper(): Developer

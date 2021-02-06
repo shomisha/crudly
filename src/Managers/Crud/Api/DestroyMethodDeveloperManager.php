@@ -4,7 +4,7 @@ namespace Shomisha\Crudly\Managers\Crud\Api;
 
 use Shomisha\Crudly\Contracts\Developer;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Authorization\DeleteAuthorizationDeveloper;
-use Shomisha\Crudly\Developers\Crud\PartialDevelopers\MethodInvocation\InvokeDeleteMethodDeveloper;
+use Shomisha\Crudly\Developers\Crud\PartialDevelopers\InvokeModelMethodDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\ReturnNoContentDeveloper;
 use Shomisha\Crudly\Managers\Crud\CrudMethodDeveloperManager;
 
@@ -33,7 +33,7 @@ class DestroyMethodDeveloperManager extends CrudMethodDeveloperManager
     public function getMainDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(InvokeDeleteMethodDeveloper::class, $this);
+        return $this->instantiateDeveloperWithManager(InvokeModelMethodDeveloper::class, $this)->using(['method' => 'delete']);
     }
 
     public function getResponseDeveloper(): Developer

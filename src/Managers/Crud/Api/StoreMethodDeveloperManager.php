@@ -6,7 +6,7 @@ use Shomisha\Crudly\Contracts\Developer;
 use Shomisha\Crudly\Developers\Crud\Api\Store\InstantiateFillAndSaveDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Authorization\CreateAuthorizationDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\InstantiateDeveloper;
-use Shomisha\Crudly\Developers\Crud\PartialDevelopers\MethodInvocation\InvokeSaveMethodDeveloper;
+use Shomisha\Crudly\Developers\Crud\PartialDevelopers\InvokeModelMethodDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\ReturnSingleResourceDeveloper;
 use Shomisha\Crudly\Developers\Crud\Web\Store\Fill\FillFieldsSeparatelyDeveloper;
 use Shomisha\Crudly\Managers\Crud\CrudMethodDeveloperManager;
@@ -56,7 +56,7 @@ class StoreMethodDeveloperManager extends CrudMethodDeveloperManager
     public function getSaveDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(InvokeSaveMethodDeveloper::class, $this);
+        return $this->instantiateDeveloperWithManager(InvokeModelMethodDeveloper::class, $this)->using(['method' => 'save']);
     }
 
     public function getResponseDeveloper(): Developer

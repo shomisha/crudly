@@ -4,7 +4,7 @@ namespace Shomisha\Crudly\Managers\Crud\Api;
 
 use Shomisha\Crudly\Contracts\Developer;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Authorization\RestoreAuthorizationDeveloper;
-use Shomisha\Crudly\Developers\Crud\PartialDevelopers\MethodInvocation\InvokeRestoreMethodDeveloper;
+use Shomisha\Crudly\Developers\Crud\PartialDevelopers\InvokeModelMethodDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\ReturnNoContentDeveloper;
 use Shomisha\Crudly\Managers\Crud\CrudMethodDeveloperManager;
 
@@ -29,7 +29,7 @@ class RestoreMethodDeveloperManager extends CrudMethodDeveloperManager
 
     public function getMainDeveloper(): Developer
     {
-        return $this->instantiateDeveloperWithManager(InvokeRestoreMethodDeveloper::class, $this);
+        return $this->instantiateDeveloperWithManager(InvokeModelMethodDeveloper::class, $this)->using(['method' => 'restore']);
     }
 
     public function getResponseDeveloper(): Developer
