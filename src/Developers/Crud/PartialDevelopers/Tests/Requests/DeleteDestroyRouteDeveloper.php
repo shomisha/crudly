@@ -30,6 +30,6 @@ class DeleteDestroyRouteDeveloper extends TestsDeveloper
 
     protected function getRoute(CrudlySpecification $specification, CrudlySet $developedSet): Code
     {
-        return $this->getManager()->getDestroyRouteDeveloper()->develop($specification, $developedSet);
+        return $this->getManager()->getGetRouteDeveloper()->using(['route' => 'destroy', 'withModel' => true])->develop($specification, $developedSet);
     }
 }

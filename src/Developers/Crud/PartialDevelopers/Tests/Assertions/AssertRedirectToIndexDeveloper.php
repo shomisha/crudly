@@ -27,6 +27,6 @@ class AssertRedirectToIndexDeveloper extends TestsDeveloper
 
     protected function getRoute(CrudlySpecification $specification, CrudlySet $developedSet): Code
     {
-        return $this->getManager()->getIndexRouteDeveloper()->develop($specification, $developedSet);
+        return $this->getManager()->getGetRouteDeveloper()->using(['route' => 'index'])->develop($specification, $developedSet);
     }
 }

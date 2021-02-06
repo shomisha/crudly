@@ -31,6 +31,6 @@ class PutDataToUpdateRouteDeveloper extends TestsDeveloper
 
     protected function getRoute(CrudlySpecification $specification, CrudlySet $developedSet): Code
     {
-        return $this->getManager()->getUpdateRouteDeveloper()->develop($specification, $developedSet);
+        return $this->getManager()->getGetRouteDeveloper()->using(['route' => 'update', 'withModel' => true])->develop($specification, $developedSet);
     }
 }

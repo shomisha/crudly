@@ -30,6 +30,6 @@ class LoadEditPageDeveloper extends TestsDeveloper
 
     protected function getRoute(CrudlySpecification $specification, CrudlySet $developedSet): Code
     {
-        return $this->getManager()->getEditRouteDeveloper()->develop($specification, $developedSet);
+        return $this->getManager()->getGetRouteDeveloper()->using(['route' => 'edit', 'withModel' => true])->develop($specification, $developedSet);
     }
 }

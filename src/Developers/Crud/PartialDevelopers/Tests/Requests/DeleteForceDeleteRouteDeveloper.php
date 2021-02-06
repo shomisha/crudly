@@ -35,6 +35,6 @@ class DeleteForceDeleteRouteDeveloper extends TestsDeveloper
 
     protected function getRoute(CrudlySpecification $specification, CrudlySet $developedSet): Code
     {
-        return $this->getManager()->getForceDeleteRouteDeveloper()->develop($specification, $developedSet);
+        return $this->getManager()->getGetRouteDeveloper()->using(['route' => 'forceDelete', 'withModel' => true])->develop($specification, $developedSet);
     }
 }

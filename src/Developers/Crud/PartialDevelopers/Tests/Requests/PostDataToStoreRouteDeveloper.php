@@ -36,6 +36,6 @@ class PostDataToStoreRouteDeveloper extends TestsDeveloper
 
     protected function getRoute(CrudlySpecification $specification, CrudlySet $developedSet): Code
     {
-        return $this->getManager()->getStoreRouteDeveloper()->develop($specification, $developedSet);
+        return $this->getManager()->getGetRouteDeveloper()->using(['route' => 'store'])->develop($specification, $developedSet);
     }
 }

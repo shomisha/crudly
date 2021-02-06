@@ -35,6 +35,6 @@ class PatchRestoreRouteDeveloper extends TestsDeveloper
 
     protected function getRoute(CrudlySpecification $specification, CrudlySet $developedSet): Code
     {
-        return $this->getManager()->getRestoreRouteDeveloper()->develop($specification, $developedSet);
+        return $this->getManager()->getGetRouteDeveloper()->using(['route' => 'restore', 'withModel' => true])->develop($specification, $developedSet);
     }
 }

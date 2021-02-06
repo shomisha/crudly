@@ -30,6 +30,6 @@ class GetShowRouteDeveloper extends TestsDeveloper
 
     protected function getRoute(CrudlySpecification $specification, CrudlySet $developedSet): Code
     {
-        return $this->getManager()->getShowRouteDeveloper()->develop($specification, $developedSet);
+        return $this->getManager()->getGetRouteDeveloper()->using(['route' => 'show', 'withModel' => true])->develop($specification, $developedSet);
     }
 }

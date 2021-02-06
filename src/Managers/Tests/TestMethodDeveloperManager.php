@@ -17,17 +17,8 @@ use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Authentication\Invok
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Authentication\InvokeCreateAndAuthenticateUserDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Authentication\InvokeDeauthorizeUserDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Factory\CreateSingleModelInstance;
-use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\GetModelIdsFromResponseDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\RefreshModelDeveloper;
-use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Routes\Getters\GetCreateRoute;
-use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Routes\Getters\GetDestroyRoute;
-use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Routes\Getters\GetEditRoute;
-use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Routes\Getters\GetForceDeleteRoute;
-use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Routes\Getters\GetIndexRoute;
-use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Routes\Getters\GetRestoreRoute;
-use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Routes\Getters\GetShowRoute;
-use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Routes\Getters\GetStoreRoute;
-use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Routes\Getters\GetUpdateRoute;
+use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\GetRouteDeveloper;
 use Shomisha\Crudly\Managers\DeveloperManager;
 
 abstract class TestMethodDeveloperManager extends DeveloperManager
@@ -119,54 +110,8 @@ abstract class TestMethodDeveloperManager extends DeveloperManager
         return $this->instantiateDeveloperWithManager(CreateSingleModelInstance::class, $this);
     }
 
-    public function getIndexRouteDeveloper(): Developer
+    public function getGetRouteDeveloper(): GetRouteDeveloper
     {
-        // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(GetIndexRoute::class, $this);
-    }
-
-    public function getShowRouteDeveloper(): Developer
-    {
-        // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(GetShowRoute::class, $this);
-    }
-
-    public function getCreateRouteDeveloper(): Developer
-    {
-        // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(GetCreateRoute::class, $this);
-    }
-
-    public function getStoreRouteDeveloper(): Developer
-    {
-        // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(GetStoreRoute::class, $this);
-    }
-
-    public function getEditRouteDeveloper(): Developer
-    {
-        // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(GetEditRoute::class, $this);
-    }
-
-    public function getUpdateRouteDeveloper(): Developer
-    {
-        return $this->instantiateDeveloperWithManager(GetUpdateRoute::class, $this);
-    }
-
-    public function getDestroyRouteDeveloper(): Developer
-    {
-        // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(GetDestroyRoute::class, $this);
-    }
-
-    public function getForceDeleteRouteDeveloper(): Developer
-    {
-        return $this->instantiateDeveloperWithManager(GetForceDeleteRoute::class, $this);
-    }
-
-    public function getRestoreRouteDeveloper(): Developer
-    {
-        return $this->instantiateDeveloperWithManager(GetRestoreRoute::class, $this);
+        return $this->instantiateDeveloperWithManager(GetRouteDeveloper::class, $this);
     }
 }
