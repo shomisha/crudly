@@ -79,7 +79,7 @@ abstract class Developer implements DeveloperContract
         return Str::of($modelName)->camel()->plural();
     }
 
-    protected function guessModelViewNamespace(ModelName $modelName): string
+    protected function guessModelViewNamespace(ModelName $modelName, ?string $viewName = null): string
     {
         $name = '';
 
@@ -87,7 +87,11 @@ abstract class Developer implements DeveloperContract
             $name .= Str::of($namespace)->replace('\\', '.')->snake()->singular() . ".";
         }
 
-        $name .= Str::of($modelName->getName())->snake()->singular();
+        $name .= Str::of($modelName->getName())->snake()->plural();
+
+        if ($viewName !== null) {
+            $name .= ".{$viewName}";
+        }
 
         return $name;
     }

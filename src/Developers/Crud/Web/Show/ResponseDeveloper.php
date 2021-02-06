@@ -17,7 +17,7 @@ class ResponseDeveloper extends CrudDeveloper
         $modelVarName = $this->guessSingularModelVariableName($model->getName());
 
         return $this->returnViewBlock(
-            $this->guessModelViewNamespace($model) . '.show',
+            $this->guessModelViewNamespace($model, 'show'),
             [
                 $modelVarName => Reference::variable($modelVarName)
             ]

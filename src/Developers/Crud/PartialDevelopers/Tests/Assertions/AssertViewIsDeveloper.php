@@ -18,7 +18,7 @@ class AssertViewIsDeveloper extends Developer
             Reference::variable('response'),
             'assertViewIs',
             [
-                $this->guessModelViewNamespace($specification->getModel()) . '.' . $this->getParameter('view')
+                $this->guessModelViewNamespace($specification->getModel(), $this->getParameter('view')),
             ]
         );
     }

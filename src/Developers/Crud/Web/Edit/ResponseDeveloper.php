@@ -24,7 +24,7 @@ class ResponseDeveloper extends CrudDeveloper
         })->toArray();
 
         return $this->returnViewBlock(
-            $this->guessModelViewNamespace($specification->getModel()),
+            $this->guessModelViewNamespace($specification->getModel(), 'edit'),
             array_merge([
                 $modelName => Reference::variable($modelName),
             ], $relationships)
