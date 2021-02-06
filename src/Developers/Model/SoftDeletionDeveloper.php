@@ -3,7 +3,7 @@
 namespace Shomisha\Crudly\Developers\Model;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Shomisha\Crudly\Contracts\Developer;
+use Shomisha\Crudly\Abstracts\Developer;
 use Shomisha\Crudly\Contracts\Specification;
 use Shomisha\Crudly\Data\CrudlySet;
 use Shomisha\Stubless\DeclarativeCode\ClassMethod;
@@ -11,7 +11,7 @@ use Shomisha\Stubless\DeclarativeCode\ClassTemplate;
 use Shomisha\Stubless\ImperativeCode\Block;
 use Shomisha\Stubless\Utilities\Importable;
 
-class SoftDeletionDeveloper implements Developer
+class SoftDeletionDeveloper extends Developer
 {
     public function develop(Specification $specification, CrudlySet $developedSet): ClassTemplate
     {

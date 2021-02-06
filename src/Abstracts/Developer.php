@@ -15,10 +15,38 @@ abstract class Developer implements DeveloperContract
 
     private ModelSupervisor $modelSupervisor;
 
+    private array $parameters = [];
+
     public function __construct(DeveloperManagerAbstract $manager, ModelSupervisor $modelSupervisor)
     {
         $this->manager = $manager;
         $this->modelSupervisor = $modelSupervisor;
+    }
+
+    public function using(array $parameters): self
+    {
+        $this->parameters = $parameters;
+
+        return $this;
+    }
+
+    protected function getParameter(string $name)
+    {
+        return $this->parameters[$name];
+    }
+
+    protected function parameterOrDefault(string $name, $default)
+    {
+        if (!$this->hasParameter($name)) {
+            return $default;
+        }
+
+        return $this->getParameter($name);
+    }
+
+    protected function hasParameter(string $name): bool
+    {
+        return array_key_exists($name, $this->parameters);
     }
 
     protected function getManager(): DeveloperManagerAbstract

@@ -2,7 +2,7 @@
 
 namespace Shomisha\Crudly\Developers\Model;
 
-use Shomisha\Crudly\Contracts\Developer;
+use Shomisha\Crudly\Abstracts\Developer;
 use Shomisha\Crudly\Contracts\Specification;
 use Shomisha\Crudly\Data\CrudlySet;
 use Shomisha\Crudly\ModelPropertyGuessers\CastGuesser;
@@ -10,7 +10,7 @@ use Shomisha\Crudly\Specifications\CrudlySpecification;
 use Shomisha\Crudly\Specifications\ModelPropertySpecification;
 use Shomisha\Stubless\DeclarativeCode\ClassProperty;
 
-class CastsDeveloper implements Developer
+class CastsDeveloper extends Developer
 {
     /** @param \Shomisha\Crudly\Specifications\CrudlySpecification $specification */
     public function develop(Specification $specification, CrudlySet $developedSet): ClassProperty

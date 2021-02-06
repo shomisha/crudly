@@ -22,7 +22,7 @@ abstract class BaseDeveloperManager
 
     public function nullDeveloper(): NullDeveloper
     {
-        return new NullDeveloper();
+        return $this->instantiateDeveloperWithManager(NullDeveloper::class, $this);
     }
 
     public function nullMethodDeveloper(): NullMethodDeveloper
