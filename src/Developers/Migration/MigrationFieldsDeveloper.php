@@ -121,7 +121,7 @@ class MigrationFieldsDeveloper extends Developer
 
     private function developSoftDeleteMigration(CrudlySpecification $specification): ?InvokeMethodBlock
     {
-        if ($columnName = $specification->softDeletionColumnName()) {
+        if (!$columnName = $specification->softDeletionColumnName()) {
             return null;
         }
 
@@ -129,7 +129,7 @@ class MigrationFieldsDeveloper extends Developer
             $this->getTableVar(),
             'softDeletes',
             [
-                $specification->softDeletionColumnDefinition()->getName()
+                $specification->softDeletionColumnName()
             ]
         );
     }
