@@ -16,7 +16,7 @@ class RelationshipSubwizard extends Subwizard
     function getSteps(): array
     {
         return [
-            'table' => new TextStep('To which table should this foreign key point to?'),
+            'table' => new TextStep('Which table should this foreign key point to?'),
             'field' => new TextStep('Which field should this foreign key point to?'),
             'has_relationship' => new ConfirmStep('Do you want a relationship for this method?', true),
             'on_delete' => new ChoiceStep('What should happen on row delete?', ForeignKeyAction::all()),

@@ -20,7 +20,7 @@ class ModelPropertySubwizard extends Subwizard
             'is_autoincrement' => new ConfirmStep('Should this field be auto-increment?'),
             'is_unique' => new ConfirmStep('Should this field be unique?'),
             'is_nullable' => new ConfirmStep('Should this field be nullable?'),
-            'is_primary' => new ConfirmStep('Should this property be the primary key?'),
+            'is_primary' => new ConfirmStep('Should this field be the primary key?'),
             'is_foreign_key' => new ConfirmStep('Should this field be a foreign key?'),
             'foreign_key_target' => $this->subWizard(new RelationshipSubwizard()),
         ];

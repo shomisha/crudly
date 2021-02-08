@@ -66,7 +66,11 @@ class CrudlyWizard extends Wizard
     {
         if (!$override) {
             $this->abort("Cancelled.");
+
+            return $override;
         }
+
+        $this->line("Define model properties:");
 
         return $override;
     }
