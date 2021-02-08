@@ -86,7 +86,7 @@ class CrudlySpecification extends Specification
 
     public function hasApiAuthorization(): bool
     {
-        return $this->extract(self::KEY_API_HAS_AUTHORIZATION);
+        return $this->extract(self::KEY_API_HAS_AUTHORIZATION) ?? false;
     }
 
     public function hasApiTests(): bool
