@@ -136,14 +136,6 @@ class CrudlyWizard extends Wizard
         $specification = $this->crudly->prepareSpecification($this->answers->all());
 
         $developedSet = $this->crudly->develop($specification);
-
-        dd([
-            'web' => $developedSet->getWebCrudController()->print(),
-            'api' => $developedSet->getApiCrudController()->print(),
-            'resource' => $developedSet->getApiCrudApiResource()->print(),
-            'form-request' => $developedSet->getWebCrudFormRequest()->print(),
-            'factory' => $developedSet->getFactory()->print(),
-        ]);
     }
 
     private function getPrimaryKeys(array $properties): Collection
