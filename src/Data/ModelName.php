@@ -37,7 +37,7 @@ class ModelName
         $namespace = $this->rootNamespace;
 
         if ($this->namespace) {
-            $namespace .= "\\{$this->namespace}}";
+            $namespace .= "\\{$this->namespace}";
         }
 
         return $namespace;
