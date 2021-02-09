@@ -71,7 +71,7 @@ class CrudlySpecification extends Specification
 
     public function hasWebAuthorization(): bool
     {
-        return $this->extract(self::KEY_WEB_HAS_AUTHORIZATION);
+        return $this->extract(self::KEY_WEB_HAS_AUTHORIZATION) ?? false;
     }
 
     public function hasWebTests(): bool
