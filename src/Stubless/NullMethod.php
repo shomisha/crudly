@@ -15,4 +15,14 @@ class NullMethod extends ClassMethod
     {
         return [];
     }
+
+    public function getImports(): array
+    {
+        return [];
+    }
+
+    public function getImportSubDelegates(): array
+    {
+        return [];
+    }
 }

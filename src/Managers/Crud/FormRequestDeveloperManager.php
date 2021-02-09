@@ -2,7 +2,7 @@
 
 namespace Shomisha\Crudly\Managers\Crud;
 
-use Shomisha\Crudly\Abstracts\Developer;
+use Shomisha\Crudly\Contracts\Developer;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\FormRequest\Rules\RulesMethodDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\FormRequest\Rules\SpecialRulesDeveloper;
 
