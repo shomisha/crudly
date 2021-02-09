@@ -44,6 +44,11 @@ class Crudly extends ActualCrudly
         return $this->lastSpecification;
     }
 
+    public function hasLastSpecification(): bool
+    {
+        return isset($this->lastSpecification);
+    }
+
     private function getDevelopedSet(): CrudlySet
     {
         if ($this->developedSet === null) {
