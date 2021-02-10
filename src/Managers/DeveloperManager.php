@@ -96,7 +96,7 @@ class DeveloperManager extends BaseDeveloperManager
         return $this->instantiateDeveloperWithManager(ApiTestsDeveloper::class, $this->getApiTestsDeveloperManager());
     }
 
-    public function getPolicyTestsDeveloper(): Developer
+    public function getPolicyDeveloper(): Developer
     {
         return $this->instantiateDeveloperWithManager(PolicyDeveloper::class, $this);
     }

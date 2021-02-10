@@ -81,6 +81,6 @@ class CrudlyDeveloper
 
     private function developPolicy(CrudlySpecification $specification, CrudlySet $developedSet): void
     {
-        $this->manager->getPolicyTestsDeveloper()->develop($specification, $developedSet);
+        $this->manager->getPolicyDeveloper()->develop($specification, $developedSet);
     }
 }
