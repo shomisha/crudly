@@ -22,13 +22,13 @@ class CrudlySpecificationBuilder
 
     private bool $timestamps = true;
 
-    private bool $webCrud = true;
-    private bool $webAuthorization = true;
-    private bool $webTests = true;
+    private bool $webCrud = false;
+    private bool $webAuthorization = false;
+    private bool $webTests = false;
 
-    private bool $apiCrud = true;
-    private bool $apiAuthorization = true;
-    private bool $apiTests = true;
+    private bool $apiCrud = false;
+    private bool $apiAuthorization = false;
+    private bool $apiTests = false;
 
     public function __construct(string $modelName)
     {
@@ -126,7 +126,7 @@ class CrudlySpecificationBuilder
 
     public function build(): CrudlySpecification
     {
-        $model = new ModelName($this->namespace, $this->rootNamespace, $this->namespace);
+        $model = new ModelName($this->modelName, $this->rootNamespace, $this->namespace);
 
         return new CrudlySpecification($model, [
             'properties' => $this->buildProperties(),
@@ -135,10 +135,10 @@ class CrudlySpecificationBuilder
             'has_timestamps' => $this->timestamps,
             'has_web' => $this->webCrud,
             'has_web_authorization' => $this->webAuthorization,
-            'has_web_test' => $this->webTests,
+            'has_web_tests' => $this->webTests,
             'has_api' => $this->apiCrud,
             'has_api_authorization' => $this->apiAuthorization,
-            'has_api_test' => $this->apiTests,
+            'has_api_tests' => $this->apiTests,
         ]);
     }
 
