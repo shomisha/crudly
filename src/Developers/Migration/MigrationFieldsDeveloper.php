@@ -21,9 +21,11 @@ class MigrationFieldsDeveloper extends Developer
     public function develop(Specification $specification, CrudlySet $developedSet): Block
     {
         $primaryKey = $specification->getPrimaryKey();
-        $otherFields = $specification->getProperties()->except($primaryKey->getName());
+        $otherFields = $specification->getProperties()->except(optional($primaryKey)->getName());
 
-        $primaryKeyMigration = $this->developPrimaryKeyMigration($primaryKey);
+        $primaryKeyMigration = ($primaryKey === null)
+            ? $this->getManager()->nullDeveloper()->develop($specification, $developedSet)
+            : $this->developPrimaryKeyMigration($primaryKey);
 
         $fieldMigrations = [];
         $foreignKeyMigrations = [];
@@ -66,7 +68,7 @@ class MigrationFieldsDeveloper extends Developer
             return Block::invokeMethod($this->getTableVar(), 'id', $arguments);
         }
 
-        return $this->developFieldMigration($specification)->chain('primary');
+        return $this->developFieldMigration($specification)->continueChain('primary');
     }
 
     private function developFieldMigration(ModelPropertySpecification $specification): InvokeBlock
@@ -82,15 +84,15 @@ class MigrationFieldsDeveloper extends Developer
         );
 
         if ($specification->isNullable()) {
-            $method->chain('nullable');
+            $method->continueChain('nullable');
         }
 
         if ($specification->isUnsigned()) {
-            $method->chain('unsigned');
+            $method->continueChain('unsigned');
         }
 
         if ($specification->isUnique()) {
-            $method->chain('unique');
+            $method->continueChain('unique');
         }
 
         return $method;

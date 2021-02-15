@@ -40,7 +40,7 @@ class MigrationDeveloper extends Developer
 
     private function guessName(ModelName $modelName): string
     {
-        return "Create" . Str::studly((string) $modelName) . "Table";
+        return "Create" . Str::of((string) $modelName)->plural()->studly() . "Table";
     }
 
     private function upMethod(CrudlySpecification $specification, CrudlySet $developedSet): ClassMethod
