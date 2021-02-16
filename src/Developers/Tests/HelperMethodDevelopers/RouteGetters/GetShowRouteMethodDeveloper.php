@@ -9,9 +9,9 @@ class GetShowRouteMethodDeveloper extends RouteGetterDeveloper
         return 'getShowRoute';
     }
 
-    protected function getExceptionMethodName(): string
+    protected function getRouteName(): string
     {
-        return 'provideShowRoute';
+        return 'show';
     }
 
     protected function acceptsModelArgument(): bool

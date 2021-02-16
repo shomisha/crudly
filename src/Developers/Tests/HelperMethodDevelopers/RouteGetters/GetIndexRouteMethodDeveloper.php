@@ -9,8 +9,8 @@ class GetIndexRouteMethodDeveloper extends RouteGetterDeveloper
         return 'getIndexRoute';
     }
 
-    protected function getExceptionMethodName(): string
+    protected function getRouteName(): string
     {
-        return 'provideIndexRoute';
+        return 'index';
     }
 }

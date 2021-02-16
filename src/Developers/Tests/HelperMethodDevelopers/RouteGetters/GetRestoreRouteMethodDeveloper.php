@@ -9,9 +9,9 @@ class GetRestoreRouteMethodDeveloper extends RouteGetterDeveloper
         return 'getRestoreRoute';
     }
 
-    protected function getExceptionMethodName(): string
+    protected function getRouteName(): string
     {
-        return 'provideRestoreRoute';
+        return 'restore';
     }
 
     protected function acceptsModelArgument(): bool

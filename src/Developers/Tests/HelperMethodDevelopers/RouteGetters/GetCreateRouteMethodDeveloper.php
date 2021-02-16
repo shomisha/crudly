@@ -9,8 +9,8 @@ class GetCreateRouteMethodDeveloper extends RouteGetterDeveloper
         return 'getCreateRoute';
     }
 
-    protected function getExceptionMethodName(): string
+    protected function getRouteName(): string
     {
-        return 'provideCreateRoute';
+        return 'create';
     }
 }

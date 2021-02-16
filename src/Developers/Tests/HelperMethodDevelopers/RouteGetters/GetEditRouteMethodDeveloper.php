@@ -9,8 +9,8 @@ class GetEditRouteMethodDeveloper extends RouteGetterDeveloper
         return 'getEditRoute';
     }
 
-    protected function getExceptionMethodName(): string
+    protected function getRouteName(): string
     {
-        return 'provideEditRoute';
+        return 'edit';
     }
 }

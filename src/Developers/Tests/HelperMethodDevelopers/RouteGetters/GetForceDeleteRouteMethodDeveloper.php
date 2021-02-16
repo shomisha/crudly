@@ -9,9 +9,9 @@ class GetForceDeleteRouteMethodDeveloper extends RouteGetterDeveloper
         return 'getForceDeleteRoute';
     }
 
-    protected function getExceptionMethodName(): string
+    protected function getRouteName(): string
     {
-        return 'provideForceDeleteRoute';
+        return 'force-delete';
     }
 
     protected function acceptsModelArgument(): bool

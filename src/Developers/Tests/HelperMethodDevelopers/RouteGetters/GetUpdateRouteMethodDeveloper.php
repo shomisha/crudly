@@ -10,9 +10,9 @@ class GetUpdateRouteMethodDeveloper extends RouteGetterDeveloper
         return 'getUpdateRoute';
     }
 
-    protected function getExceptionMethodName(): string
+    protected function getRouteName(): string
     {
-        return 'provideUpdateRoute';
+        return 'update';
     }
 
     protected function acceptsModelArgument(): bool

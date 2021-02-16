@@ -10,9 +10,9 @@ class GetDestroyRouteMethodDeveloper extends RouteGetterDeveloper
         return 'getDestroyRoute';
     }
 
-    protected function getExceptionMethodName(): string
+    protected function getRouteName(): string
     {
-        return 'provideDestroyRoute';
+        return 'destroy';
     }
 
     protected function acceptsModelArgument(): bool

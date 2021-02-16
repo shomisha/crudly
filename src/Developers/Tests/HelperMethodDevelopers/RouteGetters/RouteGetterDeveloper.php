@@ -20,7 +20,8 @@ abstract class RouteGetterDeveloper extends TestsDeveloper
             Block::throw(
                 Block::invokeStaticMethod(
                     new Importable($this->incompleteWebTestExceptionName()),
-                    $this->getExceptionMethodName()
+                    'missingRouteGetter',
+                    [$this->getRouteName()]
                 )
             )
         );
@@ -38,7 +39,7 @@ abstract class RouteGetterDeveloper extends TestsDeveloper
 
     abstract protected function getName(): string;
 
-    abstract protected function getExceptionMethodName(): string;
+    abstract protected function getRouteName(): string;
 
     protected function acceptsModelArgument(): bool
     {

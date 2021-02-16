@@ -5,7 +5,7 @@ namespace Shomisha\Crudly\Developers\Tests;
 use Illuminate\Support\Str;
 use Shomisha\Crudly\Abstracts\Developer;
 use Shomisha\Crudly\Data\ModelName;
-use Shomisha\Crudly\Exceptions\IncompleteWebTest;
+use Shomisha\Crudly\Exceptions\IncompleteTestException;
 
 /**
  * Class TestsDeveloper
@@ -41,7 +41,7 @@ abstract class TestsDeveloper extends Developer
 
     protected function incompleteWebTestExceptionName(): string
     {
-        return IncompleteWebTest::class;
+        return IncompleteTestException::class;
     }
 
     protected function guessUserClass(): ModelName
