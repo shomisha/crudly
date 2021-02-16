@@ -2,66 +2,65 @@
 
 namespace Shomisha\Crudly\Test\Unit\Guessers;
 
+use Shomisha\Crudly\Data\ValidationRules;
 use Shomisha\Crudly\Enums\ModelPropertyType;
-use Shomisha\Crudly\ModelPropertyGuessers\FakerMethodGuesser;
+use Shomisha\Crudly\ModelPropertyGuessers\ValidationRulesGuesser;
 use Shomisha\Crudly\Specifications\ModelPropertySpecification;
 use Shomisha\Crudly\Test\Specification\PropertySpecificationBuilder;
 use Shomisha\Crudly\Test\TestCase;
-use Shomisha\Stubless\ImperativeCode\Block;
-use Shomisha\Stubless\References\Reference;
 
-class FactoryFieldGuesserTest extends TestCase
+class ValidationRulesGuesserTest extends TestCase
 {
     public function modelPropertyDataProvider()
     {
         return [
             'Boolean' => [
                 PropertySpecificationBuilder::new('someBoolean', ModelPropertyType::BOOL())->buildSpecification(),
-                "\$faker->boolean;",
+                ['boolean'],
             ],
             'String' => [
                 PropertySpecificationBuilder::new('someString', ModelPropertyType::STRING())->buildSpecification(),
-                "\$faker->text(255);",
+                ['string', 'max:255'],
             ],
             'Email' => [
                 PropertySpecificationBuilder::new('someEmail', ModelPropertyType::EMAIL())->buildSpecification(),
-                "\$faker->email;",
+                ['email'],
             ],
             'Text' => [
                 PropertySpecificationBuilder::new('someText', ModelPropertyType::TEXT())->buildSpecification(),
-                "\$faker->text(63000);",
+                ['string', 'max:65535'],
             ],
             'Integer' => [
                 PropertySpecificationBuilder::new('someInteger', ModelPropertyType::INT())->buildSpecification(),
-                "\$faker->randomNumber();",
+                ['integer'],
             ],
             'Big integer' => [
                 PropertySpecificationBuilder::new('someBigInteger', ModelPropertyType::BIG_INT())->buildSpecification(),
-                "\$faker->randomNumber();",
+                ['integer'],
             ],
             'TinyInteger' => [
                 PropertySpecificationBuilder::new('someTinyInteger', ModelPropertyType::TINY_INT())->buildSpecification(),
-                "\$faker->numberBetween(1, 32000);",
+                ['integer'],
             ],
             'Float' => [
                 PropertySpecificationBuilder::new('someFloat', ModelPropertyType::FLOAT())->buildSpecification(),
-                "\$faker->randomFloat();",
+                ['numeric'],
             ],
             'Date' => [
                 PropertySpecificationBuilder::new('someDate', ModelPropertyType::DATE())->buildSpecification(),
-                "\$faker->date();",
+                ['date']
             ],
             'Datetime' => [
                 PropertySpecificationBuilder::new('someDatetime', ModelPropertyType::DATETIME())->buildSpecification(),
-                "\$faker->dateTime();",
+                ['date_format:Y-m-d H:i:s']
             ],
             'Timestamp' => [
                 PropertySpecificationBuilder::new('someTimestamp', ModelPropertyType::TIMESTAMP())->buildSpecification(),
-                "\$faker->dateTime();",
+                ['date_format:Y-m-d H:i:s']
             ],
             'Json' => [
                 PropertySpecificationBuilder::new('someJson', ModelPropertyType::JSON())->buildSpecification(),
-                "\$faker->shuffleArray([1, 2, 3, 'test', 'another', true]);",
+                ['array']
             ],
         ];
     }
@@ -70,33 +69,36 @@ class FactoryFieldGuesserTest extends TestCase
      * @test
      * @dataProvider modelPropertyDataProvider
      */
-    public function guesser_will_guess_factory_field_for_property(ModelPropertySpecification $property, string $expectedPrintedProperty)
+    public function guesser_can_guess_validation_rules_for_model_property(ModelPropertySpecification $property, array $expectedRules)
     {
-        $faker = Reference::variable('faker');
-        $guesser = new FakerMethodGuesser($faker);
+        $guesser = new ValidationRulesGuesser();
 
 
-        $actualPrintedProperty = $guesser->guess($property)->print();
+        $actualRules = $guesser->guess($property);
 
 
-        $this->assertStringContainsString($expectedPrintedProperty, $actualPrintedProperty);
+        $this->assertInstanceOf(ValidationRules::class, $actualRules);
+        $this->assertEquals($expectedRules, $actualRules->getRules());
     }
 
     /** @test */
-    public function guesser_will_chain_faker_methods_to_existing_methods()
+    public function guesser_can_append_property_rules_to_existing_ones()
     {
-        $faker = Block::invokeMethod(
-            Reference::variable('faker'),
-            'unique'
-        );
-        $guesser = new FakerMethodGuesser($faker);
+        $propertyBuilder = PropertySpecificationBuilder::new('email', ModelPropertyType::EMAIL())->unique();
 
-        $propertyBuilder = PropertySpecificationBuilder::new('title', ModelPropertyType::STRING());
+        $guesser = new ValidationRulesGuesser();
 
 
-        $actualPrintedProperty = $guesser->guess($propertyBuilder->buildSpecification())->print();
+        $rules = new ValidationRules([
+            'unique' => true,
+            'string' => true,
+        ]);
+        $guesser->withRules($rules);
+        $guesser->guess($propertyBuilder->buildSpecification());
 
 
-        $this->assertStringContainsString("\$faker->unique()->text(255)", $actualPrintedProperty);
+        $this->assertEquals([
+            'unique', 'string', 'email',
+        ], $rules->getRules());
     }
 }
