@@ -4,7 +4,6 @@ namespace Shomisha\Crudly\Test\Specification;
 
 use Shomisha\Crudly\Enums\ForeignKeyAction;
 use Shomisha\Crudly\Enums\ModelPropertyType;
-use Shomisha\Crudly\Enums\RelationshipType;
 use Shomisha\Crudly\Specifications\ModelPropertySpecification;
 
 class PropertySpecificationBuilder
@@ -29,7 +28,6 @@ class PropertySpecificationBuilder
 
     private bool $hasRelationship = false;
     private ?string $relationshipName = null;
-    private ?RelationshipType $relationshipType = null;
 
     private ?CrudlySpecificationBuilder $parent;
 
@@ -103,11 +101,10 @@ class PropertySpecificationBuilder
         return $this;
     }
 
-    public function isRelationship(string $name, RelationshipType $type): self
+    public function isRelationship(string $name): self
     {
         $this->hasRelationship = true;
         $this->relationshipName = $name;
-        $this->relationshipType = $type;
 
         return $this;
     }
@@ -116,7 +113,6 @@ class PropertySpecificationBuilder
     {
         $this->hasRelationship = false;
         $this->relationshipName = null;
-        $this->relationshipType = null;
 
         return $this;
     }
@@ -137,7 +133,6 @@ class PropertySpecificationBuilder
                 'has_relationship' => $this->hasRelationship,
                 'relationship' => [
                     'name' => $this->relationshipName,
-                    'type' => $this->relationshipType,
                 ],
                 'on_delete' => $this->onDelete,
                 'on_update' => $this->onUpdate,

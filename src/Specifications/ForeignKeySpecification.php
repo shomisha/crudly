@@ -4,7 +4,6 @@ namespace Shomisha\Crudly\Specifications;
 
 use Shomisha\Crudly\Abstracts\Specification;
 use Shomisha\Crudly\Enums\ForeignKeyAction;
-use Shomisha\Crudly\Enums\RelationshipType;
 
 class ForeignKeySpecification extends Specification
 {
@@ -35,17 +34,6 @@ class ForeignKeySpecification extends Specification
     public function getRelationshipName(): ?string
     {
         return $this->extract(self::KEY_RELATIONSHIP_NAME);
-    }
-
-    public function getRelationshipType(): ?RelationshipType
-    {
-        $relationshipType = $this->extract(self::KEY_RELATIONSHIP_TYPE);
-
-        if ($relationshipType === null) {
-            return null;
-        }
-
-        return RelationshipType::fromString($relationshipType);
     }
 
     public function getForeignKeyOnDelete(): ForeignKeyAction

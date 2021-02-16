@@ -8,7 +8,6 @@ use Shomisha\Crudly\Contracts\ModelSupervisor as ModelSupervisorContract;
 use Shomisha\Crudly\Data\ModelName;
 use Shomisha\Crudly\Enums\ForeignKeyAction;
 use Shomisha\Crudly\Enums\ModelPropertyType;
-use Shomisha\Crudly\Enums\RelationshipType;
 use Shomisha\Crudly\Test\Mocks\Crudly;
 use Shomisha\Crudly\Test\TestCase;
 
@@ -69,7 +68,6 @@ class WizardTest extends TestCase
             ->expectsQuestion('Which field should this foreign key point to?', 'id')
             ->expectsConfirmation('Do you want a relationship for this method?', 'yes')
             ->expectsQuestion('Enter the name for this relationship', 'author')
-            ->expectsChoice('Choose relationship type', 'belongsTo', RelationshipType::all())
             ->expectsChoice('What should happen on row delete?', 'do nothing', ForeignKeyAction::all())
             ->expectsChoice('What should happen on row update?', 'do nothing', ForeignKeyAction::all())
             ->expectsConfirmation('Do you want to add a model property?', 'no')
@@ -137,7 +135,6 @@ class WizardTest extends TestCase
         $this->assertEquals('authors', $authorId->getForeignKeySpecification()->getForeignKeyTable());
         $this->assertEquals('id', $authorId->getForeignKeySpecification()->getForeignKeyField());
         $this->assertEquals('author', $authorId->getForeignKeySpecification()->getRelationshipName());
-        $this->assertEquals(RelationshipType::BELONGS_TO(), $authorId->getForeignKeySpecification()->getRelationshipType());
         $this->assertEquals(ForeignKeyAction::DO_NOTHING(), $authorId->getForeignKeySpecification()->getForeignKeyOnDelete());
         $this->assertEquals(ForeignKeyAction::DO_NOTHING(), $authorId->getForeignKeySpecification()->getForeignKeyOnUpdate());
 
@@ -371,7 +368,6 @@ class WizardTest extends TestCase
             ->expectsQuestion('Which field should this foreign key point to?', 'id')
             ->expectsConfirmation('Do you want a relationship for this method?', 'yes')
             ->expectsQuestion('Enter the name for this relationship', 'author')
-            ->expectsChoice('Choose relationship type', 'belongsTo', RelationshipType::all())
             ->expectsChoice('What should happen on row delete?', 'do nothing', ForeignKeyAction::all())
             ->expectsChoice('What should happen on row update?', 'do nothing', ForeignKeyAction::all())
             ->expectsConfirmation('Do you want to add a model property?', 'yes')
@@ -449,7 +445,6 @@ class WizardTest extends TestCase
         $this->assertEquals('authors', $authorIdForeign->getForeignKeyTable());
         $this->assertTrue($authorIdForeign->hasRelationship());
         $this->assertEquals('author', $authorIdForeign->getRelationshipName());
-        $this->assertEquals(RelationshipType::BELONGS_TO(), $authorIdForeign->getRelationshipType());
         $this->assertEquals(ForeignKeyAction::DO_NOTHING(), $authorIdForeign->getForeignKeyOnUpdate());
         $this->assertEquals(ForeignKeyAction::DO_NOTHING(), $authorIdForeign->getForeignKeyOnDelete());
 
@@ -467,7 +462,6 @@ class WizardTest extends TestCase
         $this->assertEquals('categories', $categoryIdForeign->getForeignKeyTable());
         $this->assertFalse($categoryIdForeign->hasRelationship());
         $this->assertNull($categoryIdForeign->getRelationshipName());
-        $this->assertNull($categoryIdForeign->getRelationshipType());
     }
 
     /** @test */
@@ -732,7 +726,6 @@ class WizardTest extends TestCase
             ->expectsQuestion('Which field should this foreign key point to?', 'id')
             ->expectsConfirmation('Do you want a relationship for this method?', 'yes')
             ->expectsQuestion('Enter the name for this relationship', 'author')
-            ->expectsChoice('Choose relationship type', 'belongsTo', RelationshipType::all())
             ->expectsChoice('What should happen on row delete?', 'do nothing', ForeignKeyAction::all())
             ->expectsChoice('What should happen on row update?', 'do nothing', ForeignKeyAction::all())
             ->expectsConfirmation('Do you want to add a model property?', 'no')
@@ -754,7 +747,6 @@ class WizardTest extends TestCase
         $this->assertEquals('authors', $authorIdForeign->getForeignKeyTable());
         $this->assertTrue($authorIdForeign->hasRelationship());
         $this->assertEquals('author', $authorIdForeign->getRelationshipName());
-        $this->assertEquals(RelationshipType::BELONGS_TO(), $authorIdForeign->getRelationshipType());
         $this->assertEquals(ForeignKeyAction::DO_NOTHING(), $authorIdForeign->getForeignKeyOnUpdate());
         $this->assertEquals(ForeignKeyAction::DO_NOTHING(), $authorIdForeign->getForeignKeyOnDelete());
     }
@@ -795,7 +787,6 @@ class WizardTest extends TestCase
         $authorIdForeign = $authorId->getForeignKeySpecification();
         $this->assertFalse($authorIdForeign->hasRelationship());
         $this->assertNull($authorIdForeign->getRelationshipName());
-        $this->assertNull($authorIdForeign->getRelationshipType());
     }
 
     /** @test */

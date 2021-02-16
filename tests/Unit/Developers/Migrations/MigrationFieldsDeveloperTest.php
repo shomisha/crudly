@@ -6,7 +6,6 @@ use Shomisha\Crudly\Data\CrudlySet;
 use Shomisha\Crudly\Developers\Migration\MigrationFieldsDeveloper;
 use Shomisha\Crudly\Enums\ForeignKeyAction;
 use Shomisha\Crudly\Enums\ModelPropertyType;
-use Shomisha\Crudly\Enums\RelationshipType;
 use Shomisha\Crudly\Specifications\CrudlySpecification;
 use Shomisha\Crudly\Test\Specification\CrudlySpecificationBuilder;
 use Shomisha\Crudly\Test\Unit\DeveloperTestCase;
@@ -26,11 +25,11 @@ class MigrationFieldsDeveloperTest extends DeveloperTestCase
                 ->unsigned()
                 ->nullable()
                 ->isForeign('employee_id', 'employees')
-                ->isRelationship('mentor', RelationshipType::BELONGS_TO())
+                ->isRelationship('mentor')
             ->property('department_id', ModelPropertyType::BIG_INT())
                 ->unsigned()
                 ->isForeign('id', 'departments', ForeignKeyAction::CASCADE(), ForeignKeyAction::SET_NULL())
-                ->isRelationship('department', RelationshipType::BELONGS_TO())
+                ->isRelationship('department')
             ->softDeletes()
             ->softDeletionColumn('fired_at')
             ->timestamps();

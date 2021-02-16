@@ -3,7 +3,6 @@
 namespace Shomisha\Crudly\Subwizards;
 
 use Shomisha\Crudly\Enums\ForeignKeyAction;
-use Shomisha\Crudly\Enums\RelationshipType;
 use Shomisha\LaravelConsoleWizard\Command\Subwizard;
 use Shomisha\LaravelConsoleWizard\Contracts\Step;
 use Shomisha\LaravelConsoleWizard\Steps\ChoiceStep;
@@ -32,7 +31,6 @@ class RelationshipSubwizard extends Subwizard
                 $this->subWizard(
                     new OneTimeWizard([
                         'name' => new TextStep('Enter the name for this relationship'),
-                        'type' => new ChoiceStep('Choose relationship type', RelationshipType::all()),
                     ])
                 )
             );

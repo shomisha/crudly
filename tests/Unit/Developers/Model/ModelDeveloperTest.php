@@ -6,7 +6,6 @@ use Shomisha\Crudly\Config\DeveloperConfig;
 use Shomisha\Crudly\Data\CrudlySet;
 use Shomisha\Crudly\Developers\Model\ModelDeveloper;
 use Shomisha\Crudly\Enums\ModelPropertyType;
-use Shomisha\Crudly\Enums\RelationshipType;
 use Shomisha\Crudly\Managers\ModelDeveloperManager;
 use Shomisha\Crudly\Test\Specification\CrudlySpecificationBuilder;
 use Shomisha\Crudly\Test\Unit\DeveloperTestCase;
@@ -23,10 +22,10 @@ class ModelDeveloperTest extends DeveloperTestCase
             ->property('birth_date', ModelPropertyType::DATE())
             ->property('manager_id', ModelPropertyType::BIG_INT())->unsigned()
                 ->isForeign('id', 'managers')
-                ->isRelationship('manager', RelationshipType::BELONGS_TO())
+                ->isRelationship('manager')
             ->property('first_book_id', ModelPropertyType::BIG_INT())->unsigned()
                 ->isForeign('id', 'books')
-                ->isRelationship('firstBook', RelationshipType::BELONGS_TO())
+                ->isRelationship('firstBook')
             ->property('published_books', ModelPropertyType::JSON())
             ->softDeletes()
             ->softDeletionColumn('stopped_writing_at')

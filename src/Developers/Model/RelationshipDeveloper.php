@@ -6,7 +6,6 @@ use Shomisha\Crudly\Abstracts\Developer;
 use Shomisha\Crudly\Contracts\Specification;
 use Shomisha\Crudly\Data\CrudlySet;
 use Shomisha\Crudly\Data\ModelName;
-use Shomisha\Crudly\Enums\RelationshipType;
 use Shomisha\Crudly\Specifications\CrudlySpecification;
 use Shomisha\Crudly\Specifications\ModelPropertySpecification;
 use Shomisha\Stubless\DeclarativeCode\ClassMethod;
@@ -55,7 +54,6 @@ class RelationshipDeveloper extends Developer
         }
 
         return $this->prepareRelationshipMethod(
-            $foreignKeySpecification->getRelationshipType(),
             $modelName,
             $foreignKeySpecification->getRelationshipName(),
             $specification->getName(),
@@ -63,7 +61,7 @@ class RelationshipDeveloper extends Developer
         );
     }
 
-    private function prepareRelationshipMethod(RelationshipType $type, ModelName $model, string $relationshipName, string $foreignKeyField, string $localKeyField): ClassMethod
+    private function prepareRelationshipMethod(ModelName $model, string $relationshipName, string $foreignKeyField, string $localKeyField): ClassMethod
     {
         $method = ClassMethod::name($relationshipName);
 
@@ -71,7 +69,7 @@ class RelationshipDeveloper extends Developer
             Block::return(
                 Block::invokeMethod(
                     Reference::this(),
-                    $type->value(),
+                    'belongsTo',
                     [
                         Reference::classReference(
                             $model->getName()

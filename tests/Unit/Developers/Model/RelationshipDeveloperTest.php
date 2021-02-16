@@ -5,7 +5,6 @@ namespace Shomisha\Crudly\Test\Unit\Developers\Model;
 use Shomisha\Crudly\Data\CrudlySet;
 use Shomisha\Crudly\Developers\Model\RelationshipDeveloper;
 use Shomisha\Crudly\Enums\ModelPropertyType;
-use Shomisha\Crudly\Enums\RelationshipType;
 use Shomisha\Crudly\Test\Specification\CrudlySpecificationBuilder;
 use Shomisha\Crudly\Test\Unit\DeveloperTestCase;
 use Shomisha\Stubless\DeclarativeCode\ClassTemplate;
@@ -19,10 +18,10 @@ class RelationshipDeveloperTest extends DeveloperTestCase
             ->property('author_id', ModelPropertyType::BIG_INT())
                 ->unsigned()
                 ->isForeign('id', 'authors')
-                ->isRelationship('author', RelationshipType::BELONGS_TO())
+                ->isRelationship('author')
             ->property('category_uuid', ModelPropertyType::STRING())
                 ->isForeign('uuid', 'categories')
-                ->isRelationship('category', RelationshipType::BELONGS_TO())
+                ->isRelationship('category')
         ->timestamps(false);
 
         $model = ClassTemplate::name('Post');
@@ -60,10 +59,10 @@ class RelationshipDeveloperTest extends DeveloperTestCase
             ->property('author_id', ModelPropertyType::BIG_INT())
                 ->unsigned()
                 ->isForeign('id', 'authors')
-                ->isRelationship('author', RelationshipType::BELONGS_TO())
+                ->isRelationship('author')
             ->property('category_uuid', ModelPropertyType::STRING())
                 ->isForeign('uuid', 'categories')
-                ->isRelationship('category', RelationshipType::BELONGS_TO())
+                ->isRelationship('category')
             ->timestamps(false);
 
         $model = ClassTemplate::name('Post');
