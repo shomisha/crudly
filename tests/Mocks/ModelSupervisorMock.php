@@ -10,7 +10,7 @@ class ModelSupervisorMock extends ModelSupervisor
 
     public function __construct()
     {
-        $this->setRootNamespace('App\Models');
+        $this->setRootNamespace('App');
     }
 
     public function modelExists(string $rawName): bool

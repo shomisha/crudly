@@ -7,6 +7,7 @@ use Shomisha\Crudly\Developers\NullClassDeveloper;
 use Shomisha\Crudly\Developers\NullDeveloper;
 use Shomisha\Crudly\Developers\NullMethodDeveloper;
 use Shomisha\Crudly\Developers\NullPropertyDeveloper;
+use Shomisha\Crudly\Developers\NullValueDeveloper;
 use Shomisha\Crudly\Managers\BaseDeveloperManager;
 
 class DeveloperManagerMock extends BaseDeveloperManager
@@ -22,6 +23,9 @@ class DeveloperManagerMock extends BaseDeveloperManager
 
     private array $imperativeCodeDeveloperMethods = [];
     private array $requestedCodeDevelopers = [];
+
+    private array $valueDeveloperMethods = [];
+    private array $requestedValueDevelopers = [];
 
     private array $unexpectedRequests = [];
 
@@ -53,6 +57,12 @@ class DeveloperManagerMock extends BaseDeveloperManager
             $this->requestedCodeDevelopers[] = $method;
 
             return new NullDeveloper();
+        }
+
+        if (in_array($method, $this->valueDeveloperMethods)) {
+            $this->requestedValueDevelopers[] = $method;
+
+            return new NullValueDeveloper();
         }
 
         return new NullDeveloper();
@@ -94,6 +104,15 @@ class DeveloperManagerMock extends BaseDeveloperManager
         );
     }
 
+    public function assertValueDeveloperRequested(string $developerGetterMethod): void
+    {
+        Assert::assertThat(
+            $this->requestedValueDevelopers,
+            Assert::containsIdentical($developerGetterMethod),
+            "Developer getter '{$developerGetterMethod}' was not invoked."
+        );
+    }
+
     public function classDevelopers(array $expectedMethods): self
     {
         $this->classDeveloperMethods = $expectedMethods;
@@ -118,6 +137,13 @@ class DeveloperManagerMock extends BaseDeveloperManager
     public function imperativeCodeDevelopers(array $expectedMethods): self
     {
         $this->imperativeCodeDeveloperMethods = $expectedMethods;
+
+        return $this;
+    }
+
+    public function valueDevelopers(array $expectedMethods): self
+    {
+        $this->valueDeveloperMethods = $expectedMethods;
 
         return $this;
     }
