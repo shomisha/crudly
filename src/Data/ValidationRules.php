@@ -3,6 +3,7 @@
 namespace Shomisha\Crudly\Data;
 
 use Illuminate\Support\Fluent;
+use Illuminate\Support\Str;
 use Shomisha\Stubless\Contracts\Code;
 
 /**
@@ -46,6 +47,8 @@ class ValidationRules extends Fluent
 
     private function normalizeRule(string $name, $rule)
     {
+        $name = (string) Str::of($name)->snake();
+
         if ($rule instanceof Code) {
             return $rule;
         }
