@@ -68,6 +68,11 @@ class ModelSupervisor implements ModelSupervisorContract
         return $this->filesystem->isDirectory($modelsDirectoryPath);
     }
 
+    protected function setRootNamespace(string $rootNamespace): void
+    {
+        $this->rootNamespace = $rootNamespace;
+    }
+
     private function guessModelPath(ModelName $name): string
     {
         if ($this->shouldUseModelsDirectory()) {

@@ -4,6 +4,7 @@ namespace Shomisha\Crudly\Test\Unit;
 
 use Shomisha\Crudly\Contracts\ModelSupervisor;
 use Shomisha\Crudly\Test\Mocks\DeveloperManagerMock;
+use Shomisha\Crudly\Test\Mocks\ModelSupervisorMock;
 use Shomisha\Crudly\Test\TestCase;
 
 abstract class DeveloperTestCase extends TestCase
@@ -17,6 +18,7 @@ abstract class DeveloperTestCase extends TestCase
         parent::setUp();
 
         $this->manager = new DeveloperManagerMock();
-        $this->modelSupervisor = \Mockery::mock(ModelSupervisor::class)->makePartial();
+        $this->modelSupervisor = new ModelSupervisorMock();
+        $this->app->instance(ModelSupervisor::class, $this->modelSupervisor);
     }
 }

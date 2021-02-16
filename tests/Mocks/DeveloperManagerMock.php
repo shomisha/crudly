@@ -3,10 +3,10 @@
 namespace Shomisha\Crudly\Test\Mocks;
 
 use PHPUnit\Framework\Assert;
-use Shomisha\Crudly\Contracts\Developer;
 use Shomisha\Crudly\Developers\NullClassDeveloper;
 use Shomisha\Crudly\Developers\NullDeveloper;
 use Shomisha\Crudly\Developers\NullMethodDeveloper;
+use Shomisha\Crudly\Developers\NullPropertyDeveloper;
 use Shomisha\Crudly\Managers\BaseDeveloperManager;
 
 class DeveloperManagerMock extends BaseDeveloperManager
@@ -16,6 +16,9 @@ class DeveloperManagerMock extends BaseDeveloperManager
 
     private array $classMethodDeveloperMethods = [];
     private array $requestedClassMethodDevelopers = [];
+
+    private array $classPropertyDeveloperMethods = [];
+    private array $requestedClassPropertyDevelopers = [];
 
     private array $imperativeCodeDeveloperMethods = [];
     private array $requestedCodeDevelopers = [];
@@ -38,6 +41,12 @@ class DeveloperManagerMock extends BaseDeveloperManager
             $this->requestedClassMethodDevelopers[] = $method;
 
             return new NullMethodDeveloper();
+        }
+
+        if (in_array($method, $this->classPropertyDeveloperMethods)) {
+            $this->requestedClassPropertyDevelopers[] = $method;
+
+            return new NullPropertyDeveloper();
         }
 
         if (in_array($method, $this->imperativeCodeDeveloperMethods)) {
@@ -67,6 +76,15 @@ class DeveloperManagerMock extends BaseDeveloperManager
         );
     }
 
+    public function assertPropertyDeveloperRequested(string $developerGetterMethod): void
+    {
+        Assert::assertThat(
+            $this->requestedClassPropertyDevelopers,
+            Assert::containsIdentical($developerGetterMethod),
+            "Developer getter '{$developerGetterMethod}' was not invoked."
+        );
+    }
+
     public function assertCodeDeveloperRequested(string $developerGetterMethod): void
     {
         Assert::assertThat(
@@ -86,6 +104,13 @@ class DeveloperManagerMock extends BaseDeveloperManager
     public function methodDevelopers(array $expectedMethods): self
     {
         $this->classMethodDeveloperMethods = $expectedMethods;
+
+        return $this;
+    }
+
+    public function propertyDevelopers(array $expectedProperties): self
+    {
+        $this->classPropertyDeveloperMethods = $expectedProperties;
 
         return $this;
     }
