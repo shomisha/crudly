@@ -7,6 +7,7 @@ use Shomisha\Crudly\Config\DeveloperConfig;
 use Shomisha\Crudly\Contracts\Developer;
 use Shomisha\Crudly\Developers\NullDeveloper;
 use Shomisha\Crudly\Developers\NullMethodDeveloper;
+use Shomisha\Crudly\Developers\NullPropertyDeveloper;
 
 abstract class BaseDeveloperManager
 {
@@ -22,12 +23,17 @@ abstract class BaseDeveloperManager
 
     public function nullDeveloper(): NullDeveloper
     {
-        return $this->instantiateDeveloperWithManager(NullDeveloper::class, $this);
+        return new NullDeveloper();
     }
 
     public function nullMethodDeveloper(): NullMethodDeveloper
     {
-        return $this->instantiateDeveloperWithManager(NullMethodDeveloper::class, $this);
+        return new NullMethodDeveloper();
+    }
+
+    public function nullPropertyDeveloper(): NullPropertyDeveloper
+    {
+        return new NullPropertyDeveloper();
     }
 
     protected function getConfig(): DeveloperConfig

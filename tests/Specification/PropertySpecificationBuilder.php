@@ -31,14 +31,19 @@ class PropertySpecificationBuilder
     private ?string $relationshipName = null;
     private ?RelationshipType $relationshipType = null;
 
-    private CrudlySpecificationBuilder $parent;
+    private ?CrudlySpecificationBuilder $parent;
 
 
-    public function __construct(string $name, ModelPropertyType $type, CrudlySpecificationBuilder $parent)
+    public function __construct(string $name, ModelPropertyType $type, ?CrudlySpecificationBuilder $parent)
     {
         $this->name = $name;
         $this->type = $type;
         $this->parent = $parent;
+    }
+
+    public static function new(string $name, ModelPropertyType $type): self
+    {
+        return new self($name, $type, null);
     }
 
     public function unsigned(bool $unsigned = true): self
