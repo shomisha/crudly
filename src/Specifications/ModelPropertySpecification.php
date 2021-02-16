@@ -57,6 +57,11 @@ class ModelPropertySpecification extends Specification
         ]);
     }
 
+    public function isNumeric(): bool
+    {
+        return $this->isInt() || $this->getType() == ModelPropertyType::FLOAT();
+    }
+
     public function isString(): bool
     {
         return in_array($this->getType(), [

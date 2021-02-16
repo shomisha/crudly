@@ -87,7 +87,7 @@ class MigrationFieldsDeveloper extends Developer
             $method->continueChain('nullable');
         }
 
-        if ($specification->isUnsigned()) {
+        if ($specification->isUnsigned() && $specification->isNumeric()) {
             $method->continueChain('unsigned');
         }
 
