@@ -54,9 +54,10 @@ class CrudlySpecificationBuilder
         return $this;
     }
 
+    /** @return \Shomisha\Crudly\Test\Specification\PropertySpecificationBuilder|self */
     public function property(string $propertyName, ModelPropertyType $propertyType): PropertySpecificationBuilder
     {
-        $this->properties[$propertyName] = new PropertySpecificationBuilder($propertyName, $propertyType);
+        $this->properties[$propertyName] = new PropertySpecificationBuilder($propertyName, $propertyType, $this);
 
         return $this->properties[$propertyName];
     }

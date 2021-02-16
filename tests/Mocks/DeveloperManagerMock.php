@@ -96,4 +96,14 @@ class DeveloperManagerMock extends BaseDeveloperManager
 
         return $this;
     }
+
+    public function nullDeveloper(): NullDeveloper
+    {
+        return new NullDeveloper();
+    }
+
+    public function nullMethodDeveloper(): NullMethodDeveloper
+    {
+        return new NullMethodDeveloper();
+    }
 }

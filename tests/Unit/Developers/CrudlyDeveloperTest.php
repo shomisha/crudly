@@ -27,7 +27,7 @@ class CrudlyDeveloperTest extends TestCase
             'getApiCrudApiResourceDeveloper',
             'getApiCrudControllerDeveloper',
             'getApiTestsDeveloper',
-            'getPolicyTestsDeveloper',
+            'getPolicyDeveloper',
         ] as $developerGetter) {
             $expectations[] = $manager->shouldReceive($developerGetter)->once()->andReturn(new NullClassDeveloper());
         }
@@ -91,7 +91,7 @@ class CrudlyDeveloperTest extends TestCase
             'getFactoryDeveloper',
             'getWebCrudFormRequestDeveloper',
             'getWebCrudControllerDeveloper',
-            'getPolicyTestsDeveloper',
+            'getPolicyDeveloper',
         ] as $developerGetter) {
             $expectations[] = $manager->shouldReceive($developerGetter)->once()->andReturn(new NullClassDeveloper());
         }
@@ -185,7 +185,7 @@ class CrudlyDeveloperTest extends TestCase
             'getApiCrudFormRequestDeveloper',
             'getApiCrudApiResourceDeveloper',
             'getApiCrudControllerDeveloper',
-            'getPolicyTestsDeveloper',
+            'getPolicyDeveloper',
         ] as $developerGetter) {
             $expectations[] = $manager->shouldReceive($developerGetter)->once()->andReturn(new NullClassDeveloper());
         }
@@ -256,7 +256,7 @@ class CrudlyDeveloperTest extends TestCase
         ] as $developerGetter) {
             $expectations[] = $manager->shouldReceive($developerGetter)->once()->andReturn(new NullClassDeveloper());
         }
-        $expectations[] = $manager->shouldNotReceive('getPolicyTestsDeveloper');
+        $expectations[] = $manager->shouldNotReceive('getPolicyDeveloper');
 
         $specificationBuilder = CrudlySpecificationBuilder::forModel('Post')
                                                           ->webCrud()
@@ -301,7 +301,7 @@ class CrudlyDeveloperTest extends TestCase
 
         $specification = $specificationBuilder->build();
 
-        
+
         $developer = new CrudlyDeveloper($manager);
         $developer->develop($specification);
 

@@ -31,11 +31,14 @@ class PropertySpecificationBuilder
     private ?string $relationshipName = null;
     private ?RelationshipType $relationshipType = null;
 
+    private CrudlySpecificationBuilder $parent;
 
-    public function __construct(string $name, ModelPropertyType $type)
+
+    public function __construct(string $name, ModelPropertyType $type, CrudlySpecificationBuilder $parent)
     {
         $this->name = $name;
         $this->type = $type;
+        $this->parent = $parent;
     }
 
     public function unsigned(bool $unsigned = true): self
@@ -73,13 +76,15 @@ class PropertySpecificationBuilder
         return $this;
     }
 
-    public function isForeign(string $key, string $table, ?ForeignKeyAction $onUpdate, ?ForeignKeyAction $onDelete): self
+    public function isForeign(string $key, string $table, ?ForeignKeyAction $onUpdate = null, ?ForeignKeyAction $onDelete = null): self
     {
         $this->foreign = true;
         $this->foreignKeyField = $key;
         $this->foreignTable = $table;
         $this->onUpdate = $onUpdate ?? ForeignKeyAction::DO_NOTHING();
         $this->onDelete = $onDelete?? ForeignKeyAction::DO_NOTHING();
+
+        return $this;
     }
 
     public function isNotForeign(): self
@@ -145,5 +150,10 @@ class PropertySpecificationBuilder
             'is_foreign_key' => $this->foreign,
             'foreign_key_target' => $foreignKeyTarget,
         ];
+    }
+
+    public function __call($name, $arguments)
+    {
+        return $this->parent->{$name}(...$arguments);
     }
 }
