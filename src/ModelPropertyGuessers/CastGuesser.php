@@ -8,7 +8,7 @@ class CastGuesser extends ModelPropertyGuesser
 {
     protected function guessForBoolean(ModelPropertySpecification $property)
     {
-        return null;
+        return 'boolean';
     }
 
     protected function guessForString(ModelPropertySpecification $property)

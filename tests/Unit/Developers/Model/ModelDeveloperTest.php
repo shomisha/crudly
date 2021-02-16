@@ -86,12 +86,13 @@ class ModelDeveloperTest extends DeveloperTestCase
         $printed = $developer->develop($specificationBuilder->build(), new CrudlySet())->print();
 
 
-        $this->assertStringContainsString(
-            "class Author extends Model\n{\n" .
-                   "    use HasFactory;\n\n" .
-                   "    public \$timestamps = false;\n\n" .
-                   "    public \$casts = [];\n" .
-                   "}",
+        $this->assertStringContainsString(implode("\n", [
+                "class Author extends Model",
+                "{",
+                "    use HasFactory;\n",
+                "    public \$timestamps = false;",
+                "}",
+            ]),
             $printed
         );
     }

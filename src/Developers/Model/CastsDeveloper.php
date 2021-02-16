@@ -15,7 +15,13 @@ class CastsDeveloper extends Developer
     /** @param \Shomisha\Crudly\Specifications\CrudlySpecification $specification */
     public function develop(Specification $specification, CrudlySet $developedSet): ClassProperty
     {
-        return ClassProperty::name('casts')->value($this->guessCasts($specification));
+        $casts = $this->guessCasts($specification);
+
+        if (empty($casts)) {
+            return $this->getManager()->nullPropertyDeveloper()->develop($specification, $developedSet);
+        }
+
+        return ClassProperty::name('casts')->value($casts);
     }
 
     protected function guessCasts(CrudlySpecification $specification): array
