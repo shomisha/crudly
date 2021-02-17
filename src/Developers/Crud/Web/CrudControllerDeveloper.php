@@ -24,7 +24,7 @@ class CrudControllerDeveloper extends CrudDeveloper
         $controllerClass = ClassTemplate::name($this->guessControllerName($specification))
             ->extends(new Importable(Controller::class))
             // TODO: make this domain-aware (etc. use Web, Admin, Api sub-namespaces
-            ->setNamespace('App\Http\Controllers');
+            ->setNamespace('App\Http\Controllers\Web');
 
         $developedSet->setWebCrudController($controllerClass);
 
