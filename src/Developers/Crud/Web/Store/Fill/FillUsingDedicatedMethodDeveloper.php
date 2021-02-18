@@ -52,7 +52,7 @@ class FillUsingDedicatedMethodDeveloper extends CrudDeveloper
         $modelVar = Variable::fromArgument($modelArg);
         $requestVar = Variable::fromArgument($requestArg);
 
-        $properties = $specification->getProperties()->except($specification->getPrimaryKey()->getName());
+        $properties = $specification->getNonPrimaryProperties();
         $body = Block::fromArray($properties->map(function (ModelPropertySpecification $property) use ($modelVar, $requestVar) {
             return Block::assign(
                 Reference::objectProperty(

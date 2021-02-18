@@ -44,6 +44,13 @@ class CrudlySpecification extends Specification
         return $this->extract(self::KEY_PROPERTIES);
     }
 
+    public function getNonPrimaryProperties(): Collection
+    {
+        return $this->getProperties()->except(
+            optional($this->getPrimaryKey())->getName()
+        );
+    }
+
     public function getPrimaryKey(): ?ModelPropertySpecification
     {
         return $this->extract(self::KEY_PRIMARY);

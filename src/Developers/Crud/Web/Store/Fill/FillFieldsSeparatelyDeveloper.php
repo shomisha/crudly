@@ -19,7 +19,7 @@ class FillFieldsSeparatelyDeveloper extends CrudDeveloper
     /** @param \Shomisha\Crudly\Specifications\CrudlySpecification $specification */
     public function develop(Specification $specification, CrudlySet $developedSet): Code
     {
-        $properties = $specification->getProperties()->except($specification->getPrimaryKey()->getName());
+        $properties = $specification->getNonPrimaryProperties();
         $fillFieldDeveloper = $this->getManager()->getFillFieldDeveloper();
 
         return Block::fromArray($properties->map(

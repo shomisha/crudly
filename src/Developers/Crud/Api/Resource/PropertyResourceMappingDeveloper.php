@@ -20,7 +20,7 @@ class PropertyResourceMappingDeveloper extends CrudDeveloper
     public function develop(Specification $specification, CrudlySet $developedSet): ArrayValue
     {
         $primary = $specification->getPrimaryKey();
-        $remainingFields = $specification->getProperties()->except($primary->getName());
+        $remainingFields = $specification->getNonPrimaryProperties();
 
         $mappings = collect([$primary])->concat($remainingFields)->mapWithKeys(function (ModelPropertySpecification $property) {
             return [

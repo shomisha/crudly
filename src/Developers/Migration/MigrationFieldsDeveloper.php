@@ -21,7 +21,7 @@ class MigrationFieldsDeveloper extends Developer
     public function develop(Specification $specification, CrudlySet $developedSet): Block
     {
         $primaryKey = $specification->getPrimaryKey();
-        $otherFields = $specification->getProperties()->except(optional($primaryKey)->getName());
+        $otherFields = $specification->getNonPrimaryProperties();
 
         $primaryKeyMigration = ($primaryKey === null)
             ? $this->getManager()->nullDeveloper()->develop($specification, $developedSet)
