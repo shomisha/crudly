@@ -3,6 +3,7 @@
 namespace Shomisha\Crudly\Test\Mocks;
 
 use PHPUnit\Framework\Assert;
+use PHPUnit\Framework\Constraint\LogicalNot;
 use Shomisha\Crudly\Developers\NullClassDeveloper;
 use Shomisha\Crudly\Developers\NullDeveloper;
 use Shomisha\Crudly\Developers\NullMethodDeveloper;
@@ -26,6 +27,9 @@ class DeveloperManagerMock extends BaseDeveloperManager
 
     private array $valueDeveloperMethods = [];
     private array $requestedValueDevelopers = [];
+
+    private array $arraysOfDevelopers = [];
+    private array $requestedArraysOfDevelopers = [];
 
     private array $unexpectedRequests = [];
 
@@ -65,52 +69,13 @@ class DeveloperManagerMock extends BaseDeveloperManager
             return new NullValueDeveloper();
         }
 
+        if (in_array($method, $this->arraysOfDevelopers)) {
+            $this->requestedArraysOfDevelopers[] = $method;
+
+            return [];
+        }
+
         return new NullDeveloper();
-    }
-
-    public function assertClassDeveloperRequested(string $developerGetterMethod): void
-    {
-        Assert::assertThat(
-            $this->requestedClassDevelopers,
-            Assert::containsIdentical($developerGetterMethod),
-            "Developer getter '{$developerGetterMethod}' was not invoked."
-        );
-    }
-
-    public function assertMethodDeveloperRequested(string $developerGetterMethod): void
-    {
-        Assert::assertThat(
-            $this->requestedClassMethodDevelopers,
-            Assert::containsIdentical($developerGetterMethod),
-            "Developer getter '{$developerGetterMethod}' was not invoked."
-        );
-    }
-
-    public function assertPropertyDeveloperRequested(string $developerGetterMethod): void
-    {
-        Assert::assertThat(
-            $this->requestedClassPropertyDevelopers,
-            Assert::containsIdentical($developerGetterMethod),
-            "Developer getter '{$developerGetterMethod}' was not invoked."
-        );
-    }
-
-    public function assertCodeDeveloperRequested(string $developerGetterMethod): void
-    {
-        Assert::assertThat(
-            $this->requestedCodeDevelopers,
-            Assert::containsIdentical($developerGetterMethod),
-            "Developer getter '{$developerGetterMethod}' was not invoked."
-        );
-    }
-
-    public function assertValueDeveloperRequested(string $developerGetterMethod): void
-    {
-        Assert::assertThat(
-            $this->requestedValueDevelopers,
-            Assert::containsIdentical($developerGetterMethod),
-            "Developer getter '{$developerGetterMethod}' was not invoked."
-        );
     }
 
     public function classDevelopers(array $expectedMethods): self
@@ -148,13 +113,118 @@ class DeveloperManagerMock extends BaseDeveloperManager
         return $this;
     }
 
-    public function nullDeveloper(): NullDeveloper
+    public function arraysOfDevelopers(array $expectedMethods): self
     {
-        return new NullDeveloper();
+        $this->arraysOfDevelopers = $expectedMethods;
+
+        return $this;
     }
 
-    public function nullMethodDeveloper(): NullMethodDeveloper
+    public function assertClassDeveloperRequested(string $developerGetterMethod): void
     {
-        return new NullMethodDeveloper();
+        Assert::assertThat(
+            $this->requestedClassDevelopers,
+            Assert::containsIdentical($developerGetterMethod),
+            "Developer getter '{$developerGetterMethod}' was not invoked."
+        );
+    }
+
+    public function assertClassDeveloperNotRequested(string $developerGetterMethod): void
+    {
+        Assert::assertThat(
+            $this->requestedClassDevelopers,
+            new LogicalNot(Assert::containsIdentical($developerGetterMethod)),
+            "Developer getter '{$developerGetterMethod}' was invoked."
+        );
+    }
+
+    public function assertMethodDeveloperRequested(string $developerGetterMethod): void
+    {
+        Assert::assertThat(
+            $this->requestedClassMethodDevelopers,
+            Assert::containsIdentical($developerGetterMethod),
+            "Developer getter '{$developerGetterMethod}' was not invoked."
+        );
+    }
+
+    public function assertMethodDeveloperNotRequested(string $developerGetterMethod): void
+    {
+        Assert::assertThat(
+            $this->requestedClassMethodDevelopers,
+            new LogicalNot(Assert::containsIdentical($developerGetterMethod)),
+            "Developer getter '{$developerGetterMethod}' was invoked."
+        );
+    }
+
+    public function assertPropertyDeveloperRequested(string $developerGetterMethod): void
+    {
+        Assert::assertThat(
+            $this->requestedClassPropertyDevelopers,
+            Assert::containsIdentical($developerGetterMethod),
+            "Developer getter '{$developerGetterMethod}' was not invoked."
+        );
+    }
+
+    public function assertPropertyDeveloperNotRequested(string $developerGetterMethod): void
+    {
+        Assert::assertThat(
+            $this->requestedClassPropertyDevelopers,
+            new LogicalNot(Assert::containsIdentical($developerGetterMethod)),
+            "Developer getter '{$developerGetterMethod}' was invoked."
+        );
+    }
+
+    public function assertCodeDeveloperRequested(string $developerGetterMethod): void
+    {
+        Assert::assertThat(
+            $this->requestedCodeDevelopers,
+            Assert::containsIdentical($developerGetterMethod),
+            "Developer getter '{$developerGetterMethod}' was not invoked."
+        );
+    }
+
+    public function assertCodeDeveloperNotRequested(string $developerGetterMethod): void
+    {
+        Assert::assertThat(
+            $this->requestedCodeDevelopers,
+            new LogicalNot(Assert::containsIdentical($developerGetterMethod)),
+            "Developer getter '{$developerGetterMethod}' was invoked."
+        );
+    }
+
+    public function assertValueDeveloperRequested(string $developerGetterMethod): void
+    {
+        Assert::assertThat(
+            $this->requestedValueDevelopers,
+            Assert::containsIdentical($developerGetterMethod),
+            "Developer getter '{$developerGetterMethod}' was not invoked."
+        );
+    }
+
+    public function assertValueDeveloperNotRequested(string $developerGetterMethod): void
+    {
+        Assert::assertThat(
+            $this->requestedValueDevelopers,
+            new LogicalNot(Assert::containsIdentical($developerGetterMethod)),
+            "Developer getter '{$developerGetterMethod}' was invoked."
+        );
+    }
+
+    public function assertArrayOfDevelopersRequested(string $developerGetterMethod): void
+    {
+        Assert::assertThat(
+            $this->requestedArraysOfDevelopers,
+            Assert::containsIdentical($developerGetterMethod),
+            "Developer getter '{$developerGetterMethod}' was not invoked."
+        );
+    }
+
+    public function assertArrayOfDevelopersNotRequested(string $developerGetterMethod): void
+    {
+        Assert::assertThat(
+            $this->requestedArraysOfDevelopers,
+            new LogicalNot(Assert::containsIdentical($developerGetterMethod)),
+            "Developer getter '{$developerGetterMethod}' was invoked."
+        );
     }
 }
