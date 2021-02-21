@@ -64,6 +64,11 @@ abstract class Developer implements DeveloperContract
         return $property->isForeignKey() && $property->getForeignKeySpecification()->hasRelationship();
     }
 
+    protected function propertyIsForeign(ModelPropertySpecification $property): bool
+    {
+        return $property->isForeignKey();
+    }
+
     protected function guessTableName(ModelName $modelName): string
     {
         return Str::of($modelName->getName())->plural()->snake();

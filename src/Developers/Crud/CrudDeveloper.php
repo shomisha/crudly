@@ -2,7 +2,6 @@
 
 namespace Shomisha\Crudly\Developers\Crud;
 
-use Illuminate\Support\Str;
 use Shomisha\Crudly\Abstracts\Developer;
 use Shomisha\Crudly\Data\ModelName;
 use Shomisha\Crudly\Specifications\CrudlySpecification;
@@ -23,10 +22,10 @@ abstract class CrudDeveloper extends Developer
         })->filter()->values()->toArray();
     }
 
-    protected function extractRelationshipTablesFromSpecification(CrudlySpecification $specification): array
+    protected function extractForeignKeyTablesFromSpecification(CrudlySpecification $specification): array
     {
         return $specification->getProperties()->map(function (ModelPropertySpecification $propertySpecification) {
-            if (!$this->propertyIsRelationship($propertySpecification)) {
+            if (!$this->propertyIsForeign($propertySpecification)) {
                 return;
             }
 

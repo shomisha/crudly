@@ -2,12 +2,15 @@
 
 namespace Shomisha\Crudly\Developers\Crud\PartialDevelopers;
 
+use Illuminate\Support\Facades\DB;
 use Shomisha\Crudly\Contracts\Specification;
 use Shomisha\Crudly\Data\CrudlySet;
+use Shomisha\Crudly\Data\ModelName;
 use Shomisha\Crudly\Developers\Crud\CrudDeveloper;
 use Shomisha\Crudly\Specifications\CrudlySpecification;
 use Shomisha\Stubless\ImperativeCode\Block;
 use Shomisha\Stubless\Utilities\Importable;
+use Shomisha\Stubless\Values\AssignableValue;
 
 class LoadDependenciesDeveloper extends CrudDeveloper
 {
@@ -15,13 +18,10 @@ class LoadDependenciesDeveloper extends CrudDeveloper
     {
         $blocks = [];
 
-        foreach ($this->extractRelationshipModels($specification) as $modelName) {
+        foreach ($this->extractRelationshipModels($specification) as $relationshipModelName) {
             $blocks[] = Block::assign(
-                $this->guessPluralModelVariableName($modelName),
-                Block::invokeStaticMethod(
-                    new Importable($modelName->getFullyQualifiedName()),
-                    'all'
-                )
+                $this->guessPluralModelVariableName($relationshipModelName),
+                $this->loadDependencies($relationshipModelName),
             );
         }
 
@@ -29,10 +29,26 @@ class LoadDependenciesDeveloper extends CrudDeveloper
     }
 
     /** @return \Shomisha\Crudly\Data\ModelName[] */
-    private function extractRelationshipModels(CrudlySpecification $specification): array
+    protected function extractRelationshipModels(CrudlySpecification $specification): array
     {
         return array_map(function (string $tableName) {
             return $this->getModelSupervisor()->parseModelNameFromTable($tableName);
-        }, $this->extractRelationshipTablesFromSpecification($specification));
+        }, $this->extractForeignKeyTablesFromSpecification($specification));
+    }
+
+    protected function loadDependencies(ModelName $model): AssignableValue
+    {
+        if ($this->getModelSupervisor()->modelExists($model->getName())) {
+            return Block::invokeStaticMethod(
+                new Importable($model->getFullyQualifiedName()),
+                'all'
+            );
+        }
+
+        return Block::invokeStaticMethod(
+            new Importable(DB::class),
+            'table',
+            [$this->guessTableName($model)]
+        )->chain('get');
     }
 }

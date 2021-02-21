@@ -14,7 +14,7 @@ class ResponseDeveloper extends CrudDeveloper
     {
         $modelVarName = $this->guessSingularModelVariableName($specification->getModel());
 
-        $relationships = collect($this->extractRelationshipTablesFromSpecification($specification))->mapWithKeys(function (string $relationshipTable) {
+        $relationships = collect($this->extractForeignKeyTablesFromSpecification($specification))->mapWithKeys(function (string $relationshipTable) {
             $relationshipVariableName = $this->guessPluralModelVariableName(
                 $this->getModelSupervisor()->parseModelNameFromTable($relationshipTable)
             );

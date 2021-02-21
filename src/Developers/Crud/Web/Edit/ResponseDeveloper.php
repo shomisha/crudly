@@ -13,7 +13,7 @@ class ResponseDeveloper extends CrudDeveloper
     public function develop(Specification $specification, CrudlySet $developedSet): ReturnBlock
     {
         $modelName = $this->guessSingularModelVariableName($specification->getModel()->getName());
-        $relationships = collect($this->extractRelationshipTablesFromSpecification($specification))->mapWithKeys(function (string $relationshipTable) {
+        $relationships = collect($this->extractForeignKeyTablesFromSpecification($specification))->mapWithKeys(function (string $relationshipTable) {
             $relationshipVariableName = $this->guessPluralModelVariableName(
                 $this->getModelSupervisor()->parseModelNameFromTable($relationshipTable)
             );
