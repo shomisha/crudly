@@ -22,8 +22,8 @@ class LoadAllDeveloper extends CrudDeveloper
         return Block::assign(
             Variable::name($variableName),
             Block::invokeStaticMethod(
-                'all',
-                Reference::classReference(new Importable($fullModelName))
+                Reference::classReference(new Importable($fullModelName)),
+                'all'
             )
         );
     }
