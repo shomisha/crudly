@@ -11,17 +11,6 @@ use Shomisha\Stubless\ImperativeCode\ReturnBlock;
 
 abstract class CrudDeveloper extends Developer
 {
-    protected function extractRelationshipsFromSpecification(CrudlySpecification $specification): array
-    {
-        return $specification->getProperties()->map(function (ModelPropertySpecification $propertySpecification) {
-            if (!$this->propertyIsRelationship($propertySpecification)) {
-                return null;
-            }
-
-            return $propertySpecification->getForeignKeySpecification()->getRelationshipName();
-        })->filter()->values()->toArray();
-    }
-
     protected function extractForeignKeyTablesFromSpecification(CrudlySpecification $specification): array
     {
         return $specification->getProperties()->map(function (ModelPropertySpecification $propertySpecification) {
