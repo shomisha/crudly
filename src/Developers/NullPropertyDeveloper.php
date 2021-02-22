@@ -10,12 +10,22 @@ use Shomisha\Stubless\DeclarativeCode\ClassProperty;
 
 class NullPropertyDeveloper implements Developer
 {
+    private array $parameters;
+
     public function using(array $parameters): Developer
     {
+        $this->parameters = $parameters;
+
+        return $this;
     }
 
     public function develop(Specification $specification, CrudlySet $developedSet): ClassProperty
     {
         return new NullProperty('null');
+    }
+
+    public function getParameters(): array
+    {
+        return $this->parameters;
     }
 }

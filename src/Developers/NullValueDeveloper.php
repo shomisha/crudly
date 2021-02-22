@@ -10,12 +10,22 @@ use Shomisha\Stubless\Values\Value;
 
 class NullValueDeveloper implements Developer
 {
+    private array $parameters;
+
     public function using(array $parameters): Developer
     {
+        $this->parameters = $parameters;
+
+        return $this;
     }
 
     public function develop(Specification $specification, CrudlySet $developedSet): NullValue
     {
         return Value::null();
+    }
+
+    public function getParameters(): array
+    {
+        return $this->parameters;
     }
 }

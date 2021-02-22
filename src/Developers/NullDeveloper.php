@@ -9,12 +9,22 @@ use Shomisha\Stubless\ImperativeCode\Block;
 
 class NullDeveloper implements Developer
 {
+    private array $parameters;
+
     public function using(array $parameters): Developer
     {
+        $this->parameters = $parameters;
+
+        return $this;
     }
 
     public function develop(Specification $specification, CrudlySet $developedSet): Block
     {
         return Block::fromArray([]);
+    }
+
+    public function getParameters(): array
+    {
+        return $this->getParameters();
     }
 }
