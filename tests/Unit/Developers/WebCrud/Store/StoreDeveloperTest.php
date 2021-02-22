@@ -1,6 +1,6 @@
 <?php
 
-namespace Shomisha\Crudly\Test\Unit\Developers\WebCrud;
+namespace Shomisha\Crudly\Test\Unit\Developers\WebCrud\Store;
 
 use Shomisha\Crudly\Config\DeveloperConfig;
 use Shomisha\Crudly\Developers\Crud\CrudMethodDeveloper;
