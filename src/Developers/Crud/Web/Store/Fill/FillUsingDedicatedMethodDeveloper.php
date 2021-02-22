@@ -47,6 +47,7 @@ class FillUsingDedicatedMethodDeveloper extends CrudDeveloper
 
         $fillMethod = ClassMethod::name('fillFromRequest')
                                  ->arguments([$modelArg, $requestArg])
+                                 ->makePrivate()
                                  ->return(new Importable($model->getFullyQualifiedName()));
 
         $modelVar = Variable::fromArgument($modelArg);
