@@ -37,6 +37,18 @@ class NullDevelopersTest extends TestCase
     }
 
     /** @test */
+    public function null_class_developer_will_store_parameters()
+    {
+        $developer = new NullClassDeveloper();
+
+
+        $developer->using(['someParameter' => 'someValue']);
+
+
+        $this->assertEquals(['someParameter' => 'someValue'], $developer->getParameters());
+    }
+
+    /** @test */
     public function null_developer_can_develop_empty_block()
     {
         $developer = new NullDeveloper();
@@ -48,6 +60,18 @@ class NullDevelopersTest extends TestCase
         $this->assertInstanceOf(Block::class, $nullBlock);
 
         $this->assertEquals("<?php\n\n", $nullBlock->print());
+    }
+
+    /** @test */
+    public function null_developer_will_store_parameters()
+    {
+        $developer = new NullDeveloper();
+
+
+        $developer->using(['someParameter' => 'someValue']);
+
+
+        $this->assertEquals(['someParameter' => 'someValue'], $developer->getParameters());
     }
 
     /** @test */
@@ -66,6 +90,18 @@ class NullDevelopersTest extends TestCase
     }
 
     /** @test */
+    public function null_method_developer_will_store_parameters()
+    {
+        $developer = new NullMethodDeveloper();
+
+
+        $developer->using(['someParameter' => 'someValue']);
+
+
+        $this->assertEquals(['someParameter' => 'someValue'], $developer->getParameters());
+    }
+
+    /** @test */
     public function null_property_developer_can_develop_null_class_property()
     {
         $developer = new NullPropertyDeveloper();
@@ -81,6 +117,18 @@ class NullDevelopersTest extends TestCase
     }
 
     /** @test */
+    public function null_property_developer_will_store_parameters()
+    {
+        $developer = new NullPropertyDeveloper();
+
+
+        $developer->using(['someParameter' => 'someValue']);
+
+
+        $this->assertEquals(['someParameter' => 'someValue'], $developer->getParameters());
+    }
+
+    /** @test */
     public function null_value_developer_can_develop_null_value()
     {
         $developer = new NullValueDeveloper();
@@ -92,5 +140,17 @@ class NullDevelopersTest extends TestCase
         $this->assertInstanceOf(NullValue::class, $nullValue);
 
         $this->assertEquals("<?php\n\nnull;", $nullValue->print());
+    }
+
+    /** @test */
+    public function null_value_developer_will_store_parameters()
+    {
+        $developer = new NullValueDeveloper();
+
+
+        $developer->using(['someParameter' => 'someValue']);
+
+
+        $this->assertEquals(['someParameter' => 'someValue'], $developer->getParameters());
     }
 }

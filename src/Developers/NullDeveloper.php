@@ -25,6 +25,6 @@ class NullDeveloper implements Developer
 
     public function getParameters(): array
     {
-        return $this->getParameters();
+        return $this->parameters;
     }
 }
