@@ -15,6 +15,8 @@ class EditDeveloperTest extends CrudMethodTestCase
 {
     protected function getSpecificationBuilder(): CrudlySpecificationBuilder
     {
+        $this->modelSupervisor->expectedExistingModels(['User']);
+
         return tap(CrudlySpecificationBuilder::forModel('RentalListing'), function (CrudlySpecificationBuilder $specificationBuilder) {
             $specificationBuilder
                 ->property('owner_email', ModelPropertyType::EMAIL())
@@ -42,7 +44,7 @@ class EditDeveloperTest extends CrudMethodTestCase
             "    {",
             "        \$this->authorize('update', \$rentalListing);",
             "        \$users = User::all();",
-            "        \$cities = City::all();\n",
+            "        \$cities = DB::table('cities')->get();\n",
 
             "        return view('rental_listings.edit', ['rentalListing' => \$rentalListing, 'users' => \$users, 'cities' => \$cities]);",
             "    }",
@@ -55,7 +57,7 @@ class EditDeveloperTest extends CrudMethodTestCase
             "    public function edit(RentalListing \$rentalListing)",
             "    {",
             "        \$users = User::all();",
-            "        \$cities = City::all();\n",
+            "        \$cities = DB::table('cities')->get();\n",
 
             "        return view('rental_listings.edit', ['rentalListing' => \$rentalListing, 'users' => \$users, 'cities' => \$cities]);",
             "    }",

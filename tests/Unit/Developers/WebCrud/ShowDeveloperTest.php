@@ -15,10 +15,15 @@ class ShowDeveloperTest extends CrudMethodTestCase
 {
     protected function getSpecificationBuilder(): CrudlySpecificationBuilder
     {
+        $this->modelSupervisor->expectedExistingModels([
+            'Author'
+        ]);
+
         return tap(CrudlySpecificationBuilder::forModel('Post'), function (CrudlySpecificationBuilder $specificationBuilder) {
-            $specificationBuilder->property('author_id', ModelPropertyType::BIG_INT())
-                ->isForeign('id', 'authors')
-                ->isRelationship('author');
+            $specificationBuilder
+                ->property('author_id', ModelPropertyType::BIG_INT())
+                    ->isForeign('id', 'authors')
+                    ->isRelationship('author');
         });
     }
 

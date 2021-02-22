@@ -24,10 +24,15 @@ class WebCrudDeveloperTest extends DeveloperTestCase
             ->property('author_id', ModelPropertyType::BIG_INT())
                 ->isForeign('id', 'authors')
                 ->isRelationship('author')
+            ->property('category_uuid', ModelPropertyType::BIG_INT())
+                ->isForeign('uuid', 'categories')
+                ->isRelationship('category')
             ->webCrud()
             ->webAuthorization()
             ->softDeletes()
             ->softDeletionColumn('deleted_at');
+
+        $this->modelSupervisor->expectedExistingModels(['Author']);
 
         $manager = new WebCrudDeveloperManager(new DeveloperConfig(), $this->app);
         $developer = new CrudControllerDeveloper($manager, $this->modelSupervisor);
@@ -46,6 +51,7 @@ class WebCrudDeveloperTest extends DeveloperTestCase
         $this->assertStringContainsString("use App\Http\Requests\PostRequest;", $printedController);
         $this->assertStringContainsString("use App\Models\Author;", $printedController);
         $this->assertStringContainsString("use App\Models\Post;", $printedController);
+        $this->assertStringContainsString("use Illuminate\Support\Facades\DB;", $printedController);
 
         $this->assertStringContainsString(implode("\n", [
             "class PostsController extends Controller",
@@ -74,9 +80,10 @@ class WebCrudDeveloperTest extends DeveloperTestCase
             "    {",
             "        \$this->authorize('create', Post::class);",
             "        \$authors = Author::all();",
+            "        \$categories = DB::table('categories')->get();",
             "        \$post = new Post();\n",
 
-            "        return view('posts.create', ['post' => \$post, 'authors' => \$authors]);",
+            "        return view('posts.create', ['post' => \$post, 'authors' => \$authors, 'categories' => \$categories]);",
             "    }\n",
 
 
@@ -88,6 +95,7 @@ class WebCrudDeveloperTest extends DeveloperTestCase
             "        \$post->body = \$request->input('body');",
             "        \$post->published_at = \$request->input('published_at');",
             "        \$post->author_id = \$request->input('author_id');",
+            "        \$post->category_uuid = \$request->input('category_uuid');",
             "        \$post->save();\n",
 
             "        return redirect()->route('posts.index')->with('success', 'Successfully created new instance.');",
@@ -97,9 +105,10 @@ class WebCrudDeveloperTest extends DeveloperTestCase
             "    public function edit(Post \$post)",
             "    {",
             "        \$this->authorize('update', \$post);",
-            "        \$authors = Author::all();\n",
+            "        \$authors = Author::all();",
+            "        \$categories = DB::table('categories')->get();\n",
 
-            "        return view('posts.edit', ['post' => \$post, 'authors' => \$authors]);",
+            "        return view('posts.edit', ['post' => \$post, 'authors' => \$authors, 'categories' => \$categories]);",
             "    }\n",
 
 
@@ -110,6 +119,7 @@ class WebCrudDeveloperTest extends DeveloperTestCase
             "        \$post->body = \$request->input('body');",
             "        \$post->published_at = \$request->input('published_at');",
             "        \$post->author_id = \$request->input('author_id');",
+            "        \$post->category_uuid = \$request->input('category_uuid');",
             "        \$post->update();\n",
 
             "        return redirect()->route('posts.index')->with('success', 'Successfully updated instance.');",

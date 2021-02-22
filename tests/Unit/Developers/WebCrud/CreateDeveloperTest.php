@@ -15,6 +15,8 @@ class CreateDeveloperTest extends CrudMethodTestCase
 {
     protected function getSpecificationBuilder(): CrudlySpecificationBuilder
     {
+        $this->modelSupervisor->expectedExistingModels(['Publisher']);
+
         return tap(CrudlySpecificationBuilder::forModel('Author'), function (CrudlySpecificationBuilder $specificationBuilder) {
             $specificationBuilder
                 ->property('country_id', ModelPropertyType::BIG_INT())
@@ -41,7 +43,7 @@ class CreateDeveloperTest extends CrudMethodTestCase
             "    public function create()",
             "    {",
             "        \$this->authorize('create', Author::class);",
-            "        \$countries = Country::all();",
+            "        \$countries = DB::table('countries')->get();",
             "        \$publishers = Publisher::all();",
             "        \$author = new Author();\n",
 
@@ -55,7 +57,7 @@ class CreateDeveloperTest extends CrudMethodTestCase
         return implode("\n", [
             "    public function create()",
             "    {",
-            "        \$countries = Country::all();",
+            "        \$countries = DB::table('countries')->get();",
             "        \$publishers = Publisher::all();",
             "        \$author = new Author();\n",
 
