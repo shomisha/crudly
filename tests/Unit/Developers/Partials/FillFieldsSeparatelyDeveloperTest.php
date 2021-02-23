@@ -1,6 +1,6 @@
 <?php
 
-namespace Shomisha\Crudly\Test\Unit\Developers\WebCrud;
+namespace Shomisha\Crudly\Test\Unit\Developers\Partials;
 
 use Shomisha\Crudly\Config\DeveloperConfig;
 use Shomisha\Crudly\Data\CrudlySet;
