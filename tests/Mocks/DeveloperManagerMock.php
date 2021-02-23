@@ -4,6 +4,7 @@ namespace Shomisha\Crudly\Test\Mocks;
 
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\Constraint\LogicalNot;
+use Shomisha\Crudly\Contracts\Developer;
 use Shomisha\Crudly\Developers\NullClassDeveloper;
 use Shomisha\Crudly\Developers\NullDeveloper;
 use Shomisha\Crudly\Developers\NullMethodDeveloper;
@@ -15,18 +16,23 @@ class DeveloperManagerMock extends BaseDeveloperManager
 {
     private array $classDeveloperMethods = [];
     private array $requestedClassDevelopers = [];
+    private ?Developer $classDeveloper = null;
 
     private array $classMethodDeveloperMethods = [];
     private array $requestedClassMethodDevelopers = [];
+    private ?Developer $classMethodDeveloper = null;
 
     private array $classPropertyDeveloperMethods = [];
     private array $requestedClassPropertyDevelopers = [];
+    private ?Developer $classPropertyDeveloper = null;
 
     private array $imperativeCodeDeveloperMethods = [];
     private array $requestedCodeDevelopers = [];
+    private ?Developer $codeDeveloper;
 
     private array $valueDeveloperMethods = [];
     private array $requestedValueDevelopers = [];
+    private ?Developer $valueDeveloper;
 
     private array $arraysOfDevelopers = [];
     private array $requestedArraysOfDevelopers = [];
@@ -42,31 +48,31 @@ class DeveloperManagerMock extends BaseDeveloperManager
         if (in_array($method, $this->classDeveloperMethods)) {
             $this->requestedClassDevelopers[] = $method;
 
-            return new NullClassDeveloper();
+            return $this->classDeveloper ?? new NullClassDeveloper();
         }
 
         if (in_array($method, $this->classMethodDeveloperMethods)) {
             $this->requestedClassMethodDevelopers[] = $method;
 
-            return new NullMethodDeveloper();
+            return $this->classMethodDeveloper ?? new NullMethodDeveloper();
         }
 
         if (in_array($method, $this->classPropertyDeveloperMethods)) {
             $this->requestedClassPropertyDevelopers[] = $method;
 
-            return new NullPropertyDeveloper();
+            return $this->classPropertyDeveloper ?? new NullPropertyDeveloper();
         }
 
         if (in_array($method, $this->imperativeCodeDeveloperMethods)) {
             $this->requestedCodeDevelopers[] = $method;
 
-            return new NullDeveloper();
+            return $this->codeDeveloper ?? new NullDeveloper();
         }
 
         if (in_array($method, $this->valueDeveloperMethods)) {
             $this->requestedValueDevelopers[] = $method;
 
-            return new NullValueDeveloper();
+            return $this->valueDeveloper ?? new NullValueDeveloper();
         }
 
         if (in_array($method, $this->arraysOfDevelopers)) {
@@ -226,5 +232,40 @@ class DeveloperManagerMock extends BaseDeveloperManager
             new LogicalNot(Assert::containsIdentical($developerGetterMethod)),
             "Developer getter '{$developerGetterMethod}' was invoked."
         );
+    }
+
+    public function useClassDeveloper(?Developer $developer): self
+    {
+        $this->classDeveloper = $developer;
+
+        return $this;
+    }
+
+    public function useMethodDeveloper(?Developer $developer): self
+    {
+        $this->classMethodDeveloper = $developer;
+
+        return $this;
+    }
+
+    public function usePropertyDeveloper(?Developer $developer): self
+    {
+        $this->classPropertyDeveloper = $developer;
+
+        return $this;
+    }
+
+    public function useImperativeCodeDeveloper(?Developer $developer): self
+    {
+        $this->codeDeveloper = $developer;
+
+        return $this;
+    }
+
+    public function useValueDeveloper(?Developer $developer): self
+    {
+        $this->valueDeveloper = $developer;
+
+        return $this;
     }
 }
