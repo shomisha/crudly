@@ -27,7 +27,7 @@ class DestroyMethodDeveloperManager extends CrudMethodDeveloperManager
     public function getAuthorizationDeveloper(): Developer
     {
         // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(InvokeAuthorizationDeveloper::class, $this)->using(['action' => 'delete', 'withModel']);
+        return $this->instantiateDeveloperWithManager(InvokeAuthorizationDeveloper::class, $this)->using(['action' => 'delete', 'withModel' => true]);
     }
 
     public function getMainDeveloper(): Developer
