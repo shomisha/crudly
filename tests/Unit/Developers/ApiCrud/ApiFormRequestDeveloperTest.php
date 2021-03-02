@@ -1,20 +1,20 @@
 <?php
 
-namespace Shomisha\Crudly\Test\Unit\Developers\WebCrud;
+namespace Shomisha\Crudly\Test\Unit\Developers\ApiCrud;
 
 use Shomisha\Crudly\Config\DeveloperConfig;
 use Shomisha\Crudly\Data\CrudlySet;
-use Shomisha\Crudly\Developers\Crud\Web\FormRequest\WebFormRequestDeveloper;
+use Shomisha\Crudly\Developers\Crud\Api\FormRequest\ApiFormRequestDeveloper;
 use Shomisha\Crudly\Enums\ModelPropertyType;
 use Shomisha\Crudly\Managers\Crud\FormRequestDeveloperManager;
 use Shomisha\Crudly\Test\Specification\CrudlySpecificationBuilder;
 use Shomisha\Crudly\Test\Unit\DeveloperTestCase;
 use Shomisha\Stubless\DeclarativeCode\ClassTemplate;
 
-class WebFormRequestDeveloperTest extends DeveloperTestCase
+class ApiFormRequestDeveloperTest extends DeveloperTestCase
 {
     /** @test */
-    public function developer_can_develop_web_form_request()
+    public function developer_will_develop_api_form_request()
     {
         $specificationBuilder = CrudlySpecificationBuilder::forModel('Post')
             ->property('id', ModelPropertyType::BIG_INT())
@@ -28,16 +28,16 @@ class WebFormRequestDeveloperTest extends DeveloperTestCase
 
 
         $manager = new FormRequestDeveloperManager(new DeveloperConfig(), $this->app);
-        $developer = new WebFormRequestDeveloper($manager, $this->modelSupervisor);
+        $developer = new ApiFormRequestDeveloper($manager, $this->modelSupervisor);
         $developedSet = new CrudlySet();
         $formRequest = $developer->develop($specificationBuilder->build(), $developedSet);
 
 
         $this->assertInstanceOf(ClassTemplate::class, $formRequest);
-        $this->assertEquals($developedSet->getWebCrudFormRequest(), $formRequest);
+        $this->assertEquals($developedSet->getApiCrudFormRequest(), $formRequest);
 
         $printedFormRequest = $formRequest->print();
-        $this->assertStringContainsString("namespace App\Http\Requests;", $printedFormRequest);
+        $this->assertStringContainsString("namespace App\Http\Requests\Api;", $printedFormRequest);
         $this->assertStringContainsString("use Illuminate\Foundation\Http\FormRequest;", $printedFormRequest);
         $this->assertStringContainsString("use Illuminate\Validation\Rule;", $printedFormRequest);
 
@@ -69,7 +69,7 @@ class WebFormRequestDeveloperTest extends DeveloperTestCase
         ]);
 
 
-        $developer = new WebFormRequestDeveloper($this->manager, $this->modelSupervisor);
+        $developer = new ApiFormRequestDeveloper($this->manager, $this->modelSupervisor);
         $developer->develop($specificationBuilder->build(), new CrudlySet());
 
 
