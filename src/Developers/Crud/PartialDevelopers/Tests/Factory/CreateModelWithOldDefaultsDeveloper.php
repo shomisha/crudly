@@ -27,11 +27,11 @@ class CreateModelWithOldDefaultsDeveloper extends TestsDeveloper
 
         return Block::assign(
             $modelVar,
-            $this->getCreateUserBlock($specification, $developedSet)
+            $this->getCreateModelBlock($specification, $developedSet)
         );
     }
 
-    protected function getCreateUserBlock(CrudlySpecification $specification, CrudlySet $developedSet): InvokeBlock
+    protected function getCreateModelBlock(CrudlySpecification $specification, CrudlySet $developedSet): InvokeBlock
     {
         return Block::invokeStaticMethod(
             new Importable($specification->getModel()->getFullyQualifiedName()),
