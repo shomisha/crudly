@@ -14,8 +14,12 @@ class AssertViewIsDeveloper extends Developer
     /** @param \Shomisha\Crudly\Specifications\CrudlySpecification $specification */
     final public function develop(Specification $specification, CrudlySet $developedSet): InvokeMethodBlock
     {
+        $responseVar = Reference::variable(
+            $this->responseVariableName()
+        );
+
         return Block::invokeMethod(
-            Reference::variable('response'),
+            $responseVar,
             'assertViewIs',
             [
                 $this->guessModelViewNamespace($specification->getModel(), $this->getParameter('view')),
