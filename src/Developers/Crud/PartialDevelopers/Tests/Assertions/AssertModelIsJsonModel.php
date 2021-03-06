@@ -16,7 +16,7 @@ class AssertModelIsJsonModel extends TestsDeveloper
         $model = $specification->getModel();
         $primaryKeyName = $specification->getPrimaryKey()->getName();
         $modelVar = Reference::variable($this->guessSingularModelVariableName($model));
-        $responseModelIdVar = Reference::variable('response' . $this->guessSingularModelVariableName($model) . 'Id');
+        $responseModelIdVar = Reference::variable('response' . ucfirst($this->guessSingularModelVariableName($model)) . 'Id');
 
         $getModelId = Block::assign(
             $responseModelIdVar,

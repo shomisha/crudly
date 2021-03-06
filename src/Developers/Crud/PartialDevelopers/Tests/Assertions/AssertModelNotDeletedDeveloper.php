@@ -7,6 +7,7 @@ use Shomisha\Crudly\Data\CrudlySet;
 use Shomisha\Crudly\Developers\Tests\TestsDeveloper;
 use Shomisha\Crudly\Specifications\CrudlySpecification;
 use Shomisha\Stubless\Contracts\Code;
+use Shomisha\Stubless\ImperativeCode\Block;
 
 /** @method \Shomisha\Crudly\Managers\Tests\TestMethodDeveloperManager getManager() */
 class AssertModelNotDeletedDeveloper extends TestsDeveloper
@@ -23,7 +24,10 @@ class AssertModelNotDeletedDeveloper extends TestsDeveloper
 
     protected function assertNotSoftDeleted(CrudlySpecification $specification, CrudlySet $developedSet): Code
     {
-        return $this->getManager()->getAssertSoftDeletedColumnIsNullDeveloper()->develop($specification, $developedSet);
+        return Block::fromArray([
+            $this->getManager()->getRefreshModelDeveloper()->develop($specification, $developedSet),
+            $this->getManager()->getAssertSoftDeletedColumnIsNullDeveloper()->develop($specification, $developedSet),
+        ]);
     }
 
     protected function assertNotHardDeleted(CrudlySpecification $specification, CrudlySet $developedSet): Code
