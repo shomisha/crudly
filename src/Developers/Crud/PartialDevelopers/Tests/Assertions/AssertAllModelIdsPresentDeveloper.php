@@ -35,26 +35,4 @@ class AssertAllModelIdsPresentDeveloper extends TestsDeveloper
             )
         ]);
     }
-
-    protected function getResponseModelIdsVariable(CrudlySpecification $specification,
-        Variable $responseVar,
-        Variable $idsVar): AssignBlock
-    {
-        $modelsViewDataIndex = $this->guessPluralModelVariableName($specification->getModel());
-
-        $ids = Block::invokeFunction(
-            'collect',
-            [
-                Block::invokeMethod(
-                    $responseVar,
-                    'viewData',
-                    [
-                        $modelsViewDataIndex
-                    ]
-                )
-            ]
-        )->chain('pluck', [$specification->getPrimaryKey()->getName()]);
-
-        return Block::assign($idsVar, $ids);
-    }
 }
