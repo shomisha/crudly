@@ -35,12 +35,14 @@ class GetModelDataPrimeDefaultsDeveloper extends TestsDeveloper
     /** @param \Shomisha\Crudly\Specifications\CrudlySpecification $specification */
     public function develop(Specification $specification, CrudlySet $developedSet): Code
     {
-        return Block::invokeFunction(
-            'array_merge',
-            [
-                $this->prepareDefaultValues($specification),
-                Reference::variable('override'),
-            ]
+        return Block::return(
+            Block::invokeFunction(
+                'array_merge',
+                [
+                    $this->prepareDefaultValues($specification),
+                    Reference::variable('override'),
+                ]
+            )
         );
     }
 
