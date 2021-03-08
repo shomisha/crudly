@@ -7,7 +7,7 @@ class GetStoreRouteMethodDeveloper extends RouteGetterDeveloper
 {
     protected function getName(): string
     {
-        return 'store';
+        return 'getStoreRoute';
     }
 
     protected function getRouteName(): string

@@ -13,4 +13,9 @@ class GetEditRouteMethodDeveloper extends RouteGetterDeveloper
     {
         return 'edit';
     }
+
+    protected function acceptsModelArgument(): bool
+    {
+        return true;
+    }
 }
