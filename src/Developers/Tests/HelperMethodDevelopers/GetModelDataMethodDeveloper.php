@@ -22,7 +22,7 @@ class GetModelDataMethodDeveloper extends TestsDeveloper
     {
         $method = ClassMethod::name($this->getModelDataMethodName($specification->getModel()))->withArguments([
             Argument::name('override')->type('array')->value([])
-        ])->return('array');
+        ])->return('array')->makePrivate();
 
         $method->setBody(
             Block::fromArray([

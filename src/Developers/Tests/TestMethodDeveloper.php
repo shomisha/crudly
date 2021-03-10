@@ -32,6 +32,8 @@ abstract class TestMethodDeveloper extends TestsDeveloper
 
     abstract protected function getName(CrudlySpecification $specification): string;
 
+    abstract protected function hasAuthorization(CrudlySpecification $specification): bool;
+
     /** @return \Shomisha\Stubless\DeclarativeCode\Argument[] */
     protected function getArguments(): array
     {
@@ -50,7 +52,9 @@ abstract class TestMethodDeveloper extends TestsDeveloper
     final protected function getCodeFromDevelopers(array $developers, CrudlySpecification $specification, CrudlySet $developedSet): array
     {
         return array_values(array_map(function (Developer $developer) use ($specification, $developedSet) {
-            return $developer->develop($specification, $developedSet);
+            return $developer->using([
+                'hasAuthorization' => $this->hasAuthorization($specification)
+            ])->develop($specification, $developedSet);
         }, $developers));
     }
 }

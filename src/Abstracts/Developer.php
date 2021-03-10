@@ -25,7 +25,7 @@ abstract class Developer implements DeveloperContract
 
     public function using(array $parameters): self
     {
-        $this->parameters = $parameters;
+        $this->parameters = array_merge($this->parameters, $parameters);
 
         return $this;
     }

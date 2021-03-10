@@ -15,7 +15,7 @@ class IndexTestDeveloperManager extends TestMethodDeveloperManager
     public function getArrangeDevelopers(): array
     {
         return [
-            $this->getCreateAndAuthenticateUserDeveloper(),
+            $this->getAuthenticateAndAuthorizeUserDeveloper(),
             $this->instantiateDeveloperWithManager(CreateMultipleModelInstances::class, $this),
         ];
     }

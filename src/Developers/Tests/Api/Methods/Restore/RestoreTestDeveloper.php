@@ -2,7 +2,7 @@
 
 namespace Shomisha\Crudly\Developers\Tests\Api\Methods\Restore;
 
-use Shomisha\Crudly\Developers\Tests\TestMethodDeveloper;
+use Shomisha\Crudly\Developers\Tests\Api\TestMethodDeveloper;
 use Shomisha\Crudly\Specifications\CrudlySpecification;
 
 class RestoreTestDeveloper extends TestMethodDeveloper

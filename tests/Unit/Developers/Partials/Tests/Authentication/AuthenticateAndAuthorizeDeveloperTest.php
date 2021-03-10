@@ -18,7 +18,7 @@ class AuthenticateAndAuthorizeDeveloperTest extends TestMethodTestCase
 
 
         $developer = new AuthenticateAndAuthorizeUserDeveloper($this->getTestMethodDeveloperManager(), $this->modelSupervisor);
-        $block = $developer->develop($specificationBuilder->build(), new CrudlySet());
+        $block = $developer->using(['hasAuthorization' => true])->develop($specificationBuilder->build(), new CrudlySet());
 
 
         $this->assertInstanceOf(Block::class, $block);
@@ -36,7 +36,7 @@ class AuthenticateAndAuthorizeDeveloperTest extends TestMethodTestCase
 
 
         $developer = new AuthenticateAndAuthorizeUserDeveloper($this->getTestMethodDeveloperManager(), $this->modelSupervisor);
-        $printedBlock = $developer->develop($specificationBuilder->build(), new CrudlySet())->print();
+        $printedBlock = $developer->using(['hasAuthorization' => false])->develop($specificationBuilder->build(), new CrudlySet())->print();
 
 
         $this->assertStringContainsString(implode("\n", [
@@ -60,7 +60,7 @@ class AuthenticateAndAuthorizeDeveloperTest extends TestMethodTestCase
 
 
         $developer = new AuthenticateAndAuthorizeUserDeveloper($this->manager, $this->modelSupervisor);
-        $developer->develop($specificationBuilder->build(), new CrudlySet());
+        $developer->using(['hasAuthorization' => true])->develop($specificationBuilder->build(), new CrudlySet());
 
 
         $this->manager->assertCodeDeveloperRequested('getCreateAndAuthenticateUserDeveloper');

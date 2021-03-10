@@ -17,7 +17,7 @@ class AuthenticateAndAuthorizeUserDeveloper extends TestsDeveloper
             $this->getManager()->getCreateAndAuthenticateUserDeveloper()->develop($specification, $developedSet)
         ]);
 
-        if ($specification->hasWebAuthorization()) {
+        if ($this->getParameter('hasAuthorization')) {
             $block->addCode(
                 $this->getManager()->getAuthorizeUserDeveloper()->develop($specification, $developedSet)
             );

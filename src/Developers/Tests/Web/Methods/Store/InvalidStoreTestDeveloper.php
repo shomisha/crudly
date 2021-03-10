@@ -3,7 +3,7 @@
 namespace Shomisha\Crudly\Developers\Tests\Web\Methods\Store;
 
 use Shomisha\Crudly\Data\CrudlySet;
-use Shomisha\Crudly\Developers\Tests\TestMethodDeveloper;
+use Shomisha\Crudly\Developers\Tests\Web\TestMethodDeveloper;
 use Shomisha\Crudly\Specifications\CrudlySpecification;
 use Shomisha\Stubless\DeclarativeCode\Argument;
 

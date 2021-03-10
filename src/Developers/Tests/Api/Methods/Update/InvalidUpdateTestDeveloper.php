@@ -3,7 +3,7 @@
 namespace Shomisha\Crudly\Developers\Tests\Api\Methods\Update;
 
 use Shomisha\Crudly\Data\CrudlySet;
-use Shomisha\Crudly\Developers\Tests\TestMethodDeveloper;
+use Shomisha\Crudly\Developers\Tests\Api\TestMethodDeveloper;
 use Shomisha\Crudly\Specifications\CrudlySpecification;
 use Shomisha\Stubless\DeclarativeCode\Argument;
 

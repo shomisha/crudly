@@ -2,7 +2,7 @@
 
 namespace Shomisha\Crudly\Developers\Tests\Web\Methods\Index;
 
-use Shomisha\Crudly\Developers\Tests\TestMethodDeveloper;
+use Shomisha\Crudly\Developers\Tests\Web\TestMethodDeveloper;
 use Shomisha\Crudly\Specifications\CrudlySpecification;
 
 class UnauthorizedIndexTestDeveloper extends TestMethodDeveloper
