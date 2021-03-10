@@ -63,7 +63,7 @@ class GetModelDataMethodDeveloperTest extends DeveloperTestCase
 
         $this->assertInstanceOf(ClassMethod::class, $method);
         $this->assertStringContainsString(implode("\n", [
-            "    public function getPlayerData(array \$override = []) : array",
+            "    private function getPlayerData(array \$override = []) : array",
             "    {",
             "        if (!array_key_exists('club_uuid', \$override)) {",
             "            \$override['club_uuid'] = Club::factory()->create()->uuid;",

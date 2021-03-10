@@ -2,8 +2,8 @@
 
 namespace Shomisha\Crudly\Managers\Tests\Api\TestMethodDeveloperManagers\ForceDelete;
 
+use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertDatabaseMissingModelDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertResponseStatusDeveloper;
-use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertSoftDeletedColumnIsNotNull;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Requests\DeleteForceDeleteRouteDeveloper;
 use Shomisha\Crudly\Managers\Tests\TestMethodDeveloperManager;
 
@@ -28,8 +28,7 @@ class ForceDeleteTestDeveloperManager extends TestMethodDeveloperManager
     {
         return [
             $this->instantiateDeveloperWithManager(AssertResponseStatusDeveloper::class, $this)->using(['status' => 204]),
-            $this->getRefreshModelDeveloper(),
-            $this->instantiateDeveloperWithManager(AssertSoftDeletedColumnIsNotNull::class, $this),
+            $this->instantiateDeveloperWithManager(AssertDatabaseMissingModelDeveloper::class, $this),
         ];
     }
 }
