@@ -27,6 +27,7 @@ class DestroyTestDeveloperManager extends TestMethodDeveloperManager
     {
         return [
             $this->getAssertRedirectToIndexDeveloper(),
+            $this->getAssertSessionHasSuccessDeveloper(),
             $this->instantiateDeveloperWithManager(AssertModelDeletedDeveloper::class, $this),
         ];
     }

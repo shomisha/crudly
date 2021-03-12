@@ -27,6 +27,7 @@ class ForceDeleteTestDeveloperManager extends TestMethodDeveloperManager
     {
         return [
             $this->getAssertRedirectToIndexDeveloper(),
+            $this->getAssertSessionHasSuccessDeveloper(),
             $this->instantiateDeveloperWithManager(AssertDatabaseMissingModelDeveloper::class, $this),
         ];
     }

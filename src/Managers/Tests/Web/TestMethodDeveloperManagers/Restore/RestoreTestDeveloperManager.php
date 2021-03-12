@@ -28,6 +28,7 @@ class RestoreTestDeveloperManager extends TestMethodDeveloperManager
     {
         return [
             $this->getAssertRedirectToIndexDeveloper(),
+            $this->getAssertSessionHasSuccessDeveloper(),
             $this->getRefreshModelDeveloper(),
             $this->instantiateDeveloperWithManager(AssertSoftDeletedColumnIsNull::class, $this),
         ];
