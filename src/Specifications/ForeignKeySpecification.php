@@ -12,7 +12,6 @@ class ForeignKeySpecification extends Specification
         KEY_FOREIGN_KEY_FIELD = 'field',
         KEY_HAS_RELATIONSHIP = 'has_relationship',
         KEY_RELATIONSHIP_NAME = 'relationship.name',
-        KEY_RELATIONSHIP_TYPE = 'relationship.type',
         KEY_FOREIGN_KEY_ON_DELETE = 'on_delete',
         KEY_FOREIGN_KEY_ON_UPDATE = 'on_update';
 

@@ -130,9 +130,4 @@ class DeveloperManager extends BaseDeveloperManager
     {
         return $this->instantiateManager(ApiCrudDeveloperManager::class);
     }
-
-    private function getApiTestsManager()
-    {
-
-    }
 }

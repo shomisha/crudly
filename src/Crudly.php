@@ -55,9 +55,7 @@ class Crudly
 
     public function develop(CrudlySpecification $specification): CrudlySet
     {
-        $set = $this->getCrudlyDeveloper()->develop($specification);
-
-        return $set;
+        return $this->getCrudlyDeveloper()->develop($specification);
     }
 
     protected function setModelSupervisor(ModelSupervisor $modelSupervisor): self
