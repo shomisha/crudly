@@ -81,8 +81,12 @@ class ModelPropertySpecification extends Specification
         return $this->extract(self::KEY_FOREIGN_KEY) ?? false;
     }
 
-    public function getForeignKeySpecification(): ForeignKeySpecification
+    public function getForeignKeySpecification(): ?ForeignKeySpecification
     {
-        return new ForeignKeySpecification($this->extract(self::KEY_FOREIGN_KEY_TARGET));
+        if (!$foreignKeyData = $this->extract(self::KEY_FOREIGN_KEY_TARGET)) {
+            return null;
+        }
+
+        return new ForeignKeySpecification($foreignKeyData);
     }
 }
