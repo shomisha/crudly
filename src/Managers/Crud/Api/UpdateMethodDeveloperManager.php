@@ -6,6 +6,7 @@ use Shomisha\Crudly\Contracts\Developer;
 use Shomisha\Crudly\Developers\Crud\Api\Update\ValidateFillAndUpdateDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\InvokeAuthorizationDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\InvokeModelMethodDeveloper;
+use Shomisha\Crudly\Developers\Crud\PartialDevelopers\ReturnNoContentDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\ReturnSingleResourceDeveloper;
 use Shomisha\Crudly\Developers\Crud\Web\Store\Fill\FillFieldsSeparatelyDeveloper;
 use Shomisha\Crudly\Managers\Crud\CrudMethodDeveloperManager;
@@ -53,6 +54,6 @@ class UpdateMethodDeveloperManager extends CrudMethodDeveloperManager
 
     public function getResponseDeveloper(): Developer
     {
-        return $this->instantiateDeveloperWithManager(ReturnSingleResourceDeveloper::class , $this);
+        return $this->instantiateDeveloperWithManager(ReturnNoContentDeveloper::class , $this);
     }
 }

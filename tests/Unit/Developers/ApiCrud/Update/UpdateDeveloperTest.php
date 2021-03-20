@@ -52,7 +52,7 @@ class UpdateDeveloperTest extends CrudMethodTestCase
             "        \$author->publisher_id = \$request->input('publisher_id');",
             "        \$author->update();\n",
 
-            "        return new AuthorResource(\$author);",
+            "        return response()->noContent();",
             "    }",
         ]);
     }
@@ -68,7 +68,7 @@ class UpdateDeveloperTest extends CrudMethodTestCase
             "        \$author->publisher_id = \$request->input('publisher_id');",
             "        \$author->update();\n",
 
-            "        return new AuthorResource(\$author);",
+            "        return response()->noContent();",
             "    }",
         ]);
     }

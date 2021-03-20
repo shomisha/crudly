@@ -99,7 +99,7 @@ class ApiCrudDeveloperTest extends DeveloperTestCase
             "        \$author->genre_id = \$request->input('genre_id');",
             "        \$author->update();\n",
 
-            "        return new AuthorResource(\$author);",
+            "        return response()->noContent();",
             "    }\n",
 
             "    public function destroy(Author \$author)",
@@ -212,7 +212,7 @@ class ApiCrudDeveloperTest extends DeveloperTestCase
             "        \$author->genre_id = \$request->input('genre_id');",
             "        \$author->update();\n",
 
-            "        return new AuthorResource(\$author);",
+            "        return response()->noContent();",
             "    }\n",
 
             "    public function destroy(Author \$author)",
@@ -325,7 +325,7 @@ class ApiCrudDeveloperTest extends DeveloperTestCase
             "        \$author->genre_id = \$request->input('genre_id');",
             "        \$author->update();\n",
 
-            "        return new AuthorResource(\$author);",
+            "        return response()->noContent();",
             "    }\n",
 
             "    public function destroy(Author \$author)",
