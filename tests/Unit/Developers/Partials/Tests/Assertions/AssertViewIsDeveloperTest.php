@@ -12,17 +12,18 @@ class AssertViewIsDeveloperTest extends DeveloperTestCase
 {
     /**
      * @test
-     * @testWith ["index", "admins.index"]
-     *           ["show", "admins.show"]
-     *           ["create", "admins.create", "testResponse"]
-     *           ["store", "admins.store"]
-     *           ["edit", "admins.edit", "anotherResponse"]
-     *           ["update", "admins.update", "requestReturnValue"]
-     *           ["index", "admins.index"]
+     * @testWith ["Admin", "index", "admins.index"]
+     *           ["Admin", "show", "authenticatable.admins.show", null, "Authenticatables"]
+     *           ["Admin", "create", "admins.create", "testResponse"]
+     *           ["Admin", "store", "admins.store"]
+     *           ["Admin", "edit", "admins.edit", "anotherResponse"]
+     *           ["Admin", "update", "admins.update", "requestReturnValue"]
+     *           ["Admin", "index", "admins.index"]
+     *           ["Author", "index", "blog.authors.index", null, "Blog"]
      */
-    public function developer_can_develop_asserting_response_is_specific_view(string $view, string $expectedAssertionView, ?string $responseVar = null)
+    public function developer_can_develop_asserting_response_is_specific_view(string $modelName, string $view, string $expectedAssertionView, ?string $responseVar = null, ?string $modelNamespace = null)
     {
-        $specificationBuilder = CrudlySpecificationBuilder::forModel('Admin');
+        $specificationBuilder = CrudlySpecificationBuilder::forModel($modelName)->namespace($modelNamespace);
 
         $parameters = ['view' => $view];
         if ($responseVar) {

@@ -48,7 +48,10 @@ abstract class BaseDeveloperManager
 
     protected function instantiateManager(string $managerClass): BaseDeveloperManager
     {
-        return new $managerClass($this->config, $this->container);
+        return $this->container->make($managerClass, [
+            'config' => $this->getConfig(),
+            'container' => $this->getContainer(),
+        ]);
     }
 
     protected function instantiateDeveloperWithManager(string $developerClass, BaseDeveloperManager $manager): Developer
