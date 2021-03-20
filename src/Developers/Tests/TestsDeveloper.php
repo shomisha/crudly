@@ -14,11 +14,6 @@ use Shomisha\Crudly\Exceptions\IncompleteTestException;
  */
 abstract class TestsDeveloper extends Developer
 {
-    protected function guessTestClassFullName(ModelName $model): string
-    {
-        return $this->guessTestNamespace() . $this->guessTestClassShortName($model);
-    }
-
     protected function guessTestClassShortName(ModelName $model): string
     {
         return Str::of($model->getName())->singular() . "Test";
