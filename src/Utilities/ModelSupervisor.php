@@ -73,15 +73,6 @@ class ModelSupervisor implements ModelSupervisorContract
         $this->rootNamespace = $rootNamespace;
     }
 
-    private function guessModelPath(ModelName $name): string
-    {
-        if ($this->shouldUseModelsDirectory()) {
-            $this->appPath .= DIRECTORY_SEPARATOR . "Models";
-        }
-
-        return $this->appPath . DIRECTORY_SEPARATOR .  $name->getName() . '.php';
-    }
-
     private function modelNamespace(): string
     {
         $namespace = $this->rootNamespace;
