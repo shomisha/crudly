@@ -39,7 +39,7 @@ class InvalidStoreTestDeveloperTest extends DeveloperTestCase
             "        \$data = \$this->getAuthorData([\$field => \$value]);",
             "        \$response = \$this->post(\$this->getStoreRoute(), \$data);",
             "        \$response->assertStatus(422);",
-            "        \$response->assertSessionHasErrors(\$field);",
+            "        \$response->assertJsonValidationErrors(\$field);",
             "        \$this->assertDatabaseCount('authors', 0);",
             "    }\n",
         ]), ClassTemplate::name('Test')->addMethod($testMethod)->print());
@@ -69,7 +69,7 @@ class InvalidStoreTestDeveloperTest extends DeveloperTestCase
             "        \$data = \$this->getAuthorData([\$field => \$value]);",
             "        \$response = \$this->post(\$this->getStoreRoute(), \$data);",
             "        \$response->assertStatus(422);",
-            "        \$response->assertSessionHasErrors(\$field);",
+            "        \$response->assertJsonValidationErrors(\$field);",
             "        \$this->assertDatabaseCount('authors', 0);",
             "    }\n",
         ]), ClassTemplate::name('Test')->addMethod($testMethod)->print());

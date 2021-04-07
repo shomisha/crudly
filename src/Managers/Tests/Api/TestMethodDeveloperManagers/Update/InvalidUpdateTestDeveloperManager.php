@@ -2,9 +2,9 @@
 
 namespace Shomisha\Crudly\Managers\Tests\Api\TestMethodDeveloperManagers\Update;
 
+use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertJsonHasFieldErrorDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertModelHasOldValuesDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertResponseStatusDeveloper;
-use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertSessionHasFieldErrorDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Factory\CreateModelWithOldDefaultsDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Requests\PutDataToUpdateRouteDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\TestData\GetDataWithInvalidOverrideDeveloper;
@@ -32,7 +32,7 @@ class InvalidUpdateTestDeveloperManager extends TestMethodDeveloperManager
     {
         return [
             $this->instantiateDeveloperWithManager(AssertResponseStatusDeveloper::class, $this)->using(['status' => 422]),
-            $this->instantiateDeveloperWithManager(AssertSessionHasFieldErrorDeveloper::class, $this),
+            $this->instantiateDeveloperWithManager(AssertJsonHasFieldErrorDeveloper::class, $this),
             $this->getRefreshModelDeveloper(),
             $this->instantiateDeveloperWithManager(AssertModelHasOldValuesDeveloper::class, $this),
         ];

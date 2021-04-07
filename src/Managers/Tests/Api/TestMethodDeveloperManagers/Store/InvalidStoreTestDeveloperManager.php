@@ -3,8 +3,8 @@
 namespace Shomisha\Crudly\Managers\Tests\Api\TestMethodDeveloperManagers\Store;
 
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertDatabaseHasNoModels;
+use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertJsonHasFieldErrorDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertResponseStatusDeveloper;
-use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertSessionHasFieldErrorDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Requests\PostDataToStoreRouteDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\TestData\GetDataWithInvalidOverrideDeveloper;
 use Shomisha\Crudly\Managers\Tests\TestMethodDeveloperManager;
@@ -30,7 +30,7 @@ class InvalidStoreTestDeveloperManager extends TestMethodDeveloperManager
     {
         return [
             $this->instantiateDeveloperWithManager(AssertResponseStatusDeveloper::class, $this)->using(['status' => 422]),
-            $this->instantiateDeveloperWithManager(AssertSessionHasFieldErrorDeveloper::class, $this),
+            $this->instantiateDeveloperWithManager(AssertJsonHasFieldErrorDeveloper::class, $this),
             $this->instantiateDeveloperWithManager(AssertDatabaseHasNoModels::class, $this),
         ];
     }
