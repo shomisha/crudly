@@ -2,7 +2,6 @@
 
 namespace Shomisha\Crudly\Test\Unit\Developers\ApiCrud;
 
-use Shomisha\Crudly\Config\DeveloperConfig;
 use Shomisha\Crudly\Data\CrudlySet;
 use Shomisha\Crudly\Developers\Crud\Api\CrudControllerDeveloper;
 use Shomisha\Crudly\Enums\ModelPropertyType;
@@ -37,7 +36,7 @@ class ApiCrudDeveloperTest extends DeveloperTestCase
         $this->modelSupervisor->expectedExistingModels(['Country', 'Publisher']);
 
 
-        $manager = new ApiCrudDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new ApiCrudDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new CrudControllerDeveloper($manager, $this->modelSupervisor);
         $developedSet = new CrudlySet();
         $controller = $developer->develop($specificationBuilder->build(), $developedSet);
@@ -154,7 +153,7 @@ class ApiCrudDeveloperTest extends DeveloperTestCase
         $this->modelSupervisor->expectedExistingModels(['Country', 'Publisher']);
 
 
-        $manager = new ApiCrudDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new ApiCrudDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new CrudControllerDeveloper($manager, $this->modelSupervisor);
         $developedSet = new CrudlySet();
         $controller = $developer->develop($specificationBuilder->build(), $developedSet);
@@ -263,7 +262,7 @@ class ApiCrudDeveloperTest extends DeveloperTestCase
         $this->modelSupervisor->expectedExistingModels(['Country', 'Publisher']);
 
 
-        $manager = new ApiCrudDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new ApiCrudDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new CrudControllerDeveloper($manager, $this->modelSupervisor);
         $developedSet = new CrudlySet();
         $controller = $developer->develop($specificationBuilder->build(), $developedSet);

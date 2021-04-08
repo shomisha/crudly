@@ -20,7 +20,7 @@ class RestoreDeveloperTest extends CrudMethodTestCase
     protected function getDeveloperWithManager(?BaseDeveloperManager $manager = null): CrudMethodDeveloper
     {
         if ($manager === null) {
-            $manager = new RestoreMethodDeveloperManager(new DeveloperConfig(), $this->app);
+            $manager = new RestoreMethodDeveloperManager($this->getDeveloperConfig(), $this->app);
         }
 
         return new RestoreDeveloper($manager, $this->modelSupervisor);

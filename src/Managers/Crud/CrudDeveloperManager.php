@@ -2,6 +2,7 @@
 
 namespace Shomisha\Crudly\Managers\Crud;
 
+use Shomisha\Crudly\Contracts\Developer;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\ImplicitBindArgumentsDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\InstantiateDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\LoadDependenciesDeveloper;
@@ -21,7 +22,7 @@ class CrudDeveloperManager extends BaseDeveloperManager
         return $this->instantiateDeveloperWithManager(FormRequestArgumentDeveloper::class, $this);
     }
 
-    public function getInstantiateDeveloper(): InstantiateDeveloper
+    public function getInstantiateDeveloper(): Developer
     {
         return $this->instantiateDeveloperWithManager(InstantiateDeveloper::class, $this);
     }

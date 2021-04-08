@@ -20,7 +20,7 @@ class ForceDeleteDeveloperTest extends CrudMethodTestCase
     protected function getDeveloperWithManager(?BaseDeveloperManager $manager = null): CrudMethodDeveloper
     {
         if ($manager === null) {
-            $manager = new ForceDeleteMethodDeveloperManager(new DeveloperConfig(), $this->app);
+            $manager = new ForceDeleteMethodDeveloperManager($this->getDeveloperConfig(), $this->app);
         }
 
         return new ForceDeleteDeveloper($manager, $this->modelSupervisor);

@@ -31,7 +31,7 @@ class ShowDeveloperTest extends CrudMethodTestCase
     protected function getDeveloperWithManager(?BaseDeveloperManager $manager = null): CrudMethodDeveloper
     {
         if ($manager === null) {
-            $manager = new ShowMethodDeveloperManager(new DeveloperConfig(), $this->app);
+            $manager = new ShowMethodDeveloperManager($this->getDeveloperConfig(), $this->app);
         }
 
         return new ShowDeveloper($manager, $this->modelSupervisor);

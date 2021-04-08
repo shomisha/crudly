@@ -56,8 +56,38 @@ abstract class BaseDeveloperManager
 
     protected function instantiateDeveloperWithManager(string $developerClass, BaseDeveloperManager $manager): Developer
     {
-        return $this->container->make($developerClass, [
-            'manager' => $manager
-        ]);
+        [$developerClass, $arguments] = $this->parseConfiguredClass($developerClass);
+
+        return $this->container->make($developerClass, array_merge([
+            'manager' => $manager,
+        ], $arguments));
+    }
+
+    protected function instantiateDeveloperByKey(string $key, ?BaseDeveloperManager $manager = null): Developer
+    {
+        return $this->instantiateDeveloperWithManager(
+            $this->getConfig()->getConfiguredDeveloperClass(
+                $key
+            ),
+            $manager ?? $this
+        );
+    }
+
+    private function parseConfiguredClass(string $configuredClass): array
+    {
+        $parts = explode('.', $configuredClass);
+
+        $class = $parts[0];
+        $arguments = [];
+
+        if (count($parts) == 2) {
+            $arguments = collect(explode(',', $parts[1]))->mapWithKeys(function (string $nameAndValue) {
+                [$name, $value] = explode(':', $nameAndValue);
+
+                return [$name => $value];
+            })->toArray();
+        }
+
+        return [$class, $arguments];
     }
 }

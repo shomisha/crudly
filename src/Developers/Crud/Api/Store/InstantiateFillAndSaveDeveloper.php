@@ -18,7 +18,7 @@ class InstantiateFillAndSaveDeveloper extends CrudDeveloper
     {
         return Block::fromArray([
             $this->getManager()->getValidationDeveloper()->develop($specification, $developedSet),
-            $this->getManager()->getStoreInstantiateDeveloper()->develop($specification, $developedSet),
+            $this->getManager()->getInstantiateDeveloper()->develop($specification, $developedSet),
             $this->getManager()->getFillDeveloper()->develop($specification, $developedSet),
             $this->getManager()->getSaveDeveloper()->develop($specification, $developedSet),
         ]);

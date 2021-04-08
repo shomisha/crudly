@@ -4,22 +4,52 @@ namespace Shomisha\Crudly\Managers\Crud;
 
 use Shomisha\Crudly\Contracts\Developer;
 use Shomisha\Crudly\Developers\Crud\Web\Store\Fill\FillFieldUsingRequestInputDeveloper;
-use Shomisha\Crudly\Managers\BaseDeveloperManager;
 
 abstract class CrudMethodDeveloperManager extends CrudDeveloperManager
 {
-    abstract public function getArgumentsDeveloper(): array ;
+    public function getArgumentsDeveloper(): array
+    {
+        $developerClasses = $this->getConfig()->getConfiguredDevelopersGroup(
+            $this->qualifyConfigKey('arguments')
+        );
 
-    abstract public function getLoadDeveloper(): Developer;
+        return array_map(function (string $developerClass) {
+            return $this->instantiateDeveloperWithManager($developerClass, $this);
+        }, $developerClasses);
+    }
 
-    abstract public function getAuthorizationDeveloper(): Developer;
+    public function getLoadDeveloper(): Developer
+    {
+        return $this->instantiateDeveloperByKey(
+            $this->qualifyConfigKey('load')
+        );
+    }
 
-    abstract public function getMainDeveloper(): Developer;
+    public function getAuthorizationDeveloper(): Developer
+    {
+        return $this->instantiateDeveloperByKey(
+            $this->qualifyConfigKey('authorization')
+        );
+    }
 
-    abstract public function getResponseDeveloper(): Developer;
+    public function getMainDeveloper(): Developer
+    {
+        return $this->instantiateDeveloperByKey(
+            $this->qualifyConfigKey('main')
+        );
+    }
+
+    public function getResponseDeveloper(): Developer
+    {
+        return $this->instantiateDeveloperByKey(
+            $this->qualifyConfigKey('response')
+        );
+    }
 
     public function getFillFieldDeveloper(): FillFieldUsingRequestInputDeveloper
     {
         return $this->instantiateDeveloperWithManager(FillFieldUsingRequestInputDeveloper::class, $this);
     }
+
+    abstract protected function qualifyConfigKey(string $key): string;
 }

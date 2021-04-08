@@ -3,21 +3,13 @@
 namespace Shomisha\Crudly\Managers\Crud\Api;
 
 use Shomisha\Crudly\Contracts\Developer;
-use Shomisha\Crudly\Developers\Crud\Api\Destroy\DestroyDeveloper;
-use Shomisha\Crudly\Developers\Crud\Api\ForceDelete\ForceDeleteDeveloper;
-use Shomisha\Crudly\Developers\Crud\Api\Index\IndexDeveloper;
-use Shomisha\Crudly\Developers\Crud\Api\Restore\RestoreDeveloper;
-use Shomisha\Crudly\Developers\Crud\Api\Show\ShowDeveloper;
-use Shomisha\Crudly\Developers\Crud\Api\Store\StoreDeveloper;
-use Shomisha\Crudly\Developers\Crud\Api\Update\UpdateDeveloper;
 use Shomisha\Crudly\Managers\BaseDeveloperManager;
 
 class ApiCrudDeveloperManager extends BaseDeveloperManager
 {
     public function getIndexMethodDeveloper(): Developer
     {
-        // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(IndexDeveloper::class, $this->getIndexManager());
+        return $this->instantiateDeveloperByKey('api.controller.index', $this->getIndexManager());
     }
 
     public function getIndexManager(): IndexMethodDeveloperManager
@@ -27,8 +19,7 @@ class ApiCrudDeveloperManager extends BaseDeveloperManager
 
     public function getShowMethodDeveloper(): Developer
     {
-        // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(ShowDeveloper::class, $this->getShowManager());
+        return $this->instantiateDeveloperByKey('api.controller.show', $this->getShowManager());
     }
 
     public function getShowManager(): ShowMethodDeveloperManager
@@ -38,8 +29,7 @@ class ApiCrudDeveloperManager extends BaseDeveloperManager
 
     public function getStoreMethodDeveloper(): Developer
     {
-        // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(StoreDeveloper::class, $this->getStoreManager());
+        return $this->instantiateDeveloperByKey('api.controller.store', $this->getStoreManager());
     }
 
     public function getStoreManager(): StoreMethodDeveloperManager
@@ -49,8 +39,7 @@ class ApiCrudDeveloperManager extends BaseDeveloperManager
 
     public function getUpdateMethodDeveloper(): Developer
     {
-        // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(UpdateDeveloper::class, $this->getUpdateManager());
+        return $this->instantiateDeveloperByKey('api.controller.update', $this->getUpdateManager());
     }
 
     public function getUpdateManager(): UpdateMethodDeveloperManager
@@ -60,8 +49,7 @@ class ApiCrudDeveloperManager extends BaseDeveloperManager
 
     public function getDestroyMethodDeveloper(): Developer
     {
-        // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(DestroyDeveloper::class, $this->getDestroyManager());
+        return $this->instantiateDeveloperByKey('api.controller.destroy', $this->getDestroyManager());
     }
 
     public function getDestroyManager(): DestroyMethodDeveloperManager
@@ -71,8 +59,7 @@ class ApiCrudDeveloperManager extends BaseDeveloperManager
 
     public function getForceDeleteMethodDeveloper(): Developer
     {
-        // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(ForceDeleteDeveloper::class, $this->getForceDeleteManager());
+        return $this->instantiateDeveloperByKey('api.controller.force-delete', $this->getForceDeleteManager());
     }
 
     public function getForceDeleteManager(): ForceDeleteMethodDeveloperManager
@@ -82,8 +69,7 @@ class ApiCrudDeveloperManager extends BaseDeveloperManager
 
     public function getRestoreMethodDeveloper(): Developer
     {
-        // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(RestoreDeveloper::class, $this->getRestoreManager());
+        return $this->instantiateDeveloperByKey('api.controller.restore', $this->getRestoreManager());
     }
 
     public function getRestoreManager(): RestoreMethodDeveloperManager

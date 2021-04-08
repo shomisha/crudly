@@ -20,7 +20,7 @@ class DestroyDeveloperTest extends CrudMethodTestCase
     protected function getDeveloperWithManager(?BaseDeveloperManager $manager = null): CrudMethodDeveloper
     {
         if ($manager === null) {
-            $manager = new DestroyMethodDeveloperManager(new DeveloperConfig(), $this->app);
+            $manager = new DestroyMethodDeveloperManager($this->getDeveloperConfig(), $this->app);
         }
 
         return new DestroyDeveloper($manager, $this->modelSupervisor);
