@@ -28,6 +28,8 @@ class CrudlyServiceProvider extends ServiceProvider
 
         $this->registerDeveloperManager();
 
+        $this->registerDeveloperConfig();
+
         $this->app->bind(Crudly::class, function (Container $app) {
             $modelNameParser = $app->get(ModelSupervisorContract::class);
 
@@ -50,9 +52,21 @@ class CrudlyServiceProvider extends ServiceProvider
     private function registerDeveloperManager(): void
     {
         $this->app->singleton(BaseDeveloperManager::class, function (Container $app) {
-            $developerConfig = new DeveloperConfig([]);
+            return new DeveloperManager(
+                $this->app->get(DeveloperConfig::class),
+                $app
+            );
+        });
+    }
 
-            return new DeveloperManager($developerConfig, $app);
+    private function registerDeveloperConfig(): void
+    {
+        $this->app->singleton(DeveloperConfig::class, function (Container $app) {
+            $defaultsPath = __DIR__ . '/../config/defaults.php';
+
+            return tap(new DeveloperConfig(
+                $app->get('config')->get('crudly', [])
+            ))->withDefaults(new DeveloperConfig(require $defaultsPath));
         });
     }
 }
