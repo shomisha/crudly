@@ -2,7 +2,6 @@
 
 namespace Shomisha\Crudly\Test\Unit\Developers\WebCrud\Create;
 
-use Shomisha\Crudly\Config\DeveloperConfig;
 use Shomisha\Crudly\Developers\Crud\CrudMethodDeveloper;
 use Shomisha\Crudly\Developers\Crud\Web\Create\CreateDeveloper;
 use Shomisha\Crudly\Enums\ModelPropertyType;
@@ -31,7 +30,7 @@ class CreateDeveloperTest extends CrudMethodTestCase
     protected function getDeveloperWithManager(?BaseDeveloperManager $manager = null): CrudMethodDeveloper
     {
         if ($manager === null) {
-            $manager = new CreateMethodDeveloperManager(new DeveloperConfig(), $this->app);
+            $manager = new CreateMethodDeveloperManager($this->getDeveloperConfig(), $this->app);
         }
 
         return new CreateDeveloper($manager, $this->modelSupervisor);

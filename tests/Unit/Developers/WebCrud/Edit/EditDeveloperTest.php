@@ -2,7 +2,6 @@
 
 namespace Shomisha\Crudly\Test\Unit\Developers\WebCrud\Edit;
 
-use Shomisha\Crudly\Config\DeveloperConfig;
 use Shomisha\Crudly\Developers\Crud\CrudMethodDeveloper;
 use Shomisha\Crudly\Developers\Crud\Web\Edit\EditDeveloper;
 use Shomisha\Crudly\Enums\ModelPropertyType;
@@ -31,7 +30,7 @@ class EditDeveloperTest extends CrudMethodTestCase
     protected function getDeveloperWithManager(?BaseDeveloperManager $manager = null): CrudMethodDeveloper
     {
         if ($manager === null) {
-            $manager = new EditMethodDeveloperManager(new DeveloperConfig(), $this->app);
+            $manager = new EditMethodDeveloperManager($this->getDeveloperConfig(), $this->app);
         }
 
         return new EditDeveloper($manager, $this->modelSupervisor);

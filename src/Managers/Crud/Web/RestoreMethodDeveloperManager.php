@@ -2,43 +2,12 @@
 
 namespace Shomisha\Crudly\Managers\Crud\Web;
 
-use Shomisha\Crudly\Contracts\Developer;
-use Shomisha\Crudly\Developers\Crud\PartialDevelopers\InvokeAuthorizationDeveloper;
-use Shomisha\Crudly\Developers\Crud\PartialDevelopers\InvokeModelMethodDeveloper;
-use Shomisha\Crudly\Developers\Crud\Web\Restore\ResponseDeveloper as RestoreResponseDeveloper;
 use Shomisha\Crudly\Managers\Crud\CrudMethodDeveloperManager;
 
 class RestoreMethodDeveloperManager extends CrudMethodDeveloperManager
 {
-    public function getArgumentsDeveloper(): array
+    protected function qualifyConfigKey(string $key): string
     {
-        // TODO: refactor this to support overriding developers
-        return [
-            $this->getImplicitBindArgumentDeveloper(),
-        ];
-    }
-
-    public function getLoadDeveloper(): Developer
-    {
-        // TODO: refactor this to support overriding developers
-        return $this->nullDeveloper();
-    }
-
-    public function getAuthorizationDeveloper(): Developer
-    {
-        // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(InvokeAuthorizationDeveloper::class, $this)->using(['action' => 'restore', 'withModel' => true]);
-    }
-
-    public function getMainDeveloper(): Developer
-    {
-        // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(InvokeModelMethodDeveloper::class, $this)->using(['method' => 'restore']);
-    }
-
-    public function getResponseDeveloper(): Developer
-    {
-        // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(RestoreResponseDeveloper::class, $this);
+        return "web.controller.restore.{$key}";
     }
 }

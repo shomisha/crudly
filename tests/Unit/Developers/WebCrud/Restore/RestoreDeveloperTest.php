@@ -2,7 +2,6 @@
 
 namespace Shomisha\Crudly\Test\Unit\Developers\WebCrud\Restore;
 
-use Shomisha\Crudly\Config\DeveloperConfig;
 use Shomisha\Crudly\Developers\Crud\CrudMethodDeveloper;
 use Shomisha\Crudly\Developers\Crud\Web\Restore\RestoreDeveloper;
 use Shomisha\Crudly\Managers\BaseDeveloperManager;
@@ -20,7 +19,7 @@ class RestoreDeveloperTest extends CrudMethodTestCase
     protected function getDeveloperWithManager(?BaseDeveloperManager $manager = null): CrudMethodDeveloper
     {
         if ($manager === null) {
-            $manager = new RestoreMethodDeveloperManager(new DeveloperConfig(), $this->app);
+            $manager = new RestoreMethodDeveloperManager($this->getDeveloperConfig(), $this->app);
         }
 
         return new RestoreDeveloper($manager, $this->modelSupervisor);

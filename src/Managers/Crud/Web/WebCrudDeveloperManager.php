@@ -3,23 +3,13 @@
 namespace Shomisha\Crudly\Managers\Crud\Web;
 
 use Shomisha\Crudly\Contracts\Developer;
-use Shomisha\Crudly\Developers\Crud\Web\Destroy\DestroyDeveloper;
-use Shomisha\Crudly\Developers\Crud\Web\Edit\EditDeveloper;
-use Shomisha\Crudly\Developers\Crud\Web\Create\CreateDeveloper;
-use Shomisha\Crudly\Developers\Crud\Web\ForceDelete\ForceDeleteDeveloper;
-use Shomisha\Crudly\Developers\Crud\Web\Index\IndexDeveloper;
-use Shomisha\Crudly\Developers\Crud\Web\Restore\RestoreDeveloper;
-use Shomisha\Crudly\Developers\Crud\Web\Show\ShowDeveloper;
-use Shomisha\Crudly\Developers\Crud\Web\Update\UpdateDeveloper;
-use Shomisha\Crudly\Developers\Crud\Web\Store\StoreDeveloper;
 use Shomisha\Crudly\Managers\BaseDeveloperManager;
 
 class WebCrudDeveloperManager extends BaseDeveloperManager
 {
     public function getIndexMethodDeveloper(): Developer
     {
-        // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(IndexDeveloper::class, $this->getIndexManager());
+        return $this->instantiateDeveloperByKey('web.controller.index', $this->getIndexManager());
     }
 
     public function getIndexManager(): IndexMethodDeveloperManager
@@ -29,8 +19,7 @@ class WebCrudDeveloperManager extends BaseDeveloperManager
 
     public function getShowMethodDeveloper(): Developer
     {
-        // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(ShowDeveloper::class, $this->getShowManager());
+        return $this->instantiateDeveloperByKey('web.controller.show', $this->getShowManager());
     }
 
     public function getShowManager(): ShowMethodDeveloperManager
@@ -40,8 +29,7 @@ class WebCrudDeveloperManager extends BaseDeveloperManager
 
     public function getCreateMethodDeveloper(): Developer
     {
-        // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(CreateDeveloper::class, $this->getCreateManager());
+        return $this->instantiateDeveloperByKey('web.controller.create', $this->getCreateManager());
     }
 
     public function getCreateManager(): CreateMethodDeveloperManager
@@ -51,8 +39,7 @@ class WebCrudDeveloperManager extends BaseDeveloperManager
 
     public function getStoreMethodDeveloper(): Developer
     {
-        // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(StoreDeveloper::class, $this->getStoreManager());
+        return $this->instantiateDeveloperByKey('web.controller.store', $this->getStoreManager());
     }
 
     public function getStoreManager(): StoreMethodDeveloperManager
@@ -62,8 +49,7 @@ class WebCrudDeveloperManager extends BaseDeveloperManager
 
     public function getEditMethodDeveloper(): Developer
     {
-        // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(EditDeveloper::class, $this->getEditManager());
+        return $this->instantiateDeveloperByKey('web.controller.edit', $this->getEditManager());
     }
 
     public function getEditManager(): EditMethodDeveloperManager
@@ -73,8 +59,7 @@ class WebCrudDeveloperManager extends BaseDeveloperManager
 
     public function getUpdateMethodDeveloper(): Developer
     {
-        // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(UpdateDeveloper::class, $this->getUpdateManager());
+        return $this->instantiateDeveloperByKey('web.controller.update', $this->getUpdateManager());
     }
 
     public function getUpdateManager(): UpdateMethodDeveloperManager
@@ -84,8 +69,7 @@ class WebCrudDeveloperManager extends BaseDeveloperManager
 
     public function getDestroyMethodDeveloper(): Developer
     {
-        // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(DestroyDeveloper::class, $this->getDestroyManager());
+        return $this->instantiateDeveloperByKey('web.controller.destroy', $this->getDestroyManager());
     }
 
     public function getDestroyManager(): DestroyMethodDeveloperManager
@@ -95,8 +79,7 @@ class WebCrudDeveloperManager extends BaseDeveloperManager
 
     public function getForceDeleteDeveloper(): Developer
     {
-        // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(ForceDeleteDeveloper::class, $this->getForceDeleteManager());
+        return $this->instantiateDeveloperByKey('web.controller.force-delete', $this->getForceDeleteManager());
     }
 
     public function getForceDeleteManager(): ForceDeleteMethodDeveloperManager
@@ -106,8 +89,7 @@ class WebCrudDeveloperManager extends BaseDeveloperManager
 
     public function getRestoreDeveloper(): Developer
     {
-        // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(RestoreDeveloper::class, $this->getRestoreManager());
+        return $this->instantiateDeveloperByKey('web.controller.restore', $this->getRestoreManager());
     }
 
     public function getRestoreManager(): RestoreMethodDeveloperManager

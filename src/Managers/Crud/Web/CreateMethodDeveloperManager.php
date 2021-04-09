@@ -3,41 +3,26 @@
 namespace Shomisha\Crudly\Managers\Crud\Web;
 
 use Shomisha\Crudly\Contracts\Developer;
-use Shomisha\Crudly\Developers\Crud\PartialDevelopers\InvokeAuthorizationDeveloper;
-use Shomisha\Crudly\Developers\Crud\Web\Create\InstantiatePlaceholderAndLoadDependencies;
-use Shomisha\Crudly\Developers\Crud\Web\Create\ResponseDeveloper as CreateResponseDeveloper;
 use Shomisha\Crudly\Managers\Crud\CrudMethodDeveloperManager;
 
 class CreateMethodDeveloperManager extends CrudMethodDeveloperManager
 {
-    public function getArgumentsDeveloper(): array
+    protected function qualifyConfigKey(string $key): string
     {
-        return [
-
-        ];
+        return "web.controller.create.{$key}";
     }
 
-    public function getLoadDeveloper(): Developer
+    public function getInstantiateDeveloper(): Developer
     {
-        // TODO: refactor this to support overriding developers
-        return $this->nullDeveloper();
+        return $this->instantiateDeveloperByKey(
+            $this->qualifyConfigKey('main.instantiate')
+        );
     }
 
-    public function getAuthorizationDeveloper(): Developer
+    public function getLoadDependenciesDeveloper(): Developer
     {
-        // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(InvokeAuthorizationDeveloper::class, $this)->using(['action' => 'create', 'withClass' => true]);
-    }
-
-    public function getMainDeveloper(): Developer
-    {
-        // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(InstantiatePlaceholderAndLoadDependencies::class, $this);
-    }
-
-    public function getResponseDeveloper(): Developer
-    {
-        // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(CreateResponseDeveloper::class, $this);
+        return $this->instantiateDeveloperByKey(
+            $this->qualifyConfigKey('main.load-dependencies')
+        );
     }
 }

@@ -2,7 +2,6 @@
 
 namespace Shomisha\Crudly\Test\Unit\Developers\WebCrud\Store;
 
-use Shomisha\Crudly\Config\DeveloperConfig;
 use Shomisha\Crudly\Developers\Crud\CrudMethodDeveloper;
 use Shomisha\Crudly\Developers\Crud\Web\Store\StoreDeveloper;
 use Shomisha\Crudly\Enums\ModelPropertyType;
@@ -28,7 +27,7 @@ class StoreDeveloperTest extends CrudMethodTestCase
     protected function getDeveloperWithManager(?BaseDeveloperManager $manager = null): CrudMethodDeveloper
     {
         if ($manager === null) {
-            $manager = new StoreMethodDeveloperManager(new DeveloperConfig(), $this->app);
+            $manager = new StoreMethodDeveloperManager($this->getDeveloperConfig(), $this->app);
         }
 
         return new StoreDeveloper($manager, $this->modelSupervisor);

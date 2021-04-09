@@ -2,7 +2,6 @@
 
 namespace Shomisha\Crudly\Test\Unit\Developers\WebCrud\Index;
 
-use Shomisha\Crudly\Config\DeveloperConfig;
 use Shomisha\Crudly\Developers\Crud\Web\Index\IndexDeveloper;
 use Shomisha\Crudly\Enums\ModelPropertyType;
 use Shomisha\Crudly\Managers\Crud\Web\IndexMethodDeveloperManager;
@@ -25,7 +24,7 @@ class IndexDeveloperTest extends CrudMethodTestCase
     protected function getDeveloperWithManager(?BaseDeveloperManager $manager = null): CrudMethodDeveloper
     {
         if ($manager === null) {
-            $manager = new IndexMethodDeveloperManager(new DeveloperConfig(), $this->app);
+            $manager = new IndexMethodDeveloperManager($this->getDeveloperConfig(), $this->app);
         }
 
         return new IndexDeveloper($manager, $this->modelSupervisor);

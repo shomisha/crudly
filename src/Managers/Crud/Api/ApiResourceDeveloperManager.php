@@ -5,9 +5,9 @@ namespace Shomisha\Crudly\Managers\Crud\Api;
 use Shomisha\Crudly\Contracts\Developer;
 use Shomisha\Crudly\Developers\Crud\Api\Resource\PropertyResourceMappingDeveloper;
 use Shomisha\Crudly\Developers\Crud\Api\Resource\ToArrayMethodDeveloper;
-use Shomisha\Crudly\Managers\Crud\CrudDeveloperManager;
+use Shomisha\Crudly\Managers\BaseDeveloperManager;
 
-class ApiResourceDeveloperManager extends CrudDeveloperManager
+class ApiResourceDeveloperManager extends BaseDeveloperManager
 {
     public function getToArrayMethodDeveloper(): Developer
     {

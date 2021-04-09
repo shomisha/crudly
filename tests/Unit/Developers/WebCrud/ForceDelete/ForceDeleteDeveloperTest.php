@@ -2,7 +2,6 @@
 
 namespace Shomisha\Crudly\Test\Unit\Developers\WebCrud\ForceDelete;
 
-use Shomisha\Crudly\Config\DeveloperConfig;
 use Shomisha\Crudly\Developers\Crud\CrudMethodDeveloper;
 use Shomisha\Crudly\Developers\Crud\Web\ForceDelete\ForceDeleteDeveloper;
 use Shomisha\Crudly\Managers\BaseDeveloperManager;
@@ -20,7 +19,7 @@ class ForceDeleteDeveloperTest extends CrudMethodTestCase
     protected function getDeveloperWithManager(?BaseDeveloperManager $manager = null): CrudMethodDeveloper
     {
         if ($manager === null) {
-            $manager = new ForceDeleteMethodDeveloperManager(new DeveloperConfig(), $this->app);
+            $manager = new ForceDeleteMethodDeveloperManager($this->getDeveloperConfig(), $this->app);
         }
 
         return new ForceDeleteDeveloper($manager, $this->modelSupervisor);

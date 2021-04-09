@@ -2,42 +2,12 @@
 
 namespace Shomisha\Crudly\Managers\Crud\Web;
 
-use Shomisha\Crudly\Contracts\Developer;
-use Shomisha\Crudly\Developers\Crud\PartialDevelopers\InvokeAuthorizationDeveloper;
-use Shomisha\Crudly\Developers\Crud\PartialDevelopers\InvokeModelMethodDeveloper;
-use Shomisha\Crudly\Developers\Crud\Web\ForceDelete\ResponseDeveloper as ForceDeleteResponseDeveloper;
 use Shomisha\Crudly\Managers\Crud\CrudMethodDeveloperManager;
 
 class ForceDeleteMethodDeveloperManager extends CrudMethodDeveloperManager
 {
-    public function getArgumentsDeveloper(): array
+    protected function qualifyConfigKey(string $key): string
     {
-        return [
-            $this->getImplicitBindArgumentDeveloper(),
-        ];
-    }
-
-    public function getLoadDeveloper(): Developer
-    {
-        // TODO: refactor this to support overriding developers
-        return $this->nullDeveloper();
-    }
-
-    public function getAuthorizationDeveloper(): Developer
-    {
-        // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(InvokeAuthorizationDeveloper::class, $this)->using(['action' => 'forceDelete', 'withModel' => true]);
-    }
-
-    public function getMainDeveloper(): Developer
-    {
-        // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(InvokeModelMethodDeveloper::class, $this)->using(['method' => 'forceDelete']);
-    }
-
-    public function getResponseDeveloper(): Developer
-    {
-        // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(ForceDeleteResponseDeveloper::class, $this);
+        return "web.controller.force-delete.{$key}";
     }
 }

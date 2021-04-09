@@ -2,7 +2,6 @@
 
 namespace Shomisha\Crudly\Test\Unit\Developers\WebCrud\Show;
 
-use Shomisha\Crudly\Config\DeveloperConfig;
 use Shomisha\Crudly\Developers\Crud\CrudMethodDeveloper;
 use Shomisha\Crudly\Developers\Crud\Web\Show\ShowDeveloper;
 use Shomisha\Crudly\Enums\ModelPropertyType;
@@ -30,7 +29,7 @@ class ShowDeveloperTest extends CrudMethodTestCase
     protected function getDeveloperWithManager(?BaseDeveloperManager $manager = null): CrudMethodDeveloper
     {
         if ($manager === null) {
-            $manager = new ShowMethodDeveloperManager(new DeveloperConfig(), $this->app);
+            $manager = new ShowMethodDeveloperManager($this->getDeveloperConfig(), $this->app);
         }
 
         return new ShowDeveloper($manager, $this->modelSupervisor);

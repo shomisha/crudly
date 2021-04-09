@@ -39,7 +39,7 @@ return [
     'web.controller.index'=> Web\Index\IndexDeveloper::class,
     'web.controller.index.arguments' => [],
     'web.controller.index.load' => NullDeveloper::class,
-    'web.controller.index.authorization' => PartialDevelopers\InvokeAuthorizationDeveloper::class,
+    'web.controller.index.authorization' => developerClass(PartialDevelopers\InvokeAuthorizationDeveloper::class, ['action' => 'viewAll', 'withClass' => true]),
     'web.controller.index.main' => PartialDevelopers\Load\PaginateDeveloper::class,
     'web.controller.index.response' => Web\Index\ResponseDeveloper::class,
 
@@ -48,15 +48,17 @@ return [
         PartialDevelopers\ImplicitBindArgumentsDeveloper::class
     ],
     'web.controller.show.load' => NullDeveloper::class,
-    'web.controller.show.authorization' => PartialDevelopers\InvokeAuthorizationDeveloper::class,
+    'web.controller.show.authorization' => developerClass(PartialDevelopers\InvokeAuthorizationDeveloper::class, ['action' => 'view', 'withModel' => true]),
     'web.controller.show.main' => PartialDevelopers\LoadRelationshipsDeveloper::class,
     'web.controller.show.response' => Web\Show\ResponseDeveloper::class,
 
     'web.controller.create'=> Web\Create\CreateDeveloper::class,
     'web.controller.create.arguments' => [],
     'web.controller.create.load' => NullDeveloper::class,
-    'web.controller.create.authorization' => PartialDevelopers\InvokeAuthorizationDeveloper::class,
+    'web.controller.create.authorization' => developerClass(PartialDevelopers\InvokeAuthorizationDeveloper::class, ['action' => 'create', 'withClass' => true]),
     'web.controller.create.main' => Web\Create\InstantiatePlaceholderAndLoadDependencies::class,
+    'web.controller.create.main.instantiate' => PartialDevelopers\InstantiateDeveloper::class,
+    'web.controller.create.main.load-dependencies' => PartialDevelopers\LoadDependenciesDeveloper::class,
     'web.controller.create.response' => Web\Create\ResponseDeveloper::class,
 
     'web.controller.store'=> Web\Store\StoreDeveloper::class,
@@ -64,12 +66,12 @@ return [
         Web\Store\FormRequestArgumentDeveloper::class,
     ],
     'web.controller.store.load' => NullDeveloper::class,
-    'web.controller.store.authorization' => PartialDevelopers\InvokeAuthorizationDeveloper::class,
+    'web.controller.store.authorization' => developerClass(PartialDevelopers\InvokeAuthorizationDeveloper::class, ['action' => 'create', 'withClass' => true]),
     'web.controller.store.main' => Web\Store\ValidateFillAndSaveDeveloper::class,
     'web.controller.store.main.validate' => NullDeveloper::class,
     'web.controller.store.main.instantiate' => PartialDevelopers\InstantiateDeveloper::class,
     'web.controller.store.main.fill' => Web\Store\Fill\FillFieldsSeparatelyDeveloper::class,
-    'web.controller.store.main.save' => PartialDevelopers\InvokeModelMethodDeveloper::class,
+    'web.controller.store.main.save' => developerClass(PartialDevelopers\InvokeModelMethodDeveloper::class, ['method' => 'save']),
     'web.controller.store.response' => Web\Store\ResponseDeveloper::class,
 
     'web.controller.edit'=> Web\Edit\EditDeveloper::class,
@@ -77,7 +79,7 @@ return [
         PartialDevelopers\ImplicitBindArgumentsDeveloper::class,
     ],
     'web.controller.edit.load' => NullDeveloper::class,
-    'web.controller.edit.authorization' => PartialDevelopers\InvokeAuthorizationDeveloper::class,
+    'web.controller.edit.authorization' => developerClass(PartialDevelopers\InvokeAuthorizationDeveloper::class, ['action' => 'update', 'withModel' => true]),
     'web.controller.edit.main' => PartialDevelopers\LoadDependenciesDeveloper::class,
     'web.controller.edit.response' => Web\Edit\ResponseDeveloper::class,
 
@@ -87,8 +89,11 @@ return [
         PartialDevelopers\ImplicitBindArgumentsDeveloper::class,
     ],
     'web.controller.update.load' => NullDeveloper::class,
-    'web.controller.update.authorization' => PartialDevelopers\InvokeAuthorizationDeveloper::class,
+    'web.controller.update.authorization' => developerClass(PartialDevelopers\InvokeAuthorizationDeveloper::class, ['action' => 'update', 'withModel' => true]),
     'web.controller.update.main' => Web\Update\ValidateFillAndUpdateDeveloper::class,
+    'web.controller.update.main.validate' => NullDeveloper::class,
+    'web.controller.update.main.fill' => Web\Store\Fill\FillFieldsSeparatelyDeveloper::class,
+    'web.controller.update.main.update' => developerClass(PartialDevelopers\InvokeModelMethodDeveloper::class, ['method' => 'update']),
     'web.controller.update.response' => Web\Update\ResponseDeveloper::class,
 
     'web.controller.destroy'=> Web\Destroy\DestroyDeveloper::class,
@@ -96,8 +101,8 @@ return [
         PartialDevelopers\ImplicitBindArgumentsDeveloper::class,
     ],
     'web.controller.destroy.load' => NullDeveloper::class,
-    'web.controller.destroy.authorization' => PartialDevelopers\InvokeAuthorizationDeveloper::class,
-    'web.controller.destroy.main' => PartialDevelopers\InvokeModelMethodDeveloper::class,
+    'web.controller.destroy.authorization' => developerClass(PartialDevelopers\InvokeAuthorizationDeveloper::class, ['action' => 'delete', 'withModel' => true]),
+    'web.controller.destroy.main' => developerClass(PartialDevelopers\InvokeModelMethodDeveloper::class, ['method' => 'delete']),
     'web.controller.destroy.response' => Web\Destroy\ResponseDeveloper::class,
 
     'web.controller.force-delete' => Web\ForceDelete\ForceDeleteDeveloper::class,
@@ -105,8 +110,8 @@ return [
         PartialDevelopers\ImplicitBindArgumentsDeveloper::class
     ],
     'web.controller.force-delete.load' => NullDeveloper::class,
-    'web.controller.force-delete.authorization' => PartialDevelopers\InvokeAuthorizationDeveloper::class,
-    'web.controller.force-main' => PartialDevelopers\InvokeModelMethodDeveloper::class,
+    'web.controller.force-delete.authorization' => developerClass(PartialDevelopers\InvokeAuthorizationDeveloper::class, ['action' => 'forceDelete', 'withModel' => true]),
+    'web.controller.force-delete.main' => developerClass(PartialDevelopers\InvokeModelMethodDeveloper::class, ['method' => 'forceDelete']),
     'web.controller.force-delete.response' => Web\ForceDelete\ResponseDeveloper::class,
 
     'web.controller.restore'=> Web\Restore\RestoreDeveloper::class,
@@ -114,8 +119,8 @@ return [
         PartialDevelopers\ImplicitBindArgumentsDeveloper::class
     ],
     'web.controller.restore.load' => NullDeveloper::class,
-    'web.controller.restore.authorization' => PartialDevelopers\InvokeAuthorizationDeveloper::class,
-    'web.controller.restore.main' => PartialDevelopers\InvokeModelMethodDeveloper::class,
+    'web.controller.restore.authorization' => developerClass(PartialDevelopers\InvokeAuthorizationDeveloper::class, ['action' => 'restore', 'withModel' => true]),
+    'web.controller.restore.main' => developerClass(PartialDevelopers\InvokeModelMethodDeveloper::class, ['method' => 'restore']),
     'web.controller.restore.response' => Web\Restore\ResponseDeveloper::class,
 
     'api.form-request' => Api\FormRequest\ApiFormRequestDeveloper::class,

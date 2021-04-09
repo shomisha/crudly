@@ -10,31 +10,8 @@ use Shomisha\Crudly\Managers\Crud\CrudMethodDeveloperManager;
 
 class DestroyMethodDeveloperManager extends CrudMethodDeveloperManager
 {
-    public function getArgumentsDeveloper(): array
+    protected function qualifyConfigKey(string $key): string
     {
-        return [
-            $this->getImplicitBindArgumentDeveloper(),
-        ];
-    }
-
-    public function getLoadDeveloper(): Developer
-    {
-        return $this->nullDeveloper();
-    }
-
-    public function getAuthorizationDeveloper(): Developer
-    {
-        return $this->instantiateDeveloperWithManager(InvokeAuthorizationDeveloper::class, $this)->using(['action' => 'delete', 'withModel' => true]);
-    }
-
-    public function getMainDeveloper(): Developer
-    {
-        return $this->instantiateDeveloperWithManager(InvokeModelMethodDeveloper::class, $this)->using(['method' => 'delete']);
-
-    }
-
-    public function getResponseDeveloper(): Developer
-    {
-        return $this->instantiateDeveloperWithManager(DestroyResponseDeveloper::class, $this);
+        return "web.controller.destroy.{$key}";
     }
 }
