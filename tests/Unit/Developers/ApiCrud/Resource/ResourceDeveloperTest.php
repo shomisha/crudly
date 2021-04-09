@@ -36,7 +36,7 @@ class ResourceDeveloperTest extends DeveloperTestCase
         $this->modelSupervisor->expectedExistingModels(['Author', 'Publisher']);
 
 
-        $manager = new ApiResourceDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new ApiResourceDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new ApiResourceDeveloper($manager, $this->modelSupervisor);
         $developedSet = new CrudlySet();
         $resource = $developer->develop($specificationBuilder->build(), $developedSet);

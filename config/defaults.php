@@ -130,7 +130,7 @@ return [
     'api.form-request.methods.rules.validation' => PartialDevelopers\Validation\PropertyValidationRulesDeveloper::class,
 
     'api.resource' => Api\Resource\ApiResourceDeveloper::class,
-    'api.resource.to-array-method-developer' => Api\Resource\ToArrayMethodDeveloper::class,
+    'api.resource.to-array-method' => Api\Resource\ToArrayMethodDeveloper::class,
     'api.resource.property-resource-mapping' => Api\Resource\PropertyResourceMappingDeveloper::class,
 
     'api.controller' => Api\CrudControllerDeveloper::class,
