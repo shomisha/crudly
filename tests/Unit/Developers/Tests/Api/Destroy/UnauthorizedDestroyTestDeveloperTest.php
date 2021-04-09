@@ -2,7 +2,6 @@
 
 namespace Shomisha\Crudly\Test\Unit\Developers\Tests\Api\Destroy;
 
-use Shomisha\Crudly\Config\DeveloperConfig;
 use Shomisha\Crudly\Data\CrudlySet;
 use Shomisha\Crudly\Developers\Tests\Api\Methods\Destroy\UnauthorizedDestroyTestDeveloper;
 use Shomisha\Crudly\Enums\ModelPropertyType;
@@ -23,7 +22,7 @@ class UnauthorizedDestroyTestDeveloperTest extends DeveloperTestCase
             ->softDeletes(false);
 
 
-        $manager = new UnauthorizedDestroyTestDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new UnauthorizedDestroyTestDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new UnauthorizedDestroyTestDeveloper($manager, $this->modelSupervisor);
         $testMethod = $developer->develop($specificationBuilder->build(), new CrudlySet());
 
@@ -53,7 +52,7 @@ class UnauthorizedDestroyTestDeveloperTest extends DeveloperTestCase
             ->softDeletionColumn('stopped_writing_at');
 
 
-        $manager = new UnauthorizedDestroyTestDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new UnauthorizedDestroyTestDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new UnauthorizedDestroyTestDeveloper($manager, $this->modelSupervisor);
         $testMethod = $developer->develop($specificationBuilder->build(), new CrudlySet());
 

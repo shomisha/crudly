@@ -2,35 +2,12 @@
 
 namespace Shomisha\Crudly\Managers\Tests\Api\TestMethodDeveloperManagers\Restore;
 
-use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertResponseStatusDeveloper;
-use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertSoftDeletedColumnIsNull;
-use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Factory\CreateSoftDeletedInstance;
-use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Requests\PatchRestoreRouteDeveloper;
 use Shomisha\Crudly\Managers\Tests\TestMethodDeveloperManager;
 
 class RestoreTestDeveloperManager extends TestMethodDeveloperManager
 {
-    public function getArrangeDevelopers(): array
+    protected function qualifyConfigKey(string $key): string
     {
-        return [
-            $this->getAuthenticateAndAuthorizeUserDeveloper(),
-            $this->instantiateDeveloperWithManager(CreateSoftDeletedInstance::class, $this),
-        ];
-    }
-
-    public function getActDevelopers(): array
-    {
-        return [
-            $this->instantiateDeveloperWithManager(PatchRestoreRouteDeveloper::class, $this),
-        ];
-    }
-
-    public function getAssertDevelopers(): array
-    {
-        return [
-            $this->instantiateDeveloperWithManager(AssertResponseStatusDeveloper::class, $this)->using(['status' => 204]),
-            $this->getRefreshModelDeveloper(),
-            $this->instantiateDeveloperWithManager(AssertSoftDeletedColumnIsNull::class, $this),
-        ];
+        return "api.tests.restore.{$key}";
     }
 }

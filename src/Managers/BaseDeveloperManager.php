@@ -73,6 +73,16 @@ abstract class BaseDeveloperManager
         );
     }
 
+    protected function instantiateGroupOfDevelopersByKey(string $key, ?BaseDeveloperManager $manager = null): array
+    {
+        return array_map(function (string $developerClass) use ($manager) {
+            return $this->instantiateDeveloperWithManager(
+                $developerClass,
+                $manager ?? $this
+            );
+        }, $this->getConfig()->getConfiguredDevelopersGroup($key));
+    }
+
     private function parseConfiguredClass(string $configuredClass): array
     {
         $parts = explode('.', $configuredClass);

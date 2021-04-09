@@ -2,39 +2,12 @@
 
 namespace Shomisha\Crudly\Managers\Tests\Api\TestMethodDeveloperManagers\Update;
 
-use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertJsonHasFieldErrorDeveloper;
-use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertModelHasOldValuesDeveloper;
-use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertResponseStatusDeveloper;
-use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Factory\CreateModelWithOldDefaultsDeveloper;
-use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Requests\PutDataToUpdateRouteDeveloper;
-use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\TestData\GetDataWithInvalidOverrideDeveloper;
 use Shomisha\Crudly\Managers\Tests\TestMethodDeveloperManager;
 
 class InvalidUpdateTestDeveloperManager extends TestMethodDeveloperManager
 {
-    public function getArrangeDevelopers(): array
+    protected function qualifyConfigKey(string $key): string
     {
-        return [
-            $this->getAuthenticateAndAuthorizeUserDeveloper(),
-            $this->instantiateDeveloperWithManager(CreateModelWithOldDefaultsDeveloper::class, $this),
-            $this->instantiateDeveloperWithManager(GetDataWithInvalidOverrideDeveloper::class, $this),
-        ];
-    }
-
-    public function getActDevelopers(): array
-    {
-        return [
-            $this->instantiateDeveloperWithManager(PutDataToUpdateRouteDeveloper::class, $this),
-        ];
-    }
-
-    public function getAssertDevelopers(): array
-    {
-        return [
-            $this->instantiateDeveloperWithManager(AssertResponseStatusDeveloper::class, $this)->using(['status' => 422]),
-            $this->instantiateDeveloperWithManager(AssertJsonHasFieldErrorDeveloper::class, $this),
-            $this->getRefreshModelDeveloper(),
-            $this->instantiateDeveloperWithManager(AssertModelHasOldValuesDeveloper::class, $this),
-        ];
+        return "api.tests.update.invalid.{$key}";
     }
 }

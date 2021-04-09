@@ -25,7 +25,7 @@ class DestroyTestDeveloperTest extends DeveloperTestCase
             ->apiAuthorization(true);
 
 
-        $manager = new DestroyTestDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new DestroyTestDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new DestroyTestDeveloper($manager, $this->modelSupervisor);
         $testMethod = $developer->develop($specificationBuilder->build(), new CrudlySet());
 
@@ -59,7 +59,7 @@ class DestroyTestDeveloperTest extends DeveloperTestCase
             ->apiAuthorization(true);
 
 
-        $manager = new DestroyTestDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new DestroyTestDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new DestroyTestDeveloper($manager, $this->modelSupervisor);
         $testMethod = $developer->develop($specificationBuilder->build(), new CrudlySet());
 
@@ -92,7 +92,7 @@ class DestroyTestDeveloperTest extends DeveloperTestCase
             ->apiAuthorization(false);
 
 
-        $manager = new DestroyTestDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new DestroyTestDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new DestroyTestDeveloper($manager, $this->modelSupervisor);
         $testMethod = $developer->develop($specificationBuilder->build(), new CrudlySet());
 

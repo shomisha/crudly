@@ -2,33 +2,12 @@
 
 namespace Shomisha\Crudly\Managers\Tests\Api\TestMethodDeveloperManagers\ForceDelete;
 
-use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertSoftDeletedColumnIsNull;
-use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Requests\DeleteForceDeleteRouteDeveloper;
 use Shomisha\Crudly\Managers\Tests\TestMethodDeveloperManager;
 
 class UnauthorizedForceDeleteTestDeveloperManager extends TestMethodDeveloperManager
 {
-    public function getArrangeDevelopers(): array
+    protected function qualifyConfigKey(string $key): string
     {
-        return [
-            $this->getAuthenticateAndDeauthorizeUserDeveloper(),
-            $this->getCreateSingleInstanceDeveloper(),
-        ];
-    }
-
-    public function getActDevelopers(): array
-    {
-        return [
-            $this->instantiateDeveloperWithManager(DeleteForceDeleteRouteDeveloper::class, $this),
-        ];
-    }
-
-    public function getAssertDevelopers(): array
-    {
-        return [
-            $this->getAssertResponseForbiddenDeveloper(),
-            $this->getRefreshModelDeveloper(),
-            $this->instantiateDeveloperWithManager(AssertSoftDeletedColumnIsNull::class, $this),
-        ];
+        return "api.tests.force-delete.unauthorized.{$key}";
     }
 }

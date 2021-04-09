@@ -414,10 +414,10 @@ return [
         PartialDevelopers\Tests\TestData\GetDataWithInvalidOverrideDeveloper::class,
     ],
     'api.tests.update.invalid.act' => [
-        PartialDevelopers\Tests\Requests\PutDataToUpdateRouteFromIndexRouteDeveloper::class,
+        PartialDevelopers\Tests\Requests\PutDataToUpdateRouteDeveloper::class,
     ],
     'api.tests.update.invalid.assert' => [
-        PartialDevelopers\Tests\Assertions\AssertResponseStatusDeveloper::class,
+        developerClass(PartialDevelopers\Tests\Assertions\AssertResponseStatusDeveloper::class, ['status' => 422]),
         PartialDevelopers\Tests\Assertions\AssertJsonHasFieldErrorDeveloper::class,
         PartialDevelopers\Tests\RefreshModelDeveloper::class,
         PartialDevelopers\Tests\Assertions\AssertModelHasOldValuesDeveloper::class,
@@ -448,7 +448,7 @@ return [
         PartialDevelopers\Tests\Requests\DeleteDestroyRouteDeveloper::class,
     ],
     'api.tests.destroy.assert' => [
-        PartialDevelopers\Tests\Assertions\AssertResponseStatusDeveloper::class,
+        developerClass(PartialDevelopers\Tests\Assertions\AssertResponseStatusDeveloper::class, ['status' => 204]),
         PartialDevelopers\Tests\Assertions\AssertModelDeletedDeveloper::class, // TODO: make this developer configurable
     ],
 
@@ -475,7 +475,7 @@ return [
         PartialDevelopers\Tests\Requests\DeleteForceDeleteRouteDeveloper::class,
     ],
     'api.tests.force-delete.assert' => [
-        PartialDevelopers\Tests\Assertions\AssertResponseStatusDeveloper::class,
+        developerClass(PartialDevelopers\Tests\Assertions\AssertResponseStatusDeveloper::class, ['status' => 204]),
         PartialDevelopers\Tests\Assertions\AssertDatabaseMissingModelDeveloper::class,
     ],
 
@@ -532,9 +532,7 @@ return [
     'api.tests.helpers.routes' => [
         TestHelpers\RouteGetters\GetIndexRouteMethodDeveloper::class,
         TestHelpers\RouteGetters\GetShowRouteMethodDeveloper::class,
-        TestHelpers\RouteGetters\GetCreateRouteMethodDeveloper::class,
         TestHelpers\RouteGetters\GetStoreRouteMethodDeveloper::class,
-        TestHelpers\RouteGetters\GetEditRouteMethodDeveloper::class,
         TestHelpers\RouteGetters\GetUpdateRouteMethodDeveloper::class,
         TestHelpers\RouteGetters\GetDestroyRouteMethodDeveloper::class,
         TestHelpers\RouteGetters\GetForceDeleteRouteMethodDeveloper::class,
@@ -550,8 +548,8 @@ return [
         PartialDevelopers\Tests\Requests\GetIndexRouteDeveloper::class,
     ],
     'api.tests.index.assert' => [
-        PartialDevelopers\Tests\Assertions\AssertResponseStatusDeveloper::class,
-        PartialDevelopers\Tests\GetModelIdsFromResponseDeveloper::class,
+        developerClass(PartialDevelopers\Tests\Assertions\AssertResponseStatusDeveloper::class, ['status' => 200]),
+        PartialDevelopers\Tests\GetModelIdsFromJsonDeveloper::class,
         PartialDevelopers\Tests\Assertions\AssertResponseModelIdsCountSameAsModels::class,
         PartialDevelopers\Tests\Assertions\AssertJsonResponseContainsAllModels::class,
     ],
@@ -567,8 +565,6 @@ return [
         PartialDevelopers\Tests\Assertions\AssertResponseForbiddenDeveloper::class,
     ],
 
-    // TODO: incomplete API tests start here
-
 
     'api.tests.show' => ApiTestMethods\Show\ShowTestDeveloper::class,
     'api.tests.show.arrange' => [
@@ -579,7 +575,7 @@ return [
         PartialDevelopers\Tests\Requests\GetShowRouteDeveloper::class,
     ],
     'api.tests.show.assert' => [
-        PartialDevelopers\Tests\Assertions\AssertResponseSuccessfulDeveloper::class,
+        developerClass(PartialDevelopers\Tests\Assertions\AssertResponseStatusDeveloper::class, ['status' => 200]),
         PartialDevelopers\Tests\Assertions\AssertModelIsJsonModel::class,
     ],
 
@@ -605,7 +601,7 @@ return [
         PartialDevelopers\Tests\Requests\PostDataToStoreRouteDeveloper::class,
     ],
     'api.tests.store.assert' => [
-        PartialDevelopers\Tests\Assertions\AssertResponseStatusDeveloper::class,
+        developerClass(PartialDevelopers\Tests\Assertions\AssertResponseStatusDeveloper::class, ['status' => 201]),
         PartialDevelopers\Tests\Assertions\AssertDatabaseContainsNewModel::class,
     ],
 
@@ -615,10 +611,10 @@ return [
         PartialDevelopers\Tests\TestData\GetDataWithInvalidOverrideDeveloper::class,
     ],
     'api.tests.store.invalid.act' => [
-        PartialDevelopers\Tests\Requests\PostDataToStoreRouteFromIndexRouteDeveloper::class,
+        PartialDevelopers\Tests\Requests\PostDataToStoreRouteDeveloper::class,
     ],
     'api.tests.store.invalid.assert' => [
-        PartialDevelopers\Tests\Assertions\AssertResponseStatusDeveloper::class,
+        developerClass(PartialDevelopers\Tests\Assertions\AssertResponseStatusDeveloper::class, ['status' => 422]),
         PartialDevelopers\Tests\Assertions\AssertJsonHasFieldErrorDeveloper::class,
         PartialDevelopers\Tests\Assertions\AssertDatabaseHasNoModels::class,
     ],
@@ -647,7 +643,7 @@ return [
         PartialDevelopers\Tests\Requests\PutDataToUpdateRouteDeveloper::class,
     ],
     'api.tests.update.assert' => [
-        PartialDevelopers\Tests\Assertions\AssertResponseStatusDeveloper::class,
+        developerClass(PartialDevelopers\Tests\Assertions\AssertResponseStatusDeveloper::class, ['status' => 204]),
         PartialDevelopers\Tests\RefreshModelDeveloper::class,
         PartialDevelopers\Tests\Assertions\AssertModelUpdatedWithNewValuesDeveloper::class,
     ],
@@ -749,7 +745,7 @@ return [
         PartialDevelopers\Tests\Requests\PatchRestoreRouteDeveloper::class,
     ],
     'api.tests.restore.assert' => [
-        PartialDevelopers\Tests\Assertions\AssertResponseStatusDeveloper::class,
+        developerClass(PartialDevelopers\Tests\Assertions\AssertResponseStatusDeveloper::class, ['status' => 204]),
         PartialDevelopers\Tests\RefreshModelDeveloper::class,
         PartialDevelopers\Tests\Assertions\AssertSoftDeletedColumnIsNull::class,
     ],

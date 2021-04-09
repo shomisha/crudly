@@ -2,7 +2,6 @@
 
 namespace Shomisha\Crudly\Test\Unit\Developers\Tests\Api\Store;
 
-use Shomisha\Crudly\Config\DeveloperConfig;
 use Shomisha\Crudly\Data\CrudlySet;
 use Shomisha\Crudly\Developers\Tests\Api\Methods\Store\UnauthorizedStoreTestDeveloper;
 use Shomisha\Crudly\Enums\ModelPropertyType;
@@ -22,7 +21,7 @@ class UnauthorizedStoreTestDeveloperTest extends DeveloperTestCase
                 ->primary();
 
 
-        $manager = new UnauthorizedStoreTestDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new UnauthorizedStoreTestDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new UnauthorizedStoreTestDeveloper($manager, $this->modelSupervisor);
         $testMethod = $developer->develop($specificationBuilder->build(), new CrudlySet());
 

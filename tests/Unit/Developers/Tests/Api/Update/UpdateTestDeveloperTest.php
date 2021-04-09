@@ -2,7 +2,6 @@
 
 namespace Shomisha\Crudly\Test\Unit\Developers\Tests\Api\Update;
 
-use Shomisha\Crudly\Config\DeveloperConfig;
 use Shomisha\Crudly\Data\CrudlySet;
 use Shomisha\Crudly\Developers\Tests\Api\Methods\Update\UpdateTestDeveloper;
 use Shomisha\Crudly\Enums\ModelPropertyType;
@@ -26,7 +25,7 @@ class UpdateTestDeveloperTest extends DeveloperTestCase
             ->apiAuthorization(true);
 
 
-        $manager = new UpdateTestDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new UpdateTestDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new UpdateTestDeveloper($manager, $this->modelSupervisor);
         $testMethod = $developer->develop($specificationBuilder->build(), new CrudlySet());
 
@@ -44,7 +43,7 @@ class UpdateTestDeveloperTest extends DeveloperTestCase
             "        \$author = Author::factory()->create(['name' => 'Old Name', 'email' => 'old@test.com']);",
             "        \$data = \$this->getAuthorData(['name' => 'New Name', 'email' => 'new@test.com']);",
             "        \$response = \$this->put(\$this->getUpdateRoute(\$author), \$data);",
-            "        \$response->assertStatus(200);",
+            "        \$response->assertStatus(204);",
             "        \$author->refresh();",
             "        \$this->assertEquals('New Name', \$author->name);",
             "        \$this->assertEquals('new@test.com', \$author->email);",
@@ -65,7 +64,7 @@ class UpdateTestDeveloperTest extends DeveloperTestCase
             ->apiAuthorization(false);
 
 
-        $manager = new UpdateTestDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new UpdateTestDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new UpdateTestDeveloper($manager, $this->modelSupervisor);
         $testMethod = $developer->develop($specificationBuilder->build(), new CrudlySet());
 
@@ -82,7 +81,7 @@ class UpdateTestDeveloperTest extends DeveloperTestCase
             "        \$author = Author::factory()->create(['name' => 'Old Name', 'email' => 'old@test.com']);",
             "        \$data = \$this->getAuthorData(['name' => 'New Name', 'email' => 'new@test.com']);",
             "        \$response = \$this->put(\$this->getUpdateRoute(\$author), \$data);",
-            "        \$response->assertStatus(200);",
+            "        \$response->assertStatus(204);",
             "        \$author->refresh();",
             "        \$this->assertEquals('New Name', \$author->name);",
             "        \$this->assertEquals('new@test.com', \$author->email);",

@@ -10,13 +10,9 @@ abstract class CrudMethodDeveloperManager extends BaseDeveloperManager
 {
     public function getArgumentsDeveloper(): array
     {
-        $developerClasses = $this->getConfig()->getConfiguredDevelopersGroup(
+        return $this->instantiateGroupOfDevelopersByKey(
             $this->qualifyConfigKey('arguments')
         );
-
-        return array_map(function (string $developerClass) {
-            return $this->instantiateDeveloperWithManager($developerClass, $this);
-        }, $developerClasses);
     }
 
     public function getLoadDeveloper(): Developer

@@ -2,7 +2,6 @@
 
 namespace Shomisha\Crudly\Test\Unit\Developers\Tests\Api\Store;
 
-use Shomisha\Crudly\Config\DeveloperConfig;
 use Shomisha\Crudly\Data\CrudlySet;
 use Shomisha\Crudly\Developers\Tests\Api\Methods\Store\InvalidStoreTestDeveloper;
 use Shomisha\Crudly\Managers\Tests\Api\TestMethodDeveloperManagers\Store\InvalidStoreTestDeveloperManager;
@@ -20,7 +19,7 @@ class InvalidStoreTestDeveloperTest extends DeveloperTestCase
             ->apiAuthorization(true);
 
 
-        $manager = new InvalidStoreTestDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new InvalidStoreTestDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new InvalidStoreTestDeveloper($manager, $this->modelSupervisor);
         $testMethod = $developer->develop($specificationBuilder->build(), new CrudlySet());
 
@@ -53,7 +52,7 @@ class InvalidStoreTestDeveloperTest extends DeveloperTestCase
             ->apiAuthorization(false);
 
 
-        $manager = new InvalidStoreTestDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new InvalidStoreTestDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new InvalidStoreTestDeveloper($manager, $this->modelSupervisor);
         $testMethod = $developer->develop($specificationBuilder->build(), new CrudlySet());
 

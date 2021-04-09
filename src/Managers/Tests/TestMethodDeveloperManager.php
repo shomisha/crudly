@@ -23,11 +23,26 @@ use Shomisha\Crudly\Managers\DeveloperManager;
 
 abstract class TestMethodDeveloperManager extends DeveloperManager
 {
-    abstract public function getArrangeDevelopers(): array;
+    public function getArrangeDevelopers(): array
+    {
+        return $this->instantiateGroupOfDevelopersByKey(
+            $this->qualifyConfigKey('arrange')
+        );
+    }
 
-    abstract public function getActDevelopers(): array;
+    public function getActDevelopers(): array
+    {
+        return $this->instantiateGroupOfDevelopersByKey(
+            $this->qualifyConfigKey('act')
+        );
+    }
 
-    abstract public function getAssertDevelopers(): array;
+    public function getAssertDevelopers(): array
+    {
+        return $this->instantiateGroupOfDevelopersByKey(
+            $this->qualifyConfigKey('assert')
+        );
+    }
 
     public function getAuthenticateAndAuthorizeUserDeveloper(): Developer
     {
@@ -114,4 +129,6 @@ abstract class TestMethodDeveloperManager extends DeveloperManager
     {
         return $this->instantiateDeveloperWithManager(GetRouteDeveloper::class, $this);
     }
+
+    abstract protected function qualifyConfigKey(string $key): string;
 }

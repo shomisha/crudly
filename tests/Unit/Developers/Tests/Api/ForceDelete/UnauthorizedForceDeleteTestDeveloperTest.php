@@ -2,7 +2,6 @@
 
 namespace Shomisha\Crudly\Test\Unit\Developers\Tests\Api\ForceDelete;
 
-use Shomisha\Crudly\Config\DeveloperConfig;
 use Shomisha\Crudly\Data\CrudlySet;
 use Shomisha\Crudly\Developers\Tests\Api\Methods\ForceDelete\UnauthorizedForceDeleteTestDeveloper;
 use Shomisha\Crudly\Enums\ModelPropertyType;
@@ -24,7 +23,7 @@ class UnauthorizedForceDeleteTestDeveloperTest extends DeveloperTestCase
             ->softDeletionColumn('deleted_at');
 
 
-        $manager = new UnauthorizedForceDeleteTestDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new UnauthorizedForceDeleteTestDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new UnauthorizedForceDeleteTestDeveloper($manager, $this->modelSupervisor);
         $testMethod = $developer->develop($specificationBuilder->build(), new CrudlySet());
 

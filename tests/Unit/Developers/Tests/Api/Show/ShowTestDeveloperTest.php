@@ -2,7 +2,6 @@
 
 namespace Shomisha\Crudly\Test\Unit\Developers\Tests\Api\Show;
 
-use Shomisha\Crudly\Config\DeveloperConfig;
 use Shomisha\Crudly\Data\CrudlySet;
 use Shomisha\Crudly\Developers\Tests\Api\Methods\Show\ShowTestDeveloper;
 use Shomisha\Crudly\Enums\ModelPropertyType;
@@ -23,7 +22,7 @@ class ShowTestDeveloperTest extends DeveloperTestCase
             ->apiAuthorization(true);
 
 
-        $manager = new ShowTestDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new ShowTestDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new ShowTestDeveloper($manager, $this->modelSupervisor);
         $testMethod = $developer->develop($specificationBuilder->build(), new CrudlySet());
 
@@ -57,7 +56,7 @@ class ShowTestDeveloperTest extends DeveloperTestCase
             ->apiAuthorization(false);
 
 
-        $manager = new ShowTestDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new ShowTestDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new ShowTestDeveloper($manager, $this->modelSupervisor);
         $testMethod = $developer->develop($specificationBuilder->build(), new CrudlySet());
 

@@ -4,7 +4,6 @@ namespace Shomisha\Crudly\Test\Unit\Developers\Tests\Api;
 
 use Faker\Factory;
 use Faker\Generator;
-use Shomisha\Crudly\Config\DeveloperConfig;
 use Shomisha\Crudly\Data\CrudlySet;
 use Shomisha\Crudly\Developers\Tests\Api\ApiTestsDeveloper;
 use Shomisha\Crudly\Enums\ModelPropertyType;
@@ -60,7 +59,7 @@ class ApiTestsDeveloperTest extends DeveloperTestCase
         ]);
 
 
-        $manager = new ApiTestsDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new ApiTestsDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new ApiTestsDeveloper($manager, $this->modelSupervisor);
         $developedSet = new CrudlySet();
         $testClass = $developer->develop($specificationBuilder->build(), $developedSet);
@@ -259,7 +258,7 @@ class ApiTestsDeveloperTest extends DeveloperTestCase
             "        \$author = Author::factory()->create(['name' => 'Old Name', 'email' => 'old@test.com']);",
             "        \$data = \$this->getAuthorData(['name' => 'New Name', 'email' => 'new@test.com']);",
             "        \$response = \$this->put(\$this->getUpdateRoute(\$author), \$data);",
-            "        \$response->assertStatus(200);",
+            "        \$response->assertStatus(204);",
             "        \$author->refresh();",
             "        \$this->assertEquals('New Name', \$author->name);",
             "        \$this->assertEquals('new@test.com', \$author->email);",
@@ -416,7 +415,7 @@ class ApiTestsDeveloperTest extends DeveloperTestCase
         ]);
 
 
-        $manager = new ApiTestsDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new ApiTestsDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new ApiTestsDeveloper($manager, $this->modelSupervisor);
         $developedSet = new CrudlySet();
         $testClass = $developer->develop($specificationBuilder->build(), $developedSet);
@@ -491,7 +490,7 @@ class ApiTestsDeveloperTest extends DeveloperTestCase
             "        \$author = Author::factory()->create(['name' => 'Old Name', 'email' => 'old@test.com']);",
             "        \$data = \$this->getAuthorData(['name' => 'New Name', 'email' => 'new@test.com']);",
             "        \$response = \$this->put(\$this->getUpdateRoute(\$author), \$data);",
-            "        \$response->assertStatus(200);",
+            "        \$response->assertStatus(204);",
             "        \$author->refresh();",
             "        \$this->assertEquals('New Name', \$author->name);",
             "        \$this->assertEquals('new@test.com', \$author->email);",
@@ -583,7 +582,7 @@ class ApiTestsDeveloperTest extends DeveloperTestCase
         ]);
 
 
-        $manager = new ApiTestsDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new ApiTestsDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new ApiTestsDeveloper($manager, $this->modelSupervisor);
         $developedSet = new CrudlySet();
         $testClass = $developer->develop($specificationBuilder->build(), $developedSet);
@@ -700,7 +699,7 @@ class ApiTestsDeveloperTest extends DeveloperTestCase
             "        \$author = Author::factory()->create(['name' => 'Old Name', 'email' => 'old@test.com']);",
             "        \$data = \$this->getAuthorData(['name' => 'New Name', 'email' => 'new@test.com']);",
             "        \$response = \$this->put(\$this->getUpdateRoute(\$author), \$data);",
-            "        \$response->assertStatus(200);",
+            "        \$response->assertStatus(204);",
             "        \$author->refresh();",
             "        \$this->assertEquals('New Name', \$author->name);",
             "        \$this->assertEquals('new@test.com', \$author->email);",

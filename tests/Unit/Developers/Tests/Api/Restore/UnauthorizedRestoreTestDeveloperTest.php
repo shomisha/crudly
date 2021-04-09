@@ -2,7 +2,6 @@
 
 namespace Shomisha\Crudly\Test\Unit\Developers\Tests\Api\Restore;
 
-use Shomisha\Crudly\Config\DeveloperConfig;
 use Shomisha\Crudly\Data\CrudlySet;
 use Shomisha\Crudly\Developers\Tests\Api\Methods\Restore\UnauthorizedRestoreTestDeveloper;
 use Shomisha\Crudly\Enums\ModelPropertyType;
@@ -24,7 +23,7 @@ class UnauthorizedRestoreTestDeveloperTest extends DeveloperTestCase
             ->apiAuthorization(true);
 
 
-        $manager = new UnauthorizedRestoreTestDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new UnauthorizedRestoreTestDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new UnauthorizedRestoreTestDeveloper($manager, $this->modelSupervisor);
         $testMethod = $developer->develop($specificationBuilder->build(), new CrudlySet());
 

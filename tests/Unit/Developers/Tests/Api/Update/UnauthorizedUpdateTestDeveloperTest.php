@@ -2,7 +2,6 @@
 
 namespace Shomisha\Crudly\Test\Unit\Developers\Tests\Api\Update;
 
-use Shomisha\Crudly\Config\DeveloperConfig;
 use Shomisha\Crudly\Data\CrudlySet;
 use Shomisha\Crudly\Developers\Tests\Api\Methods\Update\UnauthorizedUpdateTestDeveloper;
 use Shomisha\Crudly\Enums\ModelPropertyType;
@@ -26,7 +25,7 @@ class UnauthorizedUpdateTestDeveloperTest extends DeveloperTestCase
             ->apiAuthorization(true);
 
 
-        $manager = new UnauthorizedUpdateTestDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new UnauthorizedUpdateTestDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new UnauthorizedUpdateTestDeveloper($manager, $this->modelSupervisor);
         $testMethod = $developer->develop($specificationBuilder->build(), new CrudlySet());
 

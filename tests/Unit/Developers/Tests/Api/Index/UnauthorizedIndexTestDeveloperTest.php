@@ -19,7 +19,7 @@ class UnauthorizedIndexTestDeveloperTest extends DeveloperTestCase
         $specificationBuilder = CrudlySpecificationBuilder::forModel('Author');
 
 
-        $manager = new UnauthorizedIndexTestDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new UnauthorizedIndexTestDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new UnauthorizedIndexTestDeveloper($manager, $this->modelSupervisor);
         $testMethod = $developer->develop($specificationBuilder->build(), new CrudlySet());
 
