@@ -3,17 +3,6 @@
 namespace Shomisha\Crudly\Managers;
 
 use Shomisha\Crudly\Contracts\Developer;
-use Shomisha\Crudly\Developers\Crud\Api\CrudControllerDeveloper as ApiCrudControllerDeveloper;
-use Shomisha\Crudly\Developers\Crud\Api\FormRequest\ApiFormRequestDeveloper;
-use Shomisha\Crudly\Developers\Crud\Api\Resource\ApiResourceDeveloper;
-use Shomisha\Crudly\Developers\Crud\PolicyDeveloper;
-use Shomisha\Crudly\Developers\Crud\Web\CrudControllerDeveloper as WebCrudControllerDeveloper;
-use Shomisha\Crudly\Developers\Crud\Web\FormRequest\WebFormRequestDeveloper;
-use Shomisha\Crudly\Developers\Factory\FactoryClassDeveloper;
-use Shomisha\Crudly\Developers\Migration\MigrationDeveloper;
-use Shomisha\Crudly\Developers\Model\ModelDeveloper;
-use Shomisha\Crudly\Developers\Tests\Api\ApiTestsDeveloper;
-use Shomisha\Crudly\Developers\Tests\Web\WebTestsDeveloper;
 use Shomisha\Crudly\Managers\Crud\Api\ApiCrudDeveloperManager;
 use Shomisha\Crudly\Managers\Crud\Api\ApiResourceDeveloperManager;
 use Shomisha\Crudly\Managers\Crud\FormRequestDeveloperManager;
@@ -25,8 +14,9 @@ class DeveloperManager extends BaseDeveloperManager
 {
     public function getModelDeveloper(): Developer
     {
-        // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(ModelDeveloper::class, ($this->getModelManager()));
+        return $this->instantiateDeveloperByKey(
+            'model', $this->getModelManager()
+        );
     }
 
     private function getModelManager(): BaseDeveloperManager
@@ -36,8 +26,9 @@ class DeveloperManager extends BaseDeveloperManager
 
     public function getMigrationDeveloper(): Developer
     {
-        // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(MigrationDeveloper::class, ($this->getMigrationManager()));
+        return $this->instantiateDeveloperByKey(
+            'migrations', $this->getMigrationManager()
+        );
     }
 
     private function getMigrationManager(): BaseDeveloperManager
@@ -47,8 +38,9 @@ class DeveloperManager extends BaseDeveloperManager
 
     public function getFactoryDeveloper(): Developer
     {
-        // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(FactoryClassDeveloper::class, $this->getFactoryManager());
+        return $this->instantiateDeveloperByKey(
+            'factory', $this->getFactoryManager()
+        );
     }
 
     private function getFactoryManager(): BaseDeveloperManager
@@ -58,47 +50,56 @@ class DeveloperManager extends BaseDeveloperManager
 
     public function getWebCrudFormRequestDeveloper(): Developer
     {
-        // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(WebFormRequestDeveloper::class, $this->getFormRequestDeveloperManager());
+        return $this->instantiateDeveloperByKey(
+            'web.form-request', $this->getFormRequestDeveloperManager()
+        );
     }
 
     public function getWebCrudControllerDeveloper(): Developer
     {
-        // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(WebCrudControllerDeveloper::class, $this->getWebCrudManager());
+        return $this->instantiateDeveloperByKey(
+            'web.controller', $this->getWebCrudManager()
+        );
     }
 
     public function getWebTestsDeveloper(): Developer
     {
-        // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(WebTestsDeveloper::class, $this->getWebTestsManager());
+        return $this->instantiateDeveloperByKey(
+            'web.tests', $this->getWebTestsManager()
+        );
     }
 
     public function getApiCrudFormRequestDeveloper(): Developer
     {
-        return $this->instantiateDeveloperWithManager(ApiFormRequestDeveloper::class, $this->getFormRequestDeveloperManager());
+        return $this->instantiateDeveloperByKey(
+            'api.form-request', $this->getFormRequestDeveloperManager()
+        );
     }
 
     public function getApiCrudApiResourceDeveloper(): Developer
     {
-        return $this->instantiateDeveloperWithManager(ApiResourceDeveloper::class, $this->getApiResourceDeveloperManager());
+        return $this->instantiateDeveloperByKey(
+            'api.resource', $this->getApiResourceDeveloperManager()
+        );
     }
 
     public function getApiCrudControllerDeveloper(): Developer
     {
-        // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(ApiCrudControllerDeveloper::class, $this->getApiCrudManager());
+        return $this->instantiateDeveloperByKey(
+            'api.controller', $this->getApiCrudManager()
+        );
     }
 
     public function getApiTestsDeveloper(): Developer
     {
-        // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(ApiTestsDeveloper::class, $this->getApiTestsDeveloperManager());
+        return $this->instantiateDeveloperByKey(
+            'api.tests', $this->getApiTestsDeveloperManager()
+        );
     }
 
     public function getPolicyDeveloper(): Developer
     {
-        return $this->instantiateDeveloperWithManager(PolicyDeveloper::class, $this);
+        return $this->instantiateDeveloperByKey('policy');
     }
 
     private function getWebCrudManager(): WebCrudDeveloperManager

@@ -2,7 +2,6 @@
 
 namespace Shomisha\Crudly\Test\Unit\Developers\Migrations;
 
-use Shomisha\Crudly\Config\DeveloperConfig;
 use Shomisha\Crudly\Data\CrudlySet;
 use Shomisha\Crudly\Developers\Migration\MigrationDeveloper;
 use Shomisha\Crudly\Enums\ModelPropertyType;
@@ -28,7 +27,7 @@ class MigrationDeveloperTest extends DeveloperTestCase
             ->softDeletionColumn('stopped_writing_at');
 
 
-        $manager = new MigrationDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new MigrationDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new MigrationDeveloper($manager, $this->modelSupervisor);
         $developedClass = $developer->develop($specificationBuilder->build(), $developedSet = new CrudlySet());
 

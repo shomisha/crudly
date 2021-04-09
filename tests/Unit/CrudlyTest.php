@@ -259,7 +259,7 @@ class CrudlyTest extends TestCase
                 'app',
                 'App',
             ),
-            new DeveloperManager(new DeveloperConfig(), $this->app),
+            new DeveloperManager($this->getDeveloperConfig(), $this->app),
             'app'
         );
         $crudlySet = $crudly->develop($specificationBuilder->build());

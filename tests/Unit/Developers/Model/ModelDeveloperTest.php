@@ -37,7 +37,7 @@ class ModelDeveloperTest extends DeveloperTestCase
         ]);
 
 
-        $manager = new ModelDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new ModelDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new ModelDeveloper($manager, $this->modelSupervisor);
         $developedModel = $developer->develop($specificationBuilder->build(), new CrudlySet());
 
@@ -80,7 +80,7 @@ class ModelDeveloperTest extends DeveloperTestCase
             ->timestamps(false);
 
 
-        $manager = new ModelDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new ModelDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new ModelDeveloper($manager, $this->modelSupervisor);
         $printed = $developer->develop($specificationBuilder->build(), new CrudlySet())->print();
 

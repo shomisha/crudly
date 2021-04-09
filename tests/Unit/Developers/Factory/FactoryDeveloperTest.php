@@ -31,7 +31,7 @@ class FactoryDeveloperTest extends DeveloperTestCase
         $this->modelSupervisor->expectedExistingModels(['Author']);
 
 
-        $manager = new FactoryDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new FactoryDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new FactoryClassDeveloper($manager, $this->modelSupervisor);
         $developedSet = new CrudlySet();
         $factory = $developer->develop($specificationBuilder->build(), $developedSet);
