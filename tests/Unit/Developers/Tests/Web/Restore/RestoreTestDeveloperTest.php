@@ -2,7 +2,6 @@
 
 namespace Shomisha\Crudly\Test\Unit\Developers\Tests\Web\Restore;
 
-use Shomisha\Crudly\Config\DeveloperConfig;
 use Shomisha\Crudly\Data\CrudlySet;
 use Shomisha\Crudly\Developers\Tests\Web\Methods\Restore\RestoreTestDeveloper;
 use Shomisha\Crudly\Enums\ModelPropertyType;
@@ -25,7 +24,7 @@ class RestoreTestDeveloperTest extends DeveloperTestCase
             ->webAuthorization(true);
 
 
-        $manager = new RestoreTestDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new RestoreTestDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new RestoreTestDeveloper($manager, $this->modelSupervisor);
         $testMethod = $developer->develop($specificationBuilder->build(), new CrudlySet());
 
@@ -61,7 +60,7 @@ class RestoreTestDeveloperTest extends DeveloperTestCase
             ->webAuthorization(false);
 
 
-        $manager = new RestoreTestDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new RestoreTestDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new RestoreTestDeveloper($manager, $this->modelSupervisor);
         $testMethod = $developer->develop($specificationBuilder->build(), new CrudlySet());
 

@@ -2,7 +2,6 @@
 
 namespace Shomisha\Crudly\Test\Unit\Developers\Tests\Web\Store;
 
-use Shomisha\Crudly\Config\DeveloperConfig;
 use Shomisha\Crudly\Data\CrudlySet;
 use Shomisha\Crudly\Developers\Tests\Web\Methods\Store\StoreTestDeveloper;
 use Shomisha\Crudly\Enums\ModelPropertyType;
@@ -23,7 +22,7 @@ class StoreTestDeveloperTest extends DeveloperTestCase
             ->webAuthorization(true);
 
 
-        $manager = new StoreTestDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new StoreTestDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new StoreTestDeveloper($manager, $this->modelSupervisor);
         $testMethod = $developer->develop($specificationBuilder->build(), new CrudlySet());
 
@@ -56,7 +55,7 @@ class StoreTestDeveloperTest extends DeveloperTestCase
             ->webAuthorization(false);
 
 
-        $manager = new StoreTestDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new StoreTestDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new StoreTestDeveloper($manager, $this->modelSupervisor);
         $testMethod = $developer->develop($specificationBuilder->build(), new CrudlySet());
 

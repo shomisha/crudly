@@ -2,7 +2,6 @@
 
 namespace Shomisha\Crudly\Test\Unit\Developers\Tests\Web\Show;
 
-use Shomisha\Crudly\Config\DeveloperConfig;
 use Shomisha\Crudly\Data\CrudlySet;
 use Shomisha\Crudly\Developers\Tests\Web\Methods\Show\UnauthorizedShowTestDeveloper;
 use Shomisha\Crudly\Managers\Tests\Web\TestMethodDeveloperManagers\Show\UnauthorizedShowTestDeveloperManager;
@@ -19,7 +18,7 @@ class UnauthorizedShowTestDeveloperTest extends DeveloperTestCase
         $specificationBuilder = CrudlySpecificationBuilder::forModel('Player');
 
 
-        $manager = new UnauthorizedShowTestDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new UnauthorizedShowTestDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new UnauthorizedShowTestDeveloper($manager, $this->modelSupervisor);
         $testMethod = $developer->develop($specificationBuilder->build(), new CrudlySet());
 

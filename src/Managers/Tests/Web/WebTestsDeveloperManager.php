@@ -13,87 +13,69 @@ class WebTestsDeveloperManager extends TestClassDeveloperManager
     /** @return \Shomisha\Crudly\Abstracts\Developer[] */
     public function getRouteMethodDevelopers(): array
     {
-        // TODO: refactor this to support overriding developers
-        return [
-            $this->instantiateDeveloperWithManager(RouteGetters\GetIndexRouteMethodDeveloper::class, $this),
-            $this->instantiateDeveloperWithManager(RouteGetters\GetShowRouteMethodDeveloper::class, $this),
-            $this->instantiateDeveloperWithManager(RouteGetters\GetCreateRouteMethodDeveloper::class, $this),
-            $this->instantiateDeveloperWithManager(RouteGetters\GetStoreRouteMethodDeveloper::class, $this),
-            $this->instantiateDeveloperWithManager(RouteGetters\GetEditRouteMethodDeveloper::class, $this),
-            $this->instantiateDeveloperWithManager(RouteGetters\GetUpdateRouteMethodDeveloper::class, $this),
-            $this->instantiateDeveloperWithManager(RouteGetters\GetDestroyRouteMethodDeveloper::class, $this),
-            $this->instantiateDeveloperWithManager(RouteGetters\GetForceDeleteRouteMethodDeveloper::class, $this),
-            $this->instantiateDeveloperWithManager(RouteGetters\GetRestoreRouteMethodDeveloper::class, $this),
-        ];
+        return $this->instantiateGroupOfDevelopersByKey('web.tests.helpers.routes');
     }
 
     public function getIndexTestDeveloper(): Developer
     {
-        // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(
-            TestMethods\Index\IndexTestDeveloper::class,
+        return $this->instantiateDeveloperByKey(
+            'web.tests.index',
             $this->instantiateManager(TestManagers\Index\IndexTestDeveloperManager::class)
         );
     }
 
     public function getIndexWillNotContainSoftDeletedModelsTestDeveloper(): Developer
     {
-        // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(
-            TestMethods\Index\IndexWillNotContainSoftDeletedModelsTestDeveloper::class,
+        return $this->instantiateDeveloperByKey(
+            'web.tests.index.missing-soft-deleted',
             $this->instantiateManager(TestManagers\Index\IndexWillNotContainSoftDeletedModelsTestDeveloperManager::class)
         );
     }
 
     public function getUnauthorizedIndexTestDeveloper(): Developer
     {
-        // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(
-            TestMethods\Index\UnauthorizedIndexTestDeveloper::class,
+        return $this->instantiateDeveloperByKey(
+            'web.tests.index.unauthorized',
             $this->instantiateManager(TestManagers\Index\UnauthorizedIndexTestDeveloperManager::class)
         );
     }
 
     public function getShowTestDeveloper(): Developer
     {
-        // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(
-            TestMethods\Show\ShowTestDeveloper::class,
-            $this->instantiateManager(TestManagers\Show\ShowTestDeveloperManager::class));
+        return $this->instantiateDeveloperByKey(
+            'web.tests.show',
+            $this->instantiateManager(TestManagers\Show\ShowTestDeveloperManager::class)
+        );
     }
 
     public function getUnauthorizedShowTestDeveloper(): Developer
     {
-        // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(
-            TestMethods\Show\UnauthorizedShowTestDeveloper::class,
+        return $this->instantiateDeveloperByKey(
+            'web.tests.show.unauthorized',
             $this->instantiateManager(TestManagers\Show\UnauthorizedShowTestDeveloperManager::class)
         );
     }
 
     public function getCreateTestDeveloper(): Developer
     {
-        // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(
-            TestMethods\Create\CreateTestDeveloper::class,
+        return $this->instantiateDeveloperByKey(
+            'web.tests.create',
             $this->instantiateManager(TestManagers\Create\CreateTestDeveloperManager::class)
         );
     }
 
     public function getUnauthorizedCreateTestDeveloper(): Developer
     {
-        // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(
-            TestMethods\Create\UnauthorizedCreateTestDeveloper::class,
+        return $this->instantiateDeveloperByKey(
+            'web.tests.create.unauthorized',
             $this->instantiateManager(TestManagers\Create\UnauthorizedCreateTestDeveloperManager::class)
         );
     }
 
     public function getStoreTestDeveloper(): Developer
     {
-        // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(
-            TestMethods\Store\StoreTestDeveloper::class,
+        return $this->instantiateDeveloperByKey(
+            'web.tests.store',
             $this->instantiateManager(TestManagers\Store\StoreTestDeveloperManager::class)
         );
     }
@@ -109,117 +91,104 @@ class WebTestsDeveloperManager extends TestClassDeveloperManager
 
     public function getInvalidDataStoreTestDeveloper(): Developer
     {
-        // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(
-            TestMethods\Store\InvalidStoreTestDeveloper::class,
-            $this->instantiateManager(TestManagers\Store\InvalidDataStoreTestDeveloperManager::class),
+        return $this->instantiateDeveloperByKey(
+            'web.tests.store.invalid',
+            $this->instantiateManager(TestManagers\Store\InvalidDataStoreTestDeveloperManager::class)
         );
     }
 
     public function getUnauthorizedStoreTestDeveloper(): Developer
     {
-        // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(
-            TestMethods\Store\UnauthorizedStoreTestDeveloper::class,
+        return $this->instantiateDeveloperByKey(
+            'web.tests.store.unauthorized',
             $this->instantiateManager(TestManagers\Store\UnauthorizedStoreTestDeveloperManager::class)
         );
     }
 
     public function getEditTestDeveloper(): Developer
     {
-        // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(
-            TestMethods\Edit\EditTestDeveloper::class,
+        return $this->instantiateDeveloperByKey(
+            'web.tests.edit',
             $this->instantiateManager(TestManagers\Edit\EditTestDeveloperManager::class)
         );
     }
 
     public function getUnauthorizedEditTestDeveloper(): Developer
     {
-        // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(
-            TestMethods\Edit\UnauthorizedEditTestDeveloper::class,
+        return $this->instantiateDeveloperByKey(
+            'web.tests.edit.unauthorized',
             $this->instantiateManager(TestManagers\Edit\UnauthorizedEditTestDeveloperManager::class)
         );
     }
 
     public function getUpdateTestDeveloper(): Developer
     {
-        // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(
-            TestMethods\Update\UpdateTestDeveloper::class,
+        return $this->instantiateDeveloperByKey(
+            'web.tests.update',
             $this->instantiateManager(TestManagers\Update\UpdateTestDeveloperManager::class)
         );
     }
 
     public function getInvalidDataUpdateTestDeveloper(): Developer
     {
-        // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(
-            TestMethods\Update\InvalidUpdateTestDeveloper::class,
+        return $this->instantiateDeveloperByKey(
+            'web.tests.update.invalid',
             $this->instantiateManager(TestManagers\Update\InvalidUpdateTestDeveloperManager::class)
         );
     }
 
     public function getUnauthorizedUpdateTestDeveloper(): Developer
     {
-        // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(
-            TestMethods\Update\UnauthorizedUpdateTestDeveloper::class,
+        return $this->instantiateDeveloperByKey(
+            'web.tests.update.unauthorized',
             $this->instantiateManager(TestManagers\Update\UnauthorizedUpdateTestDeveloperManager::class)
         );
     }
 
     public function getDestroyTestDeveloper(): Developer
     {
-        // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(
-            TestMethods\Destroy\DestroyTestDeveloper::class,
+        return $this->instantiateDeveloperByKey(
+            'web.tests.destroy',
             $this->instantiateManager(TestManagers\Destroy\DestroyTestDeveloperManager::class)
         );
     }
 
     public function getUnauthorizedDestroyTestDeveloper(): Developer
     {
-        // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(
-            TestMethods\Destroy\UnauthorizedDestroyTestDeveloper::class,
+        return $this->instantiateDeveloperByKey(
+            'web.tests.destroy.unauthorized',
             $this->instantiateManager(TestManagers\Destroy\UnauthorizedDestroyTestDeveloperManager::class)
         );
     }
 
     public function getForceDeleteTestDeveloper(): Developer
     {
-        // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(
-            TestMethods\ForceDelete\ForceDeleteTestDeveloper::class,
+        return $this->instantiateDeveloperByKey(
+            'web.tests.force-delete',
             $this->instantiateManager(TestManagers\ForceDelete\ForceDeleteTestDeveloperManager::class)
         );
     }
 
     public function getUnauthorizedForceDeleteTestDeveloper(): Developer
     {
-        // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(
-            TestMethods\ForceDelete\UnauthorizedForceDeleteTestDeveloper::class,
+        return $this->instantiateDeveloperByKey(
+            'web.tests.force-delete.unauthorized',
             $this->instantiateManager(TestManagers\ForceDelete\UnauthorizedForceDeleteTestDeveloperManager::class)
         );
     }
 
     public function getRestoreTestDeveloper(): Developer
     {
-        // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(
-            TestMethods\Restore\RestoreTestDeveloper::class,
+        return $this->instantiateDeveloperByKey(
+            'web.tests.restore',
             $this->instantiateManager(TestManagers\Restore\RestoreTestDeveloperManager::class)
         );
     }
 
     public function getUnauthorizedRestoreTestDeveloper(): Developer
     {
-        // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(
-            TestMethods\Restore\UnauthorizedRestoreTestDeveloper::class,
+        return $this->instantiateDeveloperByKey(
+            'web.tests.restore.unauthorized',
             $this->instantiateManager(TestManagers\Restore\UnauthorizedRestoreTestDeveloperManager::class)
         );
     }

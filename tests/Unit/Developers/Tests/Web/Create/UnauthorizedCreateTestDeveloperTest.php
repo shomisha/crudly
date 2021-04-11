@@ -2,7 +2,6 @@
 
 namespace Shomisha\Crudly\Test\Unit\Developers\Tests\Web\Create;
 
-use Shomisha\Crudly\Config\DeveloperConfig;
 use Shomisha\Crudly\Data\CrudlySet;
 use Shomisha\Crudly\Developers\Tests\Web\Methods\Create\UnauthorizedCreateTestDeveloper;
 use Shomisha\Crudly\Managers\Tests\Web\TestMethodDeveloperManagers\Create\UnauthorizedCreateTestDeveloperManager;
@@ -20,7 +19,7 @@ class UnauthorizedCreateTestDeveloperTest extends DeveloperTestCase
             ->webAuthorization(true);
 
 
-        $manager = new UnauthorizedCreateTestDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new UnauthorizedCreateTestDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new UnauthorizedCreateTestDeveloper($manager, $this->modelSupervisor);
         $testMethod = $developer->develop($specificationBuilder->build(), new CrudlySet());
 

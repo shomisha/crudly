@@ -2,7 +2,6 @@
 
 namespace Shomisha\Crudly\Test\Unit\Developers\Tests\Web\Index;
 
-use Shomisha\Crudly\Config\DeveloperConfig;
 use Shomisha\Crudly\Data\CrudlySet;
 use Shomisha\Crudly\Developers\Tests\Web\Methods\Index\UnauthorizedIndexTestDeveloper;
 use Shomisha\Crudly\Managers\Tests\Web\TestMethodDeveloperManagers\Index\UnauthorizedIndexTestDeveloperManager;
@@ -19,7 +18,7 @@ class UnauthorizedIndexTestDeveloperTest extends DeveloperTestCase
         $specificationBuilder = CrudlySpecificationBuilder::forModel('Player');
 
 
-        $manager = new UnauthorizedIndexTestDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new UnauthorizedIndexTestDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new UnauthorizedIndexTestDeveloper($manager, $this->modelSupervisor);
         $testMethod = $developer->develop($specificationBuilder->build(), new CrudlySet());
 

@@ -2,7 +2,6 @@
 
 namespace Shomisha\Crudly\Test\Unit\Developers\Tests\Web\Edit;
 
-use Shomisha\Crudly\Config\DeveloperConfig;
 use Shomisha\Crudly\Data\CrudlySet;
 use Shomisha\Crudly\Developers\Tests\Web\Methods\Edit\EditTestDeveloper;
 use Shomisha\Crudly\Enums\ModelPropertyType;
@@ -23,7 +22,7 @@ class EditTestDeveloperTest extends DeveloperTestCase
             ->webAuthorization(true);
 
 
-        $manager = new EditTestDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new EditTestDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new EditTestDeveloper($manager, $this->modelSupervisor);
         $testMethod = $developer->develop($specificationBuilder->build(), new CrudlySet());
 
@@ -57,7 +56,7 @@ class EditTestDeveloperTest extends DeveloperTestCase
             ->webAuthorization(false);
 
 
-        $manager = new EditTestDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new EditTestDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new EditTestDeveloper($manager, $this->modelSupervisor);
         $testMethod = $developer->develop($specificationBuilder->build(), new CrudlySet());
 

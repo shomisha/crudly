@@ -2,35 +2,12 @@
 
 namespace Shomisha\Crudly\Managers\Tests\Web\TestMethodDeveloperManagers\Store;
 
-use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertDatabaseHasNoModels;
-use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertSessionHasFieldErrorDeveloper;
-use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Requests\PostDataToStoreRouteFromIndexRouteDeveloper;
-use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\TestData\GetDataWithInvalidOverrideDeveloper;
 use Shomisha\Crudly\Managers\Tests\TestMethodDeveloperManager;
 
 class InvalidDataStoreTestDeveloperManager extends TestMethodDeveloperManager
 {
-    public function getArrangeDevelopers(): array
+    protected function qualifyConfigKey(string $key): string
     {
-        return [
-            $this->getAuthenticateAndAuthorizeUserDeveloper(),
-            $this->instantiateDeveloperWithManager(GetDataWithInvalidOverrideDeveloper::class, $this),
-        ];
-    }
-
-    public function getActDevelopers(): array
-    {
-        return [
-            $this->instantiateDeveloperWithManager(PostDataToStoreRouteFromIndexRouteDeveloper::class, $this),
-        ];
-    }
-
-    public function getAssertDevelopers(): array
-    {
-        return [
-            $this->getAssertRedirectToIndexDeveloper(),
-            $this->instantiateDeveloperWithManager(AssertSessionHasFieldErrorDeveloper::class, $this),
-            $this->instantiateDeveloperWithManager(AssertDatabaseHasNoModels::class, $this),
-        ];
+        return "web.tests.store.invalid.{$key}";
     }
 }

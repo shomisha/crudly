@@ -2,7 +2,6 @@
 
 namespace Shomisha\Crudly\Test\Unit\Developers\Tests\Web\ForceDelete;
 
-use Shomisha\Crudly\Config\DeveloperConfig;
 use Shomisha\Crudly\Data\CrudlySet;
 use Shomisha\Crudly\Developers\Tests\Web\Methods\ForceDelete\ForceDeleteTestDeveloper;
 use Shomisha\Crudly\Enums\ModelPropertyType;
@@ -25,7 +24,7 @@ class ForceDeleteTestDeveloperTest extends DeveloperTestCase
             ->webAuthorization(true);
 
 
-        $manager = new ForceDeleteTestDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new ForceDeleteTestDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new ForceDeleteTestDeveloper($manager, $this->modelSupervisor);
         $testMethod = $developer->develop($specificationBuilder->build(), new CrudlySet());
 
@@ -60,7 +59,7 @@ class ForceDeleteTestDeveloperTest extends DeveloperTestCase
             ->webAuthorization(false);
 
 
-        $manager = new ForceDeleteTestDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new ForceDeleteTestDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new ForceDeleteTestDeveloper($manager, $this->modelSupervisor);
         $testMethod = $developer->develop($specificationBuilder->build(), new CrudlySet());
 

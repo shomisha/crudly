@@ -2,7 +2,6 @@
 
 namespace Shomisha\Crudly\Test\Unit\Developers\Tests\Web\Edit;
 
-use Shomisha\Crudly\Config\DeveloperConfig;
 use Shomisha\Crudly\Data\CrudlySet;
 use Shomisha\Crudly\Developers\Tests\Web\Methods\Edit\UnauthorizedEditTestDeveloper;
 use Shomisha\Crudly\Managers\Tests\Web\TestMethodDeveloperManagers\Edit\UnauthorizedEditTestDeveloperManager;
@@ -19,7 +18,7 @@ class UnauthorizedEditTestDeveloperTest extends DeveloperTestCase
         $specificationBuilder = CrudlySpecificationBuilder::forModel('Player');
 
 
-        $manager = new UnauthorizedEditTestDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new UnauthorizedEditTestDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new UnauthorizedEditTestDeveloper($manager, $this->modelSupervisor);
         $testMethod = $developer->develop($specificationBuilder->build(), new CrudlySet());
 

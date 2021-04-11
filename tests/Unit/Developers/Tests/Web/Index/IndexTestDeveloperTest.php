@@ -2,7 +2,6 @@
 
 namespace Shomisha\Crudly\Test\Unit\Developers\Tests\Web\Index;
 
-use Shomisha\Crudly\Config\DeveloperConfig;
 use Shomisha\Crudly\Data\CrudlySet;
 use Shomisha\Crudly\Developers\Tests\Web\Methods\Index\IndexTestDeveloper;
 use Shomisha\Crudly\Enums\ModelPropertyType;
@@ -23,7 +22,7 @@ class IndexTestDeveloperTest extends DeveloperTestCase
             ->webAuthorization(true);
 
 
-        $manager = new IndexTestDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new IndexTestDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new IndexTestDeveloper($manager, $this->modelSupervisor);
         $testMethod = $developer->develop($specificationBuilder->build(), new CrudlySet());
 
@@ -60,7 +59,7 @@ class IndexTestDeveloperTest extends DeveloperTestCase
             ->webAuthorization(false);
 
 
-        $manager = new IndexTestDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new IndexTestDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new IndexTestDeveloper($manager, $this->modelSupervisor);
         $testMethod = $developer->develop($specificationBuilder->build(), new CrudlySet());
 

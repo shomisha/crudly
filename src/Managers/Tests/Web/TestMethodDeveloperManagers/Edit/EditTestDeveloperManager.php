@@ -10,27 +10,8 @@ use Shomisha\Crudly\Managers\Tests\TestMethodDeveloperManager;
 
 class EditTestDeveloperManager extends TestMethodDeveloperManager
 {
-    public function getArrangeDevelopers(): array
+    protected function qualifyConfigKey(string $key): string
     {
-        return [
-            $this->getAuthenticateAndAuthorizeUserDeveloper(),
-            $this->instantiateDeveloperWithManager(CreateSingleModelInstance::class, $this),
-        ];
-    }
-
-    public function getActDevelopers(): array
-    {
-        return [
-            $this->instantiateDeveloperWithManager(LoadEditPageDeveloper::class, $this),
-        ];
-    }
-
-    public function getAssertDevelopers(): array
-    {
-        return [
-            $this->getAssertResponseSuccessfulDeveloper(),
-            $this->instantiateDeveloperWithManager(AssertViewIsDeveloper::class, $this)->using(['view' => 'edit']),
-            $this->instantiateDeveloperWithManager(AssertResponseModelIsTestModel::class, $this),
-        ];
+        return "web.tests.edit.{$key}";
     }
 }

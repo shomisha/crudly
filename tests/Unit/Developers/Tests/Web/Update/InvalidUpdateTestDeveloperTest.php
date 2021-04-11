@@ -2,7 +2,6 @@
 
 namespace Shomisha\Crudly\Test\Unit\Developers\Tests\Web\Update;
 
-use Shomisha\Crudly\Config\DeveloperConfig;
 use Shomisha\Crudly\Data\CrudlySet;
 use Shomisha\Crudly\Developers\Tests\Web\Methods\Update\InvalidUpdateTestDeveloper;
 use Shomisha\Crudly\Enums\ModelPropertyType;
@@ -25,7 +24,7 @@ class InvalidUpdateTestDeveloperTest extends DeveloperTestCase
             ->webAuthorization(true);
 
 
-        $manager = new InvalidUpdateTestDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new InvalidUpdateTestDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new InvalidUpdateTestDeveloper($manager, $this->modelSupervisor);
         $testMethod = $developer->develop($specificationBuilder->build(), new CrudlySet());
 
@@ -64,7 +63,7 @@ class InvalidUpdateTestDeveloperTest extends DeveloperTestCase
             ->webAuthorization(false);
 
 
-        $manager = new InvalidUpdateTestDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new InvalidUpdateTestDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new InvalidUpdateTestDeveloper($manager, $this->modelSupervisor);
         $testMethod = $developer->develop($specificationBuilder->build(), new CrudlySet());
 

@@ -2,7 +2,6 @@
 
 namespace Shomisha\Crudly\Test\Unit\Developers\Tests\Web\Destroy;
 
-use Shomisha\Crudly\Config\DeveloperConfig;
 use Shomisha\Crudly\Data\CrudlySet;
 use Shomisha\Crudly\Developers\Tests\Web\Methods\Destroy\DestroyTestDeveloper;
 use Shomisha\Crudly\Enums\ModelPropertyType;
@@ -24,7 +23,7 @@ class DestroyTestDeveloperTest extends DeveloperTestCase
             ->webAuthorization(true);
 
 
-        $manager = new DestroyTestDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new DestroyTestDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new DestroyTestDeveloper($manager, $this->modelSupervisor);
         $testMethod = $developer->develop($specificationBuilder->build(), new CrudlySet());
 
@@ -59,7 +58,7 @@ class DestroyTestDeveloperTest extends DeveloperTestCase
             ->webAuthorization(true);
 
 
-        $manager = new DestroyTestDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new DestroyTestDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new DestroyTestDeveloper($manager, $this->modelSupervisor);
         $testMethod = $developer->develop($specificationBuilder->build(), new CrudlySet());
 
@@ -94,7 +93,7 @@ class DestroyTestDeveloperTest extends DeveloperTestCase
             ->webAuthorization(false);
 
 
-        $manager = new DestroyTestDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new DestroyTestDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new DestroyTestDeveloper($manager, $this->modelSupervisor);
         $testMethod = $developer->develop($specificationBuilder->build(), new CrudlySet());
 

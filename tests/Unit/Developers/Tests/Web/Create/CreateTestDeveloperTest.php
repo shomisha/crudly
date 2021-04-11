@@ -2,7 +2,6 @@
 
 namespace Shomisha\Crudly\Test\Unit\Developers\Tests\Web\Create;
 
-use Shomisha\Crudly\Config\DeveloperConfig;
 use Shomisha\Crudly\Data\CrudlySet;
 use Shomisha\Crudly\Developers\Tests\Web\Methods\Create\CreateTestDeveloper;
 use Shomisha\Crudly\Managers\Tests\Web\TestMethodDeveloperManagers\Create\CreateTestDeveloperManager;
@@ -20,7 +19,7 @@ class CreateTestDeveloperTest extends DeveloperTestCase
             ->webAuthorization(true);
 
 
-        $manager = new CreateTestDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new CreateTestDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new CreateTestDeveloper($manager, $this->modelSupervisor);
         $testMethod = $developer->develop($specificationBuilder->build(), new CrudlySet());
 
@@ -50,7 +49,7 @@ class CreateTestDeveloperTest extends DeveloperTestCase
             ->apiAuthorization(true);
 
 
-        $manager = new CreateTestDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new CreateTestDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new CreateTestDeveloper($manager, $this->modelSupervisor);
         $testMethod = $developer->develop($specificationBuilder->build(), new CrudlySet());
 

@@ -2,7 +2,6 @@
 
 namespace Shomisha\Crudly\Test\Unit\Developers\Tests\Web\Index;
 
-use Shomisha\Crudly\Config\DeveloperConfig;
 use Shomisha\Crudly\Data\CrudlySet;
 use Shomisha\Crudly\Developers\Tests\Web\Methods\Index\IndexWillNotContainSoftDeletedModelsTestDeveloper;
 use Shomisha\Crudly\Enums\ModelPropertyType;
@@ -25,7 +24,7 @@ class MissingSoftDeletedIndexTestDeveloperTest extends DeveloperTestCase
             ->softDeletionColumn('retired_at');
 
 
-        $manager = new IndexWillNotContainSoftDeletedModelsTestDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new IndexWillNotContainSoftDeletedModelsTestDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new IndexWillNotContainSoftDeletedModelsTestDeveloper($manager, $this->modelSupervisor);
         $testMethod = $developer->develop($specificationBuilder->build(), new CrudlySet());
 
@@ -62,7 +61,7 @@ class MissingSoftDeletedIndexTestDeveloperTest extends DeveloperTestCase
             ->softDeletionColumn('retired_at');
 
 
-        $manager = new IndexWillNotContainSoftDeletedModelsTestDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new IndexWillNotContainSoftDeletedModelsTestDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new IndexWillNotContainSoftDeletedModelsTestDeveloper($manager, $this->modelSupervisor);
         $testMethod = $developer->develop($specificationBuilder->build(), new CrudlySet());
 

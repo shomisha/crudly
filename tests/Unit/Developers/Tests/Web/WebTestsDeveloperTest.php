@@ -4,7 +4,6 @@ namespace Shomisha\Crudly\Test\Unit\Developers\Tests\Web;
 
 use Faker\Factory;
 use Faker\Generator;
-use Shomisha\Crudly\Config\DeveloperConfig;
 use Shomisha\Crudly\Data\CrudlySet;
 use Shomisha\Crudly\Developers\Tests\Web\WebTestsDeveloper;
 use Shomisha\Crudly\Enums\ModelPropertyType;
@@ -56,7 +55,7 @@ class WebTestsDeveloperTest extends DeveloperTestCase
         $faker->shouldReceive('randomNumber')->andReturn(130);
 
 
-        $manager = new WebTestsDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new WebTestsDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new WebTestsDeveloper($manager, $this->modelSupervisor);
         $testClass = $developer->develop($specificationBuilder->build(), new CrudlySet());
 
@@ -487,7 +486,7 @@ class WebTestsDeveloperTest extends DeveloperTestCase
         $faker->shouldReceive('randomNumber')->andReturn(130);
 
 
-        $manager = new WebTestsDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new WebTestsDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new WebTestsDeveloper($manager, $this->modelSupervisor);
         $testClass = $developer->develop($specificationBuilder->build(), new CrudlySet());
 
@@ -777,7 +776,7 @@ class WebTestsDeveloperTest extends DeveloperTestCase
         $faker->shouldReceive('randomNumber')->andReturn(130);
 
 
-        $manager = new WebTestsDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new WebTestsDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new WebTestsDeveloper($manager, $this->modelSupervisor);
         $testClass = $developer->develop($specificationBuilder->build(), new CrudlySet());
 

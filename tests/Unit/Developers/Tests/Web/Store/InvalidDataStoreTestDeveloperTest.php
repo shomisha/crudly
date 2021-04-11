@@ -2,7 +2,6 @@
 
 namespace Shomisha\Crudly\Test\Unit\Developers\Tests\Web\Store;
 
-use Shomisha\Crudly\Config\DeveloperConfig;
 use Shomisha\Crudly\Data\CrudlySet;
 use Shomisha\Crudly\Developers\Tests\Web\Methods\Store\InvalidStoreTestDeveloper;
 use Shomisha\Crudly\Enums\ModelPropertyType;
@@ -23,7 +22,7 @@ class InvalidDataStoreTestDeveloperTest extends DeveloperTestCase
             ->webAuthorization(true);
 
 
-        $manager = new InvalidDataStoreTestDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new InvalidDataStoreTestDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new InvalidStoreTestDeveloper($manager, $this->modelSupervisor);
         $testMethod = $developer->develop($specificationBuilder->build(), new CrudlySet());
 
@@ -57,7 +56,7 @@ class InvalidDataStoreTestDeveloperTest extends DeveloperTestCase
             ->webAuthorization(false);
 
 
-        $manager = new InvalidDataStoreTestDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new InvalidDataStoreTestDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new InvalidStoreTestDeveloper($manager, $this->modelSupervisor);
         $testMethod = $developer->develop($specificationBuilder->build(), new CrudlySet());
 

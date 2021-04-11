@@ -2,7 +2,6 @@
 
 namespace Shomisha\Crudly\Test\Unit\Developers\Tests\Web\Restore;
 
-use Shomisha\Crudly\Config\DeveloperConfig;
 use Shomisha\Crudly\Data\CrudlySet;
 use Shomisha\Crudly\Developers\Tests\Web\Methods\Restore\UnauthorizedRestoreTestDeveloper;
 use Shomisha\Crudly\Managers\Tests\Web\TestMethodDeveloperManagers\Restore\UnauthorizedRestoreTestDeveloperManager;
@@ -21,7 +20,7 @@ class UnauthorizedRestoreTestDeveloperTest extends DeveloperTestCase
             ->softDeletionColumn('deleted_at');
 
 
-        $manager = new UnauthorizedRestoreTestDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new UnauthorizedRestoreTestDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new UnauthorizedRestoreTestDeveloper($manager, $this->modelSupervisor);
         $testMethod = $developer->develop($specificationBuilder->build(), new CrudlySet());
 

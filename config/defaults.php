@@ -237,7 +237,7 @@ return [
     ],
     'web.tests.index.assert' => [
         PartialDevelopers\Tests\Assertions\AssertResponseSuccessfulDeveloper::class,
-        PartialDevelopers\Tests\Assertions\AssertViewIsDeveloper::class,
+        developerClass(PartialDevelopers\Tests\Assertions\AssertViewIsDeveloper::class, ['view' => 'index']),
         PartialDevelopers\Tests\GetModelIdsFromResponseDeveloper::class,
         PartialDevelopers\Tests\Assertions\AssertResponseModelIdsCountSameAsModels::class,
         PartialDevelopers\Tests\Assertions\AssertAllModelIdsPresentDeveloper::class,
@@ -265,7 +265,7 @@ return [
     ],
     'web.tests.index.missing-soft-deleted.assert' => [
         PartialDevelopers\Tests\Assertions\AssertResponseSuccessfulDeveloper::class,
-        PartialDevelopers\Tests\Assertions\AssertViewIsDeveloper::class,
+        developerClass(PartialDevelopers\Tests\Assertions\AssertViewIsDeveloper::class, ['view' => 'index']),
         PartialDevelopers\Tests\GetModelIdsFromResponseDeveloper::class,
         PartialDevelopers\Tests\Assertions\AssertResponseModelsMissingSingularModel::class,
     ],
@@ -281,7 +281,7 @@ return [
     ],
     'web.tests.show.assert' => [
         PartialDevelopers\Tests\Assertions\AssertResponseSuccessfulDeveloper::class,
-        PartialDevelopers\Tests\Assertions\AssertViewIsDeveloper::class,
+        developerClass(PartialDevelopers\Tests\Assertions\AssertViewIsDeveloper::class, ['view' => 'show']),
         PartialDevelopers\Tests\Assertions\AssertResponseModelIsTestModel::class,
     ],
 
@@ -307,7 +307,7 @@ return [
     ],
     'web.tests.create.assert' => [
         PartialDevelopers\Tests\Assertions\AssertResponseSuccessfulDeveloper::class,
-        PartialDevelopers\Tests\Assertions\AssertViewIsDeveloper::class,
+        developerClass(PartialDevelopers\Tests\Assertions\AssertViewIsDeveloper::class, ['view' => 'create']),
     ],
 
     'web.tests.create.unauthorized' => WebTestMethods\Create\UnauthorizedCreateTestDeveloper::class,
@@ -353,7 +353,7 @@ return [
     'web.tests.store.unauthorized' => WebTestMethods\Store\UnauthorizedStoreTestDeveloper::class,
     'web.tests.store.unauthorized.arrange' => [
         PartialDevelopers\Tests\Authentication\AuthenticateAndDeauthorizeUserDeveloper::class,
-        PartialDevelopers\Tests\TestData\GetDataWithNewDefaultsDeveloper::class,
+        PartialDevelopers\Tests\TestData\GetDataWithoutOverrideDeveloper::class,
     ],
     'web.tests.store.unauthorized.act' => [
         PartialDevelopers\Tests\Requests\PostDataToStoreRouteDeveloper::class,
@@ -374,7 +374,7 @@ return [
     ],
     'web.tests.edit.assert' => [
         PartialDevelopers\Tests\Assertions\AssertResponseSuccessfulDeveloper::class,
-        PartialDevelopers\Tests\Assertions\AssertViewIsDeveloper::class,
+        developerClass(PartialDevelopers\Tests\Assertions\AssertViewIsDeveloper::class, ['view' => 'edit']),
         PartialDevelopers\Tests\Assertions\AssertResponseModelIsTestModel::class,
     ],
 
@@ -668,6 +668,7 @@ return [
     'web.tests.update.unauthorized.arrange' => [
         PartialDevelopers\Tests\Authentication\AuthenticateAndDeauthorizeUserDeveloper::class,
         PartialDevelopers\Tests\Factory\CreateModelWithOldDefaultsDeveloper::class,
+        PartialDevelopers\Tests\TestData\GetDataWithNewDefaultsDeveloper::class,
     ],
     'web.tests.update.unauthorized.act' => [
         PartialDevelopers\Tests\Requests\PutDataToUpdateRouteDeveloper::class,
