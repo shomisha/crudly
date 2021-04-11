@@ -3,8 +3,6 @@
 namespace Shomisha\Crudly\Managers\Crud\Web;
 
 use Shomisha\Crudly\Contracts\Developer;
-use Shomisha\Crudly\Developers\Crud\PartialDevelopers\InvokeModelMethodDeveloper;
-use Shomisha\Crudly\Developers\Crud\Web\Store\Fill\FillFieldsSeparatelyDeveloper;
 use Shomisha\Crudly\Managers\Crud\CrudMethodDeveloperManager;
 
 class StoreMethodDeveloperManager extends CrudMethodDeveloperManager

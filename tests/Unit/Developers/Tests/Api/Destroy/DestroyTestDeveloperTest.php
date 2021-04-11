@@ -2,7 +2,6 @@
 
 namespace Shomisha\Crudly\Test\Unit\Developers\Tests\Api\Destroy;
 
-use Shomisha\Crudly\Config\DeveloperConfig;
 use Shomisha\Crudly\Data\CrudlySet;
 use Shomisha\Crudly\Developers\Tests\Api\Methods\Destroy\DestroyTestDeveloper;
 use Shomisha\Crudly\Enums\ModelPropertyType;

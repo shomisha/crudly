@@ -2,7 +2,6 @@
 
 namespace Shomisha\Crudly\Test\Unit\Developers\ApiCrud\Store;
 
-use Shomisha\Crudly\Config\DeveloperConfig;
 use Shomisha\Crudly\Developers\Crud\Api\Store\StoreDeveloper;
 use Shomisha\Crudly\Developers\Crud\CrudMethodDeveloper;
 use Shomisha\Crudly\Enums\ModelPropertyType;

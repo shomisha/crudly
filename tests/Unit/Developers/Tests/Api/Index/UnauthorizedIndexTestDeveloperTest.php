@@ -2,7 +2,6 @@
 
 namespace Shomisha\Crudly\Test\Unit\Developers\Tests\Api\Index;
 
-use Shomisha\Crudly\Config\DeveloperConfig;
 use Shomisha\Crudly\Data\CrudlySet;
 use Shomisha\Crudly\Developers\Tests\Api\Methods\Index\UnauthorizedIndexTestDeveloper;
 use Shomisha\Crudly\Managers\Tests\Api\TestMethodDeveloperManagers\Index\UnauthorizedIndexTestDeveloperManager;

@@ -2,13 +2,13 @@
 
 namespace Shomisha\Crudly\Test\Unit\Developers\WebCrud\Index;
 
+use Shomisha\Crudly\Developers\Crud\CrudMethodDeveloper;
 use Shomisha\Crudly\Developers\Crud\Web\Index\IndexDeveloper;
 use Shomisha\Crudly\Enums\ModelPropertyType;
+use Shomisha\Crudly\Managers\BaseDeveloperManager;
 use Shomisha\Crudly\Managers\Crud\Web\IndexMethodDeveloperManager;
 use Shomisha\Crudly\Test\Specification\CrudlySpecificationBuilder;
 use Shomisha\Crudly\Test\Unit\Developers\CrudMethodTestCase;
-use Shomisha\Crudly\Managers\BaseDeveloperManager;
-use Shomisha\Crudly\Developers\Crud\CrudMethodDeveloper;
 
 class IndexDeveloperTest extends CrudMethodTestCase
 {

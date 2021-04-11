@@ -7,8 +7,8 @@ use Shomisha\Crudly\Contracts\ModelSupervisor;
 use Shomisha\Crudly\Data\CrudlySet;
 use Shomisha\Crudly\Data\ModelName;
 use Shomisha\Crudly\Developers\CrudlyDeveloper;
-use Shomisha\Crudly\Specifications\CrudlySpecification;
 use Shomisha\Crudly\Managers\DeveloperManager;
+use Shomisha\Crudly\Specifications\CrudlySpecification;
 
 class Crudly
 {

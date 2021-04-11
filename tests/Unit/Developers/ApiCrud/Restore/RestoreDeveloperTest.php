@@ -2,7 +2,6 @@
 
 namespace Shomisha\Crudly\Test\Unit\Developers\ApiCrud\Restore;
 
-use Shomisha\Crudly\Config\DeveloperConfig;
 use Shomisha\Crudly\Developers\Crud\Api\Restore\RestoreDeveloper;
 use Shomisha\Crudly\Developers\Crud\CrudMethodDeveloper;
 use Shomisha\Crudly\Managers\BaseDeveloperManager;

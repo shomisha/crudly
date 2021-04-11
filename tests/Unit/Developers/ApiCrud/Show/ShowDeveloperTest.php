@@ -2,7 +2,6 @@
 
 namespace Shomisha\Crudly\Test\Unit\Developers\ApiCrud\Show;
 
-use Shomisha\Crudly\Config\DeveloperConfig;
 use Shomisha\Crudly\Developers\Crud\Api\Show\ShowDeveloper;
 use Shomisha\Crudly\Developers\Crud\CrudMethodDeveloper;
 use Shomisha\Crudly\Enums\ModelPropertyType;

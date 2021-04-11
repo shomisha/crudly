@@ -2,7 +2,6 @@
 
 namespace Shomisha\Crudly\Test\Unit\Developers\Factory;
 
-use Shomisha\Crudly\Config\DeveloperConfig;
 use Shomisha\Crudly\Data\CrudlySet;
 use Shomisha\Crudly\Developers\Factory\FactoryClassDeveloper;
 use Shomisha\Crudly\Enums\ModelPropertyType;

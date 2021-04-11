@@ -2,7 +2,6 @@
 
 namespace Shomisha\Crudly\Test\Unit\Developers\WebCrud;
 
-use Shomisha\Crudly\Config\DeveloperConfig;
 use Shomisha\Crudly\Data\CrudlySet;
 use Shomisha\Crudly\Developers\Crud\Web\FormRequest\WebFormRequestDeveloper;
 use Shomisha\Crudly\Enums\ModelPropertyType;

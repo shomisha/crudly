@@ -2,7 +2,6 @@
 
 namespace Shomisha\Crudly\Test\Unit\Developers\WebCrud\Update;
 
-use Shomisha\Crudly\Config\DeveloperConfig;
 use Shomisha\Crudly\Developers\Crud\CrudMethodDeveloper;
 use Shomisha\Crudly\Developers\Crud\Web\Update\UpdateDeveloper;
 use Shomisha\Crudly\Enums\ModelPropertyType;

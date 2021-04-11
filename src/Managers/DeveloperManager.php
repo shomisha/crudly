@@ -6,7 +6,6 @@ use Shomisha\Crudly\Contracts\Developer;
 use Shomisha\Crudly\Managers\Crud\Api\ApiCrudDeveloperManager;
 use Shomisha\Crudly\Managers\Crud\Api\ApiFormRequestDeveloperManager;
 use Shomisha\Crudly\Managers\Crud\Api\ApiResourceDeveloperManager;
-use Shomisha\Crudly\Managers\Crud\FormRequestDeveloperManager;
 use Shomisha\Crudly\Managers\Crud\Web\WebCrudDeveloperManager;
 use Shomisha\Crudly\Managers\Crud\Web\WebFormRequestDeveloperManager;
 use Shomisha\Crudly\Managers\Tests\Api\ApiTestsDeveloperManager;

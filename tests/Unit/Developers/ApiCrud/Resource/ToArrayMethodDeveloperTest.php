@@ -2,7 +2,6 @@
 
 namespace Shomisha\Crudly\Test\Unit\Developers\ApiCrud\Resource;
 
-use Shomisha\Crudly\Config\DeveloperConfig;
 use Shomisha\Crudly\Data\CrudlySet;
 use Shomisha\Crudly\Developers\Crud\Api\Resource\ToArrayMethodDeveloper;
 use Shomisha\Crudly\Enums\ModelPropertyType;

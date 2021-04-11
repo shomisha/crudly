@@ -2,7 +2,6 @@
 
 namespace Shomisha\Crudly\Test\Unit\Developers\WebCrud\Destroy;
 
-use Shomisha\Crudly\Config\DeveloperConfig;
 use Shomisha\Crudly\Developers\Crud\CrudMethodDeveloper;
 use Shomisha\Crudly\Developers\Crud\Web\Destroy\DestroyDeveloper;
 use Shomisha\Crudly\Managers\BaseDeveloperManager;
