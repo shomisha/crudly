@@ -778,4 +778,14 @@ return [
         PartialDevelopers\Tests\RefreshModelDeveloper::class,
         PartialDevelopers\Tests\Assertions\AssertSoftDeletedColumnIsNotNull::class,
     ],
+
+    'partials.tests.authenticate-user' => PartialDevelopers\Tests\Authentication\InvokeCreateAndAuthenticateUserDeveloper::class,
+    'partials.tests.authorize-user' => PartialDevelopers\Tests\Authentication\InvokeAuthorizeUserDeveloper::class,
+    'partials.tests.deauthorize-user' => PartialDevelopers\Tests\Authentication\InvokeDeauthorizeUserDeveloper::class,
+    'partials.tests.refresh-model' => PartialDevelopers\Tests\RefreshModelDeveloper::class,
+    'partials.tests.assert-soft-deleted' => PartialDevelopers\Tests\Assertions\AssertSoftDeletedColumnIsNull::class,
+    'partials.tests.assert-not-soft-deleted' => PartialDevelopers\Tests\Assertions\AssertSoftDeletedColumnIsNotNull::class,
+    'partials.tests.assert-hard-deleted' => PartialDevelopers\Tests\Assertions\AssertDatabaseMissingModelDeveloper::class,
+    'partials.tests.assert-not-hard-deleted' => PartialDevelopers\Tests\Assertions\AssertDatabaseHasModelDeveloper::class,
+    'partials.tests.get-route' => PartialDevelopers\Tests\GetRouteDeveloper::class,
 ];

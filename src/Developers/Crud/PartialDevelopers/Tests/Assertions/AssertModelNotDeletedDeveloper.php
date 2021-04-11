@@ -26,12 +26,12 @@ class AssertModelNotDeletedDeveloper extends TestsDeveloper
     {
         return Block::fromArray([
             $this->getManager()->getRefreshModelDeveloper()->develop($specification, $developedSet),
-            $this->getManager()->getAssertSoftDeletedColumnIsNullDeveloper()->develop($specification, $developedSet),
+            $this->getManager()->getAssertNotSoftDeletedDeveloper()->develop($specification, $developedSet),
         ]);
     }
 
     protected function assertNotHardDeleted(CrudlySpecification $specification, CrudlySet $developedSet): Code
     {
-        return $this->getManager()->getAssertDatabaseHasModelDeveloper()->develop($specification, $developedSet);
+        return $this->getManager()->getAssertNotHardDeletedDeveloper()->develop($specification, $developedSet);
     }
 }

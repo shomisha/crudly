@@ -2,15 +2,7 @@
 
 namespace Shomisha\Crudly\Managers\Tests;
 
-use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertDatabaseHasModelDeveloper;
-use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertDatabaseMissingModelDeveloper;
-use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertSoftDeletedColumnIsNotNull;
-use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertSoftDeletedColumnIsNull;
-use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Authentication\InvokeAuthorizeUserDeveloper;
-use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Authentication\InvokeCreateAndAuthenticateUserDeveloper;
-use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Authentication\InvokeDeauthorizeUserDeveloper;
-use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\RefreshModelDeveloper;
-use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\GetRouteDeveloper;
+use Shomisha\Crudly\Contracts\Developer;
 use Shomisha\Crudly\Managers\DeveloperManager;
 
 abstract class TestMethodDeveloperManager extends DeveloperManager
@@ -36,49 +28,49 @@ abstract class TestMethodDeveloperManager extends DeveloperManager
         );
     }
 
-    public function getCreateAndAuthenticateUserDeveloper(): InvokeCreateAndAuthenticateUserDeveloper
+    public function getCreateAndAuthenticateUserDeveloper(): Developer
     {
-        return $this->instantiateDeveloperWithManager(InvokeCreateAndAuthenticateUserDeveloper::class, $this);
+        return $this->instantiateDeveloperByKey('partials.tests.authenticate-user');
     }
 
-    public function getAuthorizeUserDeveloper(): InvokeAuthorizeUserDeveloper
+    public function getAuthorizeUserDeveloper(): Developer
     {
-        return $this->instantiateDeveloperWithManager(InvokeAuthorizeUserDeveloper::class, $this);
+        return $this->instantiateDeveloperByKey('partials.tests.authorize-user');
     }
 
-    public function getDeauthorizeUserDeveloper(): InvokeDeauthorizeUserDeveloper
+    public function getDeauthorizeUserDeveloper(): Developer
     {
-        return $this->instantiateDeveloperWithManager(InvokeDeauthorizeUserDeveloper::class, $this);
+        return $this->instantiateDeveloperByKey('partials.tests.deauthorize-user');
     }
 
-    public function getRefreshModelDeveloper(): RefreshModelDeveloper
+    public function getRefreshModelDeveloper(): Developer
     {
-        return $this->instantiateDeveloperWithManager(RefreshModelDeveloper::class, $this);
+        return $this->instantiateDeveloperByKey('partials.tests.refresh-model');
     }
 
-    public function getAssertSoftDeletedColumnIsNotNullDeveloper(): AssertSoftDeletedColumnIsNotNull
+    public function getAssertSoftDeletedDeveloper(): Developer
     {
-        return $this->instantiateDeveloperWithManager(AssertSoftDeletedColumnIsNotNull::class, $this);
+        return $this->instantiateDeveloperByKey('partials.tests.assert-not-soft-deleted');
     }
 
-    public function getAssertSoftDeletedColumnIsNullDeveloper(): AssertSoftDeletedColumnIsNull
+    public function getAssertNotSoftDeletedDeveloper(): Developer
     {
-        return $this->instantiateDeveloperWithManager(AssertSoftDeletedColumnIsNull::class, $this);
+        return $this->instantiateDeveloperByKey('partials.tests.assert-soft-deleted');
     }
 
-    public function getAssertDatabaseMissingModelDeveloper(): AssertDatabaseMissingModelDeveloper
+    public function getAssertHardDeletedDeveloper(): Developer
     {
-        return $this->instantiateDeveloperWithManager(AssertDatabaseMissingModelDeveloper::class, $this);
+        return $this->instantiateDeveloperByKey('partials.tests.assert-hard-deleted');
     }
 
-    public function getAssertDatabaseHasModelDeveloper(): AssertDatabaseHasModelDeveloper
+    public function getAssertNotHardDeletedDeveloper(): Developer
     {
-        return $this->instantiateDeveloperWithManager(AssertDatabaseHasModelDeveloper::class, $this);
+        return $this->instantiateDeveloperByKey('partials.tests.assert-not-hard-deleted');
     }
 
-    public function getGetRouteDeveloper(): GetRouteDeveloper
+    public function getGetRouteDeveloper(): Developer
     {
-        return $this->instantiateDeveloperWithManager(GetRouteDeveloper::class, $this);
+        return $this->instantiateDeveloperByKey('partials.tests.get-route');
     }
 
     abstract protected function qualifyConfigKey(string $key): string;
