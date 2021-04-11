@@ -88,6 +88,21 @@ class ApiTestsDeveloperTest extends DeveloperTestCase
             "        return \$user;",
             "    }\n",
 
+            "    private function getAuthorData(array \$override = []) : array",
+            "    {",
+            "        if (!array_key_exists('manager_id', \$override)) {",
+            "            throw IncompleteTestException::provideMissingForeignKey('manager_id');",
+            "        }",
+            "        if (!array_key_exists('publisher_uuid', \$override)) {",
+            "            \$override['publisher_uuid'] = Publisher::factory()->create()->uuid;",
+            "        }",
+            "        if (!array_key_exists('country_id', \$override)) {",
+            "            throw IncompleteTestException::provideMissingForeignKey('country_id');",
+            "        }\n",
+
+            "        return array_merge(['name' => 'J. K. Rowling', 'email' => 'jk@rowling.com'], \$override);",
+            "    }\n",
+
             "    private function authorizeUser(User \$user) : void",
             "    {",
             "        throw IncompleteTestException::provideUserAuthorization();",
@@ -131,21 +146,6 @@ class ApiTestsDeveloperTest extends DeveloperTestCase
             "    private function getRestoreRoute(Author \$author) : string",
             "    {",
             "        throw IncompleteTestException::missingRouteGetter('restore');",
-            "    }\n",
-
-            "    private function getAuthorData(array \$override = []) : array",
-            "    {",
-            "        if (!array_key_exists('manager_id', \$override)) {",
-            "            throw IncompleteTestException::provideMissingForeignKey('manager_id');",
-            "        }",
-            "        if (!array_key_exists('publisher_uuid', \$override)) {",
-            "            \$override['publisher_uuid'] = Publisher::factory()->create()->uuid;",
-            "        }",
-            "        if (!array_key_exists('country_id', \$override)) {",
-            "            throw IncompleteTestException::provideMissingForeignKey('country_id');",
-            "        }\n",
-
-            "        return array_merge(['name' => 'J. K. Rowling', 'email' => 'jk@rowling.com'], \$override);",
             "    }\n",
 
             "    /**",
@@ -420,6 +420,10 @@ class ApiTestsDeveloperTest extends DeveloperTestCase
         $developedSet = new CrudlySet();
         $testClass = $developer->develop($specificationBuilder->build(), $developedSet);
 
+        $printedClass = $testClass->print();
+        $this->assertStringNotContainsString('private function authorizeUser(User $user)', $printedClass);
+        $this->assertStringNotContainsString('private function deauthorizeUser(User $user)', $printedClass);
+
         $this->assertStringContainsString(implode("\n", [
             "    /**",
             "     * @test",
@@ -550,7 +554,7 @@ class ApiTestsDeveloperTest extends DeveloperTestCase
             "        \$author->refresh();",
             "        \$this->assertNull(\$author->stopped_writing_at);",
             "    }",
-        ]), $testClass->print());
+        ]), $printedClass);
     }
 
     /** @test */
@@ -777,14 +781,12 @@ class ApiTestsDeveloperTest extends DeveloperTestCase
             ->softDeletionColumn('deleted_at');
 
         $this->manager->arraysOfDevelopers([
-            'getRouteMethodDevelopers'
+            'getRouteMethodDevelopers',
+            'getHelperMethodDevelopers',
+            'getAuthorizationHelperMethodDevelopers',
         ]);
 
         $expectedDevelopers = [
-            'getAuthenticateUserMethodDeveloper',
-            'getAuthorizeMethodDeveloper',
-            'getDeauthorizeMethodDeveloper',
-            'getDataMethodDeveloper',
             'getIndexTestDeveloper',
             'getUnauthorizedIndexTestDeveloper',
             'getShowDeveloper',
@@ -812,6 +814,8 @@ class ApiTestsDeveloperTest extends DeveloperTestCase
 
 
         $this->manager->assertArrayOfDevelopersRequested('getRouteMethodDevelopers');
+        $this->manager->assertArrayOfDevelopersRequested('getHelperMethodDevelopers');
+        $this->manager->assertArrayOfDevelopersRequested('getAuthorizationHelperMethodDevelopers');
 
         foreach ($expectedDevelopers as $expectedDeveloper) {
             $this->manager->assertMethodDeveloperRequested($expectedDeveloper);

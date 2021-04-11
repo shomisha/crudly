@@ -21,7 +21,7 @@ class ApiTestsDeveloper extends TestsDeveloper
 
         $developedSet->setApiTests($apiTestsClass);
 
-        foreach ($this->getHelperMethodDevelopers() as $developer) {
+        foreach ($this->getHelperMethodDevelopers($specification) as $developer) {
             $apiTestsClass->addMethod($developer->develop($specification, $developedSet));
         }
 
@@ -32,17 +32,18 @@ class ApiTestsDeveloper extends TestsDeveloper
         return $apiTestsClass;
     }
 
-    protected function getHelperMethodDevelopers(): array
+    protected function getHelperMethodDevelopers(CrudlySpecification $specification): array
     {
-        $manager = $this->getManager();
+        $developers = $this->getManager()->getHelperMethodDevelopers();
 
-        return [
-            $manager->getAuthenticateUserMethodDeveloper(),
-            $manager->getAuthorizeMethodDeveloper(),
-            $manager->getDeauthorizeMethodDeveloper(),
-            ...$manager->getRouteMethodDevelopers(),
-            $manager->getDataMethodDeveloper(),
-        ];
+        if ($specification->hasApiAuthorization()) {
+            $developers = array_merge($developers, $this->getManager()->getAuthorizationHelperMethodDevelopers());
+        }
+
+        return array_merge(
+            $developers,
+            $this->getManager()->getRouteMethodDevelopers(),
+        );
     }
 
     protected function getTestDevelopers(CrudlySpecification $specification): array

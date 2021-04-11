@@ -3,14 +3,21 @@
 namespace Shomisha\Crudly\Managers\Tests\Web;
 
 use Shomisha\Crudly\Contracts\Developer;
-use Shomisha\Crudly\Developers\Tests\HelperMethodDevelopers\RouteGetters;
-use Shomisha\Crudly\Developers\Tests\Web\Methods as TestMethods;
 use Shomisha\Crudly\Managers\Tests\TestClassDeveloperManager;
 use Shomisha\Crudly\Managers\Tests\Web\TestMethodDeveloperManagers as TestManagers;
 
 class WebTestsDeveloperManager extends TestClassDeveloperManager
 {
-    /** @return \Shomisha\Crudly\Abstracts\Developer[] */
+    public function getHelperMethodDevelopers(): array
+    {
+        return $this->instantiateGroupOfDevelopersByKey('web.tests.helpers');
+    }
+
+    public function getAuthorizationHelperMethodDevelopers(): array
+    {
+        return $this->instantiateGroupOfDevelopersByKey('web.tests.helpers.authorization');
+    }
+
     public function getRouteMethodDevelopers(): array
     {
         return $this->instantiateGroupOfDevelopersByKey('web.tests.helpers.routes');
@@ -82,11 +89,7 @@ class WebTestsDeveloperManager extends TestClassDeveloperManager
 
     public function getInvalidDataProviderDeveloper(): Developer
     {
-        // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(
-            TestMethods\InvalidDataProviderDeveloper::class,
-            $this
-        );
+        return $this->instantiateDeveloperByKey('web.tests.helpers.invalid-data-provider');
     }
 
     public function getInvalidDataStoreTestDeveloper(): Developer

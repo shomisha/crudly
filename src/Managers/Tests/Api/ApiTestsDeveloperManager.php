@@ -3,12 +3,21 @@
 namespace Shomisha\Crudly\Managers\Tests\Api;
 
 use Shomisha\Crudly\Contracts\Developer;
-use Shomisha\Crudly\Developers\Tests\Web\Methods\InvalidDataProviderDeveloper;
 use Shomisha\Crudly\Managers\Tests\Api\TestMethodDeveloperManagers as MethodDeveloperManagers;
 use Shomisha\Crudly\Managers\Tests\TestClassDeveloperManager;
 
 class ApiTestsDeveloperManager extends TestClassDeveloperManager
 {
+    public function getHelperMethodDevelopers(): array
+    {
+        return $this->instantiateGroupOfDevelopersByKey('api.tests.helpers');
+    }
+
+    public function getAuthorizationHelperMethodDevelopers(): array
+    {
+        return $this->instantiateGroupOfDevelopersByKey('api.tests.helpers.authorization');
+    }
+
     public function getRouteMethodDevelopers(): array
     {
         return $this->instantiateGroupOfDevelopersByKey('api.tests.helpers.routes');
@@ -56,10 +65,7 @@ class ApiTestsDeveloperManager extends TestClassDeveloperManager
 
     public function getInvalidDataProviderDeveloper(): Developer
     {
-        return $this->instantiateDeveloperWithManager(
-            InvalidDataProviderDeveloper::class,
-            $this,
-        );
+        return $this->instantiateDeveloperByKey('api.tests.helpers.invalid-data-provider');
     }
 
     public function getInvalidStoreDeveloper(): Developer

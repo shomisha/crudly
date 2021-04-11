@@ -210,10 +210,10 @@ return [
     'factory.definition-fields' => Factory\FactoryDefinitionFieldDeveloper::class,
 
     'web.tests' => WebTests\WebTestsDeveloper::class,
-    'web.tests.helpers.authenticate' => TestHelpers\AuthenticateUserMethodDeveloper::class,
-    'web.tests.helpers.authorize' => TestHelpers\AuthorizeUserMethodDeveloper::class,
-    'web.tests.helpers.deauthorize' => TestHelpers\DeauthorizeUserMethodDeveloper::class,
-    'web.tests.helpers.model-data' => TestHelpers\GetModelDataMethodDeveloper::class,
+    'web.tests.helpers' => [
+        TestHelpers\AuthenticateUserMethodDeveloper::class,
+        TestHelpers\GetModelDataMethodDeveloper::class,
+    ],
 
     'web.tests.helpers.routes' => [
         TestHelpers\RouteGetters\GetIndexRouteMethodDeveloper::class,
@@ -226,6 +226,13 @@ return [
         TestHelpers\RouteGetters\GetForceDeleteRouteMethodDeveloper::class,
         TestHelpers\RouteGetters\GetRestoreRouteMethodDeveloper::class,
     ],
+
+    'web.tests.helpers.authorization' => [
+        TestHelpers\AuthorizeUserMethodDeveloper::class,
+        TestHelpers\DeauthorizeUserMethodDeveloper::class,
+    ],
+
+    'web.tests.helpers.invalid-data-provider' => WebTestMethods\InvalidDataProviderDeveloper::class,
 
     'web.tests.index' => WebTestMethods\Index\IndexTestDeveloper::class,
     'web.tests.index.arrange' => [
@@ -524,10 +531,15 @@ return [
     ],
 
     'api.tests' => ApiTests\ApiTestsDeveloper::class,
-    'api.tests.helpers.authenticate' => TestHelpers\AuthenticateUserMethodDeveloper::class,
-    'api.tests.helpers.authorize' => TestHelpers\AuthorizeUserMethodDeveloper::class,
-    'api.tests.helpers.deauthorize' => TestHelpers\DeauthorizeUserMethodDeveloper::class,
-    'api.tests.helpers.model-data' => TestHelpers\GetModelDataMethodDeveloper::class,
+    'api.tests.helpers' => [
+        TestHelpers\AuthenticateUserMethodDeveloper::class,
+        TestHelpers\GetModelDataMethodDeveloper::class,
+    ],
+
+    'api.tests.helpers.authorization' => [
+        TestHelpers\AuthorizeUserMethodDeveloper::class,
+        TestHelpers\DeauthorizeUserMethodDeveloper::class,
+    ],
 
     'api.tests.helpers.routes' => [
         TestHelpers\RouteGetters\GetIndexRouteMethodDeveloper::class,
@@ -538,6 +550,8 @@ return [
         TestHelpers\RouteGetters\GetForceDeleteRouteMethodDeveloper::class,
         TestHelpers\RouteGetters\GetRestoreRouteMethodDeveloper::class,
     ],
+
+    'api.tests.helpers.invalid-data-provider' => WebTestMethods\InvalidDataProviderDeveloper::class,
 
     'api.tests.index' => ApiTestMethods\Index\IndexTestDeveloper::class,
     'api.tests.index.arrange' => [

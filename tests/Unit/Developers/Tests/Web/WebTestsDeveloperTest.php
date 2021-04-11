@@ -83,6 +83,18 @@ class WebTestsDeveloperTest extends DeveloperTestCase
             "        return \$user;",
             "    }\n",
 
+            "    private function getPlayerData(array \$override = []) : array",
+            "    {",
+            "        if (!array_key_exists('manager_id', \$override)) {",
+            "            throw IncompleteTestException::provideMissingForeignKey('manager_id');",
+            "        }",
+            "        if (!array_key_exists('club_uuid', \$override)) {",
+            "            \$override['club_uuid'] = Club::factory()->create()->uuid;",
+            "        }\n",
+
+            "        return array_merge(['name' => 'Zlatan Ibrahimovic', 'email' => 'lion@golden.com', 'career_goals' => 130], \$override);",
+            "    }\n",
+
             "    private function authorizeUser(User \$user) : void",
             "    {",
             "        throw IncompleteTestException::provideUserAuthorization();",
@@ -136,18 +148,6 @@ class WebTestsDeveloperTest extends DeveloperTestCase
             "    private function getRestoreRoute(Player \$player) : string",
             "    {",
             "        throw IncompleteTestException::missingRouteGetter('restore');",
-            "    }\n",
-
-            "    private function getPlayerData(array \$override = []) : array",
-            "    {",
-            "        if (!array_key_exists('manager_id', \$override)) {",
-            "            throw IncompleteTestException::provideMissingForeignKey('manager_id');",
-            "        }",
-            "        if (!array_key_exists('club_uuid', \$override)) {",
-            "            \$override['club_uuid'] = Club::factory()->create()->uuid;",
-            "        }\n",
-
-            "        return array_merge(['name' => 'Zlatan Ibrahimovic', 'email' => 'lion@golden.com', 'career_goals' => 130], \$override);",
             "    }\n",
 
             "    /**",
@@ -514,6 +514,18 @@ class WebTestsDeveloperTest extends DeveloperTestCase
             "        return \$user;",
             "    }\n",
 
+            "    private function getPlayerData(array \$override = []) : array",
+            "    {",
+            "        if (!array_key_exists('manager_id', \$override)) {",
+            "            throw IncompleteTestException::provideMissingForeignKey('manager_id');",
+            "        }",
+            "        if (!array_key_exists('club_uuid', \$override)) {",
+            "            \$override['club_uuid'] = Club::factory()->create()->uuid;",
+            "        }\n",
+
+            "        return array_merge(['name' => 'Zlatan Ibrahimovic', 'email' => 'lion@golden.com', 'career_goals' => 130], \$override);",
+            "    }\n",
+
             "    private function getIndexRoute() : string",
             "    {",
             "        throw IncompleteTestException::missingRouteGetter('index');",
@@ -557,18 +569,6 @@ class WebTestsDeveloperTest extends DeveloperTestCase
             "    private function getRestoreRoute(Player \$player) : string",
             "    {",
             "        throw IncompleteTestException::missingRouteGetter('restore');",
-            "    }\n",
-
-            "    private function getPlayerData(array \$override = []) : array",
-            "    {",
-            "        if (!array_key_exists('manager_id', \$override)) {",
-            "            throw IncompleteTestException::provideMissingForeignKey('manager_id');",
-            "        }",
-            "        if (!array_key_exists('club_uuid', \$override)) {",
-            "            \$override['club_uuid'] = Club::factory()->create()->uuid;",
-            "        }\n",
-
-            "        return array_merge(['name' => 'Zlatan Ibrahimovic', 'email' => 'lion@golden.com', 'career_goals' => 130], \$override);",
             "    }\n",
 
             "    /**",
@@ -804,6 +804,18 @@ class WebTestsDeveloperTest extends DeveloperTestCase
             "        return \$user;",
             "    }\n",
 
+            "    private function getPlayerData(array \$override = []) : array",
+            "    {",
+            "        if (!array_key_exists('manager_id', \$override)) {",
+            "            throw IncompleteTestException::provideMissingForeignKey('manager_id');",
+            "        }",
+            "        if (!array_key_exists('club_uuid', \$override)) {",
+            "            \$override['club_uuid'] = Club::factory()->create()->uuid;",
+            "        }\n",
+
+            "        return array_merge(['name' => 'Zlatan Ibrahimovic', 'email' => 'lion@golden.com', 'career_goals' => 130], \$override);",
+            "    }\n",
+
             "    private function authorizeUser(User \$user) : void",
             "    {",
             "        throw IncompleteTestException::provideUserAuthorization();",
@@ -857,18 +869,6 @@ class WebTestsDeveloperTest extends DeveloperTestCase
             "    private function getRestoreRoute(Player \$player) : string",
             "    {",
             "        throw IncompleteTestException::missingRouteGetter('restore');",
-            "    }\n",
-
-            "    private function getPlayerData(array \$override = []) : array",
-            "    {",
-            "        if (!array_key_exists('manager_id', \$override)) {",
-            "            throw IncompleteTestException::provideMissingForeignKey('manager_id');",
-            "        }",
-            "        if (!array_key_exists('club_uuid', \$override)) {",
-            "            \$override['club_uuid'] = Club::factory()->create()->uuid;",
-            "        }\n",
-
-            "        return array_merge(['name' => 'Zlatan Ibrahimovic', 'email' => 'lion@golden.com', 'career_goals' => 130], \$override);",
             "    }\n",
 
             "    /**",
@@ -1114,10 +1114,6 @@ class WebTestsDeveloperTest extends DeveloperTestCase
             ->softDeletionColumn('retired_at');
 
         $expectedMethodDevelopers = [
-            'getAuthenticateUserMethodDeveloper',
-            'getAuthorizeMethodDeveloper',
-            'getDeauthorizeMethodDeveloper',
-            'getDataMethodDeveloper',
             'getIndexTestDeveloper',
             'getIndexWillNotContainSoftDeletedModelsTestDeveloper',
             'getUnauthorizedIndexTestDeveloper',
@@ -1142,7 +1138,11 @@ class WebTestsDeveloperTest extends DeveloperTestCase
             'getUnauthorizedRestoreTestDeveloper',
         ];
 
-        $this->manager->arraysOfDevelopers(['getRouteMethodDevelopers']);
+        $this->manager->arraysOfDevelopers([
+            'getRouteMethodDevelopers',
+            'getHelperMethodDevelopers',
+            'getAuthorizationHelperMethodDevelopers'
+        ]);
 
         $this->manager->methodDevelopers($expectedMethodDevelopers);
 
@@ -1156,5 +1156,7 @@ class WebTestsDeveloperTest extends DeveloperTestCase
         }
 
         $this->manager->assertArrayOfDevelopersRequested('getRouteMethodDevelopers');
+        $this->manager->assertArrayOfDevelopersRequested('getHelperMethodDevelopers');
+        $this->manager->assertArrayOfDevelopersRequested('getAuthorizationHelperMethodDevelopers');
     }
 }

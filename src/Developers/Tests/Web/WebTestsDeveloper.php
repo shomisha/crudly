@@ -39,21 +39,16 @@ class WebTestsDeveloper extends TestsDeveloper
     /** @return \Shomisha\Crudly\Abstracts\Developer[] */
     protected function getHelperMethodDevelopers(CrudlySpecification $specification): array
     {
-        $helperMethodDevelopers =  [
-            $this->getManager()->getAuthenticateUserMethodDeveloper(),
-        ];
+        $developers = $this->getManager()->getHelperMethodDevelopers();
 
         if ($specification->hasWebAuthorization()) {
-            $helperMethodDevelopers = array_merge($helperMethodDevelopers, [
-                $this->getManager()->getAuthorizeMethodDeveloper(),
-                $this->getManager()->getDeauthorizeMethodDeveloper(),
-            ]);
+            $developers = array_merge($developers, $this->getManager()->getAuthorizationHelperMethodDevelopers());
         }
 
-        return array_merge($helperMethodDevelopers, [
-            ...$this->getManager()->getRouteMethodDevelopers(),
-            $this->getManager()->getDataMethodDeveloper(),
-        ]);
+        return array_merge(
+            $developers,
+            $this->getManager()->getRouteMethodDevelopers()
+        );
     }
 
     /** @return \Shomisha\Crudly\Developers\Tests\TestsDeveloper[] */
