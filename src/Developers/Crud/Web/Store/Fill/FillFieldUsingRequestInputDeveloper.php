@@ -6,7 +6,6 @@ use Shomisha\Crudly\Abstracts\Developer;
 use Shomisha\Crudly\Contracts\Specification;
 use Shomisha\Crudly\Data\CrudlySet;
 use Shomisha\Crudly\Specifications\CrudlySpecification;
-use Shomisha\Stubless\Contracts\Code;
 use Shomisha\Stubless\ImperativeCode\AssignBlock;
 use Shomisha\Stubless\ImperativeCode\Block;
 use Shomisha\Stubless\References\Reference;

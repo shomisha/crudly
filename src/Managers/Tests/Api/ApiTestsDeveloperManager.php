@@ -155,4 +155,9 @@ class ApiTestsDeveloperManager extends TestClassDeveloperManager
             $this->instantiateManager(MethodDeveloperManagers\Restore\UnauthorizedRestoreTestDeveloperManager::class)
         );
     }
+
+    protected function qualifyConfigKey(string $key): string
+    {
+        return "api.tests.{$key}";
+    }
 }

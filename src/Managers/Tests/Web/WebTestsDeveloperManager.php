@@ -195,4 +195,9 @@ class WebTestsDeveloperManager extends TestClassDeveloperManager
             $this->instantiateManager(TestManagers\Restore\UnauthorizedRestoreTestDeveloperManager::class)
         );
     }
+
+    protected function qualifyConfigKey(string $key): string
+    {
+        return "web.tests.{$key}";
+    }
 }

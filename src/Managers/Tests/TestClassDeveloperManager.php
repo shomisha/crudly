@@ -3,22 +3,25 @@
 namespace Shomisha\Crudly\Managers\Tests;
 
 use Shomisha\Crudly\Contracts\Developer;
-use Shomisha\Crudly\Developers\Tests\HelperMethodDevelopers as TestHelpers;
 use Shomisha\Crudly\Managers\BaseDeveloperManager;
 
 abstract class TestClassDeveloperManager extends BaseDeveloperManager
 {
     abstract public function getRouteMethodDevelopers(): array;
 
+    abstract protected function qualifyConfigKey(string $key): string;
+
     public function getModelDataSpecialDefaultsDeveloper(): Developer
     {
-        // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(TestHelpers\GetModelDataSpecialDefaultsDeveloper::class, $this);
+        return $this->instantiateDeveloperByKey(
+            $this->qualifyConfigKey('helpers.get-data.special')
+        );
     }
 
     public function getModelDataPrimeDefaultsDeveloper(): Developer
     {
-        // TODO: refactor this to support overriding developers
-        return $this->instantiateDeveloperWithManager(TestHelpers\GetModelDataPrimeDefaultsDeveloper::class, $this);
+        return $this->instantiateDeveloperByKey(
+            $this->qualifyConfigKey('helpers.get-data.prime')
+        );
     }
 }

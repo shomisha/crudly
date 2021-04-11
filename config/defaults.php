@@ -234,6 +234,9 @@ return [
 
     'web.tests.helpers.invalid-data-provider' => WebTestMethods\InvalidDataProviderDeveloper::class,
 
+    'web.tests.helpers.get-data.special' => TestHelpers\GetModelDataSpecialDefaultsDeveloper::class,
+    'web.tests.helpers.get-data.prime' => TestHelpers\GetModelDataPrimeDefaultsDeveloper::class,
+
     'web.tests.index' => WebTestMethods\Index\IndexTestDeveloper::class,
     'web.tests.index.arrange' => [
         PartialDevelopers\Tests\Authentication\AuthenticateAndAuthorizeUserDeveloper::class,
@@ -553,6 +556,9 @@ return [
 
     'api.tests.helpers.invalid-data-provider' => WebTestMethods\InvalidDataProviderDeveloper::class,
 
+    'api.tests.helpers.get-data.special' => TestHelpers\GetModelDataSpecialDefaultsDeveloper::class,
+    'api.tests.helpers.get-data.prime' => TestHelpers\GetModelDataPrimeDefaultsDeveloper::class,
+
     'api.tests.index' => ApiTestMethods\Index\IndexTestDeveloper::class,
     'api.tests.index.arrange' => [
         PartialDevelopers\Tests\Authentication\AuthenticateAndAuthorizeUserDeveloper::class,
@@ -778,6 +784,8 @@ return [
         PartialDevelopers\Tests\RefreshModelDeveloper::class,
         PartialDevelopers\Tests\Assertions\AssertSoftDeletedColumnIsNotNull::class,
     ],
+
+    'partials.crud.fill-field' => Web\Store\Fill\FillFieldUsingRequestInputDeveloper::class,
 
     'partials.tests.authenticate-user' => PartialDevelopers\Tests\Authentication\InvokeCreateAndAuthenticateUserDeveloper::class,
     'partials.tests.authorize-user' => PartialDevelopers\Tests\Authentication\InvokeAuthorizeUserDeveloper::class,

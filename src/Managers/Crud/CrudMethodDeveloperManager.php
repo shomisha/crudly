@@ -43,9 +43,9 @@ abstract class CrudMethodDeveloperManager extends BaseDeveloperManager
         );
     }
 
-    public function getFillFieldDeveloper(): FillFieldUsingRequestInputDeveloper
+    public function getFillFieldDeveloper(): Developer
     {
-        return $this->instantiateDeveloperWithManager(FillFieldUsingRequestInputDeveloper::class, $this);
+        return $this->instantiateDeveloperByKey('partials.crud.fill-field');
     }
 
     abstract protected function qualifyConfigKey(string $key): string;
