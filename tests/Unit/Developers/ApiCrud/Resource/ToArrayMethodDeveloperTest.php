@@ -24,7 +24,7 @@ class ToArrayMethodDeveloperTest extends DeveloperTestCase
             ->timestamps(false);
 
 
-        $manager = new ApiResourceDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new ApiResourceDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new ToArrayMethodDeveloper($manager, $this->modelSupervisor);
         $method = $developer->develop($specificationBuilder->build(), new CrudlySet());
 

@@ -25,13 +25,11 @@ class AssertViewIsDeveloperTest extends DeveloperTestCase
     {
         $specificationBuilder = CrudlySpecificationBuilder::forModel($modelName)->namespace($modelNamespace);
 
-        $parameters = ['view' => $view];
-        if ($responseVar) {
-            $parameters['responseVarName'] = $responseVar;
-        }
 
-        $developer = new AssertViewIsDeveloper($this->manager, $this->modelSupervisor);
-        $developer->using($parameters);
+        $developer = new AssertViewIsDeveloper($this->manager, $this->modelSupervisor, $view);
+        if ($responseVar) {
+            $developer->using(['responseVarName' => $responseVar]);
+        }
         $block = $developer->develop($specificationBuilder->build(), new CrudlySet());
 
 

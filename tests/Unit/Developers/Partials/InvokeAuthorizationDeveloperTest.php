@@ -31,16 +31,10 @@ class InvokeAuthorizationDeveloperTest extends DeveloperTestCase
     {
         $specificationBuilder = CrudlySpecificationBuilder::forModel($modelName);
 
-        $developer = new InvokeAuthorizationDeveloper($this->manager, $this->modelSupervisor);
 
-        $parameters = [
-            'action' => $action,
-            'withModel' => $withModel,
-            'withClass' => $withClass,
-        ];
+        $developer = new InvokeAuthorizationDeveloper($this->manager, $this->modelSupervisor, $action, $withClass, $withModel);
 
 
-        $developer->using($parameters);
         $block = $developer->develop($specificationBuilder->build(), new CrudlySet());
 
 

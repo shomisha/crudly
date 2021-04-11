@@ -16,11 +16,14 @@ class InvokeModelMethodDeveloper extends Developer
 {
     private string $method;
 
-    public function __construct(DeveloperManagerAbstract $manager, ModelSupervisor $modelSupervisor, string $method)
+    private array $arguments;
+
+    public function __construct(DeveloperManagerAbstract $manager, ModelSupervisor $modelSupervisor, string $method, array $arguments = [])
     {
         parent::__construct($manager, $modelSupervisor);
 
         $this->method = $method;
+        $this->arguments = $arguments;
     }
 
     /** @param \Shomisha\Crudly\Specifications\CrudlySpecification $specification */
@@ -31,7 +34,7 @@ class InvokeModelMethodDeveloper extends Developer
         return Block::invokeMethod(
             $modelVar,
             $this->method,
-            $this->getArguments()
+            $this->arguments
         );
     }
 
@@ -41,10 +44,5 @@ class InvokeModelMethodDeveloper extends Developer
             'modelVarName',
             $this->guessSingularModelVariableName($specification->getModel())
         );
-    }
-
-    protected function getArguments(): array
-    {
-        return $this->parameterOrDefault('arguments', []);
     }
 }

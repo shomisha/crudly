@@ -2,7 +2,6 @@
 
 namespace Shomisha\Crudly\Test\Unit\Developers\WebCrud;
 
-use Shomisha\Crudly\Config\DeveloperConfig;
 use Shomisha\Crudly\Data\CrudlySet;
 use Shomisha\Crudly\Developers\Crud\Web\CrudControllerDeveloper;
 use Shomisha\Crudly\Enums\ModelPropertyType;
@@ -34,7 +33,7 @@ class WebCrudDeveloperTest extends DeveloperTestCase
 
         $this->modelSupervisor->expectedExistingModels(['Author']);
 
-        $manager = new WebCrudDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new WebCrudDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new CrudControllerDeveloper($manager, $this->modelSupervisor);
         $developedSet = new CrudlySet();
         $crudController = $developer->develop($specificationBuilder->build(), $developedSet);
@@ -167,7 +166,7 @@ class WebCrudDeveloperTest extends DeveloperTestCase
             ->softDeletionColumn('deleted_at');
 
 
-        $manager = new WebCrudDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new WebCrudDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new CrudControllerDeveloper($manager, $this->modelSupervisor);
         $developedSet = new CrudlySet();
         $printedController = $developer->develop($specificationBuilder->build(), $developedSet)->print();
@@ -262,7 +261,7 @@ class WebCrudDeveloperTest extends DeveloperTestCase
             ->softDeletes(false);
 
 
-        $manager = new WebCrudDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new WebCrudDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new CrudControllerDeveloper($manager, $this->modelSupervisor);
         $developedSet = new CrudlySet();
         $printedController = $developer->develop($specificationBuilder->build(), $developedSet)->print();

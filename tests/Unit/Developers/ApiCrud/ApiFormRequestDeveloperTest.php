@@ -27,7 +27,7 @@ class ApiFormRequestDeveloperTest extends DeveloperTestCase
                 ->isRelationship('author');
 
 
-        $manager = new FormRequestDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new FormRequestDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new ApiFormRequestDeveloper($manager, $this->modelSupervisor);
         $developedSet = new CrudlySet();
         $formRequest = $developer->develop($specificationBuilder->build(), $developedSet);

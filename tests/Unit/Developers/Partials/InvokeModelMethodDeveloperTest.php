@@ -19,11 +19,7 @@ class InvokeModelMethodDeveloperTest extends DeveloperTestCase
         $specificationBuilder = CrudlySpecificationBuilder::forModel('Employee');
 
 
-        $developer = new InvokeModelMethodDeveloper($this->manager, $this->modelSupervisor);
-        $developer->using([
-            'method' => 'doSomething',
-            'arguments' => [1, 'string', true],
-        ]);
+        $developer = new InvokeModelMethodDeveloper($this->manager, $this->modelSupervisor, 'doSomething', [1, 'string', true]);
         $block = $developer->develop($specificationBuilder->build(), new CrudlySet());
 
 
@@ -39,11 +35,9 @@ class InvokeModelMethodDeveloperTest extends DeveloperTestCase
         $specificationBuilder = CrudlySpecificationBuilder::forModel('Author');
 
 
-        $developer = new InvokeModelMethodDeveloper($this->manager, $this->modelSupervisor);
+        $developer = new InvokeModelMethodDeveloper($this->manager, $this->modelSupervisor, 'write', ['book']);
         $developer->using([
             'modelVarName' => 'mainAuthor',
-            'method' => 'write',
-            'arguments' => ['book'],
         ]);
         $printedBlock = $developer->develop($specificationBuilder->build(), new CrudlySet())->print();
 
@@ -73,11 +67,7 @@ class InvokeModelMethodDeveloperTest extends DeveloperTestCase
         $specificationBuilder = CrudlySpecificationBuilder::forModel('Manager');
 
 
-        $developer = new InvokeModelMethodDeveloper($this->manager, $this->modelSupervisor);
-        $developer->using([
-            'method' => 'doSomething',
-            'arguments' => [$argument],
-        ]);
+        $developer = new InvokeModelMethodDeveloper($this->manager, $this->modelSupervisor, 'doSomething', [$argument]);
         $printedBlock = $developer->develop($specificationBuilder->build(), new CrudlySet())->print();
 
 

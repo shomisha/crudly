@@ -18,19 +18,9 @@ class TestMethodTestCase extends DeveloperTestCase
                 parent::__construct(new DeveloperConfig(), $container);
             }
 
-            public function getArrangeDevelopers(): array
+            protected function qualifyConfigKey(string $key): string
             {
-                return [];
-            }
-
-            public function getActDevelopers(): array
-            {
-                return [];
-            }
-
-            public function getAssertDevelopers(): array
-            {
-                return [];
+                return $key;
             }
         };
     }

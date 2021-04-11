@@ -24,7 +24,7 @@ class UpMethodDeveloperTest extends DeveloperTestCase
             ->timestamps(false);
 
 
-        $manager = new MigrationDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new MigrationDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new UpMethodDeveloper($manager, $this->modelSupervisor);
         $upMethod = $developer->develop($specificationBuilder->build(), new CrudlySet());
 
@@ -52,7 +52,7 @@ class UpMethodDeveloperTest extends DeveloperTestCase
         $specificationBuilder = CrudlySpecificationBuilder::forModel($modelName)->property('id', ModelPropertyType::BIG_INT())->unsigned()->primary();
 
 
-        $manager = new MigrationDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new MigrationDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new UpMethodDeveloper($manager, $this->modelSupervisor);
         $printedMethod = $developer->develop($specificationBuilder->build(), new CrudlySet())->print();
 

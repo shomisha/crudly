@@ -23,14 +23,11 @@ class AssertResponseStatusDeveloperTest extends DeveloperTestCase
     {
         $specificationBuilder = CrudlySpecificationBuilder::forModel('Post');
 
-        $parameters = ['status' => $expectedStatus];
+
+        $developer = new AssertResponseStatusDeveloper($this->manager, $this->modelSupervisor, $expectedStatus);
         if ($responseVar) {
-            $parameters['responseVarName'] = $responseVar;
+            $developer->using(['responseVarName' => $responseVar]);
         }
-
-
-        $developer = new AssertResponseStatusDeveloper($this->manager, $this->modelSupervisor);
-        $developer->using($parameters);
         $block = $developer->develop($specificationBuilder->build(), new CrudlySet());
 
 

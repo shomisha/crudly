@@ -2,7 +2,6 @@
 
 namespace Shomisha\Crudly\Test\Unit\Developers\Factory;
 
-use Shomisha\Crudly\Config\DeveloperConfig;
 use Shomisha\Crudly\Data\CrudlySet;
 use Shomisha\Crudly\Developers\Factory\DefinitionMethodDeveloper;
 use Shomisha\Crudly\Enums\ModelPropertyType;
@@ -32,7 +31,7 @@ class DefinitionMethodDeveloperTest extends DeveloperTestCase
         $this->modelSupervisor->expectedExistingModels(['Author']);
 
 
-        $manager = new FactoryDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new FactoryDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new DefinitionMethodDeveloper($manager, $this->modelSupervisor);
         $definitionMethod = $developer->develop($specificationBuilder->build(), new CrudlySet());
 
@@ -65,7 +64,7 @@ class DefinitionMethodDeveloperTest extends DeveloperTestCase
         $this->modelSupervisor->expectedExistingModels(['Author']);
 
 
-        $manager = new FactoryDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new FactoryDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new DefinitionMethodDeveloper($manager, $this->modelSupervisor);
         $definitionMethod = $developer->develop($specificationBuilder->build(), new CrudlySet());
 
