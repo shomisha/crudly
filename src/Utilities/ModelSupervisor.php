@@ -13,7 +13,6 @@ class ModelSupervisor implements ModelSupervisorContract
 
     private string $appPath;
 
-    // TODO: pull this from the container
     private string $rootNamespace;
 
     public function __construct(Filesystem $filesystem, string $appPath, string $rootNamespace)

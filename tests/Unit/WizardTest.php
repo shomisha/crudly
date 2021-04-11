@@ -27,7 +27,6 @@ class WizardTest extends TestCase
     /** @test */
     public function wizard_will_gather_information_from_user()
     {
-        // TODO: extractuj pokretanje wizarda u neko metodu
         $this->artisan('crudly:model')
             ->expectsQuestion('Enter the name of your model', 'Post')
 
