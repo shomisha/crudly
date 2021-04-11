@@ -4,7 +4,6 @@ namespace Shomisha\Crudly\Test\Unit\Developers\Tests\HelperMethods;
 
 use Faker\Factory;
 use Faker\Generator;
-use Shomisha\Crudly\Config\DeveloperConfig;
 use Shomisha\Crudly\Data\CrudlySet;
 use Shomisha\Crudly\Developers\Tests\HelperMethodDevelopers\GetModelDataMethodDeveloper;
 use Shomisha\Crudly\Enums\ModelPropertyType;
@@ -56,7 +55,7 @@ class GetModelDataMethodDeveloperTest extends DeveloperTestCase
         ]);
 
 
-        $manager = new WebTestsDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new WebTestsDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new GetModelDataMethodDeveloper($manager, $this->modelSupervisor);
         $method = $developer->develop($specificationBuilder->build(), new CrudlySet());
 

@@ -17,7 +17,7 @@ class DeleteDestroyRouteDeveloperTest extends DeveloperTestCase
     {
         $specificationBuilder = CrudlySpecificationBuilder::forModel('Post');
 
-        $manager = new DestroyTestDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new DestroyTestDeveloperManager($this->getDeveloperConfig(), $this->app);
 
 
         $developer = new DeleteDestroyRouteDeveloper($manager, $this->modelSupervisor);

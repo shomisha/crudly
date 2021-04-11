@@ -2,7 +2,6 @@
 
 namespace Shomisha\Crudly\Test\Unit\Developers\Partials\Tests\Assertions;
 
-use Shomisha\Crudly\Config\DeveloperConfig;
 use Shomisha\Crudly\Data\CrudlySet;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertRedirectToIndexDeveloper;
 use Shomisha\Crudly\Managers\Tests\Web\TestMethodDeveloperManagers\Store\StoreTestDeveloperManager;
@@ -18,7 +17,7 @@ class AssertRedirectToIndexDeveloperTest extends DeveloperTestCase
         $specificationBuilder = CrudlySpecificationBuilder::forModel('Post');
 
 
-        $manager = new StoreTestDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new StoreTestDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new AssertRedirectToIndexDeveloper($manager, $this->modelSupervisor);
         $block = $developer->develop($specificationBuilder->build(), new CrudlySet());
 

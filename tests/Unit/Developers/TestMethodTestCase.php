@@ -11,11 +11,11 @@ class TestMethodTestCase extends DeveloperTestCase
 {
     protected function getTestMethodDeveloperManager(): TestMethodDeveloperManager
     {
-        return new class($this->app) extends TestMethodDeveloperManager
+        return new class($this->app, $this->getDeveloperConfig()) extends TestMethodDeveloperManager
         {
-            public function __construct(Container $container)
+            public function __construct(Container $container, DeveloperConfig $config)
             {
-                parent::__construct(new DeveloperConfig(), $container);
+                parent::__construct($config, $container);
             }
 
             protected function qualifyConfigKey(string $key): string

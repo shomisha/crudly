@@ -18,7 +18,7 @@ class GetIndexRouteDeveloperTest extends DeveloperTestCase
         $specificationBuilder = CrudlySpecificationBuilder::forModel('Post');
 
 
-        $manager = new IndexTestDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new IndexTestDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new GetIndexRouteDeveloper($manager, $this->modelSupervisor);
         $block = $developer->develop($specificationBuilder->build(), new CrudlySet());
 

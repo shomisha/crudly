@@ -18,7 +18,7 @@ class GetShowRouteDeveloperTest extends DeveloperTestCase
         $specificationBuilder = CrudlySpecificationBuilder::forModel('Post');
 
 
-        $manager = new ShowTestDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new ShowTestDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new GetShowRouteDeveloper($manager, $this->modelSupervisor);
         $block = $developer->develop($specificationBuilder->build(), new CrudlySet());
 

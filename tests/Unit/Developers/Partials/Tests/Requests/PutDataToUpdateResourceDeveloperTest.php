@@ -18,7 +18,7 @@ class PutDataToUpdateResourceDeveloperTest extends DeveloperTestCase
         $specificationBuilder = CrudlySpecificationBuilder::forModel('Post');
 
 
-        $manager = new UpdateTestDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new UpdateTestDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new PutDataToUpdateRouteDeveloper($manager, $this->modelSupervisor);
         $block = $developer->develop($specificationBuilder->build(), new CrudlySet());
 

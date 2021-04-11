@@ -18,7 +18,7 @@ class PutDataToUpdateRouteFromIndexRouteDeveloperTest extends DeveloperTestCase
         $specificationBuilder = CrudlySpecificationBuilder::forModel('Author');
 
 
-        $manager = new UpdateTestDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new UpdateTestDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new PutDataToUpdateRouteFromIndexRouteDeveloper($manager, $this->modelSupervisor);
         $block = $developer->develop($specificationBuilder->build(), new CrudlySet());
 

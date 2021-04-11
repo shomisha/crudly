@@ -18,7 +18,7 @@ class PostDataToStoreRouteDeveloperTest extends DeveloperTestCase
         $specificationBuilder = CrudlySpecificationBuilder::forModel('Post');
 
 
-        $manager = new StoreTestDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new StoreTestDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new PostDataToStoreRouteDeveloper($manager, $this->modelSupervisor);
         $block = $developer->develop($specificationBuilder->build(), new CrudlySet());
 

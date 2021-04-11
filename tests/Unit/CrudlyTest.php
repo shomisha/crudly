@@ -2,7 +2,6 @@
 
 namespace Shomisha\Crudly\Test\Unit;
 
-use Shomisha\Crudly\Config\DeveloperConfig;
 use Shomisha\Crudly\Crudly;
 use Shomisha\Crudly\Data\CrudlySet;
 use Shomisha\Crudly\Data\ModelName;
@@ -32,7 +31,7 @@ class CrudlyTest extends TestCase
         $crudly = new Crudly(
             $this->app->get('files'),
             $modelSupervisor,
-            new DeveloperManager(new DeveloperConfig(), $this->app),
+            new DeveloperManager($this->getDeveloperConfig(), $this->app),
             'app'
         );
         $crudly->parseModelName('Result');
@@ -53,7 +52,7 @@ class CrudlyTest extends TestCase
         $crudly = new Crudly(
             $this->app->get('files'),
             $modelSupervisor,
-            new DeveloperManager(new DeveloperConfig(), $this->app),
+            new DeveloperManager($this->getDeveloperConfig(), $this->app),
             'app'
         );
         $modelIsValid = $crudly->modelNameIsValid('Test#Random#Model');
@@ -75,7 +74,7 @@ class CrudlyTest extends TestCase
         $crudly = new Crudly(
             $this->app->get('files'),
             $modelSupervisor,
-            new DeveloperManager(new DeveloperConfig(), $this->app),
+            new DeveloperManager($this->getDeveloperConfig(), $this->app),
             'app'
         );
         $modelExists = $crudly->modelExists('Weapon');
@@ -159,7 +158,7 @@ class CrudlyTest extends TestCase
         $crudly = new Crudly(
             $this->app->get('files'),
           $modelSupervisor,
-            new DeveloperManager(new DeveloperConfig(), $this->app),
+            new DeveloperManager($this->getDeveloperConfig(), $this->app),
             'app'
         );
         $specification = $crudly->prepareSpecification($input);

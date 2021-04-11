@@ -2,7 +2,6 @@
 
 namespace Shomisha\Crudly\Test\Unit\Developers\Partials\Tests\Assertions;
 
-use Shomisha\Crudly\Config\DeveloperConfig;
 use Shomisha\Crudly\Data\CrudlySet;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Assertions\AssertModelNotDeletedDeveloper;
 use Shomisha\Crudly\Enums\ModelPropertyType;
@@ -23,7 +22,7 @@ class AssertModelNotDeletedDeveloperTest extends DeveloperTestCase
             ->softDeletes(false);
 
 
-        $manager = new DestroyTestDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new DestroyTestDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new AssertModelNotDeletedDeveloper($manager, $this->modelSupervisor);
         $block = $developer->develop($specificationBuilder->build(), new CrudlySet());
 
@@ -37,14 +36,14 @@ class AssertModelNotDeletedDeveloperTest extends DeveloperTestCase
     {
         $specificationBuilder = CrudlySpecificationBuilder::forModel('Developer');
 
-        $this->manager->imperativeCodeDevelopers(['getAssertDatabaseHasModelDeveloper']);
+        $this->manager->imperativeCodeDevelopers(['getAssertNotHardDeletedDeveloper']);
 
 
         $developer = new AssertModelNotDeletedDeveloper($this->manager, $this->modelSupervisor);
         $developer->develop($specificationBuilder->build(), new CrudlySet());
 
 
-        $this->manager->assertCodeDeveloperRequested('getAssertDatabaseHasModelDeveloper');
+        $this->manager->assertCodeDeveloperRequested('getAssertNotHardDeletedDeveloper');
     }
 
     /** @test */
@@ -57,7 +56,7 @@ class AssertModelNotDeletedDeveloperTest extends DeveloperTestCase
             ->softDeletionColumn('fired_at');
 
 
-        $manager = new DestroyTestDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new DestroyTestDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new AssertModelNotDeletedDeveloper($manager, $this->modelSupervisor);
         $block = $developer->develop($specificationBuilder->build(), new CrudlySet());
 
@@ -76,7 +75,7 @@ class AssertModelNotDeletedDeveloperTest extends DeveloperTestCase
             ->softDeletes(true)
             ->softDeletionColumn('deleted_at');
 
-        $this->manager->imperativeCodeDevelopers(['getRefreshModelDeveloper', 'getAssertSoftDeletedColumnIsNullDeveloper']);
+        $this->manager->imperativeCodeDevelopers(['getRefreshModelDeveloper', 'getAssertNotSoftDeletedDeveloper']);
 
 
         $developer = new AssertModelNotDeletedDeveloper($this->manager, $this->modelSupervisor);
@@ -84,6 +83,6 @@ class AssertModelNotDeletedDeveloperTest extends DeveloperTestCase
 
 
         $this->manager->assertCodeDeveloperRequested('getRefreshModelDeveloper');
-        $this->manager->assertCodeDeveloperRequested('getAssertSoftDeletedColumnIsNullDeveloper');
+        $this->manager->assertCodeDeveloperRequested('getAssertNotSoftDeletedDeveloper');
     }
 }

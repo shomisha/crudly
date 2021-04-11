@@ -2,7 +2,6 @@
 
 namespace Shomisha\Crudly\Test\Unit\Developers\Partials\Tests\Requests;
 
-use Shomisha\Crudly\Config\DeveloperConfig;
 use Shomisha\Crudly\Data\CrudlySet;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\Tests\Requests\PostDataToStoreRouteFromIndexRouteDeveloper;
 use Shomisha\Crudly\Managers\Tests\Api\TestMethodDeveloperManagers\Store\StoreTestDeveloperManager;
@@ -18,7 +17,7 @@ class PostDataToStoreRouteFromIndexRouteDeveloperTest extends DeveloperTestCase
         $specificationBuilder = CrudlySpecificationBuilder::forModel('Author');
 
 
-        $manager = new StoreTestDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new StoreTestDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new PostDataToStoreRouteFromIndexRouteDeveloper($manager, $this->modelSupervisor);
         $block = $developer->develop($specificationBuilder->build(), new CrudlySet());
 

@@ -2,7 +2,6 @@
 
 namespace Shomisha\Crudly\Test\Unit\Developers\Partials;
 
-use Shomisha\Crudly\Config\DeveloperConfig;
 use Shomisha\Crudly\Data\CrudlySet;
 use Shomisha\Crudly\Developers\Crud\Web\Store\Fill\FillFieldsSeparatelyDeveloper;
 use Shomisha\Crudly\Enums\ModelPropertyType;
@@ -21,7 +20,7 @@ class FillFieldsSeparatelyDeveloperTest extends DeveloperTestCase
             ->property('author_id', ModelPropertyType::BIG_INT());
 
 
-        $manager = new StoreMethodDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new StoreMethodDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new FillFieldsSeparatelyDeveloper($manager, $this->modelSupervisor);
         $block = $developer->develop($specificationBuilder->build(), new CrudlySet());
 
@@ -59,7 +58,7 @@ class FillFieldsSeparatelyDeveloperTest extends DeveloperTestCase
             ->property('title', ModelPropertyType::STRING());
 
 
-        $manager = new StoreMethodDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new StoreMethodDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new FillFieldsSeparatelyDeveloper($manager, $this->modelSupervisor);
         $printedBlock = $developer->develop($specificationBuilder->build(), new CrudlySet())->print();
 

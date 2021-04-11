@@ -18,7 +18,7 @@ class PatchRestoreRouteDeveloperTest extends DeveloperTestCase
         $specificationBuilder = CrudlySpecificationBuilder::forModel('Post');
 
 
-        $manager = new RestoreTestDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new RestoreTestDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new PatchRestoreRouteDeveloper($manager, $this->modelSupervisor);
         $block = $developer->develop($specificationBuilder->build(), new CrudlySet());
 

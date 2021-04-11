@@ -18,7 +18,7 @@ class LoadEditPageDeveloperTest extends DeveloperTestCase
         $specificationBuilder = CrudlySpecificationBuilder::forModel('Post');
 
 
-        $manager = new EditTestDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new EditTestDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new LoadEditPageDeveloper($manager, $this->modelSupervisor);
         $block = $developer->develop($specificationBuilder->build(), new CrudlySet());
 
