@@ -4,9 +4,11 @@ namespace Shomisha\Crudly\Managers;
 
 use Shomisha\Crudly\Contracts\Developer;
 use Shomisha\Crudly\Managers\Crud\Api\ApiCrudDeveloperManager;
+use Shomisha\Crudly\Managers\Crud\Api\ApiFormRequestDeveloperManager;
 use Shomisha\Crudly\Managers\Crud\Api\ApiResourceDeveloperManager;
 use Shomisha\Crudly\Managers\Crud\FormRequestDeveloperManager;
 use Shomisha\Crudly\Managers\Crud\Web\WebCrudDeveloperManager;
+use Shomisha\Crudly\Managers\Crud\Web\WebFormRequestDeveloperManager;
 use Shomisha\Crudly\Managers\Tests\Api\ApiTestsDeveloperManager;
 use Shomisha\Crudly\Managers\Tests\Web\WebTestsDeveloperManager;
 
@@ -51,7 +53,7 @@ class DeveloperManager extends BaseDeveloperManager
     public function getWebCrudFormRequestDeveloper(): Developer
     {
         return $this->instantiateDeveloperByKey(
-            'web.form-request', $this->getFormRequestDeveloperManager()
+            'web.form-request', $this->getWebFormRequestDeveloperManager()
         );
     }
 
@@ -72,7 +74,7 @@ class DeveloperManager extends BaseDeveloperManager
     public function getApiCrudFormRequestDeveloper(): Developer
     {
         return $this->instantiateDeveloperByKey(
-            'api.form-request', $this->getFormRequestDeveloperManager()
+            'api.form-request', $this->getApiFormRequestDeveloperManager()
         );
     }
 
@@ -117,9 +119,14 @@ class DeveloperManager extends BaseDeveloperManager
         return $this->instantiateManager(ApiTestsDeveloperManager::class);
     }
 
-    private function getFormRequestDeveloperManager(): FormRequestDeveloperManager
+    private function getApiFormRequestDeveloperManager(): ApiFormRequestDeveloperManager
     {
-        return $this->instantiateManager(FormRequestDeveloperManager::class);
+        return $this->instantiateManager(ApiFormRequestDeveloperManager::class);
+    }
+
+    private function getWebFormRequestDeveloperManager(): WebFormRequestDeveloperManager
+    {
+        return $this->instantiateManager(WebFormRequestDeveloperManager::class);
     }
 
     private function getApiResourceDeveloperManager(): ApiResourceDeveloperManager

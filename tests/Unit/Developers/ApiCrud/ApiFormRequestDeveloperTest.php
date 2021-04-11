@@ -2,11 +2,10 @@
 
 namespace Shomisha\Crudly\Test\Unit\Developers\ApiCrud;
 
-use Shomisha\Crudly\Config\DeveloperConfig;
 use Shomisha\Crudly\Data\CrudlySet;
 use Shomisha\Crudly\Developers\Crud\Api\FormRequest\ApiFormRequestDeveloper;
 use Shomisha\Crudly\Enums\ModelPropertyType;
-use Shomisha\Crudly\Managers\Crud\FormRequestDeveloperManager;
+use Shomisha\Crudly\Managers\Crud\Api\ApiFormRequestDeveloperManager;
 use Shomisha\Crudly\Test\Specification\CrudlySpecificationBuilder;
 use Shomisha\Crudly\Test\Unit\DeveloperTestCase;
 use Shomisha\Stubless\DeclarativeCode\ClassTemplate;
@@ -27,7 +26,7 @@ class ApiFormRequestDeveloperTest extends DeveloperTestCase
                 ->isRelationship('author');
 
 
-        $manager = new FormRequestDeveloperManager($this->getDeveloperConfig(), $this->app);
+        $manager = new ApiFormRequestDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new ApiFormRequestDeveloper($manager, $this->modelSupervisor);
         $developedSet = new CrudlySet();
         $formRequest = $developer->develop($specificationBuilder->build(), $developedSet);

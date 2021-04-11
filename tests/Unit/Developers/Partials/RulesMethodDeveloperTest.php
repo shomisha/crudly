@@ -2,13 +2,11 @@
 
 namespace Shomisha\Crudly\Test\Unit\Developers\Partials;
 
-use Shomisha\Crudly\Config\DeveloperConfig;
-use Shomisha\Crudly\Contracts\Developer;
 use Shomisha\Crudly\Data\CrudlySet;
 use Shomisha\Crudly\Developers\ArrayDeveloper;
 use Shomisha\Crudly\Developers\Crud\PartialDevelopers\FormRequest\Rules\RulesMethodDeveloper;
 use Shomisha\Crudly\Enums\ModelPropertyType;
-use Shomisha\Crudly\Managers\Crud\FormRequestDeveloperManager;
+use Shomisha\Crudly\Managers\Crud\Api\ApiFormRequestDeveloperManager;
 use Shomisha\Crudly\Test\Specification\CrudlySpecificationBuilder;
 use Shomisha\Crudly\Test\Unit\DeveloperTestCase;
 use Shomisha\Stubless\DeclarativeCode\ClassMethod;
@@ -30,7 +28,7 @@ class RulesMethodDeveloperTest extends DeveloperTestCase
                 ->isForeign('id', 'countries');
 
 
-        $manager = new FormRequestDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new ApiFormRequestDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new RulesMethodDeveloper($manager, $this->modelSupervisor);
         $method = $developer->develop($specificationBuilder->build(), new CrudlySet());
 

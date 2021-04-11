@@ -6,7 +6,7 @@ use Shomisha\Crudly\Config\DeveloperConfig;
 use Shomisha\Crudly\Data\CrudlySet;
 use Shomisha\Crudly\Developers\Crud\Web\FormRequest\WebFormRequestDeveloper;
 use Shomisha\Crudly\Enums\ModelPropertyType;
-use Shomisha\Crudly\Managers\Crud\FormRequestDeveloperManager;
+use Shomisha\Crudly\Managers\Crud\Web\WebFormRequestDeveloperManager;
 use Shomisha\Crudly\Test\Specification\CrudlySpecificationBuilder;
 use Shomisha\Crudly\Test\Unit\DeveloperTestCase;
 use Shomisha\Stubless\DeclarativeCode\ClassTemplate;
@@ -27,7 +27,7 @@ class WebFormRequestDeveloperTest extends DeveloperTestCase
                 ->isRelationship('author');
 
 
-        $manager = new FormRequestDeveloperManager(new DeveloperConfig(), $this->app);
+        $manager = new WebFormRequestDeveloperManager($this->getDeveloperConfig(), $this->app);
         $developer = new WebFormRequestDeveloper($manager, $this->modelSupervisor);
         $developedSet = new CrudlySet();
         $formRequest = $developer->develop($specificationBuilder->build(), $developedSet);
