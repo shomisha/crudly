@@ -2,158 +2,158 @@
 
 namespace Shomisha\Crudly\Data;
 
-use Shomisha\Stubless\Contracts\Code;
+use Shomisha\Stubless\DeclarativeCode\ClassTemplate;
 
 class CrudlySet
 {
-    private Code $migration;
+    private ClassTemplate $migration;
 
-    private Code $model;
+    private ClassTemplate $model;
 
-    private Code $factory;
+    private ClassTemplate $factory;
 
-    private Code $webCrudController;
+    private ClassTemplate $webCrudController;
 
-    private ?Code $webCrudFormRequest = null;
+    private ?ClassTemplate $webCrudFormRequest = null;
 
-    private Code $webTests;
+    private ClassTemplate $webTests;
 
-    private ?Code $apiCrudFormRequest = null;
+    private ?ClassTemplate $apiCrudFormRequest = null;
 
-    private Code $apiCrudApiResource;
+    private ClassTemplate $apiCrudApiResource;
 
-    private Code $apiCrudController;
+    private ClassTemplate $apiCrudController;
 
-    private Code $apiTests;
+    private ClassTemplate $apiTests;
 
-    private Code $policy;
+    private ClassTemplate $policy;
 
-    public function getMigration(): Code
+    public function getMigration(): ClassTemplate
     {
         return $this->migration;
     }
 
-    public function setMigration(Code $migration): self
+    public function setMigration(ClassTemplate $migration): self
     {
         $this->migration = $migration;
 
         return $this;
     }
 
-    public function getModel(): Code
+    public function getModel(): ClassTemplate
     {
         return $this->model;
     }
 
-    public function setModel(Code $model): self
+    public function setModel(ClassTemplate $model): self
     {
         $this->model = $model;
 
         return $this;
     }
 
-    public function getFactory(): Code
+    public function getFactory(): ClassTemplate
     {
         return $this->factory;
     }
 
-    public function setFactory(Code $factory): self
+    public function setFactory(ClassTemplate $factory): self
     {
         $this->factory = $factory;
 
         return $this;
     }
 
-    public function getWebCrudController(): Code
+    public function getWebCrudController(): ClassTemplate
     {
         return $this->webCrudController;
     }
 
-    public function setWebCrudController(Code $webCrudController): self
+    public function setWebCrudController(ClassTemplate $webCrudController): self
     {
         $this->webCrudController = $webCrudController;
 
         return $this;
     }
 
-    public function getWebCrudFormRequest(): ?Code
+    public function getWebCrudFormRequest(): ?ClassTemplate
     {
         return $this->webCrudFormRequest;
     }
 
-    public function setWebCrudFormRequest(?Code $webCrudFormRequest): self
+    public function setWebCrudFormRequest(?ClassTemplate $webCrudFormRequest): self
     {
         $this->webCrudFormRequest = $webCrudFormRequest;
 
         return $this;
     }
 
-    public function getWebTests(): Code
+    public function getWebTests(): ClassTemplate
     {
         return $this->webTests;
     }
 
-    public function setWebTests(Code $webTests): self
+    public function setWebTests(ClassTemplate $webTests): self
     {
         $this->webTests = $webTests;
 
         return $this;
     }
 
-    public function getApiCrudFormRequest(): ?Code
+    public function getApiCrudFormRequest(): ?ClassTemplate
     {
         return $this->apiCrudFormRequest;
     }
 
-    public function setApiCrudFormRequest(?Code $apiCrudFormRequest): self
+    public function setApiCrudFormRequest(?ClassTemplate $apiCrudFormRequest): self
     {
         $this->apiCrudFormRequest = $apiCrudFormRequest;
 
         return $this;
     }
 
-    public function getApiCrudApiResource(): Code
+    public function getApiCrudApiResource(): ClassTemplate
     {
         return $this->apiCrudApiResource;
     }
 
-    public function setApiCrudApiResource(Code $apiCrudApiResource): self
+    public function setApiCrudApiResource(ClassTemplate $apiCrudApiResource): self
     {
         $this->apiCrudApiResource = $apiCrudApiResource;
 
         return $this;
     }
 
-    public function getApiCrudController(): Code
+    public function getApiCrudController(): ClassTemplate
     {
         return $this->apiCrudController;
     }
 
-    public function setApiCrudController(Code $apiCrudController): self
+    public function setApiCrudController(ClassTemplate $apiCrudController): self
     {
         $this->apiCrudController = $apiCrudController;
 
         return $this;
     }
 
-    public function getApiTests(): Code
+    public function getApiTests(): ClassTemplate
     {
         return $this->apiTests;
     }
 
-    public function setApiTests(Code $apiTests): self
+    public function setApiTests(ClassTemplate $apiTests): self
     {
         $this->apiTests = $apiTests;
 
         return $this;
     }
 
-    public function getPolicy(): Code
+    public function getPolicy(): ClassTemplate
     {
         return $this->policy;
     }
 
-    public function setPolicy(Code $policy): self
+    public function setPolicy(ClassTemplate $policy): self
     {
         $this->policy = $policy;
 

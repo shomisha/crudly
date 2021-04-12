@@ -14,6 +14,7 @@ use Shomisha\Crudly\Specifications\ModelPropertySpecification;
 use Shomisha\Crudly\Test\Mocks\ModelSupervisorMock;
 use Shomisha\Crudly\Test\Specification\CrudlySpecificationBuilder;
 use Shomisha\Crudly\Test\TestCase;
+use Shomisha\Crudly\Utilities\FileSaver\TestFileSaver;
 use Shomisha\Crudly\Utilities\ModelSupervisor;
 use Shomisha\Stubless\DeclarativeCode\ClassTemplate;
 
@@ -29,10 +30,9 @@ class CrudlyTest extends TestCase
 
 
         $crudly = new Crudly(
-            $this->app->get('files'),
             $modelSupervisor,
             new DeveloperManager($this->getDeveloperConfig(), $this->app),
-            'app'
+            new TestFileSaver()
         );
         $crudly->parseModelName('Result');
 
@@ -50,10 +50,9 @@ class CrudlyTest extends TestCase
 
 
         $crudly = new Crudly(
-            $this->app->get('files'),
             $modelSupervisor,
             new DeveloperManager($this->getDeveloperConfig(), $this->app),
-            'app'
+            new TestFileSaver()
         );
         $modelIsValid = $crudly->modelNameIsValid('Test#Random#Model');
 
@@ -72,10 +71,9 @@ class CrudlyTest extends TestCase
 
 
         $crudly = new Crudly(
-            $this->app->get('files'),
             $modelSupervisor,
             new DeveloperManager($this->getDeveloperConfig(), $this->app),
-            'app'
+            new TestFileSaver()
         );
         $modelExists = $crudly->modelExists('Weapon');
 
@@ -156,10 +154,9 @@ class CrudlyTest extends TestCase
 
 
         $crudly = new Crudly(
-            $this->app->get('files'),
           $modelSupervisor,
             new DeveloperManager($this->getDeveloperConfig(), $this->app),
-            'app'
+            new TestFileSaver()
         );
         $specification = $crudly->prepareSpecification($input);
 
@@ -252,14 +249,13 @@ class CrudlyTest extends TestCase
 
 
         $crudly = new Crudly(
-            $this->app->get('files'),
             new ModelSupervisor(
                 $this->app->get('files'),
                 'app',
                 'App',
             ),
             new DeveloperManager($this->getDeveloperConfig(), $this->app),
-            'app'
+            new TestFileSaver()
         );
         $crudlySet = $crudly->develop($specificationBuilder->build());
 

@@ -9,6 +9,7 @@ use Shomisha\Crudly\Data\ModelName;
 use Shomisha\Crudly\Developers\CrudlyDeveloper;
 use Shomisha\Crudly\Managers\DeveloperManager;
 use Shomisha\Crudly\Specifications\CrudlySpecification;
+use Shomisha\Crudly\Utilities\FileSaver\FileSaver;
 
 class Crudly
 {
@@ -16,16 +17,13 @@ class Crudly
 
     private DeveloperManager $developerManager;
 
-    private Filesystem $filesystem;
+    private FileSaver $fileSaver;
 
-    private string $appPath;
-
-    public function __construct(Filesystem $filesystem, ModelSupervisor $modelSupervisor, DeveloperManager $developerManager, string $appPath)
+    public function __construct(ModelSupervisor $modelSupervisor, DeveloperManager $developerManager, FileSaver $fileSaver)
     {
         $this->modelSupervisor = $modelSupervisor;
         $this->developerManager = $developerManager;
-        $this->filesystem = $filesystem;
-        $this->appPath = $appPath;
+        $this->fileSaver = $fileSaver;
     }
 
     public function parseModelName(string $modelName): ModelName
@@ -55,7 +53,11 @@ class Crudly
 
     public function develop(CrudlySpecification $specification): CrudlySet
     {
-        return $this->getCrudlyDeveloper()->develop($specification);
+        $developedSet = $this->getCrudlyDeveloper()->develop($specification);
+
+        $this->fileSaver->saveAllFiles($developedSet);
+
+        return $developedSet;
     }
 
     protected function setModelSupervisor(ModelSupervisor $modelSupervisor): self

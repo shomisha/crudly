@@ -9,6 +9,7 @@ use Shomisha\Crudly\Config\DeveloperConfig;
 use Shomisha\Crudly\Contracts\ModelSupervisor as ModelSupervisorContract;
 use Shomisha\Crudly\Managers\BaseDeveloperManager;
 use Shomisha\Crudly\Managers\DeveloperManager;
+use Shomisha\Crudly\Utilities\FileSaver\FileSaver;
 use Shomisha\Crudly\Utilities\ModelSupervisor;
 
 class CrudlyServiceProvider extends ServiceProvider
@@ -26,6 +27,8 @@ class CrudlyServiceProvider extends ServiceProvider
     {
         $this->registerModelSupervisor();
 
+        $this->registerFileSaver();
+
         $this->registerDeveloperManager();
 
         $this->registerDeveloperConfig();
@@ -34,10 +37,9 @@ class CrudlyServiceProvider extends ServiceProvider
             $modelNameParser = $app->get(ModelSupervisorContract::class);
 
             return new Crudly(
-                $app['files'],
                 $app->get(ModelSupervisorContract::class),
                 $app->get(BaseDeveloperManager::class),
-                $app['path']
+                $app->get(FileSaver::class)
             );
         });
     }
@@ -46,6 +48,17 @@ class CrudlyServiceProvider extends ServiceProvider
     {
         $this->app->bind(ModelSupervisorContract::class, function (Container $app) {
             return new ModelSupervisor($app['files'], $app['path'], $this->app->getNamespace());
+        });
+    }
+
+    private function registerFileSaver(): void
+    {
+        $this->app->bind(FileSaver::class, function (Container $app) {
+            return new FileSaver(
+                $app->get(ModelSupervisorContract::class),
+                $app->basePath(),
+                $app['path']
+            );
         });
     }
 
