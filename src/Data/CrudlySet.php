@@ -12,21 +12,21 @@ class CrudlySet
 
     private ClassTemplate $factory;
 
-    private ClassTemplate $webCrudController;
+    private ?ClassTemplate $webCrudController = null;
 
     private ?ClassTemplate $webCrudFormRequest = null;
 
-    private ClassTemplate $webTests;
+    private ?ClassTemplate $webTests = null;
 
     private ?ClassTemplate $apiCrudFormRequest = null;
 
-    private ClassTemplate $apiCrudApiResource;
+    private ?ClassTemplate $apiCrudApiResource = null;
 
-    private ClassTemplate $apiCrudController;
+    private ?ClassTemplate $apiCrudController = null;
 
-    private ClassTemplate $apiTests;
+    private ?ClassTemplate $apiTests = null;
 
-    private ClassTemplate $policy;
+    private ?ClassTemplate $policy = null;
 
     public function getMigration(): ClassTemplate
     {
@@ -64,9 +64,9 @@ class CrudlySet
         return $this;
     }
 
-    public function getWebCrudController(): ClassTemplate
+    public function getWebCrudController(): ?ClassTemplate
     {
-        return $this->webCrudController;
+        return $this->webCrudController ?? null;
     }
 
     public function setWebCrudController(ClassTemplate $webCrudController): self
@@ -88,7 +88,7 @@ class CrudlySet
         return $this;
     }
 
-    public function getWebTests(): ClassTemplate
+    public function getWebTests(): ?ClassTemplate
     {
         return $this->webTests;
     }
@@ -112,7 +112,7 @@ class CrudlySet
         return $this;
     }
 
-    public function getApiCrudApiResource(): ClassTemplate
+    public function getApiCrudApiResource(): ?ClassTemplate
     {
         return $this->apiCrudApiResource;
     }
@@ -124,7 +124,7 @@ class CrudlySet
         return $this;
     }
 
-    public function getApiCrudController(): ClassTemplate
+    public function getApiCrudController(): ?ClassTemplate
     {
         return $this->apiCrudController;
     }
@@ -136,7 +136,7 @@ class CrudlySet
         return $this;
     }
 
-    public function getApiTests(): ClassTemplate
+    public function getApiTests(): ?ClassTemplate
     {
         return $this->apiTests;
     }
@@ -148,7 +148,7 @@ class CrudlySet
         return $this;
     }
 
-    public function getPolicy(): ClassTemplate
+    public function getPolicy(): ?ClassTemplate
     {
         return $this->policy;
     }

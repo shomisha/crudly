@@ -5,6 +5,7 @@ namespace Shomisha\Crudly\Utilities\FileSaver;
 use Illuminate\Support\Str;
 use Shomisha\Crudly\Data\CrudlySet;
 use Shomisha\Crudly\Utilities\ModelSupervisor;
+use Shomisha\Stubless\DeclarativeCode\ClassTemplate;
 
 class FileSaver
 {
@@ -45,17 +46,22 @@ class FileSaver
                 $this->saveApiTests($developedSet);
             }
         }
+
+        if ($developedSet->getPolicy()) {
+            $this->savePolicy($developedSet);
+        }
     }
 
     protected function saveMigration(CrudlySet $developedSet): bool
     {
-        return $developedSet->getMigration()->save(
-            $this->joinPathComponentsAndExtension([
+        return $this->saveToPotentiallyMissingDirectory(
+            [
                 $this->projectRoot,
                 'database',
                 'migrations',
                 $this->guessMigrationFilename($developedSet),
-            ])
+            ],
+             $developedSet->getMigration()
         );
     }
 
@@ -70,8 +76,9 @@ class FileSaver
 
         $components[] = $model->getName();
 
-        return $model->save(
-            $this->joinPathComponentsAndExtension($components)
+        return $this->saveToPotentiallyMissingDirectory(
+            $components,
+            $model
         );
     }
 
@@ -79,13 +86,14 @@ class FileSaver
     {
         $factory = $developedSet->getFactory();
 
-        return $factory->save(
-            $this->joinPathComponentsAndExtension([
+        return $this->saveToPotentiallyMissingDirectory(
+            [
                 $this->projectRoot,
                 'database',
                 'factories',
                 $factory->getName(),
-            ])
+            ],
+            $factory
         );
     }
 
@@ -93,14 +101,15 @@ class FileSaver
     {
         $controller = $developedSet->getWebCrudController();
 
-        return $controller->save(
-            $this->joinPathComponentsAndExtension([
+        return $this->saveToPotentiallyMissingDirectory(
+            [
                 $this->appRoot,
                 'Http',
                 'Controllers',
                 'Web',
                 $controller->getName(),
-            ])
+            ],
+            $controller
         );
     }
 
@@ -108,14 +117,15 @@ class FileSaver
     {
         $formRequest = $developedSet->getWebCrudFormRequest();
 
-        return $formRequest->save(
-            $this->joinPathComponentsAndExtension([
+        return $this->saveToPotentiallyMissingDirectory(
+            [
                 $this->appRoot,
                 'Http',
                 'Requests',
                 'Web',
                 $formRequest->getName(),
-            ])
+            ],
+            $formRequest
         );
     }
 
@@ -123,14 +133,15 @@ class FileSaver
     {
         $webTests = $developedSet->getWebTests();
 
-        return $webTests->save(
-            $this->joinPathComponentsAndExtension([
+        return $this->saveToPotentiallyMissingDirectory(
+            [
                 $this->projectRoot,
                 'tests',
                 'Feature',
                 'Web',
                 $webTests->getName()
-            ])
+            ],
+            $webTests
         );
     }
 
@@ -138,14 +149,15 @@ class FileSaver
     {
         $apiController = $developedSet->getApiCrudController();
 
-        return $apiController->save(
-            $this->joinPathComponentsAndExtension([
+        return $this->saveToPotentiallyMissingDirectory(
+            [
                 $this->appRoot,
                 'Http',
                 'Controllers',
                 'Api',
                 $apiController->getName()
-            ])
+            ],
+            $apiController
         );
     }
 
@@ -153,14 +165,15 @@ class FileSaver
     {
         $apiFormRequest = $developedSet->getApiCrudFormRequest();
 
-        return $apiFormRequest->save(
-            $this->joinPathComponentsAndExtension([
+        return $this->saveToPotentiallyMissingDirectory(
+            [
                 $this->appRoot,
                 'Http',
                 'Requests',
                 'Api',
                 $apiFormRequest->getName()
-            ])
+            ],
+            $apiFormRequest
         );
     }
 
@@ -168,13 +181,14 @@ class FileSaver
     {
         $apiResource = $developedSet->getApiCrudApiResource();
 
-        return $apiResource->save(
-            $this->joinPathComponentsAndExtension([
+        return $this->saveToPotentiallyMissingDirectory(
+            [
                 $this->appRoot,
                 'Http',
                 'Resources',
                 $apiResource->getName()
-            ])
+            ],
+            $apiResource
         );
     }
 
@@ -182,14 +196,15 @@ class FileSaver
     {
         $apiTests = $developedSet->getApiTests();
 
-        return $apiTests->save(
-            $this->joinPathComponentsAndExtension([
+        return $this->saveToPotentiallyMissingDirectory(
+            [
                 $this->projectRoot,
                 'tests',
                 'Feature',
                 'Api',
                 $apiTests->getName()
-            ])
+            ],
+            $apiTests
         );
     }
 
@@ -197,12 +212,13 @@ class FileSaver
     {
         $policy = $developedSet->getPolicy();
 
-        return $policy->save(
-            $this->joinPathComponentsAndExtension([
+        return $this->saveToPotentiallyMissingDirectory(
+            [
                 $this->appRoot,
                 'Policies',
                 $policy->getName()
-            ])
+            ],
+            $policy
         );
     }
 
@@ -216,6 +232,21 @@ class FileSaver
         $tableName = Str::of($developedSet->getModel()->getName())->plural()->snake();
         $datePrefix = date('Y_m_d_His');
 
-        return "{$datePrefix}_create_{$tableName}.php";
+        return "{$datePrefix}_create_{$tableName}_table";
+    }
+
+    protected function saveToPotentiallyMissingDirectory(array $pathComponents, ClassTemplate $class): bool
+    {
+        $path = $this->joinPathComponentsAndExtension($pathComponents);
+        $isInFolder = preg_match("/^(.*)\/([^\/]+)$/", $path, $filepathMatches);
+
+        if($isInFolder) {
+            $folderName = $filepathMatches[1];
+            if (!is_dir($folderName)) {
+                mkdir($folderName, 0777, true);
+            }
+        }
+
+        return $class->save($path);
     }
 }
