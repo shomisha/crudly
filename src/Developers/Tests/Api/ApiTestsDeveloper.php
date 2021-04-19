@@ -32,6 +32,11 @@ class ApiTestsDeveloper extends TestsDeveloper
         return $apiTestsClass;
     }
 
+    protected function guessTestNamespace(): string
+    {
+        return "Tests\Feature\Api";
+    }
+
     protected function getHelperMethodDevelopers(CrudlySpecification $specification): array
     {
         $developers = $this->getManager()->getHelperMethodDevelopers();

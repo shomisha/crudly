@@ -11,7 +11,7 @@ class WebFormRequestDeveloper extends FormRequestDeveloper
     protected function getFormRequestNamespace(): string
     {
         // TODO: make this domain-aware using specification
-        return "App\Http\Requests";
+        return "App\Http\Requests\Web";
     }
 
     protected function addFormRequestToSet(Code $formRequest, CrudlySet $developedSet)

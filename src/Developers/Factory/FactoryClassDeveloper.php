@@ -23,6 +23,8 @@ class FactoryClassDeveloper extends FactoryDeveloper
         $factoryClass = ClassTemplate::name($this->guessFactoryShortName($model))
                                      ->extends(new Importable(Factory::class));
 
+        $factoryClass->setNamespace('Database\Factories');
+
         $developedSet->setFactory($factoryClass);
 
         $factoryClass->addProperty(

@@ -19,11 +19,6 @@ abstract class TestsDeveloper extends Developer
         return Str::of($model->getName())->singular() . "Test";
     }
 
-    protected function guessTestNamespace(): string
-    {
-        return "Tests\Feature\Web";
-    }
-
     protected function guessTestNameSingularModelComponent(ModelName $model): string
     {
         return Str::of($model->getName())->singular()->snake('_');

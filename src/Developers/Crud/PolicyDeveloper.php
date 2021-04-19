@@ -18,7 +18,9 @@ class PolicyDeveloper extends Developer
     /** @param \Shomisha\Crudly\Specifications\CrudlySpecification $specification */
     public function develop(Specification $specification, CrudlySet $developedSet): ClassTemplate
     {
-        $policy = ClassTemplate::name($this->guessPolicyName($specification));
+        $policy = ClassTemplate::name($this->guessPolicyName($specification))->setNamespace(
+            'App\Policies'
+        );
 
         $developedSet->setPolicy($policy);
 

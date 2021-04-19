@@ -36,6 +36,11 @@ class WebTestsDeveloper extends TestsDeveloper
         return $webTestsClass;
     }
 
+    protected function guessTestNamespace(): string
+    {
+        return "Tests\Feature\Web";
+    }
+
     /** @return \Shomisha\Crudly\Abstracts\Developer[] */
     protected function getHelperMethodDevelopers(CrudlySpecification $specification): array
     {
