@@ -19,16 +19,11 @@ class GetModelIdsFromResponseDeveloper extends TestsDeveloper
         $modelsViewDataIndex = $this->guessPluralModelVariableName($model);
         $idsVar = Reference::variable("response" . ucfirst($this->guessSingularModelVariableName($model)) . 'Ids');
 
-        $ids = Block::invokeFunction(
-            'collect',
+        $ids = Block::invokeMethod(
+            $responseVar,
+            'viewData',
             [
-                Block::invokeMethod(
-                    $responseVar,
-                    'viewData',
-                    [
-                        $modelsViewDataIndex
-                    ]
-                )
+                $modelsViewDataIndex,
             ]
         )->chain('pluck', [$specification->getPrimaryKey()->getName()]);
 

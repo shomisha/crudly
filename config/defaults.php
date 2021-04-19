@@ -39,7 +39,7 @@ return [
     'web.controller.index'=> Web\Index\IndexDeveloper::class,
     'web.controller.index.arguments' => [],
     'web.controller.index.load' => NullDeveloper::class,
-    'web.controller.index.authorization' => developerClass(PartialDevelopers\InvokeAuthorizationDeveloper::class, ['action' => 'viewAll', 'withClass' => true]),
+    'web.controller.index.authorization' => developerClass(PartialDevelopers\InvokeAuthorizationDeveloper::class, ['action' => 'viewAny', 'withClass' => true]),
     'web.controller.index.main' => PartialDevelopers\Load\PaginateDeveloper::class,
     'web.controller.index.response' => Web\Index\ResponseDeveloper::class,
 
@@ -138,7 +138,7 @@ return [
     'api.controller.index'=> Api\Index\IndexDeveloper::class,
     'api.controller.index.arguments' => [],
     'api.controller.index.load' => NullDeveloper::class,
-    'api.controller.index.authorization' => developerClass(PartialDevelopers\InvokeAuthorizationDeveloper::class, ['action' => 'viewAll', 'withClass' => true]),
+    'api.controller.index.authorization' => developerClass(PartialDevelopers\InvokeAuthorizationDeveloper::class, ['action' => 'viewAny', 'withClass' => true]),
     'api.controller.index.main' => PartialDevelopers\Load\PaginateDeveloper::class,
     'api.controller.index.response' => Api\Index\ResponseDeveloper::class,
 
