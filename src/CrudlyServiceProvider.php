@@ -14,6 +14,13 @@ use Shomisha\Crudly\Utilities\ModelSupervisor;
 
 class CrudlyServiceProvider extends ServiceProvider
 {
+    public function boot()
+    {
+        $this->publishes([
+            __DIR__ . '/../config/crudly.php' => config_path('crudly.php'),
+        ]);
+    }
+
     public function register()
     {
         $this->registerCrudly();
