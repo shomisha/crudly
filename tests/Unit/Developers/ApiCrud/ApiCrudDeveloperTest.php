@@ -49,7 +49,7 @@ class ApiCrudDeveloperTest extends DeveloperTestCase
         $this->assertStringContainsString("namespace App\Http\Controllers\Api;", $printedController);
 
         $this->assertStringContainsString("use App\Http\Controllers\Controller;", $printedController);
-        $this->assertStringContainsString("use App\Http\Requests\AuthorRequest;", $printedController);
+        $this->assertStringContainsString("use App\Http\Requests\Api\AuthorRequest;", $printedController);
         $this->assertStringContainsString("use App\Http\Resources\AuthorResource;", $printedController);
         $this->assertStringContainsString("use App\Models\Author;", $printedController);
 
@@ -58,7 +58,7 @@ class ApiCrudDeveloperTest extends DeveloperTestCase
             "{",
             "    public function index()",
             "    {",
-            "        \$this->authorize('viewAll', Author::class);",
+            "        \$this->authorize('viewAny', Author::class);",
             "        \$authors = Author::paginate();\n",
 
             "        return AuthorResource::collection(\$authors);",
@@ -166,7 +166,7 @@ class ApiCrudDeveloperTest extends DeveloperTestCase
         $this->assertStringContainsString("namespace App\Http\Controllers\Api;", $printedController);
 
         $this->assertStringContainsString("use App\Http\Controllers\Controller;", $printedController);
-        $this->assertStringContainsString("use App\Http\Requests\AuthorRequest;", $printedController);
+        $this->assertStringContainsString("use App\Http\Requests\Api\AuthorRequest;", $printedController);
         $this->assertStringContainsString("use App\Http\Resources\AuthorResource;", $printedController);
         $this->assertStringContainsString("use App\Models\Author;", $printedController);
 
@@ -275,7 +275,7 @@ class ApiCrudDeveloperTest extends DeveloperTestCase
         $this->assertStringContainsString("namespace App\Http\Controllers\Api;", $printedController);
 
         $this->assertStringContainsString("use App\Http\Controllers\Controller;", $printedController);
-        $this->assertStringContainsString("use App\Http\Requests\AuthorRequest;", $printedController);
+        $this->assertStringContainsString("use App\Http\Requests\Api\AuthorRequest;", $printedController);
         $this->assertStringContainsString("use App\Http\Resources\AuthorResource;", $printedController);
         $this->assertStringContainsString("use App\Models\Author;", $printedController);
 
@@ -284,7 +284,7 @@ class ApiCrudDeveloperTest extends DeveloperTestCase
             "{",
             "    public function index()",
             "    {",
-            "        \$this->authorize('viewAll', Author::class);",
+            "        \$this->authorize('viewAny', Author::class);",
             "        \$authors = Author::paginate();\n",
 
             "        return AuthorResource::collection(\$authors);",

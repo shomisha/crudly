@@ -18,14 +18,13 @@ class FillUsingDedicatedMethodDeveloperTest extends DeveloperTestCase
         $specificationBuilder = CrudlySpecificationBuilder::forModel('Post');
 
 
-        $developer = new FillUsingDedicatedMethodDeveloper($this->manager, $this->modelSupervisor);
+        $developer = new FillUsingDedicatedMethodDeveloper($this->manager, $this->modelSupervisor, 'api');
         $developedSet = new CrudlySet();
         $developedSet->setWebCrudController(ClassTemplate::name('PostController'));
         $block = $developer->develop($specificationBuilder->build(), $developedSet);
 
 
         $this->assertInstanceOf(InvokeMethodBlock::class, $block);
-
         $this->assertStringContainsString("\$this->fillFromRequest(\$post, \$request);", $block->print());
     }
 
@@ -40,13 +39,15 @@ class FillUsingDedicatedMethodDeveloperTest extends DeveloperTestCase
             ->property('views', ModelPropertyType::BIG_INT());
 
 
-        $developer = new FillUsingDedicatedMethodDeveloper($this->manager, $this->modelSupervisor);
+        $developer = new FillUsingDedicatedMethodDeveloper($this->manager, $this->modelSupervisor, 'web');
         $developedSet = new CrudlySet();
         $controller = ClassTemplate::name('PostController');
         $developedSet->setWebCrudController($controller);
         $developer->develop($specificationBuilder->build(), $developedSet);
 
 
+        $printedController = $controller->print();
+        $this->assertStringContainsString("use App\Http\Requests\Web\PostRequest;", $printedController);
         $this->assertStringContainsString(implode("\n", [
             "    private function fillFromRequest(Post \$post, PostRequest \$request) : Post",
             "    {",
@@ -57,6 +58,6 @@ class FillUsingDedicatedMethodDeveloperTest extends DeveloperTestCase
             "        \$post->views = \$request->input('views');\n",
             "        return \$post;",
             "    }",
-        ]), $controller->print());
+        ]), $printedController);
     }
 }

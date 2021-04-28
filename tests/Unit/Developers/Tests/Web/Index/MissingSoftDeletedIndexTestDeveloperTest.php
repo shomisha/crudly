@@ -44,7 +44,7 @@ class MissingSoftDeletedIndexTestDeveloperTest extends DeveloperTestCase
             "        \$response = \$this->get(\$this->getIndexRoute());",
             "        \$response->assertSuccessful();",
             "        \$response->assertViewIs('players.index');",
-            "        \$responsePlayerIds = collect(\$response->viewData('players'))->pluck('id');",
+            "        \$responsePlayerIds = \$response->viewData('players')->pluck('id');",
             "        \$this->assertNotContains(\$player->id, \$responsePlayerIds);",
             "    }\n",
         ]), ClassTemplate::name('Test')->addMethod($testMethod)->print());
@@ -80,7 +80,7 @@ class MissingSoftDeletedIndexTestDeveloperTest extends DeveloperTestCase
             "        \$response = \$this->get(\$this->getIndexRoute());",
             "        \$response->assertSuccessful();",
             "        \$response->assertViewIs('players.index');",
-            "        \$responsePlayerIds = collect(\$response->viewData('players'))->pluck('id');",
+            "        \$responsePlayerIds = \$response->viewData('players')->pluck('id');",
             "        \$this->assertNotContains(\$player->id, \$responsePlayerIds);",
             "    }\n",
         ]), ClassTemplate::name('Test')->addMethod($testMethod)->print());

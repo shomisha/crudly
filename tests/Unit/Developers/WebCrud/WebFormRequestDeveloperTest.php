@@ -36,7 +36,7 @@ class WebFormRequestDeveloperTest extends DeveloperTestCase
         $this->assertEquals($developedSet->getWebCrudFormRequest(), $formRequest);
 
         $printedFormRequest = $formRequest->print();
-        $this->assertStringContainsString("namespace App\Http\Requests;", $printedFormRequest);
+        $this->assertStringContainsString("namespace App\Http\Requests\Web;", $printedFormRequest);
         $this->assertStringContainsString("use Illuminate\Foundation\Http\FormRequest;", $printedFormRequest);
         $this->assertStringContainsString("use Illuminate\Validation\Rule;", $printedFormRequest);
 

@@ -35,7 +35,7 @@ class IndexDeveloperTest extends CrudMethodTestCase
         return implode("\n", [
             "    public function index()",
             "    {",
-            "        \$this->authorize('viewAll', Post::class);",
+            "        \$this->authorize('viewAny', Post::class);",
             "        \$posts = Post::paginate();\n",
 
             "        return view('posts.index', ['posts' => \$posts]);",

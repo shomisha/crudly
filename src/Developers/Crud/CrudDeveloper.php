@@ -22,11 +22,12 @@ abstract class CrudDeveloper extends Developer
         })->filter()->toArray();
     }
 
-    protected function guessFormRequestClass(ModelName $model): string
+    protected function guessFormRequestClass(ModelName $model, string $domain): string
     {
         $formRequestShortName = $this->guessFormRequestClassShortName($model);
+        $domain = ucfirst($domain);
 
-        return "App\Http\Requests\\{$formRequestShortName}";
+        return "App\Http\Requests\\{$domain}\\{$formRequestShortName}";
     }
 
     protected function guessFormRequestClassShortName(ModelName $model): string

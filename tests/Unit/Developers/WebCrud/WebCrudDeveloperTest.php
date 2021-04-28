@@ -47,7 +47,7 @@ class WebCrudDeveloperTest extends DeveloperTestCase
         $this->assertStringContainsString("namespace App\Http\Controllers\Web;", $printedController);
 
         $this->assertStringContainsString("use App\Http\Controllers\Controller;", $printedController);
-        $this->assertStringContainsString("use App\Http\Requests\PostRequest;", $printedController);
+        $this->assertStringContainsString("use App\Http\Requests\Web\PostRequest;", $printedController);
         $this->assertStringContainsString("use App\Models\Author;", $printedController);
         $this->assertStringContainsString("use App\Models\Post;", $printedController);
         $this->assertStringContainsString("use Illuminate\Support\Facades\DB;", $printedController);
@@ -59,7 +59,7 @@ class WebCrudDeveloperTest extends DeveloperTestCase
 
             "    public function index()",
             "    {",
-            "        \$this->authorize('viewAll', Post::class);",
+            "        \$this->authorize('viewAny', Post::class);",
             "        \$posts = Post::paginate();\n",
 
             "        return view('posts.index', ['posts' => \$posts]);",
@@ -267,6 +267,11 @@ class WebCrudDeveloperTest extends DeveloperTestCase
         $printedController = $developer->develop($specificationBuilder->build(), $developedSet)->print();
 
 
+        $this->assertStringContainsString("namespace App\Http\Controllers\Web;", $printedController);
+        $this->assertStringContainsString("use App\Http\Controllers\Controller;", $printedController);
+        $this->assertStringContainsString("use App\Http\Requests\Web\PostRequest;", $printedController);
+        $this->assertStringContainsString("use App\Models\Post;", $printedController);
+
         $this->assertStringContainsString(implode("\n", [
             "class PostsController extends Controller",
             "{",
@@ -274,7 +279,7 @@ class WebCrudDeveloperTest extends DeveloperTestCase
 
             "    public function index()",
             "    {",
-            "        \$this->authorize('viewAll', Post::class);",
+            "        \$this->authorize('viewAny', Post::class);",
             "        \$posts = Post::paginate();\n",
 
             "        return view('posts.index', ['posts' => \$posts]);",

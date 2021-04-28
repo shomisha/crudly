@@ -2,6 +2,7 @@
 
 namespace Shomisha\Crudly\Developers\Tests\Web;
 
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Shomisha\Crudly\Contracts\Specification;
 use Shomisha\Crudly\Data\CrudlySet;
 use Shomisha\Crudly\Developers\Tests\TestsDeveloper;
@@ -24,6 +25,10 @@ class WebTestsDeveloper extends TestsDeveloper
         )->extends(new Importable('Tests\TestCase'))->setNamespace($this->guessTestNamespace());
 
         $developedSet->setWebTests($webTestsClass);
+
+        $webTestsClass->uses([
+            new Importable(RefreshDatabase::class)
+        ]);
 
         foreach ($this->getHelperMethodDevelopers($specification) as $developer) {
             $webTestsClass->addMethod($developer->develop($specification, $developedSet));

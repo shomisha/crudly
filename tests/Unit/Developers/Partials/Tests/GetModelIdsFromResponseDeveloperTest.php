@@ -29,7 +29,7 @@ class GetModelIdsFromResponseDeveloperTest extends DeveloperTestCase
 
         $this->assertInstanceOf(AssignBlock::class, $block);
         $this->assertStringContainsString(
-            "\$responseAuthorIds = collect(\$response->viewData('authors'))->pluck('{$primaryKey}');",
+            "\$responseAuthorIds = \$response->viewData('authors')->pluck('{$primaryKey}');",
             $block->print()
         );
     }

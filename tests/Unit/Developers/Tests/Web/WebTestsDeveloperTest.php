@@ -70,11 +70,14 @@ class WebTestsDeveloperTest extends DeveloperTestCase
         $this->assertStringContainsString("use App\Models\Player;", $printedClass);
         $this->assertStringContainsString("use App\Models\User;", $printedClass);
         $this->assertStringContainsString("use Shomisha\Crudly\Exceptions\IncompleteTestException;", $printedClass);
+        $this->assertStringContainsString("use Illuminate\Foundation\Testing\RefreshDatabase;", $printedClass);
         $this->assertStringContainsString("use Tests\TestCase;", $printedClass);
 
         $this->assertStringContainsString(implode("\n", [
             "class PlayerTest extends TestCase",
             "{",
+            "    use RefreshDatabase;\n",
+
             "    public function createAndAuthenticateUser() : User",
             "    {",
             "        \$user = User::factory()->create();",
@@ -161,7 +164,7 @@ class WebTestsDeveloperTest extends DeveloperTestCase
             "        \$response = \$this->get(\$this->getIndexRoute());",
             "        \$response->assertSuccessful();",
             "        \$response->assertViewIs('players.index');",
-            "        \$responsePlayerIds = collect(\$response->viewData('players'))->pluck('uuid');",
+            "        \$responsePlayerIds = \$response->viewData('players')->pluck('uuid');",
             "        \$this->assertCount(\$players->count(), \$responsePlayerIds);",
             "        foreach (\$players as \$player) {",
             "            \$this->assertContains(\$player->uuid, \$responsePlayerIds);",
@@ -180,7 +183,7 @@ class WebTestsDeveloperTest extends DeveloperTestCase
             "        \$response = \$this->get(\$this->getIndexRoute());",
             "        \$response->assertSuccessful();",
             "        \$response->assertViewIs('players.index');",
-            "        \$responsePlayerIds = collect(\$response->viewData('players'))->pluck('uuid');",
+            "        \$responsePlayerIds = \$response->viewData('players')->pluck('uuid');",
             "        \$this->assertNotContains(\$player->uuid, \$responsePlayerIds);",
             "    }\n",
 
@@ -501,11 +504,14 @@ class WebTestsDeveloperTest extends DeveloperTestCase
         $this->assertStringContainsString("use App\Models\Player;", $printedClass);
         $this->assertStringContainsString("use App\Models\User;", $printedClass);
         $this->assertStringContainsString("use Shomisha\Crudly\Exceptions\IncompleteTestException;", $printedClass);
+        $this->assertStringContainsString("use Illuminate\Foundation\Testing\RefreshDatabase;", $printedClass);
         $this->assertStringContainsString("use Tests\TestCase;", $printedClass);
 
         $this->assertStringContainsString(implode("\n", [
             "class PlayerTest extends TestCase",
             "{",
+            "    use RefreshDatabase;\n",
+
             "    public function createAndAuthenticateUser() : User",
             "    {",
             "        \$user = User::factory()->create();",
@@ -581,7 +587,7 @@ class WebTestsDeveloperTest extends DeveloperTestCase
             "        \$response = \$this->get(\$this->getIndexRoute());",
             "        \$response->assertSuccessful();",
             "        \$response->assertViewIs('players.index');",
-            "        \$responsePlayerIds = collect(\$response->viewData('players'))->pluck('uuid');",
+            "        \$responsePlayerIds = \$response->viewData('players')->pluck('uuid');",
             "        \$this->assertCount(\$players->count(), \$responsePlayerIds);",
             "        foreach (\$players as \$player) {",
             "            \$this->assertContains(\$player->uuid, \$responsePlayerIds);",
@@ -599,7 +605,7 @@ class WebTestsDeveloperTest extends DeveloperTestCase
             "        \$response = \$this->get(\$this->getIndexRoute());",
             "        \$response->assertSuccessful();",
             "        \$response->assertViewIs('players.index');",
-            "        \$responsePlayerIds = collect(\$response->viewData('players'))->pluck('uuid');",
+            "        \$responsePlayerIds = \$response->viewData('players')->pluck('uuid');",
             "        \$this->assertNotContains(\$player->uuid, \$responsePlayerIds);",
             "    }\n",
 
@@ -792,10 +798,12 @@ class WebTestsDeveloperTest extends DeveloperTestCase
         $this->assertStringContainsString("use App\Models\User;", $printedClass);
         $this->assertStringContainsString("use Shomisha\Crudly\Exceptions\IncompleteTestException;", $printedClass);
         $this->assertStringContainsString("use Tests\TestCase;", $printedClass);
+        $this->assertStringContainsString("use Illuminate\Foundation\Testing\RefreshDatabase;", $printedClass);
 
         $this->assertStringContainsString(implode("\n", [
             "class PlayerTest extends TestCase",
             "{",
+            "    use RefreshDatabase;\n",
             "    public function createAndAuthenticateUser() : User",
             "    {",
             "        \$user = User::factory()->create();",
@@ -882,7 +890,7 @@ class WebTestsDeveloperTest extends DeveloperTestCase
             "        \$response = \$this->get(\$this->getIndexRoute());",
             "        \$response->assertSuccessful();",
             "        \$response->assertViewIs('players.index');",
-            "        \$responsePlayerIds = collect(\$response->viewData('players'))->pluck('uuid');",
+            "        \$responsePlayerIds = \$response->viewData('players')->pluck('uuid');",
             "        \$this->assertCount(\$players->count(), \$responsePlayerIds);",
             "        foreach (\$players as \$player) {",
             "            \$this->assertContains(\$player->uuid, \$responsePlayerIds);",

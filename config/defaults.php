@@ -63,7 +63,7 @@ return [
 
     'web.controller.store'=> Web\Store\StoreDeveloper::class,
     'web.controller.store.arguments' => [
-        Web\Store\FormRequestArgumentDeveloper::class,
+        developerClass(Web\Store\FormRequestArgumentDeveloper::class, ['domain' => 'web']),
     ],
     'web.controller.store.load' => NullDeveloper::class,
     'web.controller.store.authorization' => developerClass(PartialDevelopers\InvokeAuthorizationDeveloper::class, ['action' => 'create', 'withClass' => true]),
@@ -85,7 +85,7 @@ return [
 
     'web.controller.update'=> Web\Update\UpdateDeveloper::class,
     'web.controller.update.arguments' => [
-        Web\Store\FormRequestArgumentDeveloper::class,
+        developerClass(Web\Store\FormRequestArgumentDeveloper::class, ['domain' => 'web']),
         PartialDevelopers\ImplicitBindArgumentsDeveloper::class,
     ],
     'web.controller.update.load' => NullDeveloper::class,
@@ -153,7 +153,7 @@ return [
 
     'api.controller.store'=> Api\Store\StoreDeveloper::class,
     'api.controller.store.arguments' => [
-        Web\Store\FormRequestArgumentDeveloper::class,
+        developerClass(Web\Store\FormRequestArgumentDeveloper::class, ['domain' => 'api']),
     ],
     'api.controller.store.load' => NullDeveloper::class,
     'api.controller.store.authorization' => developerClass(PartialDevelopers\InvokeAuthorizationDeveloper::class, ['action' => 'create', 'withClass' => true]),
@@ -166,7 +166,7 @@ return [
 
     'api.controller.update'=> Api\Update\UpdateDeveloper::class,
     'api.controller.update.arguments' => [
-        Web\Store\FormRequestArgumentDeveloper::class,
+        developerClass(Web\Store\FormRequestArgumentDeveloper::class, ['domain' => 'api']),
         PartialDevelopers\ImplicitBindArgumentsDeveloper::class,
     ],
     'api.controller.update.load' => NullDeveloper::class,

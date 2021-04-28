@@ -4,11 +4,13 @@ namespace Shomisha\Crudly\Test\Unit;
 
 use Illuminate\Support\Collection;
 use Shomisha\Crudly\Commands\CrudlyWizard;
+use Shomisha\Crudly\Contracts\ModelSupervisor;
 use Shomisha\Crudly\Contracts\ModelSupervisor as ModelSupervisorContract;
 use Shomisha\Crudly\Data\ModelName;
 use Shomisha\Crudly\Enums\ForeignKeyAction;
 use Shomisha\Crudly\Enums\ModelPropertyType;
 use Shomisha\Crudly\Test\Mocks\Crudly;
+use Shomisha\Crudly\Test\Mocks\ModelSupervisorMock;
 use Shomisha\Crudly\Test\TestCase;
 
 class WizardTest extends TestCase

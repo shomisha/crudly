@@ -2,9 +2,11 @@
 
 namespace Shomisha\Crudly\Developers\Crud\Web\Store\Fill;
 
+use Shomisha\Crudly\Contracts\ModelSupervisor;
 use Shomisha\Crudly\Contracts\Specification;
 use Shomisha\Crudly\Data\CrudlySet;
 use Shomisha\Crudly\Developers\Crud\CrudDeveloper;
+use Shomisha\Crudly\Managers\BaseDeveloperManager as DeveloperManagerAbstract;
 use Shomisha\Crudly\Specifications\CrudlySpecification;
 use Shomisha\Crudly\Specifications\ModelPropertySpecification;
 use Shomisha\Stubless\Contracts\Code;
@@ -17,6 +19,15 @@ use Shomisha\Stubless\Utilities\Importable;
 
 class FillUsingDedicatedMethodDeveloper extends CrudDeveloper
 {
+    private string $domain;
+
+    public function __construct(DeveloperManagerAbstract $manager, ModelSupervisor $modelSupervisor, string $domain)
+    {
+        parent::__construct($manager, $modelSupervisor);
+
+        $this->domain = $domain;
+    }
+
     /** @param \Shomisha\Crudly\Specifications\CrudlySpecification $specification */
     public function develop(Specification $specification, CrudlySet $developedSet): Code
     {
@@ -43,7 +54,8 @@ class FillUsingDedicatedMethodDeveloper extends CrudDeveloper
 
         $modelArg = Argument::name($this->guessSingularModelVariableName($model->getName()))
                             ->type(new Importable($model->getFullyQualifiedName()));
-        $requestArg = Argument::name('request')->type(new Importable($this->guessFormRequestClass($model)));
+
+        $requestArg = Argument::name('request')->type(new Importable($this->guessFormRequestClass($model, $this->domain)));
 
         $fillMethod = ClassMethod::name('fillFromRequest')
                                  ->arguments([$modelArg, $requestArg])

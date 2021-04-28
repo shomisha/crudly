@@ -70,16 +70,20 @@ class ApiTestsDeveloperTest extends DeveloperTestCase
 
         $printedClass = $testClass->print();
 
-        $this->assertStringContainsString("namespace Tests\Feature\Web;", $printedClass);
+        $this->assertStringContainsString("namespace Tests\Feature\Api;", $printedClass);
         $this->assertStringContainsString("use App\Models\Author;", $printedClass);
         $this->assertStringContainsString("use App\Models\Publisher;", $printedClass);
         $this->assertStringContainsString("use App\Models\User;", $printedClass);
         $this->assertStringContainsString("use Shomisha\Crudly\Exceptions\IncompleteTestException;", $printedClass);
         $this->assertStringContainsString("use Tests\TestCase;", $printedClass);
+        $this->assertStringContainsString("use Illuminate\Foundation\Testing\RefreshDatabase;", $printedClass);
+
 
         $this->assertStringContainsString(implode("\n", [
             "class AuthorTest extends TestCase",
             "{",
+            "    use RefreshDatabase;\n",
+
             "    public function createAndAuthenticateUser() : User",
             "    {",
             "        \$user = User::factory()->create();",

@@ -2,6 +2,7 @@
 
 namespace Shomisha\Crudly\Developers\Tests\Api;
 
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Shomisha\Crudly\Contracts\Specification;
 use Shomisha\Crudly\Data\CrudlySet;
 use Shomisha\Crudly\Developers\Tests\TestsDeveloper;
@@ -20,6 +21,10 @@ class ApiTestsDeveloper extends TestsDeveloper
         )->extends(new Importable('Tests\TestCase'))->setNamespace($this->guessTestNamespace());
 
         $developedSet->setApiTests($apiTestsClass);
+
+        $apiTestsClass->uses([
+            new Importable(RefreshDatabase::class)
+        ]);
 
         foreach ($this->getHelperMethodDevelopers($specification) as $developer) {
             $apiTestsClass->addMethod($developer->develop($specification, $developedSet));
