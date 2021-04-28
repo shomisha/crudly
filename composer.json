@@ -1,15 +1,17 @@
 {
     "name": "shomisha/crudly",
-    "description": "Crudly is a CLI tool for generating all of your mechanisms for CRUD using simple command line wizards.",
+    "description": "Crudly is a CLI tool for generating all of your mechanisms for CRUD using a simple command line wizard.",
     "keywords": ["laravel", "crud", "cli", "generation", "code-generation"],
     "type": "package",
     "require": {
-        "php": "^7.4",
+        "php": "^7.4|^8.0",
         "laravel/framework": "^8.0",
         "shomisha/laravel-console-wizard": "^1.8",
-        "shomisha/stubless": "^1.4",
-        "orchestra/testbench": "^6.11",
-        "mockery/mockery": "^1.4"
+        "shomisha/stubless": "^1.4"
+    },
+    "require-dev": {
+        "mockery/mockery": "^1.4",
+        "orchestra/testbench": "^6.11"
     },
     "license": "MIT",
     "authors": [
@@ -17,5 +19,22 @@
             "name": "Misa Kovic",
             "email": "misa95kovic@gmail.com"
         }
-    ]
+    ],
+    "autoload": {
+        "psr-4": {
+            "Shomisha\\Crudly\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Shomisha\\Crudly\\Test\\": "tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "\\Shomisha\\Crudly\\CrudlyServiceProvider"
+            ]
+        }
+    }
 }
