@@ -10,7 +10,7 @@ abstract class FactoryDeveloper extends Developer
     protected function guessFactoryFullName(ModelName $model): string
     {
         // TODO: make this domain-aware using specification?
-        return "Database\Factories" . $this->guessFactoryShortName($model);
+        return "Database\Factories\\" . $this->guessFactoryShortName($model);
     }
 
     protected function guessFactoryShortName(ModelName $model): string
