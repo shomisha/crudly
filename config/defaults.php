@@ -39,7 +39,7 @@ return [
     'web.controller.index'=> Web\Index\IndexDeveloper::class,
     'web.controller.index.arguments' => [],
     'web.controller.index.load' => NullDeveloper::class,
-    'web.controller.index.authorization' => developerClass(PartialDevelopers\InvokeAuthorizationDeveloper::class, ['action' => 'viewAny', 'withClass' => true]),
+    'web.controller.index.authorization' => configureDeveloper(PartialDevelopers\InvokeAuthorizationDeveloper::class, ['action' => 'viewAny', 'withClass' => true]),
     'web.controller.index.main' => PartialDevelopers\Load\PaginateDeveloper::class,
     'web.controller.index.response' => Web\Index\ResponseDeveloper::class,
 
@@ -48,14 +48,14 @@ return [
         PartialDevelopers\ImplicitBindArgumentsDeveloper::class
     ],
     'web.controller.show.load' => NullDeveloper::class,
-    'web.controller.show.authorization' => developerClass(PartialDevelopers\InvokeAuthorizationDeveloper::class, ['action' => 'view', 'withModel' => true]),
+    'web.controller.show.authorization' => configureDeveloper(PartialDevelopers\InvokeAuthorizationDeveloper::class, ['action' => 'view', 'withModel' => true]),
     'web.controller.show.main' => PartialDevelopers\LoadRelationshipsDeveloper::class,
     'web.controller.show.response' => Web\Show\ResponseDeveloper::class,
 
     'web.controller.create'=> Web\Create\CreateDeveloper::class,
     'web.controller.create.arguments' => [],
     'web.controller.create.load' => NullDeveloper::class,
-    'web.controller.create.authorization' => developerClass(PartialDevelopers\InvokeAuthorizationDeveloper::class, ['action' => 'create', 'withClass' => true]),
+    'web.controller.create.authorization' => configureDeveloper(PartialDevelopers\InvokeAuthorizationDeveloper::class, ['action' => 'create', 'withClass' => true]),
     'web.controller.create.main' => Web\Create\InstantiatePlaceholderAndLoadDependencies::class,
     'web.controller.create.main.instantiate' => PartialDevelopers\InstantiateDeveloper::class,
     'web.controller.create.main.load-dependencies' => PartialDevelopers\LoadDependenciesDeveloper::class,
@@ -63,15 +63,15 @@ return [
 
     'web.controller.store'=> Web\Store\StoreDeveloper::class,
     'web.controller.store.arguments' => [
-        developerClass(Web\Store\FormRequestArgumentDeveloper::class, ['domain' => 'web']),
+        configureDeveloper(Web\Store\FormRequestArgumentDeveloper::class, ['domain' => 'web']),
     ],
     'web.controller.store.load' => NullDeveloper::class,
-    'web.controller.store.authorization' => developerClass(PartialDevelopers\InvokeAuthorizationDeveloper::class, ['action' => 'create', 'withClass' => true]),
+    'web.controller.store.authorization' => configureDeveloper(PartialDevelopers\InvokeAuthorizationDeveloper::class, ['action' => 'create', 'withClass' => true]),
     'web.controller.store.main' => Web\Store\ValidateFillAndSaveDeveloper::class,
     'web.controller.store.main.validate' => NullDeveloper::class,
     'web.controller.store.main.instantiate' => PartialDevelopers\InstantiateDeveloper::class,
     'web.controller.store.main.fill' => Web\Store\Fill\FillFieldsSeparatelyDeveloper::class,
-    'web.controller.store.main.save' => developerClass(PartialDevelopers\InvokeModelMethodDeveloper::class, ['method' => 'save']),
+    'web.controller.store.main.save' => configureDeveloper(PartialDevelopers\InvokeModelMethodDeveloper::class, ['method' => 'save']),
     'web.controller.store.response' => Web\Store\ResponseDeveloper::class,
 
     'web.controller.edit'=> Web\Edit\EditDeveloper::class,
@@ -79,21 +79,21 @@ return [
         PartialDevelopers\ImplicitBindArgumentsDeveloper::class,
     ],
     'web.controller.edit.load' => NullDeveloper::class,
-    'web.controller.edit.authorization' => developerClass(PartialDevelopers\InvokeAuthorizationDeveloper::class, ['action' => 'update', 'withModel' => true]),
+    'web.controller.edit.authorization' => configureDeveloper(PartialDevelopers\InvokeAuthorizationDeveloper::class, ['action' => 'update', 'withModel' => true]),
     'web.controller.edit.main' => PartialDevelopers\LoadDependenciesDeveloper::class,
     'web.controller.edit.response' => Web\Edit\ResponseDeveloper::class,
 
     'web.controller.update'=> Web\Update\UpdateDeveloper::class,
     'web.controller.update.arguments' => [
-        developerClass(Web\Store\FormRequestArgumentDeveloper::class, ['domain' => 'web']),
+        configureDeveloper(Web\Store\FormRequestArgumentDeveloper::class, ['domain' => 'web']),
         PartialDevelopers\ImplicitBindArgumentsDeveloper::class,
     ],
     'web.controller.update.load' => NullDeveloper::class,
-    'web.controller.update.authorization' => developerClass(PartialDevelopers\InvokeAuthorizationDeveloper::class, ['action' => 'update', 'withModel' => true]),
+    'web.controller.update.authorization' => configureDeveloper(PartialDevelopers\InvokeAuthorizationDeveloper::class, ['action' => 'update', 'withModel' => true]),
     'web.controller.update.main' => Web\Update\ValidateFillAndUpdateDeveloper::class,
     'web.controller.update.main.validate' => NullDeveloper::class,
     'web.controller.update.main.fill' => Web\Store\Fill\FillFieldsSeparatelyDeveloper::class,
-    'web.controller.update.main.update' => developerClass(PartialDevelopers\InvokeModelMethodDeveloper::class, ['method' => 'update']),
+    'web.controller.update.main.update' => configureDeveloper(PartialDevelopers\InvokeModelMethodDeveloper::class, ['method' => 'update']),
     'web.controller.update.response' => Web\Update\ResponseDeveloper::class,
 
     'web.controller.destroy'=> Web\Destroy\DestroyDeveloper::class,
@@ -101,8 +101,8 @@ return [
         PartialDevelopers\ImplicitBindArgumentsDeveloper::class,
     ],
     'web.controller.destroy.load' => NullDeveloper::class,
-    'web.controller.destroy.authorization' => developerClass(PartialDevelopers\InvokeAuthorizationDeveloper::class, ['action' => 'delete', 'withModel' => true]),
-    'web.controller.destroy.main' => developerClass(PartialDevelopers\InvokeModelMethodDeveloper::class, ['method' => 'delete']),
+    'web.controller.destroy.authorization' => configureDeveloper(PartialDevelopers\InvokeAuthorizationDeveloper::class, ['action' => 'delete', 'withModel' => true]),
+    'web.controller.destroy.main' => configureDeveloper(PartialDevelopers\InvokeModelMethodDeveloper::class, ['method' => 'delete']),
     'web.controller.destroy.response' => Web\Destroy\ResponseDeveloper::class,
 
     'web.controller.force-delete' => Web\ForceDelete\ForceDeleteDeveloper::class,
@@ -110,8 +110,8 @@ return [
         PartialDevelopers\ImplicitBindArgumentsDeveloper::class
     ],
     'web.controller.force-delete.load' => NullDeveloper::class,
-    'web.controller.force-delete.authorization' => developerClass(PartialDevelopers\InvokeAuthorizationDeveloper::class, ['action' => 'forceDelete', 'withModel' => true]),
-    'web.controller.force-delete.main' => developerClass(PartialDevelopers\InvokeModelMethodDeveloper::class, ['method' => 'forceDelete']),
+    'web.controller.force-delete.authorization' => configureDeveloper(PartialDevelopers\InvokeAuthorizationDeveloper::class, ['action' => 'forceDelete', 'withModel' => true]),
+    'web.controller.force-delete.main' => configureDeveloper(PartialDevelopers\InvokeModelMethodDeveloper::class, ['method' => 'forceDelete']),
     'web.controller.force-delete.response' => Web\ForceDelete\ResponseDeveloper::class,
 
     'web.controller.restore'=> Web\Restore\RestoreDeveloper::class,
@@ -119,8 +119,8 @@ return [
         PartialDevelopers\ImplicitBindArgumentsDeveloper::class
     ],
     'web.controller.restore.load' => NullDeveloper::class,
-    'web.controller.restore.authorization' => developerClass(PartialDevelopers\InvokeAuthorizationDeveloper::class, ['action' => 'restore', 'withModel' => true]),
-    'web.controller.restore.main' => developerClass(PartialDevelopers\InvokeModelMethodDeveloper::class, ['method' => 'restore']),
+    'web.controller.restore.authorization' => configureDeveloper(PartialDevelopers\InvokeAuthorizationDeveloper::class, ['action' => 'restore', 'withModel' => true]),
+    'web.controller.restore.main' => configureDeveloper(PartialDevelopers\InvokeModelMethodDeveloper::class, ['method' => 'restore']),
     'web.controller.restore.response' => Web\Restore\ResponseDeveloper::class,
 
     'api.form-request' => Api\FormRequest\ApiFormRequestDeveloper::class,
@@ -138,7 +138,7 @@ return [
     'api.controller.index'=> Api\Index\IndexDeveloper::class,
     'api.controller.index.arguments' => [],
     'api.controller.index.load' => NullDeveloper::class,
-    'api.controller.index.authorization' => developerClass(PartialDevelopers\InvokeAuthorizationDeveloper::class, ['action' => 'viewAny', 'withClass' => true]),
+    'api.controller.index.authorization' => configureDeveloper(PartialDevelopers\InvokeAuthorizationDeveloper::class, ['action' => 'viewAny', 'withClass' => true]),
     'api.controller.index.main' => PartialDevelopers\Load\PaginateDeveloper::class,
     'api.controller.index.response' => Api\Index\ResponseDeveloper::class,
 
@@ -147,34 +147,34 @@ return [
         PartialDevelopers\ImplicitBindArgumentsDeveloper::class
     ],
     'api.controller.show.load' => NullDeveloper::class,
-    'api.controller.show.authorization' => developerClass(PartialDevelopers\InvokeAuthorizationDeveloper::class, ['action' => 'view', 'withModel' => true]),
+    'api.controller.show.authorization' => configureDeveloper(PartialDevelopers\InvokeAuthorizationDeveloper::class, ['action' => 'view', 'withModel' => true]),
     'api.controller.show.main' => PartialDevelopers\LoadRelationshipsDeveloper::class,
     'api.controller.show.response' => PartialDevelopers\ReturnSingleResourceDeveloper::class,
 
     'api.controller.store'=> Api\Store\StoreDeveloper::class,
     'api.controller.store.arguments' => [
-        developerClass(Web\Store\FormRequestArgumentDeveloper::class, ['domain' => 'api']),
+        configureDeveloper(Web\Store\FormRequestArgumentDeveloper::class, ['domain' => 'api']),
     ],
     'api.controller.store.load' => NullDeveloper::class,
-    'api.controller.store.authorization' => developerClass(PartialDevelopers\InvokeAuthorizationDeveloper::class, ['action' => 'create', 'withClass' => true]),
+    'api.controller.store.authorization' => configureDeveloper(PartialDevelopers\InvokeAuthorizationDeveloper::class, ['action' => 'create', 'withClass' => true]),
     'api.controller.store.main' => Api\Store\InstantiateFillAndSaveDeveloper::class,
     'api.controller.store.main.validate' => NullDeveloper::class,
     'api.controller.store.main.instantiate' => PartialDevelopers\InstantiateDeveloper::class,
     'api.controller.store.main.fill' => Web\Store\Fill\FillFieldsSeparatelyDeveloper::class,
-    'api.controller.store.main.save' => developerClass(PartialDevelopers\InvokeModelMethodDeveloper::class, ['method' => 'save']),
+    'api.controller.store.main.save' => configureDeveloper(PartialDevelopers\InvokeModelMethodDeveloper::class, ['method' => 'save']),
     'api.controller.store.response' => PartialDevelopers\ReturnSingleResourceDeveloper::class,
 
     'api.controller.update'=> Api\Update\UpdateDeveloper::class,
     'api.controller.update.arguments' => [
-        developerClass(Web\Store\FormRequestArgumentDeveloper::class, ['domain' => 'api']),
+        configureDeveloper(Web\Store\FormRequestArgumentDeveloper::class, ['domain' => 'api']),
         PartialDevelopers\ImplicitBindArgumentsDeveloper::class,
     ],
     'api.controller.update.load' => NullDeveloper::class,
-    'api.controller.update.authorization' => developerClass(PartialDevelopers\InvokeAuthorizationDeveloper::class, ['action' => 'update', 'withModel' => true]),
+    'api.controller.update.authorization' => configureDeveloper(PartialDevelopers\InvokeAuthorizationDeveloper::class, ['action' => 'update', 'withModel' => true]),
     'api.controller.update.main' => Web\Update\ValidateFillAndUpdateDeveloper::class,
     'api.controller.update.main.validate' => NullDeveloper::class,
     'api.controller.update.main.fill' => Web\Store\Fill\FillFieldsSeparatelyDeveloper::class,
-    'api.controller.update.main.update' => developerClass(PartialDevelopers\InvokeModelMethodDeveloper::class, ['method' => 'update']),
+    'api.controller.update.main.update' => configureDeveloper(PartialDevelopers\InvokeModelMethodDeveloper::class, ['method' => 'update']),
     'api.controller.update.response' => PartialDevelopers\ReturnNoContentDeveloper::class,
 
     'api.controller.destroy'=> Api\Destroy\DestroyDeveloper::class,
@@ -182,8 +182,8 @@ return [
         PartialDevelopers\ImplicitBindArgumentsDeveloper::class,
     ],
     'api.controller.destroy.load' => NullDeveloper::class,
-    'api.controller.destroy.authorization' => developerClass(PartialDevelopers\InvokeAuthorizationDeveloper::class, ['action' => 'delete', 'withModel' => true]),
-    'api.controller.destroy.main' => developerClass(PartialDevelopers\InvokeModelMethodDeveloper::class, ['method' => 'delete']),
+    'api.controller.destroy.authorization' => configureDeveloper(PartialDevelopers\InvokeAuthorizationDeveloper::class, ['action' => 'delete', 'withModel' => true]),
+    'api.controller.destroy.main' => configureDeveloper(PartialDevelopers\InvokeModelMethodDeveloper::class, ['method' => 'delete']),
     'api.controller.destroy.response' => PartialDevelopers\ReturnNoContentDeveloper::class,
 
     'api.controller.force-delete' => Api\ForceDelete\ForceDeleteDeveloper::class,
@@ -191,8 +191,8 @@ return [
         PartialDevelopers\ImplicitBindArgumentsDeveloper::class
     ],
     'api.controller.force-delete.load' => NullDeveloper::class,
-    'api.controller.force-delete.authorization' => developerClass(PartialDevelopers\InvokeAuthorizationDeveloper::class, ['action' => 'forceDelete', 'withModel' => true]),
-    'api.controller.force-delete.main' => developerClass(PartialDevelopers\InvokeModelMethodDeveloper::class, ['method' => 'forceDelete']),
+    'api.controller.force-delete.authorization' => configureDeveloper(PartialDevelopers\InvokeAuthorizationDeveloper::class, ['action' => 'forceDelete', 'withModel' => true]),
+    'api.controller.force-delete.main' => configureDeveloper(PartialDevelopers\InvokeModelMethodDeveloper::class, ['method' => 'forceDelete']),
     'api.controller.force-delete.response' => PartialDevelopers\ReturnNoContentDeveloper::class,
 
     'api.controller.restore'=> Api\Restore\RestoreDeveloper::class,
@@ -200,8 +200,8 @@ return [
         PartialDevelopers\ImplicitBindArgumentsDeveloper::class
     ],
     'api.controller.restore.load' => NullDeveloper::class,
-    'api.controller.restore.authorization' => developerClass(PartialDevelopers\InvokeAuthorizationDeveloper::class, ['action' => 'restore', 'withModel' => true]),
-    'api.controller.restore.main' => developerClass(PartialDevelopers\InvokeModelMethodDeveloper::class, ['method' => 'restore']),
+    'api.controller.restore.authorization' => configureDeveloper(PartialDevelopers\InvokeAuthorizationDeveloper::class, ['action' => 'restore', 'withModel' => true]),
+    'api.controller.restore.main' => configureDeveloper(PartialDevelopers\InvokeModelMethodDeveloper::class, ['method' => 'restore']),
     'api.controller.restore.response' => PartialDevelopers\ReturnNoContentDeveloper::class,
 
     'factory' => Factory\FactoryClassDeveloper::class,
@@ -247,7 +247,7 @@ return [
     ],
     'web.tests.index.assert' => [
         PartialDevelopers\Tests\Assertions\AssertResponseSuccessfulDeveloper::class,
-        developerClass(PartialDevelopers\Tests\Assertions\AssertViewIsDeveloper::class, ['view' => 'index']),
+        configureDeveloper(PartialDevelopers\Tests\Assertions\AssertViewIsDeveloper::class, ['view' => 'index']),
         PartialDevelopers\Tests\GetModelIdsFromResponseDeveloper::class,
         PartialDevelopers\Tests\Assertions\AssertResponseModelIdsCountSameAsModels::class,
         PartialDevelopers\Tests\Assertions\AssertAllModelIdsPresentDeveloper::class,
@@ -275,7 +275,7 @@ return [
     ],
     'web.tests.index.missing-soft-deleted.assert' => [
         PartialDevelopers\Tests\Assertions\AssertResponseSuccessfulDeveloper::class,
-        developerClass(PartialDevelopers\Tests\Assertions\AssertViewIsDeveloper::class, ['view' => 'index']),
+        configureDeveloper(PartialDevelopers\Tests\Assertions\AssertViewIsDeveloper::class, ['view' => 'index']),
         PartialDevelopers\Tests\GetModelIdsFromResponseDeveloper::class,
         PartialDevelopers\Tests\Assertions\AssertResponseModelsMissingSingularModel::class,
     ],
@@ -291,7 +291,7 @@ return [
     ],
     'web.tests.show.assert' => [
         PartialDevelopers\Tests\Assertions\AssertResponseSuccessfulDeveloper::class,
-        developerClass(PartialDevelopers\Tests\Assertions\AssertViewIsDeveloper::class, ['view' => 'show']),
+        configureDeveloper(PartialDevelopers\Tests\Assertions\AssertViewIsDeveloper::class, ['view' => 'show']),
         PartialDevelopers\Tests\Assertions\AssertResponseModelIsTestModel::class,
     ],
 
@@ -317,7 +317,7 @@ return [
     ],
     'web.tests.create.assert' => [
         PartialDevelopers\Tests\Assertions\AssertResponseSuccessfulDeveloper::class,
-        developerClass(PartialDevelopers\Tests\Assertions\AssertViewIsDeveloper::class, ['view' => 'create']),
+        configureDeveloper(PartialDevelopers\Tests\Assertions\AssertViewIsDeveloper::class, ['view' => 'create']),
     ],
 
     'web.tests.create.unauthorized' => WebTestMethods\Create\UnauthorizedCreateTestDeveloper::class,
@@ -384,7 +384,7 @@ return [
     ],
     'web.tests.edit.assert' => [
         PartialDevelopers\Tests\Assertions\AssertResponseSuccessfulDeveloper::class,
-        developerClass(PartialDevelopers\Tests\Assertions\AssertViewIsDeveloper::class, ['view' => 'edit']),
+        configureDeveloper(PartialDevelopers\Tests\Assertions\AssertViewIsDeveloper::class, ['view' => 'edit']),
         PartialDevelopers\Tests\Assertions\AssertResponseModelIsTestModel::class,
     ],
 
@@ -427,7 +427,7 @@ return [
         PartialDevelopers\Tests\Requests\PutDataToUpdateRouteDeveloper::class,
     ],
     'api.tests.update.invalid.assert' => [
-        developerClass(PartialDevelopers\Tests\Assertions\AssertResponseStatusDeveloper::class, ['status' => 422]),
+        configureDeveloper(PartialDevelopers\Tests\Assertions\AssertResponseStatusDeveloper::class, ['status' => 422]),
         PartialDevelopers\Tests\Assertions\AssertJsonHasFieldErrorDeveloper::class,
         PartialDevelopers\Tests\RefreshModelDeveloper::class,
         PartialDevelopers\Tests\Assertions\AssertModelHasOldValuesDeveloper::class,
@@ -458,7 +458,7 @@ return [
         PartialDevelopers\Tests\Requests\DeleteDestroyRouteDeveloper::class,
     ],
     'api.tests.destroy.assert' => [
-        developerClass(PartialDevelopers\Tests\Assertions\AssertResponseStatusDeveloper::class, ['status' => 204]),
+        configureDeveloper(PartialDevelopers\Tests\Assertions\AssertResponseStatusDeveloper::class, ['status' => 204]),
         PartialDevelopers\Tests\Assertions\AssertModelDeletedDeveloper::class, // TODO: make this developer configurable
     ],
 
@@ -485,7 +485,7 @@ return [
         PartialDevelopers\Tests\Requests\DeleteForceDeleteRouteDeveloper::class,
     ],
     'api.tests.force-delete.assert' => [
-        developerClass(PartialDevelopers\Tests\Assertions\AssertResponseStatusDeveloper::class, ['status' => 204]),
+        configureDeveloper(PartialDevelopers\Tests\Assertions\AssertResponseStatusDeveloper::class, ['status' => 204]),
         PartialDevelopers\Tests\Assertions\AssertDatabaseMissingModelDeveloper::class,
     ],
 
@@ -568,7 +568,7 @@ return [
         PartialDevelopers\Tests\Requests\GetIndexRouteDeveloper::class,
     ],
     'api.tests.index.assert' => [
-        developerClass(PartialDevelopers\Tests\Assertions\AssertResponseStatusDeveloper::class, ['status' => 200]),
+        configureDeveloper(PartialDevelopers\Tests\Assertions\AssertResponseStatusDeveloper::class, ['status' => 200]),
         PartialDevelopers\Tests\GetModelIdsFromJsonDeveloper::class,
         PartialDevelopers\Tests\Assertions\AssertResponseModelIdsCountSameAsModels::class,
         PartialDevelopers\Tests\Assertions\AssertJsonResponseContainsAllModels::class,
@@ -595,7 +595,7 @@ return [
         PartialDevelopers\Tests\Requests\GetShowRouteDeveloper::class,
     ],
     'api.tests.show.assert' => [
-        developerClass(PartialDevelopers\Tests\Assertions\AssertResponseStatusDeveloper::class, ['status' => 200]),
+        configureDeveloper(PartialDevelopers\Tests\Assertions\AssertResponseStatusDeveloper::class, ['status' => 200]),
         PartialDevelopers\Tests\Assertions\AssertModelIsJsonModel::class,
     ],
 
@@ -621,7 +621,7 @@ return [
         PartialDevelopers\Tests\Requests\PostDataToStoreRouteDeveloper::class,
     ],
     'api.tests.store.assert' => [
-        developerClass(PartialDevelopers\Tests\Assertions\AssertResponseStatusDeveloper::class, ['status' => 201]),
+        configureDeveloper(PartialDevelopers\Tests\Assertions\AssertResponseStatusDeveloper::class, ['status' => 201]),
         PartialDevelopers\Tests\Assertions\AssertDatabaseContainsNewModel::class,
     ],
 
@@ -634,7 +634,7 @@ return [
         PartialDevelopers\Tests\Requests\PostDataToStoreRouteDeveloper::class,
     ],
     'api.tests.store.invalid.assert' => [
-        developerClass(PartialDevelopers\Tests\Assertions\AssertResponseStatusDeveloper::class, ['status' => 422]),
+        configureDeveloper(PartialDevelopers\Tests\Assertions\AssertResponseStatusDeveloper::class, ['status' => 422]),
         PartialDevelopers\Tests\Assertions\AssertJsonHasFieldErrorDeveloper::class,
         PartialDevelopers\Tests\Assertions\AssertDatabaseHasNoModels::class,
     ],
@@ -663,7 +663,7 @@ return [
         PartialDevelopers\Tests\Requests\PutDataToUpdateRouteDeveloper::class,
     ],
     'api.tests.update.assert' => [
-        developerClass(PartialDevelopers\Tests\Assertions\AssertResponseStatusDeveloper::class, ['status' => 204]),
+        configureDeveloper(PartialDevelopers\Tests\Assertions\AssertResponseStatusDeveloper::class, ['status' => 204]),
         PartialDevelopers\Tests\RefreshModelDeveloper::class,
         PartialDevelopers\Tests\Assertions\AssertModelUpdatedWithNewValuesDeveloper::class,
     ],
@@ -766,7 +766,7 @@ return [
         PartialDevelopers\Tests\Requests\PatchRestoreRouteDeveloper::class,
     ],
     'api.tests.restore.assert' => [
-        developerClass(PartialDevelopers\Tests\Assertions\AssertResponseStatusDeveloper::class, ['status' => 204]),
+        configureDeveloper(PartialDevelopers\Tests\Assertions\AssertResponseStatusDeveloper::class, ['status' => 204]),
         PartialDevelopers\Tests\RefreshModelDeveloper::class,
         PartialDevelopers\Tests\Assertions\AssertSoftDeletedColumnIsNull::class,
     ],

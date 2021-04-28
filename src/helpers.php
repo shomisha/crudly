@@ -1,7 +1,7 @@
 <?php
 
-if (!function_exists('developerClass')) {
-    function developerClass(string $class, array $arguments = []) {
+if (!function_exists('configureDeveloper')) {
+    function configureDeveloper(string $class, array $arguments = []) {
         $arguments = collect($arguments)->map(function (string $value, string $name) {
             return "{$name}:{$value}";
         })->implode(',');
