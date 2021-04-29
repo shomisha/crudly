@@ -116,9 +116,9 @@ return [
 
     'web.controller.restore'=> Web\Restore\RestoreDeveloper::class,
     'web.controller.restore.arguments' => [
-        PartialDevelopers\ImplicitBindArgumentsDeveloper::class
+        PartialDevelopers\ModelKeyArgumentDeveloper::class,
     ],
-    'web.controller.restore.load' => NullDeveloper::class,
+    'web.controller.restore.load' => PartialDevelopers\Load\LoadByPrimaryKeyDeveloper::class,
     'web.controller.restore.authorization' => configureDeveloper(PartialDevelopers\InvokeAuthorizationDeveloper::class, ['action' => 'restore', 'withModel' => true]),
     'web.controller.restore.main' => configureDeveloper(PartialDevelopers\InvokeModelMethodDeveloper::class, ['method' => 'restore']),
     'web.controller.restore.response' => Web\Restore\ResponseDeveloper::class,
@@ -197,9 +197,9 @@ return [
 
     'api.controller.restore'=> Api\Restore\RestoreDeveloper::class,
     'api.controller.restore.arguments' => [
-        PartialDevelopers\ImplicitBindArgumentsDeveloper::class
+        PartialDevelopers\ModelKeyArgumentDeveloper::class,
     ],
-    'api.controller.restore.load' => NullDeveloper::class,
+    'api.controller.restore.load' => PartialDevelopers\Load\LoadByPrimaryKeyDeveloper::class,
     'api.controller.restore.authorization' => configureDeveloper(PartialDevelopers\InvokeAuthorizationDeveloper::class, ['action' => 'restore', 'withModel' => true]),
     'api.controller.restore.main' => configureDeveloper(PartialDevelopers\InvokeModelMethodDeveloper::class, ['method' => 'restore']),
     'api.controller.restore.response' => PartialDevelopers\ReturnNoContentDeveloper::class,
@@ -223,6 +223,7 @@ return [
         TestHelpers\RouteGetters\GetEditRouteMethodDeveloper::class,
         TestHelpers\RouteGetters\GetUpdateRouteMethodDeveloper::class,
         TestHelpers\RouteGetters\GetDestroyRouteMethodDeveloper::class,
+        // TODO: only implement these two if soft-deletion was requested
         TestHelpers\RouteGetters\GetForceDeleteRouteMethodDeveloper::class,
         TestHelpers\RouteGetters\GetRestoreRouteMethodDeveloper::class,
     ],
@@ -550,6 +551,7 @@ return [
         TestHelpers\RouteGetters\GetStoreRouteMethodDeveloper::class,
         TestHelpers\RouteGetters\GetUpdateRouteMethodDeveloper::class,
         TestHelpers\RouteGetters\GetDestroyRouteMethodDeveloper::class,
+        // TODO: only implement these two if soft deletion is requested
         TestHelpers\RouteGetters\GetForceDeleteRouteMethodDeveloper::class,
         TestHelpers\RouteGetters\GetRestoreRouteMethodDeveloper::class,
     ],

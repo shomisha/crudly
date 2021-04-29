@@ -4,6 +4,7 @@ namespace Shomisha\Crudly\Test\Unit\Developers\ApiCrud\Restore;
 
 use Shomisha\Crudly\Developers\Crud\Api\Restore\RestoreDeveloper;
 use Shomisha\Crudly\Developers\Crud\CrudMethodDeveloper;
+use Shomisha\Crudly\Enums\ModelPropertyType;
 use Shomisha\Crudly\Managers\BaseDeveloperManager;
 use Shomisha\Crudly\Managers\Crud\Api\RestoreMethodDeveloperManager;
 use Shomisha\Crudly\Test\Specification\CrudlySpecificationBuilder;
@@ -13,7 +14,9 @@ class RestoreDeveloperTest extends CrudMethodTestCase
 {
     protected function getSpecificationBuilder(): CrudlySpecificationBuilder
     {
-        return CrudlySpecificationBuilder::forModel('Animal')->softDeletes();
+        return tap(CrudlySpecificationBuilder::forModel('Animal'), function (CrudlySpecificationBuilder $specification) {
+            $specification->property('id', ModelPropertyType::BIG_INT())->primary();
+        });
     }
 
     protected function getDeveloperWithManager(?BaseDeveloperManager $manager = null): CrudMethodDeveloper
@@ -28,8 +31,9 @@ class RestoreDeveloperTest extends CrudMethodTestCase
     protected function getDevelopedMethodWithAuthorization(): string
     {
         return implode("\n", [
-            "    public function restore(Animal \$animal)",
+            "    public function restore(\$animalId)",
             "    {",
+            "        \$animal = Animal::query()->withTrashed()->findOrFail(\$animalId);",
             "        \$this->authorize('restore', \$animal);",
             "        \$animal->restore();\n",
 
@@ -41,8 +45,9 @@ class RestoreDeveloperTest extends CrudMethodTestCase
     protected function getDevelopedMethodWithoutAuthorization(): string
     {
         return implode("\n", [
-            "    public function restore(Animal \$animal)",
+            "    public function restore(\$animalId)",
             "    {",
+            "        \$animal = Animal::query()->withTrashed()->findOrFail(\$animalId);",
             "        \$animal->restore();\n",
 
             "        return response()->noContent();",

@@ -64,4 +64,9 @@ abstract class CrudDeveloper extends Developer
 
         return Block::return($redirectResponse);
     }
+
+    protected function primaryKeyVariableName(string $modelName, string $primaryKeyName): string
+    {
+        return lcfirst($modelName) . ucfirst($primaryKeyName);
+    }
 }

@@ -143,8 +143,9 @@ class WebCrudDeveloperTest extends DeveloperTestCase
             "    }\n",
 
 
-            "    public function restore(Post \$post)",
+            "    public function restore(\$postId)",
             "    {",
+            "        \$post = Post::query()->withTrashed()->findOrFail(\$postId);",
             "        \$this->authorize('restore', \$post);",
             "        \$post->restore();\n",
 
@@ -240,8 +241,9 @@ class WebCrudDeveloperTest extends DeveloperTestCase
             "    }\n",
 
 
-            "    public function restore(Post \$post)",
+            "    public function restore(\$postId)",
             "    {",
+            "        \$post = Post::query()->withTrashed()->findOrFail(\$postId);",
             "        \$post->restore();\n",
 
             "        return redirect()->route('posts.index')->with('success', 'Successfully restored instance.');",

@@ -117,8 +117,9 @@ class ApiCrudDeveloperTest extends DeveloperTestCase
             "        return response()->noContent();",
             "    }\n",
 
-            "    public function restore(Author \$author)",
+            "    public function restore(\$authorId)",
             "    {",
+            "        \$author = Author::query()->withTrashed()->findOrFail(\$authorId);",
             "        \$this->authorize('restore', \$author);",
             "        \$author->restore();\n",
 
@@ -228,8 +229,9 @@ class ApiCrudDeveloperTest extends DeveloperTestCase
             "        return response()->noContent();",
             "    }\n",
 
-            "    public function restore(Author \$author)",
+            "    public function restore(\$authorId)",
             "    {",
+            "        \$author = Author::query()->withTrashed()->findOrFail(\$authorId);",
             "        \$author->restore();\n",
 
             "        return response()->noContent();",
