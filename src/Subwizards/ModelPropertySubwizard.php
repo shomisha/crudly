@@ -16,11 +16,11 @@ class ModelPropertySubwizard extends Subwizard
         return [
             'name' => new TextStep('Enter property name'),
             'type' => new ChoiceStep('Choose property type', ModelPropertyType::all()),
-            'is_unsigned' => new ConfirmStep('Should this field be unsigned?'),
-            'is_autoincrement' => new ConfirmStep('Should this field be auto-increment?'),
+            'is_unsigned' => new ConfirmStep('Should this field be unsigned?', $this->isPotentialAutoIncrementPrimary()),
+            'is_autoincrement' => new ConfirmStep('Should this field be auto-increment?', $this->isPotentialAutoIncrementPrimary()),
             'is_unique' => new ConfirmStep('Should this field be unique?'),
             'is_nullable' => new ConfirmStep('Should this field be nullable?'),
-            'is_primary' => new ConfirmStep('Should this field be the primary key?'),
+            'is_primary' => new ConfirmStep('Should this field be the primary key?', $this->isPotentialPrimaryKey()),
             'is_foreign_key' => new ConfirmStep('Should this field be a foreign key?'),
             'foreign_key_target' => $this->subWizard(new RelationshipSubwizard()),
         ];
@@ -107,6 +107,27 @@ class ModelPropertySubwizard extends Subwizard
         }
 
         return false;
+    }
+
+    private function isPotentialAutoIncrementPrimary(): \Closure
+    {
+        return function () {
+            $isId = $this->answers->get('name') == 'id';
+            $isNumeric = in_array(
+                $this->answers->get('type'),
+                [ModelPropertyType::TINY_INT(), ModelPropertyType::INT(), ModelPropertyType::BIG_INT()]
+            );
+            $isAutoIncrement = $this->answers->get('is_autoincrement', true);
+
+            return $isId && $isNumeric && $isAutoIncrement;
+        };
+    }
+
+    private function isPotentialPrimaryKey(): \Closure
+    {
+        return function () {
+            return $this->isPotentialAutoIncrementPrimary()();
+        };
     }
 
     private function typeIsStringable(): bool

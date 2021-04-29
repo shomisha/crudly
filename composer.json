@@ -6,7 +6,7 @@
     "require": {
         "php": "^7.4|^8.0",
         "laravel/framework": "^8.0",
-        "shomisha/laravel-console-wizard": "^1.8",
+        "shomisha/laravel-console-wizard": "^1.9",
         "shomisha/stubless": "^1.5"
     },
     "require-dev": {
