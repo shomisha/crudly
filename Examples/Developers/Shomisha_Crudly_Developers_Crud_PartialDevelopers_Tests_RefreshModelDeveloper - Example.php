@@ -1,0 +1,3 @@
+<?php
+
+$post->refresh();

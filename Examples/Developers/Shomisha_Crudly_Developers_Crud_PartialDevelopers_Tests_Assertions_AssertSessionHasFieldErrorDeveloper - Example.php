@@ -1,0 +1,3 @@
+<?php
+
+$response->assertSessionHasErrors($field);
