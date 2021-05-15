@@ -135,7 +135,7 @@ class CrudlyTest extends TestCase
                             'name' => 'publisher'
                         ],
                         'on_delete' => 'cascade',
-                        'on_update' => 'do nothing'
+                        'on_update' => 'no action'
                     ],
                 ],
             ],
@@ -232,7 +232,7 @@ class CrudlyTest extends TestCase
         $this->assertEquals('id', $foreignKeySpecification->getForeignKeyField());
         $this->assertEquals('publisher', $foreignKeySpecification->getRelationshipName());
         $this->assertEquals(ForeignKeyAction::CASCADE(), $foreignKeySpecification->getForeignKeyOnDelete());
-        $this->assertEquals(ForeignKeyAction::DO_NOTHING(), $foreignKeySpecification->getForeignKeyOnUpdate());
+        $this->assertEquals(ForeignKeyAction::NO_ACTION(), $foreignKeySpecification->getForeignKeyOnUpdate());
     }
 
     /** @test */

@@ -14,9 +14,9 @@ class ForeignKeyAction extends BaseEnum
         return new self('set null');
     }
 
-    public static function DO_NOTHING(): self
+    public static function NO_ACTION(): self
     {
-        return new self('do nothing');
+        return new self('no action');
     }
 
     public static function all(): array
@@ -24,7 +24,7 @@ class ForeignKeyAction extends BaseEnum
         return [
             self::CASCADE(),
             self::SET_NULL(),
-            self::DO_NOTHING(),
+            self::NO_ACTION(),
         ];
     }
 }

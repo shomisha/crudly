@@ -69,8 +69,8 @@ class WizardTest extends TestCase
             ->expectsQuestion('Which field should this foreign key point to?', 'id')
             ->expectsConfirmation('Do you want a relationship for this method?', 'yes')
             ->expectsQuestion('Enter the name for this relationship', 'author')
-            ->expectsChoice('What should happen on row delete?', 'do nothing', ForeignKeyAction::all())
-            ->expectsChoice('What should happen on row update?', 'do nothing', ForeignKeyAction::all())
+            ->expectsChoice('What should happen on row delete?', 'no action', ForeignKeyAction::all())
+            ->expectsChoice('What should happen on row update?', 'no action', ForeignKeyAction::all())
             ->expectsConfirmation('Do you want to add a model property?', 'no')
 
             ->expectsChoice('You have specified multiple primary keys. Please select one', 'id', ['id', 'title'])
@@ -136,8 +136,8 @@ class WizardTest extends TestCase
         $this->assertEquals('authors', $authorId->getForeignKeySpecification()->getForeignKeyTable());
         $this->assertEquals('id', $authorId->getForeignKeySpecification()->getForeignKeyField());
         $this->assertEquals('author', $authorId->getForeignKeySpecification()->getRelationshipName());
-        $this->assertEquals(ForeignKeyAction::DO_NOTHING(), $authorId->getForeignKeySpecification()->getForeignKeyOnDelete());
-        $this->assertEquals(ForeignKeyAction::DO_NOTHING(), $authorId->getForeignKeySpecification()->getForeignKeyOnUpdate());
+        $this->assertEquals(ForeignKeyAction::NO_ACTION(), $authorId->getForeignKeySpecification()->getForeignKeyOnDelete());
+        $this->assertEquals(ForeignKeyAction::NO_ACTION(), $authorId->getForeignKeySpecification()->getForeignKeyOnUpdate());
 
         $this->assertEquals('id', $specification->getPrimaryKey()->getName());
 
@@ -369,8 +369,8 @@ class WizardTest extends TestCase
             ->expectsQuestion('Which field should this foreign key point to?', 'id')
             ->expectsConfirmation('Do you want a relationship for this method?', 'yes')
             ->expectsQuestion('Enter the name for this relationship', 'author')
-            ->expectsChoice('What should happen on row delete?', 'do nothing', ForeignKeyAction::all())
-            ->expectsChoice('What should happen on row update?', 'do nothing', ForeignKeyAction::all())
+            ->expectsChoice('What should happen on row delete?', 'no action', ForeignKeyAction::all())
+            ->expectsChoice('What should happen on row update?', 'no action', ForeignKeyAction::all())
             ->expectsConfirmation('Do you want to add a model property?', 'yes')
 
             ->expectsQuestion('Enter property name', 'category_id')
@@ -383,8 +383,8 @@ class WizardTest extends TestCase
             ->expectsQuestion('Which table should this foreign key point to?', 'categories')
             ->expectsQuestion('Which field should this foreign key point to?', 'id')
             ->expectsConfirmation('Do you want a relationship for this method?', 'no')
-            ->expectsChoice('What should happen on row delete?', 'do nothing', ForeignKeyAction::all())
-            ->expectsChoice('What should happen on row update?', 'do nothing', ForeignKeyAction::all())
+            ->expectsChoice('What should happen on row delete?', 'no action', ForeignKeyAction::all())
+            ->expectsChoice('What should happen on row update?', 'no action', ForeignKeyAction::all())
             ->expectsConfirmation('Do you want to add a model property?', 'no')
 
              ->expectsConfirmation('Do you want soft deletion for this model?', 'no')
@@ -446,8 +446,8 @@ class WizardTest extends TestCase
         $this->assertEquals('authors', $authorIdForeign->getForeignKeyTable());
         $this->assertTrue($authorIdForeign->hasRelationship());
         $this->assertEquals('author', $authorIdForeign->getRelationshipName());
-        $this->assertEquals(ForeignKeyAction::DO_NOTHING(), $authorIdForeign->getForeignKeyOnUpdate());
-        $this->assertEquals(ForeignKeyAction::DO_NOTHING(), $authorIdForeign->getForeignKeyOnDelete());
+        $this->assertEquals(ForeignKeyAction::NO_ACTION(), $authorIdForeign->getForeignKeyOnUpdate());
+        $this->assertEquals(ForeignKeyAction::NO_ACTION(), $authorIdForeign->getForeignKeyOnDelete());
 
         $categoryId = $properties['category_id'];
         $this->assertEquals('category_id', $categoryId->getName());
@@ -727,8 +727,8 @@ class WizardTest extends TestCase
             ->expectsQuestion('Which field should this foreign key point to?', 'id')
             ->expectsConfirmation('Do you want a relationship for this method?', 'yes')
             ->expectsQuestion('Enter the name for this relationship', 'author')
-            ->expectsChoice('What should happen on row delete?', 'do nothing', ForeignKeyAction::all())
-            ->expectsChoice('What should happen on row update?', 'do nothing', ForeignKeyAction::all())
+            ->expectsChoice('What should happen on row delete?', 'no action', ForeignKeyAction::all())
+            ->expectsChoice('What should happen on row update?', 'no action', ForeignKeyAction::all())
             ->expectsConfirmation('Do you want to add a model property?', 'no')
 
             ->expectsConfirmation('Do you want soft deletion for this model?', 'no')
@@ -748,8 +748,8 @@ class WizardTest extends TestCase
         $this->assertEquals('authors', $authorIdForeign->getForeignKeyTable());
         $this->assertTrue($authorIdForeign->hasRelationship());
         $this->assertEquals('author', $authorIdForeign->getRelationshipName());
-        $this->assertEquals(ForeignKeyAction::DO_NOTHING(), $authorIdForeign->getForeignKeyOnUpdate());
-        $this->assertEquals(ForeignKeyAction::DO_NOTHING(), $authorIdForeign->getForeignKeyOnDelete());
+        $this->assertEquals(ForeignKeyAction::NO_ACTION(), $authorIdForeign->getForeignKeyOnUpdate());
+        $this->assertEquals(ForeignKeyAction::NO_ACTION(), $authorIdForeign->getForeignKeyOnDelete());
     }
 
     /** @test */
@@ -769,8 +769,8 @@ class WizardTest extends TestCase
              ->expectsQuestion('Which table should this foreign key point to?', 'authors')
              ->expectsQuestion('Which field should this foreign key point to?', 'id')
              ->expectsConfirmation('Do you want a relationship for this method?', 'no')
-             ->expectsChoice('What should happen on row delete?', 'do nothing', ForeignKeyAction::all())
-             ->expectsChoice('What should happen on row update?', 'do nothing', ForeignKeyAction::all())
+             ->expectsChoice('What should happen on row delete?', 'no action', ForeignKeyAction::all())
+             ->expectsChoice('What should happen on row update?', 'no action', ForeignKeyAction::all())
              ->expectsConfirmation('Do you want to add a model property?', 'no')
 
              ->expectsConfirmation('Do you want soft deletion for this model?', 'no')

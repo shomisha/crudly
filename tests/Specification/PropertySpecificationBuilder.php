@@ -84,8 +84,8 @@ class PropertySpecificationBuilder
         $this->foreign = true;
         $this->foreignKeyField = $key;
         $this->foreignTable = $table;
-        $this->onUpdate = $onUpdate ?? ForeignKeyAction::DO_NOTHING();
-        $this->onDelete = $onDelete?? ForeignKeyAction::DO_NOTHING();
+        $this->onUpdate = $onUpdate ?? ForeignKeyAction::NO_ACTION();
+        $this->onDelete = $onDelete?? ForeignKeyAction::NO_ACTION();
 
         return $this;
     }

@@ -51,7 +51,7 @@ class MigrationFieldsDeveloperTest extends DeveloperTestCase
         $this->assertStringContainsString("\$table->softDeletes('fired_at');", $printedFields);
         $this->assertStringContainsString("\$table->timestamps();", $printedFields);
 
-        $this->assertStringContainsString("\$table->foreign('mentor_id')->references('employee_id')->on('employees')->onDelete('do nothing')->onUpdate('do nothing');", $printedFields);
+        $this->assertStringContainsString("\$table->foreign('mentor_id')->references('employee_id')->on('employees')->onDelete('no action')->onUpdate('no action');", $printedFields);
         $this->assertStringContainsString("\$table->foreign('department_id')->references('id')->on('departments')->onDelete('set null')->onUpdate('cascade');", $printedFields);
     }
 
@@ -231,9 +231,9 @@ class MigrationFieldsDeveloperTest extends DeveloperTestCase
         $specificationBuilder = CrudlySpecificationBuilder::forModel('Purchase')
             ->property('id', ModelPropertyType::BIG_INT())->unsigned()->primary()
             ->property('product_id', ModelPropertyType::BIG_INT())->unsigned()
-                ->isForeign('id', 'products', ForeignKeyAction::DO_NOTHING(), ForeignKeyAction::CASCADE())
+                ->isForeign('id', 'products', ForeignKeyAction::NO_ACTION(), ForeignKeyAction::CASCADE())
             ->property('buyer_email', ModelPropertyType::EMAIL())
-                ->isForeign('email', 'users', ForeignKeyAction::DO_NOTHING(), ForeignKeyAction::SET_NULL())
+                ->isForeign('email', 'users', ForeignKeyAction::NO_ACTION(), ForeignKeyAction::SET_NULL())
             ->property('seller_id', ModelPropertyType::BIG_INT())->unsigned()
                 ->isForeign('id', 'sellers')
             ->timestamps(false);
@@ -247,9 +247,9 @@ class MigrationFieldsDeveloperTest extends DeveloperTestCase
             "\$table->bigInteger('product_id')->unsigned();\n" .
                    "\$table->string('buyer_email');\n" .
                    "\$table->bigInteger('seller_id')->unsigned();\n" .
-                   "\$table->foreign('product_id')->references('id')->on('products')->onDelete('cascade')->onUpdate('do nothing');\n" .
-                   "\$table->foreign('buyer_email')->references('email')->on('users')->onDelete('set null')->onUpdate('do nothing');\n" .
-                   "\$table->foreign('seller_id')->references('id')->on('sellers')->onDelete('do nothing')->onUpdate('do nothing');",
+                   "\$table->foreign('product_id')->references('id')->on('products')->onDelete('cascade')->onUpdate('no action');\n" .
+                   "\$table->foreign('buyer_email')->references('email')->on('users')->onDelete('set null')->onUpdate('no action');\n" .
+                   "\$table->foreign('seller_id')->references('id')->on('sellers')->onDelete('no action')->onUpdate('no action');",
             $printedFields
         );
     }
